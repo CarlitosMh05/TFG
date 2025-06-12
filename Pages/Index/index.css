@@ -360,4 +360,46 @@ body
     background: #bdbdbd;
 }
 
+@media (max-width: 1355px) {
+    .imagenes :first-child,
+    .imagenes :nth-child(2) {
+        display: none;
+    }
+
+    .imagenes :last-child {
+        width: 30vw;
+        height: 20vh;
+    }
+
+    .imagenes{
+        justify-content: center ;
+        align-items: center;
+    }
+
+
+    .cookie-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cookie-btns {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 383px)
+{
+    .underline {
+        background-size: 0%;
+
+    }
+}
+
+@media (max-width: 970px) {
+    .imagenes{
+        display: none !important;
+    }
+}
+
+
 
