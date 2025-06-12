@@ -62,7 +62,8 @@ body.dark-mode, html.dark-mode,
 .dark-mode .concepto-display,
 .dark-mode .etiqueta-display,
 .dark-mode .currency-display,
-.dark-mode .etiqueta-show-display 
+.dark-mode .etiqueta-show-display,
+.dark-mode .dropdown-display 
  {
   background: #303030 !important;
   color: #fff !important;
@@ -75,7 +76,8 @@ body.dark-mode, html.dark-mode,
 .dark-mode .etiqueta-options,
 .dark-mode .currency-options,
 .dark-mode .upload-label,
-.dark-mode .etiqueta-show-options {
+.dark-mode .etiqueta-show-options,
+.dark-mode .dropdown-options li {
   background: #303030 !important;
   color: #fff !important;
 }
