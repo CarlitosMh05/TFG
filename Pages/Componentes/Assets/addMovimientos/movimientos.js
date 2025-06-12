@@ -714,7 +714,12 @@ $(document).ready(function ()
   //Procesar datos subidos
 
   $("#confirmBtn").click(function(event) {
-    event.preventDefault();
+    event.preventDefault(); 
+
+    const $btn = $(this);
+
+    // Si ya está deshabilitado, salir (evita doble envío)
+    if ($btn.prop('disabled')) return;
   
     // Otros reads…
     const cantidad       = $('#cantidad').val().trim();
@@ -763,8 +768,10 @@ $(document).ready(function ()
       hasError = true;
     }
   
-    if (hasError) return;
-    
+    if (hasError) {
+      $btn.prop('disabled', false);
+      return;
+    }
     
     // —— Construir FormData usando las variables ——  
     const formData = new FormData();
@@ -817,11 +824,13 @@ $(document).ready(function ()
           if (window.reiniciarYcargar) window.reiniciarYcargar();
           if (window.reiniciarYcargarComparar) window.reiniciarYcargarComparar();
           if (window.updateCharts) window.updateCharts();
-
+          
         }
+        $btn.prop('disabled', false);
       },
       error(xhr, status, error) {
         console.error(error);
+        $btn.prop('disabled', false);
       }
     });
   });
