@@ -1231,6 +1231,8 @@ h1 {
   color: #234085;
   cursor: pointer;
   transition: background 0.13s;
+  text-align: center;
+  width: 100% !important;
 }
 .dropdown-options li:hover {
   background: var(--azulPrimario, #3B77D1);
