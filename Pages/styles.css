@@ -266,3 +266,12 @@ input[type="text"] {
     color: white;
     background-color: #2468cf;
 }
+
+@media (max-width: 950px) {
+    form {
+        width: 90vw !important;
+    }
+
+    
+}
+
