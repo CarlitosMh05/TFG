@@ -1,0 +1,23 @@
+/* Centrado solo si está vacío y SIN foco */
+#password:placeholder-shown:not(:focus) + label {
+    top: 40%;
+}
+
+/* Si hay error y está vacío y sin foco → centrado ajustado */
+.input-container.error #password:placeholder-shown:not(:focus) + label {
+    top: 33%;
+}
+
+/* Si tiene foco o contenido, el label sube */
+#password:focus + label,
+#password:not(:placeholder-shown) + label {
+    top: 5px;
+    font-size: 14px;
+    color: var(--azulPrimario);
+}
+
+/* Con error, pero foco o contenido → label rojo y arriba */
+.input-container.error #password:focus + label,
+.input-container.error #password:not(:placeholder-shown) + label {
+    color: red;
+}

@@ -1,0 +1,973 @@
+*
+{
+  margin: 0;
+  padding: 0;
+}
+
+
+:root {
+  --azulPrimario: #3B77D1;
+  --hoverAzulPrimario: #2d5b9f;
+}
+
+/* ========================= */
+/* Boton añadir movimientos  */
+/* ========================= */
+
+.floating-button-container 
+{
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+.floating-button 
+{
+  position: relative;
+  background-color: var(--azulPrimario);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.floating-button:hover 
+{
+  background-color: var(--hoverAzulPrimario);
+}
+
+/* Icono del mas */
+.floating-button .material-symbols-outlined 
+{
+  font-size: 28px;
+  pointer-events: none;
+}
+
+/* Etiqueta del boton de añadir movimiento */
+.floating-button .tooltip
+{
+  position: absolute;
+  bottom: 70px;
+  background-color: var(--azulPrimario);
+  color: white;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+/* Mostrar la etiqueta al hacer hover */
+.floating-button:hover .tooltip 
+{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================= */
+/*      Overlay y Modal      */
+/* ========================= */
+  
+/* Overlay */
+.overlay 
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+  display: none;
+  pointer-events: auto; 
+}
+  
+/* Mientras el modal está abierto, bloquea pointer-events de todo lo que esté debajo del overlay */
+body.modal-open *:not(.modal):not(.modal *):not(#overlay):not(.flatpickr-calendar):not(.flatpickr-calendar *) {
+  pointer-events: none !important;
+}
+  
+
+/* Modal */
+
+.modal 
+{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  width: 500px;
+  z-index: 2005;
+  display: none;
+  box-shadow: 0 0 20px white;
+  font-family: "Inter", sans-serif;
+  overflow: visible;
+}
+
+/* Titulo del modal */
+.modal h3 
+{
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+
+/* Filas del modal */
+.row 
+{
+  display: flex;
+  margin-bottom: 20px;
+  gap: 5%;
+  justify-content: space-around;
+  
+}
+
+/* Contenedores con estilo de etiqueta flotante en las filas*/
+.row .input-container 
+{
+  position: relative;
+  width: 100%;
+}
+
+.row .input-container.amount-with-currency {
+  align-self: flex-start;
+}
+
+/* Resto de contenedores */
+.input-container
+{
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.amount-with-currency.error .sign-toggle 
+{
+  top: 40%;
+}
+
+/* Mismo aspecto a los input y textarea*/
+.input-container input, .input-container textarea
+{
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Estilo del input con cantidad y moneda*/
+
+.amount-with-currency {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.amount-with-currency input {
+padding-right: 60px; 
+padding-left: 30px;
+
+}
+
+/* =================== */
+/*      Dropdowns      */
+/* =================== */
+
+.frecuencia-dropdown, .concepto-dropdown, .etiqueta-display  {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.currency-dropdown 
+{
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 20;
+}
+
+/*Botones de más y menos */
+.sign-toggle {
+  position: absolute;
+  left: 8px;               /* separa un poquito del borde izquierdo */
+  top: 50%;                
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                /* ajusta espacio entre + y – */
+  z-index: 2;    
+}
+
+/*Boton de + ó -*/
+.sign-btn {
+  border: 1px solid gray;
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  font-size: 8px;
+  line-height: 1;
+}
+
+/*Cuando estan seleccionados los botones*/
+.sign-btn.active {
+  background-color: var(--azulPrimario);
+  border-color: var(--azulPrimario);
+  color: white;
+}
+
+/*Tamayo de los simbolos*/
+.sign-btn *
+{
+  height: 15px;
+  width: 15px;
+}
+
+/*Desplazar a la izquierda el label para que se vean los simbolos*/
+#labelCantidad
+{
+  left: 30px;
+}
+
+/* Texto del dropdown*/
+
+.frecuencia-display, .concepto-display, .etiqueta-display {
+  padding: 15px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background: white;
+  font-size: 14px;
+  color: #333;
+  position: relative;
+
+}
+
+.currency-display 
+{
+  font-size: 16px;
+  background: white;
+  padding-right: 13px; /* espacio para flechita */
+  border-radius: 5px;
+  user-select: none;
+  pointer-events: auto;
+  position: relative;
+}
+
+/* Flechita */
+
+.frecuencia-display::after, .concepto-display::after, .currency-display::after, .etiqueta-display::after  
+{
+  content: "⮟"; 
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #666;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.currency-display::after 
+{
+  right: 0px !important;
+}
+
+/* Animación de la flecha al abrirse*/
+.frecuencia-display.open::after, .concepto-display.open::after, .currency-display.open::after, .etiqueta-display.open::after  
+{
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
+/* Caja de las opciones del dropdown*/
+.frecuencia-options, .concepto-options, .currency-options, .etiqueta-options
+{
+  position: absolute;
+  top: 110%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: none;
+  width: 100%;
+  z-index: 10;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.currency-options 
+{
+  top: 110% !important;
+  width: 120px !important;
+  left: -40px; 
+}
+
+/* Estilos de cada opción */
+
+.frecuencia-options li, .concepto-options li, .currency-options li, .etiqueta-options li  
+{
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover de cada opción */
+
+.frecuencia-options li:hover, .concepto-options li:hover, .currency-options li:hover, .etiqueta-options li:hover  
+{
+  background-color: var(--azulPrimario);
+  color: white;
+}
+
+#conceptoOptions li.adding:hover,
+#etiquetaOptions li.adding:hover {
+  background-color: transparent !important;
+}
+
+/* Opcional: quita el cursor pointer y pon el por defecto */
+#conceptoOptions li.adding,
+#etiquetaOptions li.adding {
+  cursor: default !important;
+}
+
+/* Desactiva hover en el li de búsqueda */
+#conceptoOptions li.search-item:hover,
+#etiquetaOptions li.search-item:hover {
+  background-color: transparent !important;
+  cursor: default !important;
+  color: black !important;
+}
+
+
+/* Para el nuevo ítem */
+.new-item-container {
+  position: relative;
+}
+
+.new-item-container .new-item-input {
+  padding-left: 30px;
+  /* o ajusta si quieres iconos ahí después */
+}
+
+/* Asegúrate de que los floating-label rules cubran también estas clases */
+.search-container input:focus + label,
+.search-container input:not(:placeholder-shown) + label,
+.new-item-container input:focus + label,
+.new-item-container input:not(:placeholder-shown) + label {
+  top: 2px;
+  font-size: 14px;
+  color: var(--azulPrimario) !important; 
+}
+
+.search-container label {
+  color: gray !important; /* Color inicial negro */
+}
+
+.search-container input:focus,
+.search-container input:not(:placeholder-shown),
+.new-item-container input:focus,
+.new-item-container input:not(:placeholder-shown) {
+  border-color: var(--azulPrimario);
+  border-width: 3px;
+}
+
+
+#conceptoOptions,
+#etiquetaOptions {
+  max-height: 200px;        /* ajusta la altura que prefieras */
+  overflow-y: auto;         /* scroll vertical si supera la altura */
+}
+
+/* opcional: añade algo de padding y fondo para que el scroll se vea bien */
+#conceptoOptions li,
+#etiquetaOptions li {
+  padding: 8px 12px;
+}
+
+
+
+/* Para el search-container: icono y padding */
+.search-container {
+  position: relative;
+}
+
+.search-container .search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: gray;
+  width: 20px;
+  height: 20px;
+}
+
+.search-container .search-input {
+  padding-left: 35px; /* deja espacio para la lupa */
+}
+
+
+/* Estilos para el search-item */
+.search-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+}
+.search-icon {
+  font-size: 1.2em;
+  margin-right: 8px;
+}
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1em;
+}
+
+/* Borde azul al estar abierto (igual que inputs con foco o contenido) */
+.frecuencia-display.open,
+.concepto-display.open,
+.etiqueta-display.open{
+  border-color: var(--azulPrimario);
+  border-width: 3px;
+}
+
+/* =================== */
+/*      Inputs         */
+/* =================== */
+
+
+/* Posicionamiento del label flotante */
+.input-container label 
+{
+  position: absolute;
+  top: 45%;
+  left: 15px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: gray;
+  background: white;
+  padding: 0 5px;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+
+  
+/* Cuando textarea tiene foco o contenido: sube el label */
+.input-container textarea:focus + label,
+.input-container textarea:not(:placeholder-shown) + label 
+{
+  top: 2px;
+  font-size: 14px;
+  color: var(--azulPrimario);
+}
+  
+/* Foco: cambia el borde del textarea */
+.input-container textarea:focus,
+.input-container textarea:not(:placeholder-shown) 
+{
+  border-color: var(--azulPrimario);
+  border-width: 3px;
+}
+    
+
+/* Estilos cuando hay error */
+.bad-text
+{
+  display: none; 
+  color: red; 
+  font-size: 12px;
+}
+
+/* Bordes azules al hacer foco o si tienen contenido */
+.input-container input:focus,
+.input-container input:not(:placeholder-shown)
+{
+  border-color: var(--azulPrimario);
+  border-width: 3px;
+}
+
+/* Mover label arriba cuando hay contenido o foco */
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label
+{
+  top: 2px;
+  font-size: 14px;
+  color: var(--azulPrimario) ;
+}
+
+.input-container input:not(:focus):not(:placeholder-shown),
+.input-container textarea:not(:focus):not(:placeholder-shown) {
+  border-color: gray;
+  border-width: 1px;
+}
+
+.input-container input:not(:focus):not(:placeholder-shown) + label,
+.input-container textarea:not(:focus):not(:placeholder-shown) + label {
+  color: gray;
+}
+
+
+
+/* Si el campo está vacío con error, el label se mantiene centrado */
+.input-container.error label 
+{
+  top: 40%;
+  color: red !important;
+}
+
+.input-container.error .currency-dropdown
+{
+  top: 40%;
+}
+
+
+
+/* Quitar flechas del input number */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button 
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+/* =================== */
+/*      Textarea       */
+/* =================== */
+
+/* Estilo base del textarea */
+.input-container textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  resize: none;
+  background: white;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out;
+}
+
+/* =================== */
+/*     Radiobuttons    */
+/* =================== */
+
+.radios-row 
+{
+  display: flex;
+  justify-content: space-between;
+  gap: 5%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.radio-container 
+{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 45%;
+  font-size: 14px;
+  color: #333;
+  font-family: "Inter", sans-serif;
+}
+
+.radio-container label 
+{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+  
+/* ================ */
+/*   Recurrencia    */
+/* ================ */
+
+
+.recurrente-container 
+{
+  display: none;
+  margin-top: 10px;
+}
+  
+.recurrente-container .row
+{
+  display: flex;
+  gap: 5%;
+  justify-content: space-around;
+}
+  
+.recurrente-dia, .recurrente-tipo 
+{
+  width: 45% !important;
+  position: relative;
+}
+
+
+
+
+
+/* =================== */
+/*      Fechas         */
+/* =================== */
+
+/* Contenedor animado */
+.fecha-container 
+{
+  margin-top: 10px;
+  display: none; 
+}
+
+/* =================== */
+/*      Imagen         */
+/* =================== */
+
+.modal-file-upload {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  max-width: 45%;
+  z-index: 2;
+}
+
+.upload-label {
+  cursor: pointer;
+  color: #333;
+  background: #f7f7f7;
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: 1px solid gray;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.upload-label:hover {
+  background-color: #ebebeb;
+}
+
+.uploaded-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.uploaded-preview img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.file-name-container {
+  display: flex;
+  align-items: center;
+  max-width: 180px;
+  gap: 20px;
+}
+
+.file-name-wrapper {
+  position: relative;
+  max-width: 140px;
+  flex-shrink: 1;
+}
+
+.file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
+  color: #333;
+  border: 1px solid gray;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #f7f7f7;
+  font-size: 13px;
+  max-width: 100%;
+}
+
+.file-name-tooltip {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  z-index: 10;
+  background: white;
+  color: #333;
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  max-width: 250px;
+  white-space: normal;
+  word-wrap: break-word;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Mostrar tooltip solo si corresponde Y el ratón está encima */
+.file-name-wrapper.show-tooltip:hover .file-name-tooltip {
+  display: block;
+}
+
+.remove-image {
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 6px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.remove-image:hover {
+  background-color: #ddd;
+}
+
+
+/* =================== */
+/*   Boton confirmar   */
+/* =================== */
+.modal-actions 
+{
+  text-align: right;
+  margin-top: 50px;
+}
+
+#confirmBtn 
+{
+  background-color: var(--azulPrimario);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#confirmBtn:hover 
+{
+  background-color: var(--hoverAzulPrimario);
+}
+  
+.observaciones-container label {
+  top: 30px; 
+} 
+
+/*ETIQUTAS*/
+/* Igualar altura con observaciones si hay una sola fila */
+
+
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.chip {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chip .remove-chip {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  line-height: 1;
+  margin-left: 4px;
+}
+
+.chip:hover {
+  background-color: #d4d4d4;
+  cursor: pointer;
+}
+
+/* Excluimos el icono de la regla que desactiva pointer-events */
+.info-icon-wrapper,
+#infoIcon {
+  pointer-events: auto !important;
+  z-index: 1001;  /* un peldaño por encima de las opciones (z-index:10) */
+}
+
+/* Icono redondo de info */
+/* Posicionamiento del wrapper */
+.info-icon-wrapper {
+position: absolute;
+top: 10px;
+right: -30px;
+width: 20px;
+height: 20px;
+}
+
+/* Icono redondo */
+.info-icon {
+background-color: #d1d1d1;
+color: #000;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+font-size: 13px;
+font-weight: bold;
+text-align: center;
+line-height: 20px;
+cursor: pointer;
+user-select: none;
+z-index: 1000;
+}
+
+/* Tooltip que se posicionará dinámicamente con JS */
+.info-tooltip {
+position: absolute;
+width: 240px;
+background-color: white;
+border: 1px solid #ccc;
+border-radius: 10px;
+padding: 12px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+font-size: 13px;
+z-index: 10000;
+display: none;
+flex-direction: column;
+top: 10px;
+}
+
+.info-tooltip::before {
+content: "";
+position: absolute;
+left: -7px;
+top: 10px; /* puedes ajustar esto para que apunte al centro del icono */
+width: 0;
+height: 0;
+border-top: 8px solid transparent;
+border-bottom: 8px solid transparent;
+border-right: 8px solid white;
+filter: drop-shadow(-1px 0 1px rgba(0,0,0,0.1));
+}
+
+
+/* Texto del tooltip*/
+.tooltip-text {
+color: #333;
+font-size: 13px;
+line-height: 1.3;
+margin-bottom: 20px;
+text-align: center;
+font-family: "Inter", sans-serif;
+
+}
+
+/* Vídeo del tooltip*/
+.tooltip-video video {
+width: 100%;
+height: 100px;
+object-fit: cover;
+border-radius: 6px;
+pointer-events: none;
+}
+
+
+/* Alerta de movimiento creado*/
+.success-alert {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745;
+  color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 10000;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 500px) 
+{
+  .modal{
+    max-width: 90vw;
+    width: 80vw;
+    height: 70vh;
+    overflow-y: scroll;
+  }
+
+  .row
+  {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  #tipoPagoContainer
+  {
+    display: none;
+  }
+  
+  .modal-file-upload
+  {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #confirmBtn
+  {
+    width: 100%;
+  }
+
+}

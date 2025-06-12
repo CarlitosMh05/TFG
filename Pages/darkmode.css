@@ -1,0 +1,119 @@
+
+
+body.dark-mode, html.dark-mode,
+.dark-mode .modal,
+.dark-mode .perfil-modal,
+.dark-mode .mini-modal,
+.dark-mode .main,
+.dark-mode .movimientos-list
+ {
+  background: #212121 !important;
+  color: #fff !important;
+} 
+
+
+.dark-mode .charts-container,
+.dark-mode .month-selector,
+.dark-mode .sticky-resumen,
+.dark-mode .no-movimientos,
+.dark-mode .conceptos-col,
+.dark-mode .movimientos-dia,
+.dark-mode .columna-comparar,
+.dark-mode .comparar-diferencia-central
+{
+  background: #303030 !important;
+  color: #fff !important;
+}
+.dark-mode .principal-header, 
+.dark-mode .titulo-principal, 
+.dark-mode .greeting p, 
+.dark-mode .resumen-cantidad,
+.dark-mode .title,
+.dark-mode .amount,
+.dark-mode .radio-container,
+.dark-mode .mov-dia-resumen,
+.dark-mode .mov-header-col,
+.dark-mode .movimiento-concepto,
+.dark-mode .diferencia-media,
+.dark-mode .chart-amount-ing,
+.dark-mode .chart-amount-gas {
+  color: #fff !important;
+}
+.dark-mode .sidebar {
+  background: #303030 !important;
+  color: #fff !important;
+  border-right: 1.5px solid #303030;
+}
+.dark-mode .sidebar-link, 
+.dark-mode .sidebar-link .sidebar-icon {
+  color: #fff !important;
+}
+.dark-mode .sidebar-link.active,
+.dark-mode .sidebar-link:hover {
+  background: #303030 !important;
+  color: #fff !important;
+}
+.dark-mode .hamburger-btn .bar {
+  background: #fff !important;
+}
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode .frecuencia-show-display,
+.dark-mode .concepto-display,
+.dark-mode .etiqueta-display,
+.dark-mode .currency-display,
+.dark-mode .etiqueta-show-display 
+ {
+  background: #303030 !important;
+  color: #fff !important;
+  border-color: #555 !important;
+}
+.dark-mode .dropdown-options, 
+.dark-mode .frecuencia-show-options,
+.dark-mode .concepto-options,
+.dark-mode .currency-options,
+.dark-mode .etiqueta-options,
+.dark-mode .currency-options,
+.dark-mode .upload-label,
+.dark-mode .etiqueta-show-options {
+  background: #303030 !important;
+  color: #fff !important;
+}
+.dark-mode .material-symbols-outlined,
+.dark-mode .mov-action-btn .editar-mov-btn {
+  color: #fff !important;
+}
+
+.dark-mode .input-container label
+{
+    background: #303030 !important;
+}
+
+.dark-mode .month-selector.stuck
+{
+    box-shadow: 0 8px 20px -8px rgba(255, 255, 255, 0.15), 0 2px 6px -2px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .perfil-modal,
+.dark-mode .mini-modal
+{
+    box-shadow: 0 0 20px white;
+}
+
+
+.dark-mode .conceptos-list li,
+.dark-mode .etiquetas-list li
+{
+    background: #585858 !important;
+  color: #fff !important;
+}
+
+.dark-mode .lista-mov-dia .movimiento-row:nth-child(odd) 
+{
+    background: #252525;
+}
+
+.dark-mode .lista-mov-dia .movimiento-row:nth-child(even) 
+{
+    background: #303030;
+}

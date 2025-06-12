@@ -1,0 +1,794 @@
+html
+{
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.principal-header {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  }
+
+   .greeting{
+    margin-bottom: 20px;
+   }
+  .principal-header .greeting p {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+
+  /* “Hola, Nombre” más grande y destacado */
+.principal-header .greeting p:first-child {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #222;
+}
+
+/* “Resumen mensual” algo más pequeño pero aún prominente */
+.principal-header .greeting p#monthlySummary {
+  font-size: 1.4rem;
+  color: #555;
+  margin-top: 8px;
+}
+
+#monthlyNet {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* clases para el color según signo */
+#monthlyNet.positive { color: green; }
+#monthlyNet.zero     { color: black; }
+#monthlyNet.negative { color: red; }
+  
+  
+
+  .main
+  {
+    width: 95%;
+    margin: auto;
+    border-radius: 75px;
+    
+  }
+
+  .charts-container 
+  {
+    display: flex;
+    justify-content: center;
+    background: #F7F7F7;
+    border-radius: 75px;
+    margin: 30px 0;
+  }
+
+  .charts-wrapper
+  {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .chart-box 
+  {
+    width: 30%;
+    margin: 4% 10%;
+    position: relative;
+    
+  }
+
+
+   
+  #trendChartContainer
+  {
+    width: 70%;
+    position: relative;
+  }
+  
+  #trendChartContainer  .chart-title 
+  {
+    position: absolute;
+    left: 57%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;     /* para que no interfiera con clicks en el canvas */
+    z-index: 10;
+    top: -100px;
+  }
+
+  .chart-title 
+  {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;     /* para que no interfiera con clicks en el canvas */
+    z-index: 10;
+    top: -50px;
+    white-space: nowrap;
+  }
+  
+  .chart-title .title {
+    display: block;
+    font-size: 1.2rem;
+    color: #222;
+    margin-bottom: 4px;
+  }
+  
+  .chart-title .amount {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #222;
+  }
+
+  .month-selector {
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #333;
+    padding-right: 150;
+    position: sticky;
+    background: #f7f7f7;
+    z-index: 100; 
+    top: 0;
+    border-top-left-radius: 75px; 
+    border-top-right-radius: 75px;
+    padding-top: 70px;
+    
+  }
+
+  .month-selector.stuck {
+     border-radius: 0 0 75px 75px !important;
+     box-shadow: 0 8px 20px -8px rgba(59,119,209,0.15), 0 2px 6px -2px rgba(0,0,0,0.05);
+     transition: box-shadow 0.25s;  
+  }
+
+  #circularCharts
+  {
+    margin-top: 0; 
+    border-top-left-radius: 0;  
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 75px;
+    border-bottom-right-radius: 75px;
+  }
+
+  #circularCharts.radius {
+     border-top-left-radius: 75px !important;  
+    border-top-right-radius: 75px !important;
+  }
+  
+  .month-arrow {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1.3rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    position: relative;
+  }
+  
+  .month-arrow:hover {
+    background-color: #e0e0e0;
+  }
+
+  .month-arrow:disabled {
+    opacity: 0.5;
+    pointer-events: auto;
+  }
+
+  .month-arrow[disabled]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 130%; /* Debajo del botón, ajusta si lo prefieres arriba */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 7px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+
+  .month-arrow[disabled]:hover::after {
+    opacity: 1;
+  }
+
+  
+
+  #currentMonthText {
+    display: inline-block;
+    text-align: center;
+    min-width: 300px; /* Ajusta según el mes más largo posible */
+    font-variant-numeric: tabular-nums; /* para que los números ocupen igual */
+  }
+
+  #customDateBtn
+  {
+    background-color: transparent;
+    cursor: pointer;
+    border: none; 
+    width: 32px;
+    height: 32px;
+  }
+
+  #customDateBtn:hover
+  {
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    transition: background-color 0.5s ease;
+    
+  }
+
+  .volver-hoy {
+    font-size: 1rem;
+    color: #cfcfcf;
+    cursor: pointer;
+    margin-right: 15px;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+
+  .volver-hoy:hover {
+    color: black;
+  }
+
+  /*Flechita*/
+
+.no-movimientos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+  font-size: 2.5rem;
+  color: black;
+  background: #f7f7f7;
+  border-bottom-left-radius: 75px;
+  border-bottom-right-radius: 75px;
+
+}
+
+.flecha-container {
+  margin-top: 20px;
+  font-size: 4rem;
+  color: black;
+  animation: bounce 1.5s infinite;
+  font-family: "Inter", sans-serif;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/*Frecuencia dropdown*/
+
+.frecuencia-show-dropdown  {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.frecuencia-show-display {
+  padding: 15px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+  position: relative;
+  padding-right: 25px;
+}
+
+.frecuencia-show-display::after  
+{
+  content: "⮟"; 
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #666;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.input-container.open #frecuenciaShow {
+  color: var(--azulPrimario); /* o #3B77D1 si prefieres directo */
+  font-weight: bold;
+}
+
+
+
+.frecuencia-show-display::after  
+{
+  transform: translateY(-50%) rotate(0deg);
+}
+
+
+.frecuencia-show-display.open::after {
+  transform: translateY(-50%) rotate(180deg); /* ← rota solo cuando abierto */
+}
+
+.frecuencia-show-options
+{
+  position: absolute;
+  top: 110%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: none;
+  width: 100%;
+  z-index: 10;
+  text-align: center;
+  
+}
+
+.frecuencia-show-options li  
+{
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.frecuencia-show-options li:hover  
+{
+  background-color: var(--azulPrimario);
+  color: white;
+}
+
+.frecuencia-show-display.open{
+  border-color: var(--azulPrimario);
+  border-width: 3px;
+
+}
+
+#trendChartTitle 
+{
+  top: -15px !important;
+}
+
+#trendChartContainer
+{
+  padding-top: 50px;
+}
+
+
+.sticky-resumen {
+  position: sticky;
+  top: 0;
+  z-index: 101;
+  background: #f7f7f7;
+  padding: 8px 0;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#stickyResumenCantidad.positive {
+  color: green;
+}
+#stickyResumenCantidad.negative {
+  color: red;
+}
+#stickyResumenCantidad.zero {
+  color: black;
+}
+
+#trendChartsContainer
+{
+  margin-top: 75px;
+  overflow-x: scroll;
+}
+
+
+  .barras-aviso {
+  position: absolute;
+  top: 10px;
+  right: -200px;
+  background: #fff0f0;
+  color: #d12d2d;
+  padding: 10px 18px;
+  border: 1.5px solid #d12d2d;
+  border-radius: 8px;
+  font-size: 1rem;
+  z-index: 20;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(209,45,45,0.09);
+  pointer-events: none; /* para que no moleste al gráfico */
+}
+
+
+.chartjs-legend li.hidden,
+.chartjs-legend li.legend-item--hidden,
+.chartjs-legend li[aria-disabled="true"] {
+  text-decoration: line-through !important;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.legend-item.hidden,
+.legend-item.legend-item--hidden {
+  text-decoration: line-through !important;
+  opacity: 0.5;
+}
+
+
+
+
+
+.etiqueta-show-dropdown {
+  position: absolute;
+  cursor: pointer;
+  user-select: none;
+  min-width: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  right: 60px;
+  bottom: 10px;
+}
+
+.etiqueta-show-label-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+}
+
+.etiqueta-show-label {
+ font-size: 13px;
+  color: #888;
+  margin-bottom: 0;
+  transition: color .18s;
+  font-weight: 500;
+}
+
+.etiqueta-show-display {
+  padding: 15px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+  position: relative;
+  padding-right: 25px;
+  min-width: 120px;
+  transition: border-color .18s;
+}
+
+.etiqueta-show-display:focus,
+.etiqueta-show-display.open {
+  border-color: var(--azulPrimario, #3B77D1);
+  border-width: 3px;
+}
+.etiqueta-show-label.active,
+.etiqueta-show-label.focused {
+  color: var(--azulPrimario, #3B77D1);
+  font-weight: bold;
+}
+
+.etiqueta-show-display::after {
+  content: "⮟";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #666;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+.etiqueta-show-display.open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.etiqueta-show-options {
+   min-width: unset;
+  width: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 20;
+  text-align: right;
+  display: none;
+}
+
+.etiqueta-show-options li {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.etiqueta-show-options li:hover{
+   background-color: var(--azulPrimario, #3B77D1);
+  color: white;
+}
+
+.input-container.open #etiquetaShow {
+  color: var(--azulPrimario); /* o #3B77D1 si prefieres directo */
+  font-weight: bold;
+}
+
+#orderByEtiqueta
+{
+  min-width: 200px; 
+  width: auto; 
+  margin-left: 24px; 
+  position: absolute;
+  right: 60px; 
+  bottom: 10px;
+}
+
+
+/* REsponsive */
+/* ========================== */
+/*        RESPONSIVE          */
+/* ========================== */
+
+/* --- TABLET: ≤ 1000px --- */
+
+@media (max-width: 1120px) {
+
+  #orderByEtiqueta
+  {
+    min-width: 100px;
+  }
+
+}
+
+@media (max-width: 950px) {
+
+  .main  {
+    border-radius: 0 !important;
+  }
+
+  .charts-container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 0;
+    align-items: center;
+  }
+  
+  .chart-title{
+    left: 50%;
+  }
+
+  canvas
+  {
+    margin: auto;
+  }
+
+  .month-selector {
+    display: grid;
+    grid-template-rows: 1fr 1fr;  /* dos columnas iguales */
+    grid-template-columns: 1fr 1fr 1fr;  /* dos columnas iguales */
+    justify-items: center;
+    gap: 6px 2vw;
+    width: 100%;    
+    padding-right: 0;       /* el fondo ocupa todo el ancho igual */
+  }
+
+  #orderByEtiqueta
+  {
+    position: relative;
+    grid-column: 3;
+    grid-row: 2;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  #selectMonth
+  {
+    grid-column: 2 ;
+    grid-row: 1;
+    display: flex;
+  }
+
+  #customDateBtn
+  {
+    grid-column: 3 ;
+    grid-row: 1;
+  }
+
+  #selectFrecuencia
+  {
+    margin-left: 40px;
+  }
+
+  #trendChart
+  {
+    width: 1000px !important;
+    height: 500px !important;
+    margin: auto;
+  }
+  
+}
+
+@media (max-width: 736px) 
+{
+  .month-selector 
+  {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;  /* dos columnas iguales */
+    grid-template-columns: 1fr 1fr 1fr;  /* dos columnas iguales */
+    justify-items: center;
+    gap: 6px 2vw;
+    width: 100%;    
+    padding-right: 0;       /* el fondo ocupa todo el ancho igual */
+  }
+
+  #selectFrecuencia
+  {
+    left: 150px;
+    grid-row: 3;
+  }
+
+  #orderByEtiqueta
+  {
+    right: 150px;
+    grid-row: 3;
+    margin-right: 40px;
+
+  }
+
+  #goToTodayText
+  {
+    grid-row: 1;
+    position: relative;
+    left: 150px;
+  }
+
+  #customDateBtn
+  {
+    grid-row: 1;
+    position: relative;
+    right: 150px;
+  }
+
+  #selectMonth
+  {
+    grid-column: 2;
+    grid-row: 2;
+    margin-bottom: 20px;
+  }
+
+  #stickyResumen
+  {
+    margin-bottom: 0;
+  }
+
+  .month-selector.stuck
+  {
+    padding-top: 40px;
+  }
+
+
+}
+
+
+@media (max-width: 510px) 
+{
+  #orderByEtiqueta
+  {
+    width: 80%;
+    margin-right: 70px;
+  }
+}
+
+@media (max-width: 467px) {
+  body, html
+  {
+    width: 100%;
+  }
+
+  .charts-container
+  {
+    align-items: flex-start;
+  }
+
+  .main {
+    width: 100%;
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .principal-header .greeting p:first-child
+  {
+    font-size: 1.1rem;
+  }
+
+  .principal-header .greeting p#monthlySummary
+  {
+    font-size: 1rem;
+  }
+
+  #monthlyNet
+  {
+    font-size: 1.3rem;
+  }
+
+  .month-selector {
+   grid-template-columns: 1fr;
+    font-size: 0.6rem;
+  }
+  /* Centra el texto del mes */
+  #currentMonthText {
+    min-width: 150px;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  #orderByEtiqueta
+  {
+    width: 40%;
+    margin-left: 30px;
+    right: 90px;
+  }
+
+  #selectFrecuencia {
+    min-width: 80px !important;
+    left: 110px;
+  }
+
+  #selectMonth {
+    position: relative;
+    left: 50px;
+  }
+  
+  #customDateBtn {
+    position: relative;
+    right: 50px;
+  }
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
