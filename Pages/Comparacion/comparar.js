@@ -2,7 +2,7 @@
 
 //Comprobando que funcion
 
-// aaa
+// aa
 
 // --------- Helpers y formato ----------
 function capitalize(str) {
