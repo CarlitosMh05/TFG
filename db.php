@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
+//Peuqño cambio
 $servername = "localhost";  // Servidor MySQL
 $username = "root";         // Usuario de MySQL
 $password = "";             // Contraseña de MySQL
