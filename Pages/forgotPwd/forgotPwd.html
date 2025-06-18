@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="forgotPwd.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form  >
+        <input type="hidden" name="formulario" value="form1" id="form1">
+
+        <h2>Introduce las credenciales que usaste al crear la cuenta</h2>
+
+        <div class="input-container" style="margin-bottom: 30px;">
+            <input type="email" id="email" placeholder=" " required>
+            <label for="email">Correo</label>
+            <p class="badMail bad-text">Debes introducir un correo</p>
+        </div>
+
+        <div class="input-container" style="margin-bottom: 30px;">
+            <input type="number" id="number" placeholder=" " required>
+            <label for="nombre">Telefono</label>
+            <p class="badNumber bad-text">Debes introducir un telefono</p>
+        </div>
+
+        <section class="buttons">
+            <input type="button" value="Cambiar contraseña" id="next">
+        </section>
+    </form>
+
+    <form style="display: none;" id="nextStep">
+        <input type="hidden" name="formulario" value="form2" id="form2">
+        <h2>Te hemos enviado un correo con una contraseña temporal. </h2>
+
+        <div class="input-container" style="margin-bottom: 30px;">
+            <input type="password" id="temporalPwd" placeholder=" " required>
+            <label for="password">Contraseña temporal</label>
+            <p class="badPwd bad-text">Debes introducir la contraseña temporal</p>
+        </div>
+
+        <div class="input-container" style="margin-bottom: 30px;">
+            <input type="password" id="newPassword" placeholder=" " required>
+            <label for="newPassword">Nueva contraseña</label>
+            <button type="button" class="toggle-password" onclick="togglePassword()" style="display: none;">
+                <span class="material-symbols-outlined" id="icon">visibility</span>
+            </button>
+            <p class="badNewPwd bad-text">Debes introducir una nueva contraseña</p>
+            <div class="password-strength">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="input-container" style="margin-bottom: 30px;">
+            <input type="password" id="confirmationPwd" placeholder=" " required>
+            <label for="confirmationPwd">Confirmar</label>
+            <p class="badConfirmationPwd bad-text">Debes confirmar la contraseña</p>
+        </div>
+
+        <section class="buttons">
+            <input type="button" value="Cambiar contraseña" id="next2">
+        </section>
+    </form>
+
+    <div id="succes" style="display: none;">
+        <h1>Contraseña cambiada con exito.</h1><br><br>
+        <h2>Redirigiendo al Inicio de sesión<span class="dots"></span></h2>
+    </div>
+
+    <script src="forgotPwd.js"></script>
+</body>
+</html>

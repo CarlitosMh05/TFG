@@ -1,0 +1,420 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html
+{
+    overflow-x: hidden;
+}
+
+body
+{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* .scroll-animation {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity var(--duration, 1s) ease-out, transform var(--duration, 1s) ease-out;
+} */
+
+
+.scroll-animation.show 
+{
+    opacity: 1;
+    transform: translateY(0px);
+
+}
+
+/* ============================= */
+/*        Mensaje inicial        */
+/* ============================= */
+
+#titulo1, #titulo2
+{
+    font-family: "Caveat";
+    font-size: 80px;
+}
+
+.start
+{
+    text-align: center;
+    margin-top: 6%;
+}
+
+/* #titulo1, #titulo2, a, #shadow{
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+} */
+
+.underline {
+    background-image: url('/Imagenes/underline.png');
+    background-size: 130%;
+    background-position-x: 130px;
+    background-position-y: 30px;
+}
+
+/* ============================= */
+/*            Botones            */
+/* ============================= */
+
+.butons a
+{
+    margin-top: 20%;
+    background-color: #3B77D1;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    width: 250px;
+    height: 75px;
+    font-family: "Caveat";
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 7px 7px 15px  gray;
+    cursor: pointer;
+    transition: background-color 0.7s ease, color 0.7s ease, box-shadow 0.7s ease, opacity 1s ease-in-out;
+    text-decoration: none;
+}
+
+
+.butons a:hover
+{
+    background-color: white;
+    color: #3B77D1;
+    box-shadow: 15px 20px 15px  gray;
+    border: 1px solid gray;
+
+}
+
+.butons
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+/* ============================= */
+/*            Sombra             */
+/* ============================= */
+
+#shadow
+{
+    position: relative;
+    top: 10vh;
+    border-radius: 100%;
+    width: 150vw;
+    background-color: rgb(241, 241, 241);
+}
+
+
+
+.container
+{
+    position: relative;
+    left: 25vw;
+    top: 30vh;
+    height: 100%;
+    background-color: rgb(241, 241, 241);
+    padding-bottom: 10vh;
+    
+
+}
+
+
+/* ============================= */
+/*           Texto               */
+/* ============================= */
+
+.text1
+{
+    width: 100vw;
+    text-align: center;
+    font-family: "Inter";
+}
+
+.text1 h1
+{
+    font-family: "Inter";
+    color: black;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 50px;
+
+}
+
+.text1-animation {
+    opacity: 0;
+    transform: translateY(200px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Cuando el elemento entra en pantalla */
+.text1-animation.show {
+    opacity: 1;
+    transform: translateY(0px);
+
+}
+
+/* ============================= */
+/*         Contenido 1           */
+/* ============================= */
+
+.content
+{
+    display: flex;
+    margin-top: 10vh;
+}
+
+.content .imagenes
+{
+    display: flex;
+    flex-direction: column;
+    padding-left: 4%;
+    margin-top: 8vh;
+    width: 80vw;
+    height: 60vh;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    background-color: white;
+    padding-top: 10vh;
+    padding-right: 5vw;
+}
+
+.content .imagenes img
+{
+    width: 20vw;
+    height: 15vh;
+
+}
+
+.content .texto
+{
+    display: flex;
+    justify-content: center;
+    padding: 10vh 10vw;
+}
+
+.fade 
+{
+    opacity: 0;  /* Oculto por defecto */
+    transition: opacity 2s ease-out, transform 2s ease-out;
+}
+
+
+
+.content .texto p
+{
+    font-size: 40px;
+    text-align: left;
+    padding-left: 15%;
+    padding-top: 17%;
+    line-height: 65px;
+}
+
+/* ============================= */
+/*         Contenido 2           */
+/* ============================= */
+
+.content2
+{
+    display: flex;
+    margin-top: 15vh;
+}
+
+.content2 .imagenes
+{
+    display: flex;
+    flex-direction: column;
+    padding-right: 0;
+    margin-top: 10vh;
+    width: 80vw;
+    height: 60vh;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    background-color: white;
+    padding-top: 10vh;
+    padding-left: 10vw;
+}
+
+.content2 .imagenes img
+{
+    width: 20vw;
+    height: 15vh;
+    z-index: 9999;
+
+}
+
+.content2 .texto
+{
+    display: flex;
+    justify-content: center;
+    padding: 10vh 10vw;
+}
+
+.content2 .texto p
+{
+    font-size: 40px;
+    text-align: left;
+    padding-right: 15%;
+    padding-top: 17%;
+    line-height: 65px;
+}
+
+/* ============================= */
+/*            Final              */
+/* ============================= */
+
+.end
+{
+    width: 100vw;
+    min-height: 80vh; /* Evita que colapse incluso sin contenido */
+    background-color: white;
+    margin-top: 70vh;
+    text-align: center;
+    font-family: "Caveat";
+    font-size: 40px;
+    max-height: 100vh;
+    overflow-y: auto;  
+     transition: transform 0.3s ease-out;
+    
+}
+
+.end-content {
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/*Cookies*/
+.cookie-consent-popup {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    min-width: 340px;
+    max-width: 90vw;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 7px 0px #bdbdbd;
+    display: flex;
+    align-items: center;
+    padding: 22px 36px 22px 20px;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s cubic-bezier(.37,1.14,.26,1.24), transform 0.7s cubic-bezier(.37,1.14,.26,1.24);
+    font-family: "Inter", sans-serif;
+    font-size: 17px;
+}
+
+.cookie-consent-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.cookie-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.cookie-icon {
+    font-size: 32px;
+    margin-right: 6px;
+}
+
+.cookie-text a {
+    color: #3B77D1;
+    text-decoration: underline;
+    font-weight: 500;
+    opacity: 1;
+}
+
+.cookie-btns {
+    display: flex;
+    gap: 10px;
+    margin-left: 16px;
+}
+
+.cookie-btn {
+    padding: 8px 22px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s;
+    font-size: 16px;
+}
+
+.cookie-btn.accept {
+    background: #3B77D1;
+    color: white;
+}
+
+.cookie-btn.reject {
+    background: #e6e6e6;
+    color: #3B77D1;
+}
+.cookie-btn.accept:hover {
+    background: #2d5b9f;
+}
+.cookie-btn.reject:hover {
+    background: #bdbdbd;
+}
+
+@media (max-width: 1355px) {
+    .imagenes :first-child,
+    .imagenes :nth-child(2) {
+        display: none;
+    }
+
+    .imagenes :last-child {
+        width: 30vw;
+        height: 20vh;
+    }
+
+    .imagenes{
+        justify-content: center ;
+        align-items: center;
+    }
+
+
+    .cookie-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cookie-btns {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 383px)
+{
+    .underline {
+        background-size: 0%;
+
+    }
+}
+
+@media (max-width: 970px) {
+    .imagenes{
+        display: none !important;
+    }
+}
+
+
+

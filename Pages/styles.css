@@ -1,0 +1,277 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --azulPrimario: #3B77D1;
+}
+
+body
+{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--azulPrimario);
+}
+
+/* ============================= */
+/*       Estilos del form        */
+/* ============================= */
+
+form
+{
+    position: relative;
+    width: 40%;
+    padding: 50px;
+    background-color: white;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Inter", sans-serif;
+    box-shadow: 0px 0px 30px white;
+}
+
+form h2
+{
+    font-weight: 500;
+    margin-bottom: 45px;
+    font-size: 25px;
+    font-family: "Montserrat";
+}
+
+/* ============================= */
+/*       Estilos del input       */
+/* ============================= */
+
+.input-container 
+{
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+
+.input-container input 
+{
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+/* Etiqueta flotante */
+.input-container label {
+    position: absolute;
+    top: 60%;
+    left: 15px;
+    transform: translateY(-80%);
+    font-size: 14px;
+    color: gray;
+    background: transparent;
+    padding: 0 5px;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+/* Estilos cuando hay error */
+.bad-text
+{
+    display: none; 
+    color: red; 
+    font-size: 12px;
+}
+
+/* ======================================  */
+/*   Estilos del input al ser modificado   */
+/* ======================================  */
+
+/* Cuando el input tiene foco o contenido */
+
+    /* Cambia el input*/
+    .input-container input:focus,
+    .input-container input:not(:placeholder-shown) 
+    {
+        border-color: var(--azulPrimario);;
+        border-width: 3px;
+    }
+
+    /* Cambia el label*/
+    .input-container input:focus + label,
+    .input-container input:not(:placeholder-shown) + label 
+    {
+        top: 5px !important;
+        font-size: 14px;
+        color: var(--azulPrimario);
+        background-color: white;
+    }
+
+    /* Cuando esta la clase error, cambia el label */
+    .input-container.error input:focus + label,
+    .input-container.error input:not(:placeholder-shown) + label 
+    {
+        color: red;
+    }
+
+    .input-container.error input:focus 
+    { /* Añadimos 'input' para mayor especificidad */
+         border: 1px solid red ;
+    }
+
+    .input-container.error input 
+    { /* Añadimos 'input' para mayor especificidad */
+         border: 1px solid red ;
+    }
+
+    
+
+    /* Cuando hay error modifica el top del label para volver a centrarlo */
+    .input-container.error label 
+    {
+        top: 45%;
+    }
+
+/* Cuando el input pierde el foco pero tiene contenido, el color del label vuelve a gris */
+.input-container input:not(:focus):not(:placeholder-shown) + label 
+{
+    color: gray;
+}
+
+/* Cuando el input pierde el foco pero tiene contenido y tiene la clase error, el color del label vuelve a rojo */
+.input-container.error input:not(:focus):not(:placeholder-shown) + label {
+    color: red;
+}
+
+/* Cuando el input tiene foco, se vuelve azul */
+.input-container input:focus {
+    border-color: var(--azulPrimario);
+    border-width: 3px;
+}
+
+
+
+
+/* Cuando el input pierde el foco, vuelve a gris si tiene contenido */
+.input-container input:not(:focus):not(:placeholder-shown) {
+    border-color: gray;
+    border-width: 1px;
+}
+
+
+/* Estilos para quitar las flechas del input number */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+
+.toggle-password {
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+
+
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    font-size: 22px;
+    color: #555;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    display: inline-block;
+}
+
+.material-symbols-outlined.animate {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+/* Estilos del texto "¿Has olvidado tu correo/contraseña?" */
+.forgot-text {
+    display: block;
+    font-size: 12px;
+    color: var(--azulPrimario);;
+    font-weight: 300;
+    margin-top: 5px;
+    text-decoration: none;
+}
+
+.forgot-text:hover 
+{
+    color: #316fcb;
+
+}
+
+/* ============================*/
+/*    Estilos de los botones   */
+/* ============================*/
+.buttons input
+{
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: none;
+    margin: 0 10px;
+    cursor: pointer;
+    
+}
+
+.buttons
+{
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* Para cada boton indidual*/
+
+
+#next
+{
+    background-color: var(--azulPrimario);
+    color: white;
+}
+
+/*Hovers botones*/
+
+#next:hover
+{
+    color: white;
+    background-color: #2468cf;
+}
+
+@media (max-width: 950px) {
+    form {
+        width: 90vw !important;
+    }
+
+    
+}
+

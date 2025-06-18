@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../styles.css">
+        <link rel="stylesheet" href="inicioSesion.css">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+    </head>
+    <body>
+        <form>
+            <h2>Iniciar sesion</h2>
+
+            <div class="input-container" style="margin-bottom: 30px;">
+                <input type="email" id="email" placeholder=" " required>
+                <label for="email">Correo</label>
+                <p class="bad-text badEmail">Debes introducir un email</p>
+            </div>
+
+            <div class="input-container">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password">Contraseña</label>
+                <button type="button" class="toggle-password" onclick="togglePassword()" style="display: none;">
+                    <span class="material-symbols-outlined" id="icon">visibility</span>
+                </button>
+                <p class="badPwd bad-text">Debes introducir una contraseña</p>
+                <a href="../forgotPwd/forgotPwd.html" class="forgot-text">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <section class="buttons">
+                <input type="button" value="Crear Cuenta" id="crearCuenta" onclick='window.location.href = "../CrearCuenta/crearCuenta.html";'>
+                <input type="button" value="Siguiente" id="next">
+            </section>
+        </form>
+    </body>
+
+    <script src="inicioSesion.js"></script>
+</html>
