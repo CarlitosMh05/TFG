@@ -2,8 +2,6 @@
 
 //Comprobando que funcion
 
-// aa
-
 // --------- Helpers y formato ----------
 function capitalize(str) {
   if (!str) return '';
