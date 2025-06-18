@@ -1,5 +1,7 @@
 // comparar.js: lógica modular para dos columnas independientes
 
+//Comprobando que funcion
+
 // --------- Helpers y formato ----------
 function capitalize(str) {
   if (!str) return '';
