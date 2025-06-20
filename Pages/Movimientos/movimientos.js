@@ -632,7 +632,6 @@ $(function () {
           </div>
         </li>
       `);
-      lucide.createIcons();
       if (window.lucide) lucide.createIcons();
 
       // Solo las disponibles (no seleccionadas)
