@@ -92,7 +92,7 @@ $uid = $_SESSION['user_id'];
             </ul>
           </div>
           
-          <input type="hidden" id="etiqueta" required>
+          <input type="hidden" id="filtroEtiqueta" required>
           <label for="etiqueta" id="labelEtiqueta">Etiquetas (Opcional)</label>
           <p class="badEtiqueta bad-text">Debes seleccionar un etiqueta</p>
           
