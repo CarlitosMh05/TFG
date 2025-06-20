@@ -275,7 +275,6 @@ $(function () {
     $row.addClass('editando-responsive');
     // 4. Inicializar controles y eventos
     inicializarControlesEdicion($row, movData);
-    if (window.lucide) lucide.createIcons();
     // 5. Ocultar todos los botones de editar menos el de esta fila (ya se hace automáticamente con el HTML nuevo)
     $('.editar-mov-btn').not(`[data-id="${movId}"]`).hide();
   }
