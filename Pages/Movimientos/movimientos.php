@@ -95,7 +95,6 @@ $uid = $_SESSION['user_id'];
           <input type="hidden" id="filtroEtiqueta" required>
           <label for="filtroEtiqueta" id="labelEtiqueta">Etiquetas (Opcional)</label>
           
-          <div class="chips-container" id="chipsContainer"></div>
         </div>
         <!-- Fechas -->
         <div class="input-container floating-label-group" style="min-width:170px; position:relative; width: fit-content;">
