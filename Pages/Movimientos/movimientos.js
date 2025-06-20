@@ -985,9 +985,6 @@ $(function () {
       $('.dropdown-display').not($display).removeClass('open');
       $options.fadeToggle(120);
       $display.toggleClass('open');
-      if ($options.is(':visible')) {
-        $options.find('.search-input').focus();
-      }
       e.stopPropagation();
     });
 
