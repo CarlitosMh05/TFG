@@ -620,18 +620,19 @@ $(function () {
   }
 
   function updateDropdown() {
+      $etiquetaOptions.append(`
+          <li class="search-item">
+            <div class="input-container search-container">
+              <input type="text" class="search-input" placeholder=" ">
+              <label style="left: 33px; color: black !important;">Buscar concepto...</label>
+              <i data-lucide="search" class="search-icon"></i>
+            </div>
+          </li>
+        `);
       $etiquetaOptions.empty();
 
       // Search bar
-      $etiquetaOptions.append(`
-        <li class="search-item">
-          <div class="input-container search-container">
-            <input type="text" class="search-input" placeholder=" ">
-            <label style="left: 33px; color: black !important;">Buscar concepto...</label>
-            <i data-lucide="search" class="search-icon"></i>
-          </div>
-        </li>
-      `);
+      
       if (window.lucide) lucide.createIcons();
 
       // Solo las disponibles (no seleccionadas)
@@ -1007,7 +1008,7 @@ $(function () {
           </div>
         </li>
       `);
-      
+
       $options.empty();
       
 
