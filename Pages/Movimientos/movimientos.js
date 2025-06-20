@@ -469,18 +469,7 @@ $(function () {
     if (window.lucide) lucide.createIcons();
   }
 
-  etiquetaDisplay.on('click', function () {
-    // Cierra dropdown de conceptos si está abierto
-    $('#conceptoOptions').fadeOut(150);
-    $('#conceptoDisplay').removeClass('open');
-    $('#conceptoDisplay').closest('.input-container').find('label').css('color', 'gray');
-
-    etiquetaOptions.fadeToggle(150);
-    etiquetaDisplay.toggleClass('open');
-
-    const label = $(this).closest('.input-container').find('label');
-    label.css('color', etiquetaDisplay.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
-  });
+  
 
   function cargarOpcionesConceptoEdicion($row, tipo) {
     // tipo: 'ingreso' o 'gasto'
