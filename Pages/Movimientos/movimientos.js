@@ -475,7 +475,6 @@ $(function () {
     // tipo: 'ingreso' o 'gasto'
     $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=' + tipo, function(data) {
       const $cOpts = $row.find('.concepto-options');
-      $cOpts.empty();
       $cOpts.append(`
         <li class="search-item">
           <div class="input-container search-container">
@@ -485,6 +484,8 @@ $(function () {
           </div>
         </li>
       `);
+      $cOpts.empty();
+      
       if (window.lucide) lucide.createIcons();
       (data.conceptos || []).forEach(c => {
         $cOpts.append(`<li data-value="${c.nombre}">${c.nombre}</li>`);
