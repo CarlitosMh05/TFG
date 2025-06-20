@@ -719,7 +719,7 @@ input:checked + .slider:before {
   width: 100% !important;
 }
 
-#filtroConceptoContainer, #filtroEtiquetaDisplay
+#filtroConceptoContainer, #filtroEtiquetaContainer
 {
   max-width: 400px;
 }
