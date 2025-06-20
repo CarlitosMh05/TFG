@@ -70,9 +70,9 @@ $uid = $_SESSION['user_id'];
     <div id="filtrosBlock" class="filtros-block">
       <div class="filtros-flex">
         <!-- Concepto -->
-        <div class="input-container">
+        <div class="input-container" id="filtroConceptoContainer">
 
-          <div class="concepto-dropdown" id="filtroConceptoContainer">
+          <div class="concepto-dropdown" >
             <div class="concepto-display" id="filtroConceptoDisplay">>Seleccionar concepto</div>
             <ul class="concepto-options" id="filtroConceptoOptions">
             </ul>
