@@ -703,7 +703,8 @@ $(function () {
     // Añadir nueva etiqueta inline
     $etiquetaOptions.off('click', 'li.add-new').on('click', 'li.add-new', function() {
       const $li = $(this);
-      $li.html(`
+      $li.removeClass('add-new').addClass('adding');
+      $li.empty().append(`
         <div class="input-container new-item-container">
           <input type="text" class="new-item-input" placeholder=" ">
           <label>+Añadir etiqueta</label>
