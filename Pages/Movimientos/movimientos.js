@@ -882,9 +882,16 @@ $(function () {
             window.reiniciarYcargar();
             movimientoEditandoId = null;
           } 
-          else if(response.noMovFind || response.noValidConcept || response.badImageTipe || response.errorUploadingImage || response.noActualization) 
-          {
-            alert(response.error || 'Error al actualizar movimiento');
+          else if (response.noMovFind) {
+            showFailMessage(response.noMovFind);
+          } else if (response.noValidConcept) {
+            showFailMessage(response.noValidConcept);
+          } else if (response.badImageTipe) {
+            showFailMessage(response.badImageTipe);
+          } else if (response.errorUploadingImage) {
+            showFailMessage(response.errorUploadingImage);
+          } else if (response.noActualization) {
+            showFailMessage(response.noActualization);
           }
         },
         error(xhr, status, error) {
