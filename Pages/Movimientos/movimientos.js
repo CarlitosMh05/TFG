@@ -983,8 +983,14 @@ $(function () {
 
     $display.off('click').on('click', function(e) {
       // Cerrar otros abiertos
-      $('.dropdown-options').not($options).fadeOut(80);
-      $('.dropdown-display').not($display).removeClass('open');
+      // Cerrar otros dropdowns manualmente
+      if (idDisplay === 'filtroConceptoDisplay') {
+        $('#filtroEtiquetaOptions').fadeOut(80);
+        $('#filtroEtiquetaDisplay').removeClass('open');
+      } else if (idDisplay === 'filtroEtiquetaDisplay') {
+        $('#filtroConceptoOptions').fadeOut(80);
+        $('#filtroConceptoDisplay').removeClass('open');
+      }
       $options.fadeToggle(120);
       $display.toggleClass('open');
       e.stopPropagation();
