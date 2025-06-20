@@ -70,34 +70,19 @@ $uid = $_SESSION['user_id'];
     <div id="filtrosBlock" class="filtros-block">
       <div class="filtros-flex">
         <!-- Concepto -->
-        <div class="input-container">
-
-          <div class="concepto-dropdown">
-            <div class="concepto-display" id="conceptoDisplay">Seleccionar concepto</div>
-            <ul class="concepto-options" id="conceptoOptions">
-            </ul>
-          </div>
-
-          <input type="hidden" id="selectedConcepto" required>
-          <label for="concepto" id="concepto">Concepto</label>
-          <p class="badConcept bad-text">Debes seleccionar un concepto</p>
+        <div class="input-container filtro-dropdown" id="filtroConceptoContainer" style="min-width: 170px;">
+          <div class="dropdown-display" id="filtroConceptoDisplay">Todos</div>
+          <ul class="dropdown-options" id="filtroConceptoOptions"></ul>
+          <input type="hidden" id="filtroConceptoValue">
+          <label for="filtroConcepto" class="filtro-label">Concepto</label>
         </div>
-
         <!-- Etiqueta -->
-       <div class="input-container etiqueta-container">
-        <div class="etiqueta-dropdown">
-          <div class="etiqueta-display" id="etiquetaDisplay">Seleccionar etiquetas</div>
-          <ul class="etiqueta-options" id="etiquetaOptions">
-          </ul>
+        <div class="input-container filtro-dropdown" id="filtroEtiquetaContainer" style="min-width: 170px;">
+          <div class="dropdown-display" id="filtroEtiquetaDisplay">Todas</div>
+          <ul class="dropdown-options" id="filtroEtiquetaOptions"></ul>
+          <input type="hidden" id="filtroEtiquetaValue">
+          <label for="filtroEtiqueta" class="filtro-label">Etiqueta</label>
         </div>
-        
-        <input type="hidden" id="etiqueta" required>
-        <label for="etiqueta" id="labelEtiqueta">Etiquetas (Opcional)</label>
-        <p class="badEtiqueta bad-text">Debes seleccionar un etiqueta</p>
-        
-        <div class="chips-container" id="chipsContainer"></div>
-      </div>
-
         <!-- Fechas -->
         <div class="input-container floating-label-group" style="min-width:170px; position:relative;">
           <input type="text" id="filtroFecha" class="filtro-input floating-label-input" autocomplete="off">
