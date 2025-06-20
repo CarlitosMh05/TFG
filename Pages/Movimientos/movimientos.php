@@ -72,7 +72,7 @@ $uid = $_SESSION['user_id'];
         <!-- Concepto -->
         <div class="input-container">
 
-          <div class="concepto-dropdown">
+          <div class="concepto-dropdown" id="filtroConceptoContainer">
             <div class="concepto-display" id="conceptoDisplay">Seleccionar concepto</div>
             <ul class="concepto-options" id="conceptoOptions">
             </ul>
