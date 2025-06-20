@@ -81,7 +81,7 @@ $stmt->bind_param('dsdssii', $cantidad, $moneda, $concepto_id, $observaciones, $
 $stmt->execute();
 
 if ($stmt->affected_rows < 0) {
-    echo json_encode(['success' => false, 'error' => 'No se pudo actualizar']);
+    echo json_encode(['success' => false, 'noActualization' => 'No se pudo actualizar']);
     exit;
 }
 
