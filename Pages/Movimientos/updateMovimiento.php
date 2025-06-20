@@ -65,7 +65,7 @@ if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
     $nombreFinal = "mov_{$id}_" . time() . "." . $ext;
     $ruta = "uploads/$nombreFinal";
     if (!move_uploaded_file($file['tmp_name'], $ruta)) {
-        echo json_encode(['success' => false, 'error' => 'Error al subir la imagen']);
+        echo json_encode(['success' => false, 'errorUploadingImage' => 'Error al subir la imagen']);
         exit;
     }
     // Si hay imagen anterior, eliminarla
