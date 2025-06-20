@@ -1008,6 +1008,8 @@ $(function () {
           </div>
         </li>
       `);
+      
+      if (window.lucide) lucide.createIcons();
 
       // Filtrar por texto
       let filtered = dataList;
