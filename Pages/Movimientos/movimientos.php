@@ -82,14 +82,28 @@ $uid = $_SESSION['user_id'];
           <label for="concepto" id="concepto">Concepto</label>
           <p class="badConcept bad-text">Debes seleccionar un concepto</p>
         </div>
-        
+
         <!-- Etiqueta -->
-        <div class="input-container filtro-dropdown" id="filtroEtiquetaContainer" style="min-width: 170px;">
-          <div class="dropdown-display" id="filtroEtiquetaDisplay">Todas</div>
-          <ul class="dropdown-options" id="filtroEtiquetaOptions"></ul>
-          <input type="hidden" id="filtroEtiquetaValue">
-          <label for="filtroEtiqueta" class="filtro-label">Etiqueta</label>
+       <div class="input-container etiqueta-container">
+        <div class="etiqueta-dropdown">
+          <div class="etiqueta-display" id="etiquetaDisplay">Seleccionar etiquetas</div>
+          
+          <div class="info-icon-wrapper" id="infoIcon">
+            <div class="info-icon" id="">i</div>
+          </div>
+          
+          <ul class="etiqueta-options" id="etiquetaOptions">
+            <li class="add-new" data-type="etiqueta">+ Añadir etiqueta</li>  
+          </ul>
         </div>
+        
+        <input type="hidden" id="etiqueta" required>
+        <label for="etiqueta" id="labelEtiqueta">Etiquetas (Opcional)</label>
+        <p class="badEtiqueta bad-text">Debes seleccionar un etiqueta</p>
+        
+        <div class="chips-container" id="chipsContainer"></div>
+      </div>
+      
         <!-- Fechas -->
         <div class="input-container floating-label-group" style="min-width:170px; position:relative;">
           <input type="text" id="filtroFecha" class="filtro-input floating-label-input" autocomplete="off">
