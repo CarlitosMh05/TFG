@@ -995,9 +995,12 @@ $(function () {
     function renderOptions(filtrar = '') {
       $options.empty();
       $options.append(`
-        <li class="search-item">
-          <i data-lucide="search" class="search-icon"></i>
-          <input type="text" class="search-input" placeholder="Buscar...">
+       <li class="search-item">
+          <div class="input-container search-container">
+            <input type="text" class="search-input" placeholder=" ">
+            <label style="left: 33px; color: black !important;">Buscar etiqueta…</label>
+            <i data-lucide="search" class="search-icon"></i>
+          </div>
         </li>
       `);
 
