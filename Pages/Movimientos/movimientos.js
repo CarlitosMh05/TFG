@@ -998,7 +998,6 @@ $(function () {
 
     // Construye la lista (incluye buscador arriba)
     function renderOptions(filtrar = '') {
-      $options.empty();
       $options.append(`
        <li class="search-item">
           <div class="input-container search-container">
@@ -1008,6 +1007,8 @@ $(function () {
           </div>
         </li>
       `);
+      $options.empty();
+      
 
       if (window.lucide) lucide.createIcons();
 
