@@ -881,7 +881,9 @@ $(function () {
             // Recargar solo esa fila o toda la tabla, como prefieras:
             window.reiniciarYcargar();
             movimientoEditandoId = null;
-          } else if(response.noMovFind){
+          } 
+          else if(response.noMovFind || ) 
+          {
             alert(response.error || 'Error al actualizar movimiento');
           }
         },
