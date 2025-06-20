@@ -626,7 +626,7 @@ $(function () {
 
   function updateDropdown() {
       $etiquetaOptions.empty();
-
+      const $options = $row.find('.etiqueta-options');
       // Search bar
       $options.empty();
         if ($options.find('.search-item').length === 0) {
