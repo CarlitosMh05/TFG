@@ -55,10 +55,7 @@
   flex-wrap: wrap;
 }
 
-.filtros-flex *
-{
-  width: 20% !important;
-}
+
 
 
 .filtro-label {
