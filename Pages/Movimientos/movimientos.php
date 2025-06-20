@@ -80,7 +80,6 @@ $uid = $_SESSION['user_id'];
 
           <input type="hidden" id="filtroConceptoValue" required>
           <label for="filtroConcepto" id="concepto">Concepto</label>
-          <p class="badConcept bad-text">Debes seleccionar un concepto</p>
         </div>
 
         <!-- Etiqueta -->
