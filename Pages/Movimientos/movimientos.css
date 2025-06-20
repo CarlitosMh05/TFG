@@ -717,7 +717,10 @@ input:checked + .slider:before {
 .conceptos-list li .eliminar-concepto:hover { background: rgb(235, 235, 235); }
 
 
-
+.search-input
+{
+  width: 30%;
+}
 
 .conceptos-cols {
   display: flex;
