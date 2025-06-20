@@ -1241,7 +1241,7 @@ h1 {
   background: var(--azulPrimario, #3B77D1);
   color: #fff;
 }
-.dropdown-options .search-item {
+.dropdown-options {
   background: none !important;
   cursor: default !important;
   pointer-events: none; /* Desactiva el hover/click solo en el LI */
