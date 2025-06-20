@@ -55,7 +55,10 @@
   flex-wrap: wrap;
 }
 
-
+#filtroConceptoContainer
+{
+  width: fit-content;
+}
 
 
 .filtro-label {
