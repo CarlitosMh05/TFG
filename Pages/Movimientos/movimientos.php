@@ -180,7 +180,6 @@ $uid = $_SESSION['user_id'];
     </div>
   </div>
 
-  <p>Hola caracola</p> <p>
 
 
   <!-- Modal de añadir movimiento (usa el mismo HTML/modal que tienes en principal) -->
