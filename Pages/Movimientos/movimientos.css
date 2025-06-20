@@ -1242,11 +1242,7 @@ h1 {
   color: #fff;
 }
 
-.add-new:hover {
-  background: none !important;
-  color: inherit !important;
-  cursor: default !important;
-}
+
 
 .dropdown-options {
   background: none !important;
