@@ -719,6 +719,11 @@ input:checked + .slider:before {
   width: 100% !important;
 }
 
+#filtroConceptoDisplay, #filtroEtiquetaDisplay
+{
+  max-width: 400px;
+}
+
 .conceptos-cols {
   display: flex;
   gap: 32px;
