@@ -489,6 +489,9 @@ $(function () {
         `);
         if (window.lucide) lucide.createIcons();
       }
+
+      $options.find('li:not(.search-item)').remove(); // solo borra las que no son el input
+
       (data.conceptos || []).forEach(c => {
         $cOpts.append(`<li data-value="${c.nombre}">${c.nombre}</li>`);
       });
