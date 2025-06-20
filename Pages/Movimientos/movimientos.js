@@ -1007,6 +1007,7 @@ $(function () {
           </div>
         </li>
       `);
+      
       $options.empty();
       
 
