@@ -77,11 +77,10 @@ $uid = $_SESSION['user_id'];
         </div>
 
         <!-- Etiqueta -->
-        <div class="input-container filtro-dropdown" id="filtroEtiquetaContainer" style="min-width: 170px;">
-          <div class="dropdown-display" id="filtroEtiquetaDisplay">Todas</div>
-          <ul class="dropdown-options" id="filtroEtiquetaOptions"></ul>
+        <div class="input-container etiqueta-dropdown" id="filtroEtiquetaContainer">
+          <div class="etiqueta-display" id="filtroEtiquetaDisplay">Seleccionar etiqueta</div>
           <input type="hidden" id="filtroEtiquetaValue">
-          <label for="filtroEtiqueta" class="filtro-label">Etiqueta</label>
+          <ul class="etiqueta-options" id="filtroEtiquetaOptions"></ul>
         </div>
         <!-- Fechas -->
         <div class="input-container floating-label-group" style="min-width:170px; position:relative;">
