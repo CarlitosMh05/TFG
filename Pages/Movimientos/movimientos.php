@@ -87,7 +87,7 @@ $uid = $_SESSION['user_id'];
           <div class="etiqueta-dropdown">
             <div class="etiqueta-display" id="filtroEtiquetaDisplay">Seleccionar etiquetas</div>
             
-            <ul class="etiqueta-options" id="etiquetaOptions">
+            <ul class="etiqueta-options" id="filtroEtiquetaOptions">
               <li class="add-new" data-type="etiqueta">+ Añadir etiqueta</li>  
             </ul>
           </div>
