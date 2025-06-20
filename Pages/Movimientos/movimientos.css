@@ -1251,7 +1251,7 @@ h1 {
   background: none;
 }
 
-.dropdown-options li.search-item input {
+.dropdown-options li{
   pointer-events: auto; /* Permite escribir en el input */
   flex: 1;
   margin-left: 6px;
