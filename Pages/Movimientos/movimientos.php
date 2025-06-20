@@ -83,7 +83,7 @@ $uid = $_SESSION['user_id'];
           <ul class="etiqueta-options" id="filtroEtiquetaOptions"></ul>
         </div>
         <!-- Fechas -->
-        <div class="input-container floating-label-group" style="min-width:170px; position:relative;">
+        <div class="input-container floating-label-group" style="min-width:170px; position:relative; width: fit-content;">
           <input type="text" id="filtroFecha" class="filtro-input floating-label-input" autocomplete="off">
           <label for="filtroFecha" class="floating-label">Rango</label>
         </div>
