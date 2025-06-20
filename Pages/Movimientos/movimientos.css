@@ -55,10 +55,12 @@
   flex-wrap: wrap;
 }
 
-#filtroConceptoContainer
+#filtroConceptoContainer, #filtroEtiquetaContainer
 {
   width: fit-content;
 }
+
+
 
 
 .filtro-label {
