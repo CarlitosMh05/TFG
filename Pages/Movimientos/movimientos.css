@@ -909,7 +909,6 @@ h1 {
 }
 
 #filtrosBlock select, #filtrosBlock input[type="text"] {
-  background: #f6f8fd;
   border: 1.5px solid #bbb;
   border-radius: 8px;
   padding: 8px 12px;
