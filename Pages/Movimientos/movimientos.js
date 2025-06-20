@@ -1317,6 +1317,7 @@ $(function () {
           $('#modalImportar, #modalImportarOverlay').fadeOut(140);
           showSuccessMessage('¡Movimientos importados correctamente!');
           window.reiniciarYcargar && window.reiniciarYcargar();
+           cargarFiltrosDropdownsCustom();
         } else {
           showFailMessage(resp.error || 'Error al importar.');
         }
