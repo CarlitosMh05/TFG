@@ -882,7 +882,7 @@ $(function () {
             window.reiniciarYcargar();
             movimientoEditandoId = null;
           } 
-          else if(response.noMovFind || response.noValidConcept) 
+          else if(response.noMovFind || response.noValidConcept || response.badImageTipe ) 
           {
             alert(response.error || 'Error al actualizar movimiento');
           }
