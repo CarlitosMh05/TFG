@@ -93,7 +93,7 @@ $uid = $_SESSION['user_id'];
           </div>
           
           <input type="hidden" id="filtroEtiqueta" required>
-          <label for="filtroEtiqueta" id="labelEtiqueta">Etiquetas (Opcional)</label>
+          <label for="filtroEtiqueta" id="labelEtiqueta">Etiquetas</label>
           
         </div>
         <!-- Fechas -->
