@@ -1242,7 +1242,12 @@ h1 {
   color: #fff;
 }
 
-
+.concepto-options li.adding:hover,
+.etiqueta-options li.adding:hover {
+  background: transparent !important;
+  color: inherit !important;
+  cursor: default;
+}
 
 .dropdown-options {
   background: none !important;
