@@ -431,7 +431,7 @@ padding-left: 30px;
 }
 
 .search-container .search-input {
-  padding-left: 35px; /* deja espacio para la lupa */
+  padding-left: 35px !important; /* deja espacio para la lupa */
 }
 
 
