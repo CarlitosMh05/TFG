@@ -319,6 +319,7 @@ padding-left: 30px;
   text-align: center;
   overflow-y: scroll;
   max-height: 300px;
+  overflow-x: hidden;
 }
 
 .currency-options 
