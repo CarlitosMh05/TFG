@@ -1065,6 +1065,8 @@ h1 {
   background: var(--hoverAzulPrimario, #2d5b9f);
 }
 
+
+
 /* --- Mini modal de borrar movimiento --- */
 .mini-modal-overlay {
   display: none; position: fixed; inset: 0; z-index: 2000;
