@@ -721,7 +721,7 @@ input:checked + .slider:before {
 
 #filtroConceptoContainer, #filtroEtiquetaContainer
 {
-  max-width: 400px;
+  max-width: 275px;
 }
 
 .conceptos-cols {
