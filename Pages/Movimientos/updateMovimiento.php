@@ -35,7 +35,7 @@ $stmt->bind_param('ii', $id, $uid);
 $stmt->execute();
 $res = $stmt->get_result();
 if ($res->num_rows !== 1) {
-    echo json_encode(['success' => false, 'error' => 'Movimiento no encontrado']);
+    echo json_encode(['success' => false, 'noMovFind' => 'Movimiento no encontrado']);
     exit;
 }
 $mov = $res->fetch_assoc();
