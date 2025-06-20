@@ -1224,6 +1224,7 @@ h1 {
   overflow-y: auto;
   min-width: 170px;
   text-align: center;
+  overflow-x: hidden;
 }
 .dropdown-options li {
   padding: 8px 14px;
