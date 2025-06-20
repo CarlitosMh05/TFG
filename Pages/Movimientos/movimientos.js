@@ -475,9 +475,9 @@ $(function () {
     $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=' + tipo, function(data) {
       const $cOpts = $row.find('.concepto-options');
       $cOpts.empty();
-      $options.empty();
-      if ($options.find('.search-item').length === 0) {
-        $options.append(`
+      $cOpts.empty();
+      if ($cOpts.find('.search-item').length === 0) {
+        $cOpts.append(`
           <li class="search-item">
             <div class="input-container search-container">
               <input type="text" class="search-input" placeholder=" ">
@@ -489,7 +489,7 @@ $(function () {
         if (window.lucide) lucide.createIcons();
       }
 
-      $options.find('li:not(.search-item)').remove(); // solo borra las que no son el input
+      $cOpts.find('li:not(.search-item)').remove(); // solo borra las que no son el input
 
       (data.conceptos || []).forEach(c => {
         $cOpts.append(`<li data-value="${c.nombre}">${c.nombre}</li>`);
