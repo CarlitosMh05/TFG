@@ -70,17 +70,38 @@ $uid = $_SESSION['user_id'];
     <div id="filtrosBlock" class="filtros-block">
       <div class="filtros-flex">
         <!-- Concepto -->
-       <div class="input-container concepto-dropdown" id="filtroConceptoContainer">
-          <div class="concepto-display" id="filtroConceptoDisplay">Seleccionar concepto</div>
-          <input type="hidden" id="filtroConceptoValue">
-          <ul class="concepto-options" id="filtroConceptoOptions"></ul>
+        <div class="input-container">
+
+          <div class="concepto-dropdown">
+            <div class="concepto-display" id="conceptoDisplay">Seleccionar concepto</div>
+            <ul class="concepto-options" id="conceptoOptions">
+            </ul>
+          </div>
+
+          <input type="hidden" id="selectedConcepto" required>
+          <label for="concepto" id="concepto">Concepto</label>
+          <p class="badConcept bad-text">Debes seleccionar un concepto</p>
         </div>
 
         <!-- Etiqueta -->
-        <div class="input-container etiqueta-dropdown" id="filtroEtiquetaContainer">
-          <div class="etiqueta-display" id="filtroEtiquetaDisplay">Seleccionar etiqueta</div>
-          <input type="hidden" id="filtroEtiquetaValue">
-          <ul class="etiqueta-options" id="filtroEtiquetaOptions"></ul>
+        <div class="input-container etiqueta-container">
+          <div class="etiqueta-dropdown">
+            <div class="etiqueta-display" id="etiquetaDisplay">Seleccionar etiquetas</div>
+            
+            <div class="info-icon-wrapper" id="infoIcon">
+              <div class="info-icon" id="">i</div>
+            </div>
+            
+            <ul class="etiqueta-options" id="etiquetaOptions">
+              <li class="add-new" data-type="etiqueta">+ Añadir etiqueta</li>  
+            </ul>
+          </div>
+          
+          <input type="hidden" id="etiqueta" required>
+          <label for="etiqueta" id="labelEtiqueta">Etiquetas (Opcional)</label>
+          <p class="badEtiqueta bad-text">Debes seleccionar un etiqueta</p>
+          
+          <div class="chips-container" id="chipsContainer"></div>
         </div>
         <!-- Fechas -->
         <div class="input-container floating-label-group" style="min-width:170px; position:relative; width: fit-content;">
