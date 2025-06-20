@@ -93,7 +93,7 @@ $uid = $_SESSION['user_id'];
           </div>
           
           <input type="hidden" id="filtroEtiqueta" required>
-          <label for="etiqueta" id="labelEtiqueta">Etiquetas (Opcional)</label>
+          <label for="filtroEtiqueta" id="labelEtiqueta">Etiquetas (Opcional)</label>
           <p class="badEtiqueta bad-text">Debes seleccionar un etiqueta</p>
           
           <div class="chips-container" id="chipsContainer"></div>
