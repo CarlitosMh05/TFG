@@ -1254,6 +1254,8 @@ h1 {
   flex: 1;
   margin-left: 6px;
   padding-left: 31px !important;
+  width: 100px !important;
+  max-width: min-content;
 }
 
 .dropdown-options li.search-item .search-icon {
