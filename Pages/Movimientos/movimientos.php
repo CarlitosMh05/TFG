@@ -82,6 +82,7 @@ $uid = $_SESSION['user_id'];
           <label for="concepto" id="concepto">Concepto</label>
           <p class="badConcept bad-text">Debes seleccionar un concepto</p>
         </div>
+        
         <!-- Etiqueta -->
         <div class="input-container filtro-dropdown" id="filtroEtiquetaContainer" style="min-width: 170px;">
           <div class="dropdown-display" id="filtroEtiquetaDisplay">Todas</div>
