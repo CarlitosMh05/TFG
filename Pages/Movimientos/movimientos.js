@@ -551,15 +551,14 @@ $(function () {
       .on('click', 'li.add-new', function() {
         const $li = $(this);
         $li.removeClass('add-new').addClass('adding');
-        $li.removeClass('add-new').addClass('adding');
-$li.empty().append(`
-  <div class="input-container new-item-container">
-    <input type="text" class="new-item-input" placeholder=" ">
-    <label>+Añadir concepto</label>
-  </div>
-  <span class="spinner" style="display:none;">⏳</span>
-  <div class="error-text" style="color: red !important;"></div>
-`);
+        $li.empty().append(`
+          <div class="input-container new-item-container">
+            <input type="text" class="new-item-input" placeholder=" ">
+            <label>+Añadir concepto</label>
+          </div>
+          <span class="spinner" style="display:none;">⏳</span>
+          <div class="error-text" style="color: red !important;"></div>
+        `);
         const $input = $li.find('input.new-item-input');
         const $spin = $li.find('span.spinner');
         const $error = $li.find('div.error-text');
