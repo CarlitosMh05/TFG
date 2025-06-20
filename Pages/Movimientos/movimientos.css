@@ -1260,7 +1260,7 @@ h1 {
   max-width: min-content;
 }
 
-.dropdown-options li.search-item .search-icon {
+.dropdown-options li  {
   color: #bbb;
   font-size: 1.18rem;
   pointer-events: none;
