@@ -478,7 +478,7 @@ $(function () {
         <li class="search-item">
           <div class="input-container search-container">
             <input type="text" class="search-input" placeholder=" ">
-            <label style="left: 33px; color: black !important;">Buscar etiqueta…</label>
+            <label style="left: 33px;">Buscar concepto…</label>
             <i data-lucide="search" class="search-icon"></i>
           </div>
         </li>
