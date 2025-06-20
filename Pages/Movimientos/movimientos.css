@@ -914,7 +914,7 @@ h1 {
   font-size: 1.07rem;
   transition: border-color 0.18s;
   background: white;
-  color: gray;
+  color: black;
 }
 
 #filtrosBlock select:focus, #filtrosBlock input[type="text"]:focus {
