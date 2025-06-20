@@ -716,7 +716,7 @@ input:checked + .slider:before {
 
 .search-input
 {
-  width: 30%;
+  width: 100% !important;
 }
 
 .conceptos-cols {
