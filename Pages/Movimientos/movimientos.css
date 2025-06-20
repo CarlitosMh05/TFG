@@ -892,9 +892,8 @@ h1 {
 
 /* Filtros */
 #filtrosBlock {
-  background: #f7f7fa;
   border-radius: 16px;
-  box-shadow: 0 1.5px 8px rgba(59,119,209,0.06);
+  box-shadow: 0px 0px 15px 1px #25549e4d;
   padding: 18px 18px 10px 18px;
   margin-bottom: 25px;
   margin-top: 6px;
