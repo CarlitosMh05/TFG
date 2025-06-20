@@ -633,6 +633,7 @@ $(function () {
         </li>
       `);
       lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
 
       // Solo las disponibles (no seleccionadas)
       const disponibles = (etiquetasOriginales || []).filter(et => !etiquetasSeleccionadas.includes(et.nombre));
@@ -1008,7 +1009,7 @@ $(function () {
           </div>
         </li>
       `);
-      
+
       if (window.lucide) lucide.createIcons();
 
       // Filtrar por texto
