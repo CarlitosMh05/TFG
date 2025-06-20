@@ -645,6 +645,8 @@ $(function () {
 
       $options.find('li:not(.search-item)').remove(); // solo borra las que no son el input
 
+      lucide.createIcons();
+      
       // Solo las disponibles (no seleccionadas)
       const disponibles = (etiquetasOriginales || []).filter(et => !etiquetasSeleccionadas.includes(et.nombre));
       disponibles.forEach(et => {
