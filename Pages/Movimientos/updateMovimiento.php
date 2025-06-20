@@ -46,7 +46,7 @@ $stmtC->bind_param('si', $concepto, $uid);
 $stmtC->execute();
 $resC = $stmtC->get_result();
 if ($resC->num_rows === 0) {
-    echo json_encode(['success' => false, 'error' => 'Concepto no válido']);
+    echo json_encode(['success' => false, 'noValidConcept' => 'Concepto no válido']);
     exit;
 }
 $rowC = $resC->fetch_assoc();
@@ -59,7 +59,7 @@ if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $permitidas = ['jpg', 'jpeg', 'png', 'webp'];
     if (!in_array($ext, $permitidas)) {
-        echo json_encode(['success' => false, 'error' => 'Tipo de imagen no permitido']);
+        echo json_encode(['success' => false, 'badImageTipe' => 'Tipo de imagen no permitido']);
         exit;
     }
     $nombreFinal = "mov_{$id}_" . time() . "." . $ext;
