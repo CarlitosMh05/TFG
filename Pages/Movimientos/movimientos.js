@@ -550,7 +550,8 @@ $(function () {
       .off('click', 'li.add-new')
       .on('click', 'li.add-new', function() {
         const $li = $(this);
-        $li.removeClass('add-new').addClass('adding').html(`
+        $li.removeClass('add-new').addClass('adding');
+        $li.empty().append(`
           <div class="input-container new-item-container">
             <input type="text" class="new-item-input" placeholder=" ">
             <label>+Añadir concepto</label>
