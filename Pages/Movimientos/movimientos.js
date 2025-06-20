@@ -1005,19 +1005,20 @@ $(function () {
     // Construye la lista (incluye buscador arriba)
     function renderOptions(filtrar = '') {
       $options.empty();
-      if ($options.find('.search-item').length === 0) {
-      $options.append(`
-        <li class="search-item">
-          <div class="input-container search-container">
-            <input type="text" class="search-input" placeholder=" ">
-            <label style="left: 33px;">Buscar...</label>
-            <i data-lucide="search" class="search-icon"></i>
-          </div>
-        </li>
-      `);
-      if (window.lucide) lucide.createIcons();
-    }
+        if ($options.find('.search-item').length === 0) {
+        $options.append(`
+          <li class="search-item">
+            <div class="input-container search-container">
+              <input type="text" class="search-input" placeholder=" ">
+              <label style="left: 33px;">Buscar...</label>
+              <i data-lucide="search" class="search-icon"></i>
+            </div>
+          </li>
+        `);
+        if (window.lucide) lucide.createIcons();
+      }
 
+      $options.find('li:not(.search-item)').remove(); // solo borra las que no son el input
 
       // Filtrar por texto
       let filtered = dataList;
