@@ -626,16 +626,19 @@ $(function () {
       $etiquetaOptions.empty();
 
       // Search bar
-      $etiquetaOptions.append(`
-        <li class="search-item">
-          <div class="input-container search-container">
-            <input type="text" class="search-input" placeholder=" ">
-            <label style="left: 33px; color: black !important;">Buscar concepto...</label>
-            <i data-lucide="search" class="search-icon"></i>
-          </div>
-        </li>
-      `);
-      if (window.lucide) lucide.createIcons();
+      $options.empty();
+        if ($options.find('.search-item').length === 0) {
+        $options.append(`
+          <li class="search-item">
+            <div class="input-container search-container">
+              <input type="text" class="search-input" placeholder=" ">
+              <label style="left: 33px;">Buscar...</label>
+              <i data-lucide="search" class="search-icon"></i>
+            </div>
+          </li>
+        `);
+        if (window.lucide) lucide.createIcons();
+      }
 
       // Solo las disponibles (no seleccionadas)
       const disponibles = (etiquetasOriginales || []).filter(et => !etiquetasSeleccionadas.includes(et.nombre));
