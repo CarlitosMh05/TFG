@@ -894,7 +894,6 @@ $(document).ready(function ()
     $('#fechaContainer, #recurrenteContainer').hide();
 
     // Fecha / recurrente
-    $('#fechaElegida').val('');
     $('#diaRecurrente').val('');
     $('#frecuenciaDisplay').text('Mensual');
     $('#frecuenciaOptions').hide();
