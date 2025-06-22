@@ -1010,10 +1010,10 @@ $('#predConceptoGastoOptions').off('click', 'li[data-id]')
     $disp.data('id', $(this).data('id'));
 });
 
-$('#tipoMovimientoDisplay').on('click', function (e) {
+$('#predEtiquetaDisplay').on('click', function (e) {
   const $disp = $(this);
   const $cont = $disp.closest('.input-container');
-  const $options = $('#tipoMovimientoOptions');
+  const $options = $('#predEtiquetaOptions');
 
   $options.fadeToggle(150);
   $disp.toggleClass('open');
@@ -1022,14 +1022,14 @@ $('#tipoMovimientoDisplay').on('click', function (e) {
     $disp.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
 });
 
-$('#tipoMovimientoOptions').off('click', 'li[data-value]')
+$('#predEtiquetaOptions').off('click', 'li[data-value]')
   .on('click', 'li[data-value]', function (e) {
     const value = $(this).text();
-    const $disp = $('#tipoMovimientoDisplay');
+    const $disp = $('#predEtiquetaDisplay');
     const $cont = $disp.closest('.input-container');
 
     $disp.text(value).removeClass('open');
-    $('#tipoMovimientoOptions').fadeOut(150);
+    $('#predEtiquetaOptions').fadeOut(150);
 
     $cont.find('label').css('color', 'gray');
     $disp.data('tipo', $(this).data('value'));
