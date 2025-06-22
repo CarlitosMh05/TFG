@@ -72,7 +72,7 @@
             </div>
         </div>
 
-
+        
         <div class="section-content" data-section="predeterminados">
             <h3>Predeterminados</h3>
 
@@ -93,24 +93,29 @@
                 </div>
             </div>
 
-            <div class="conceptos-col">
-                <div class="conceptos-title">Etiquetas</div>
-                <div class="input-container etiqueta-dropdown">
-                <div id="predEtiquetaDisplay" class="etiqueta-display">Seleccionar etiquetas</div>
-                <ul id="predEtiquetaOptions" class="etiqueta-options"></ul>
-                </div>
-                <div id="predChipsContainer" class="chips-container"></div>
-            
+            <div class="conceptos-cols">
 
-                <div class="conceptos-title">Ingresos / Gasto</div>
-                <div class="input-container">
-                    <div id="tipoMovimientoDisplay" class="concepto-display">Gasto</div>
-                    <ul id="tipoMovimientoOptions" class="concepto-options">
-                        <li data-value="gasto">Gasto</li>
-                        <li data-value="ingreso">Ingreso</li>
-                    </ul>
+                <div class="conceptos-col">
+                    <div class="conceptos-title">Etiquetas</div>
+                    <div class="input-container etiqueta-dropdown">
+                    <div id="predEtiquetaDisplay" class="etiqueta-display">Seleccionar etiquetas</div>
+                    <ul id="predEtiquetaOptions" class="etiqueta-options"></ul>
+                    </div>
+                    <div id="predChipsContainer" class="chips-container"></div>
+                </div>
+
+                <div class="conceptos-col">
+                    <div class="conceptos-title">Ingresos / Gasto</div>
+                    <div class="input-container">
+                        <div id="tipoMovimientoDisplay" class="concepto-display">Gasto</div>
+                        <ul id="tipoMovimientoOptions" class="concepto-options">
+                            <li data-value="gasto">Gasto</li>
+                            <li data-value="ingreso">Ingreso</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
 
             <button id="guardarPredeterminadosBtn" class="concepto-add-btn" style="margin-top: 20px;">Guardar preferencias</button>
         </div>
