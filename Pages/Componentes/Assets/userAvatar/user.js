@@ -1327,7 +1327,7 @@ $('#guardarPredeterminadosBtn').on('click', function() {
   const data = {
     concepto_ingreso_id: ingresoId === "" ? null : ingresoId,
     concepto_gasto_id: gastoId === "" ? null : gastoId,
-    tipo_default: $('#tipoMovimientoDefault').val(),
+    tipo_default: $('#tipoMovimientoDisplay').data('tipo') || 'gasto',
     etiquetas: etiquetas
   };
   console.log(data);
