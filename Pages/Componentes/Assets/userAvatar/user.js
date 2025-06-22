@@ -972,7 +972,7 @@ $('#predConceptoIngresoDisplay').on('click', function (e) {
 });
 
 // Click en una opción de ingreso
-$('#conceptoIngresoOptions').off('click', 'li[data-id]')
+$('#predConceptoIngresoOptions').off('click', 'li[data-id]')
   .on('click', 'li[data-id]', function (e) {
     const value = $(this).text();
     const $disp = $('#conceptoIngresoDisplay');
