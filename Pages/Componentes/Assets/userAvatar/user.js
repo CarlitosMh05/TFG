@@ -904,6 +904,106 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
   // Llama a cargarDropdownEtiquetas() al iniciar
   cargarDropdownEtiquetas();
 });
+
+//Funciones de pestaña de Predeterminados
+
+function cargarPredeterminados() {
+  $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function(data) {
+    if (data.success) {
+      // Conceptos
+      $('#predConceptoIngresoDisplay').text(data.ingreso_nombre || 'Seleccionar concepto').data('id', data.concepto_ingreso_id);
+      $('#predConceptoGastoDisplay').text(data.gasto_nombre || 'Seleccionar concepto').data('id', data.concepto_gasto_id);
+
+      // Etiquetas
+      etiquetasPred = data.etiquetas || [];
+      renderPredChips();
+
+      // Tipo
+      $('#tipoMovimientoDefault').val(data.tipo_default || 'gasto');
+    }
+  });
+
+  // Cargar conceptos y etiquetas
+  $.getJSON('../Componentes/Assets/fetchOptions.php', function(data) {
+    // Ingreso
+    let ingreso = data.conceptos.filter(c => c.es_ingreso);
+    let gasto = data.conceptos.filter(c => !c.es_ingreso);
+
+    const $ing = $('#predConceptoIngresoOptions').empty();
+    ingreso.forEach(c => $ing.append(`<li data-id="${c.id}">${c.nombre}</li>`));
+    
+    const $gas = $('#predConceptoGastoOptions').empty();
+    gasto.forEach(c => $gas.append(`<li data-id="${c.id}">${c.nombre}</li>`));
+
+    const $etiq = $('#predEtiquetaOptions').empty();
+    $etiq.append(`<li data-id="null">Sin etiqueta</li>`);
+    data.etiquetas.forEach(et => {
+      $etiq.append(`<li data-id="${et.id}">${et.nombre}</li>`);
+    });
+  });
+}
+
+let etiquetasPred = [];
+
+function renderPredChips() {
+  const container = $('#predChipsContainer').empty();
+  etiquetasPred.forEach(et => {
+    const chip = $(`<div class="chip" data-id="${et.id}">${et.nombre}<button class="remove-chip">×</button></div>`);
+    container.append(chip);
+  });
+}
+
+// Interacciones
+$(document).on('click', '#predConceptoIngresoOptions li', function() {
+  const id = $(this).data('id');
+  $('#predConceptoIngresoDisplay').text($(this).text()).data('id', id);
+  $('#predConceptoIngresoOptions').fadeOut(150);
+});
+
+$(document).on('click', '#predConceptoGastoOptions li', function() {
+  const id = $(this).data('id');
+  $('#predConceptoGastoDisplay').text($(this).text()).data('id', id);
+  $('#predConceptoGastoOptions').fadeOut(150);
+});
+
+$(document).on('click', '#predEtiquetaOptions li', function() {
+  const id = $(this).data('id');
+  const nombre = $(this).text();
+  if (etiquetasPred.length >= 5) return;
+  if (!etiquetasPred.find(e => e.id == id)) {
+    etiquetasPred.push({ id, nombre });
+    renderPredChips();
+  }
+});
+
+$(document).on('click', '.chip .remove-chip', function() {
+  const id = $(this).parent().data('id');
+  etiquetasPred = etiquetasPred.filter(e => e.id != id);
+  renderPredChips();
+});
+
+$('#guardarPredeterminadosBtn').on('click', function() {
+  const data = {
+    concepto_ingreso_id: $('#predConceptoIngresoDisplay').data('id') || null,
+    concepto_gasto_id: $('#predConceptoGastoDisplay').data('id') || null,
+    tipo_default: $('#tipoMovimientoDefault').val(),
+    etiquetas: etiquetasPred.map(e => e.id)
+  };
+  $.post('../Componentes/Assets/userAvatar/savePredeterminados.php', data, function(resp) {
+    if (resp.success) {
+      showSuccessMessage('Preferencias guardadas');
+    } else {
+      showFailMessage(resp.error || 'Error al guardar');
+    }
+  }, 'json');
+});
+
+$('[data-section="predeterminados"]').on('section:show', cargarPredeterminados);
+
+
+
+
+
 function showSuccessMessage(text) {
   // Si ya existe, lo quitamos antes
   $('.success-alert').remove();
