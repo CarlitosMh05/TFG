@@ -70,18 +70,6 @@
             </div>
         </div>
 
-
-        <div data-section="etiquetas" class="section-content">
-            <h3 style="margin-bottom: 18px;">Etiquetas</h3>
-            <div class="input-container" id="containerMiniModalInputEtiquetas" >
-                <input id="nuevaEtiquetaInput" type="text" placeholder=" " autocomplete="off"/>
-                <label for="nuevaEtiquetaInput" id="labelInputEtiqueta">Nueva etiqueta...</label>
-                        <p class="bad-text" id="badEtiqueta"></p>
-                <button id="añadirEtiquetaBtn" class="etiqueta-add-btn">Añadir</button>
-            </div>
-            <ul id="listaEtiquetas" class="etiquetas-list"></ul>
-        </div>
-
         <li data-section="predeterminados">Predeterminados</li>
 
         <div class="section-content" data-section="predeterminados">
@@ -128,6 +116,20 @@
 
             <button id="guardarPredeterminadosBtn" class="concepto-add-btn" style="margin-top: 20px;">Guardar preferencias</button>
         </div>
+
+
+        <div data-section="etiquetas" class="section-content">
+            <h3 style="margin-bottom: 18px;">Etiquetas</h3>
+            <div class="input-container" id="containerMiniModalInputEtiquetas" >
+                <input id="nuevaEtiquetaInput" type="text" placeholder=" " autocomplete="off"/>
+                <label for="nuevaEtiquetaInput" id="labelInputEtiqueta">Nueva etiqueta...</label>
+                        <p class="bad-text" id="badEtiqueta"></p>
+                <button id="añadirEtiquetaBtn" class="etiqueta-add-btn">Añadir</button>
+            </div>
+            <ul id="listaEtiquetas" class="etiquetas-list"></ul>
+        </div>
+
+        
 
         <div data-section="usuario" class="section-content">
             <h3 style="margin-bottom: 20px;">Datos de usuario</h3>
