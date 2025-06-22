@@ -66,17 +66,7 @@ $(document).ready(function ()
         renderChips();
         updateDropdown();
 
-        loadOptions(() => {
-          const conceptos = $('#conceptoOptions li[data-value]');
-          const predConceptoNombre = conceptos.toArray().find(li => {
-            const id = parseInt($(li).data('id'));
-            return id === (tipo === 'ingreso' ? ingreso : gasto);
-          });
-          if (predConceptoNombre) {
-            $('#conceptoDisplay').text($(predConceptoNombre).text());
-            $('#selectedConcepto').val($(predConceptoNombre).text());
-          }
-        });
+        
         
       }
     });
