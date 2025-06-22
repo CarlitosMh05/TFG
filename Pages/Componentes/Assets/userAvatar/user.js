@@ -908,22 +908,7 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 //Funciones de pestaña de Predeterminados
 
 function cargarPredeterminados() {
-  $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function(data) {
-    if (data.success) {
-      // Conceptos
-      $('#predConceptoIngresoDisplay').text(data.ingreso_nombre || 'Seleccionar concepto').data('id', data.concepto_ingreso_id);
-      $('#predConceptoGastoDisplay').text(data.gasto_nombre || 'Seleccionar concepto').data('id', data.concepto_gasto_id);
-
-      // Etiquetas
-      etiquetasPred = data.etiquetas || [];
-      renderPredChips();
-
-      // Tipo
-      $('#tipoMovimientoDefault').val(data.tipo_default || 'gasto');
-    }
-  });
-
-  // Cargar conceptos y etiquetas
+    // Cargar conceptos y etiquetas
   $.getJSON('../Componentes/Assets/fetchOptions.php', function(data) {
     // Ingreso
     let ingreso = data.conceptos.filter(c => c.es_ingreso);
@@ -941,6 +926,24 @@ function cargarPredeterminados() {
       $etiq.append(`<li data-id="${et.id}">${et.nombre}</li>`);
     });
   });
+
+
+  $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function(data) {
+    if (data.success) {
+      // Conceptos
+      $('#predConceptoIngresoDisplay').text(data.ingreso_nombre || 'Seleccionar concepto').data('id', data.concepto_ingreso_id);
+      $('#predConceptoGastoDisplay').text(data.gasto_nombre || 'Seleccionar concepto').data('id', data.concepto_gasto_id);
+
+      // Etiquetas
+      etiquetasPred = data.etiquetas || [];
+      renderPredChips();
+
+      // Tipo
+      $('#tipoMovimientoDefault').val(data.tipo_default || 'gasto');
+    }
+  });
+
+  
 }
 
 let etiquetasPred = [];
