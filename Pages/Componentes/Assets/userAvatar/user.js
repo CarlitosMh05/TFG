@@ -909,45 +909,87 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 
 //Funciones de pestaña de Predeterminados
 
-function cargarPredeterminados() {
-    // Cargar conceptos y etiquetas
-  $.getJSON('../Componentes/Assets/fetchOptions.php', function(data) {
-    console.log(data)
-    // Ingreso
-    let ingreso = data.conceptos.filter(c => c.es_ingreso);
-    let gasto = data.conceptos.filter(c => !c.es_ingreso);
+function cargarOpcionesPredeterminadas() {
+  let conceptosIngreso = [];
+  let conceptosGasto = [];
+  let etiquetasTotales = [];
 
-    const $ing = $('#predConceptoIngresoOptions').empty();
-    ingreso.forEach(c => $ing.append(`<li data-id="${c.id}">${c.nombre}</li>`));
-    
-    const $gas = $('#predConceptoGastoOptions').empty();
-    gasto.forEach(c => $gas.append(`<li data-id="${c.id}">${c.nombre}</li>`));
-
-    const $etiq = $('#predEtiquetaOptions').empty();
-    $etiq.append(`<li data-id="null">Sin etiqueta</li>`);
-    data.etiquetas.forEach(et => {
-      $etiq.append(`<li data-id="${et.id}">${et.nombre}</li>`);
+  // Paso 1: Fetch conceptos ingreso
+  $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=ingreso', function (data) {
+    conceptosIngreso = data.conceptos || [];
+    const $ul = $('#predConceptoIngresoOptions').empty();
+    conceptosIngreso.forEach(c => {
+      $ul.append(`<li data-id="${c.id}">${c.nombre}</li>`);
     });
   });
 
-
-  $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function(data) {
-    if (data.success) {
-      // Conceptos
-      $('#predConceptoIngresoDisplay').text(data.ingreso_nombre || 'Seleccionar concepto').data('id', data.concepto_ingreso_id);
-      $('#predConceptoGastoDisplay').text(data.gasto_nombre || 'Seleccionar concepto').data('id', data.concepto_gasto_id);
-
-      // Etiquetas
-      etiquetasPred = data.etiquetas || [];
-      renderPredChips();
-
-      // Tipo
-      $('#tipoMovimientoDefault').val(data.tipo_default || 'gasto');
-    }
+  // Paso 2: Fetch conceptos gasto
+  $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=gasto', function (data) {
+    conceptosGasto = data.conceptos || [];
+    const $ul = $('#predConceptoGastoOptions').empty();
+    conceptosGasto.forEach(c => {
+      $ul.append(`<li data-id="${c.id}">${c.nombre}</li>`);
+    });
   });
 
-  
+  // Paso 3: Fetch etiquetas
+  $.getJSON('../Componentes/Assets/fetchOptions.php', function (data) {
+    etiquetasTotales = data.etiquetas || [];
+
+    const $ul = $('#predEtiquetaOptions').empty();
+    etiquetasTotales.forEach(et => {
+      $ul.append(`<li data-value="${et.id}">${et.nombre}</li>`);
+    });
+
+    // Añadir "Sin etiqueta" como opción
+    $ul.prepend(`<li data-value="">Sin etiqueta</li>`);
+  });
+
+  // Paso 4: Obtener predeterminados ya guardados
+  $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function (resp) {
+    if (!resp.success) return;
+
+    // Ingreso
+    if (resp.concepto_ingreso_id && conceptosIngreso.length > 0) {
+      const item = conceptosIngreso.find(c => c.id == resp.concepto_ingreso_id);
+      if (item) {
+        $('#predConceptoIngresoDisplay').text(item.nombre).data('id', item.id);
+      }
+    }
+
+    // Gasto
+    if (resp.concepto_gasto_id && conceptosGasto.length > 0) {
+      const item = conceptosGasto.find(c => c.id == resp.concepto_gasto_id);
+      if (item) {
+        $('#predConceptoGastoDisplay').text(item.nombre).data('id', item.id);
+      }
+    }
+
+    // Tipo movimiento por defecto
+    if (resp.tipo_default) {
+      const capitalizado = resp.tipo_default.charAt(0).toUpperCase() + resp.tipo_default.slice(1);
+      $('#tipoMovimientoDisplay').text(capitalizado).data('tipo', resp.tipo_default);
+    }
+
+    // Etiquetas predeterminadas
+    const chipsContainer = $('#predChipsContainer').empty();
+    (resp.etiquetas || []).forEach(id => {
+      const etiqueta = etiquetasTotales.find(e => e.id == id);
+      if (etiqueta) {
+        chipsContainer.append(`
+          <div class="chip" data-id="${etiqueta.id}">
+            ${etiqueta.nombre}
+            <button class="remove-chip" title="Eliminar etiqueta">×</button>
+          </div>
+        `);
+      }
+    });
+  });
 }
+
+// Ejecutar al entrar en la sección
+$('[data-section="predeterminados"]').on('section:show', cargarOpcionesPredeterminadas);
+
 
 let etiquetasPred = [];
 
