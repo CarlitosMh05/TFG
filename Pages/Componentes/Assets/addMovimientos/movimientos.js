@@ -66,14 +66,14 @@ $(document).ready(function ()
           renderChips();
           updateDropdown();
 
-         
+          overlay.style.display = "block";
+          modal.style.display = "block";
+          document.body.classList.add("modal-open");
         });
       }
     });
 
-     overlay.style.display = "block";
-          modal.style.display = "block";
-          document.body.classList.add("modal-open");
+
     
   });
 
