@@ -964,7 +964,6 @@ function cargarOpcionesPredeterminadas() {
   // Paso 3: Fetch etiquetas
   $.getJSON('../Componentes/Assets/fetchOptions.php', function (data) {
     etiquetasTotales = data.etiquetas || [];
-    console.log(etiquetasTotales);
     const $ul = $('#predEtiquetaOptions').empty();
     $ul.append(`
       <li class="search-item">
@@ -1315,7 +1314,6 @@ $('#guardarPredeterminadosBtn').on('click', function() {
     tipo_default: $('#tipoMovimientoDefault').val(),
     etiquetas: etiquetasPred.map(e => e.id)
   };
-  console.log(data);
   $.post('../Componentes/Assets/userAvatar/savePredeterminados.php', data, function(resp) {
     if (resp.success) {
       showSuccessMessage('Preferencias guardadas');
