@@ -1025,7 +1025,6 @@ function cargarOpcionesPredeterminadas() {
       predEtiquetaOptions.append(`<li data-value="${et.nombre}">${et.nombre}</li>`);
     });
 
-    predEtiquetaOptions.append(`<li class="add-new" data-type="etiqueta">+ Añadir etiqueta</li>`);
   }
 
   // Actualizar altura
