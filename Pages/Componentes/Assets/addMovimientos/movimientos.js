@@ -45,8 +45,6 @@ $(document).ready(function ()
         }
         
         const value = $(this).data('value');
-        const $disp = $('#conceptoDisplay');
-        const $cont =  $('#conceptoDisplay').closest('.input-container');
 
         // 1) Actualizar texto y cerrar menú
         $('#conceptoDisplay').text(value).removeClass('open');
