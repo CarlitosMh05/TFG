@@ -1035,6 +1035,19 @@ $('#tipoMovimientoOptions').off('click', 'li[data-value]')
     $disp.data('tipo', $(this).data('value'));
 });
 
+if (!$(e.target).closest('.concepto-dropdown, .etiqueta-dropdown, .frecuencia-dropdown, .currency-dropdown, #conceptoIngresoDisplay, #conceptoIngresoOptions, #conceptoGastoDisplay, #conceptoGastoOptions, #tipoMovimientoDisplay, #tipoMovimientoOptions').length) {
+  setTimeout(() => {
+    $('#conceptoIngresoOptions').fadeOut(150);
+    $('#conceptoIngresoDisplay').removeClass('open');
+
+    $('#conceptoGastoOptions').fadeOut(150);
+    $('#conceptoGastoDisplay').removeClass('open');
+
+    $('#tipoMovimientoOptions').fadeOut(150);
+    $('#tipoMovimientoDisplay').removeClass('open');
+  }, 10);
+}
+
 
 
 // Interacciones
