@@ -156,8 +156,17 @@ $(document).ready(function ()
       $minus.addClass('active');
       $plus.removeClass('active');
       conceptoTipoActual = 'gasto'; // NUEVO
-       $('#selectedConcepto').val('');
-      $('#conceptoDisplay').text('Seleccionar concepto');
+      if (conceptoIngresoPredeterminadoId) {
+        $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=ingreso', data => {
+          const concepto = (data.conceptos || []).find(c => c.id == conceptoIngresoPredeterminadoId);
+          const nombre = concepto ? concepto.nombre : 'Seleccionar concepto';
+          $('#conceptoDisplay').text(nombre);
+          $('#selectedConcepto').val(nombre);
+        });
+      } else {
+        $('#conceptoDisplay').text('Seleccionar concepto');
+        $('#selectedConcepto').val('');
+      }
       updateSign();
       loadOptions(); // recargar conceptos
     }
