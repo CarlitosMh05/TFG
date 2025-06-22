@@ -1086,6 +1086,11 @@ $(document).on('click', function (e) {
 });
 
 
+
+
+
+
+
 // Click en el display de concepto ingreso
 $('#predConceptoIngresoDisplay').on('click', function (e) {
   const $disp = $(this);
@@ -1207,21 +1212,7 @@ $(document).on('click', '#predConceptoGastoOptions li', function() {
   $('#predConceptoGastoOptions').fadeOut(150);
 });
 
-$(document).on('click', '#predEtiquetaOptions li', function() {
-  const id = $(this).data('id');
-  const nombre = $(this).text();
-  if (etiquetasPred.length >= 5) return;
-  if (!etiquetasPred.find(e => e.id == id)) {
-    etiquetasPred.push({ id, nombre });
-    renderPredChips();
-  }
-});
 
-$(document).on('click', '.chip .remove-chip', function() {
-  const id = $(this).parent().data('id');
-  etiquetasPred = etiquetasPred.filter(e => e.id != id);
-  renderPredChips();
-});
 
 $('#guardarPredeterminadosBtn').on('click', function() {
   const data = {
