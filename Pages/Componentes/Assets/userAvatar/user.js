@@ -932,7 +932,7 @@ function cargarOpcionesPredeterminadas() {
       </li>
     `);
     lucide.createIcons();
-    
+
     conceptosIngreso.forEach(c => {
       $ul.append(`<li data-id="${c.id}">${c.nombre}</li>`);
     });
@@ -942,6 +942,18 @@ function cargarOpcionesPredeterminadas() {
   $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=gasto', function (data) {
     conceptosGasto = data.conceptos || [];
     const $ul = $('#predConceptoGastoOptions').empty();
+
+    $ul.append(`
+      <li class="search-item">
+        <div class="input-container search-container">
+          <input type="text" class="search-input ingreso-search" placeholder=" ">
+          <label style="left: 33px;">Buscar concepto…</label>
+          <i data-lucide="search" class="search-icon"></i>
+        </div>
+      </li>
+    `);
+    lucide.createIcons();
+    
     conceptosGasto.forEach(c => {
       $ul.append(`<li data-id="${c.id}">${c.nombre}</li>`);
     });
