@@ -1036,7 +1036,7 @@ function cargarOpcionesPredeterminadas() {
     const disponibles = (etiquetasTotales || []).filter(et => !etiquetasPredSeleccionadas.includes(et.nombre));
 
     disponibles.forEach(et => {
-      predEtiquetaOptions.append(`<li data-value="${et.id}">${et.nombre}</li>`);
+      predEtiquetaOptions.append(`<li data-value="${et.nombre}" data-id="${et.id}">${et.nombre}</li>`);
     });
   }
 
