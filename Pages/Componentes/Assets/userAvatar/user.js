@@ -979,7 +979,7 @@ $('#predConceptoIngresoOptions').off('click', 'li[data-id]')
     const $cont = $disp.closest('.input-container');
 
     $disp.text(value).removeClass('open');
-    $('#conceptoIngresoOptions').fadeOut(150);
+    $('#predConceptoIngresoOptions').fadeOut(150);
 
     $cont.find('label').css('color', 'gray');
     $disp.data('id', $(this).data('id'));
@@ -1004,7 +1004,7 @@ $('#predConceptoGastoOptions').off('click', 'li[data-id]')
     const $cont = $disp.closest('.input-container');
 
     $disp.text(value).removeClass('open');
-    $('#conceptoGastoOptions').fadeOut(150);
+    $('#predConceptoGastoOptions').fadeOut(150);
 
     $cont.find('label').css('color', 'gray');
     $disp.data('id', $(this).data('id'));
