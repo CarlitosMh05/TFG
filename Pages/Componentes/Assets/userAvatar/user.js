@@ -1087,13 +1087,7 @@ function cargarOpcionesPredeterminadas() {
   });
 
   // Cerrar menú si haces clic fuera
-  $(document).on('click', function (e) {
-    if (!$(e.target).closest('.etiqueta-dropdown').length) {
-      predEtiquetaOptions.fadeOut(150);
-      predEtiquetaDisplay.removeClass('open');
-      predEtiquetaDisplay.closest('.input-container').find('label').css('color', 'gray');
-    }
-  });
+ 
 
   // Inicializar
   renderPredChips();
