@@ -908,7 +908,6 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 //Funciones de pestaña de Predeterminados
 
 function cargarPredeterminados() {
-  alert("hola")
   $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function(data) {
     if (data.success) {
       // Conceptos
