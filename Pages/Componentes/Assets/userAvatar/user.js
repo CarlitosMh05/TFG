@@ -952,8 +952,7 @@ function cargarOpcionesPredeterminadas() {
     `);
     lucide.createIcons();
 
-    // Añadir "Sin etiqueta" como opción
-    $ul.prepend(`<li data-value="">Sin etiqueta</li>`);
+   
   });
 
   // Paso 4: Obtener predeterminados ya guardados
