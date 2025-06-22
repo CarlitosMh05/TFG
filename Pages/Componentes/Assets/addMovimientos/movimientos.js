@@ -703,6 +703,11 @@ $(document).ready(function ()
               else 
               {
                 $input.prop('disabled', false);
+                if(resp.alredyExists)
+                {
+                  $error.text(resp.alredyExists||'Error al crear').show();
+
+                }
                 $error.text(resp.error||'Error al crear').show();
               }
             }, 'json')
