@@ -958,40 +958,32 @@ function renderPredChips() {
   });
 }
 
-function initDropdownPredeterminados(displayId, optionsId, hiddenInputId = null) {
-  const $display = $(`#${displayId}`);
-  const $options = $(`#${optionsId}`);
-  const $container = $display.closest('.input-container');
+// Click en el display de concepto ingreso
+$('#conceptoIngresoDisplay').on('click', function (e) {
+  const $disp = $(this);
+  const $cont = $disp.closest('.input-container');
+  const $options = $('#conceptoIngresoOptions');
 
-  $display.on('click', function () {
-    $options.fadeToggle(150);
-    $display.toggleClass('open');
-    $container.find('label').css('color', $display.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
+  $options.fadeToggle(150);
+  $disp.toggleClass('open');
+
+  $cont.find('label').css('color',
+    $disp.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
+});
+
+// Click en una opción de ingreso
+$('#conceptoIngresoOptions').off('click', 'li[data-id]')
+  .on('click', 'li[data-id]', function (e) {
+    const value = $(this).text();
+    const $disp = $('#conceptoIngresoDisplay');
+    const $cont = $disp.closest('.input-container');
+
+    $disp.text(value).removeClass('open');
+    $('#conceptoIngresoOptions').fadeOut(150);
+
+    $cont.find('label').css('color', 'gray');
+    $disp.data('id', $(this).data('id'));
   });
-
-  $options.on('click', 'li[data-id], li[data-value]', function () {
-    const val = $(this).text();
-    const id = $(this).data('id') || $(this).data('value');
-
-    $display.text(val).removeClass('open');
-    $options.fadeOut(150);
-    if (hiddenInputId) {
-      $(`#${hiddenInputId}`).val(id);
-    }
-
-    $container.find('label').css('color', 'gray');
-  });
-
-  // Click fuera cierra dropdown
-  $(document).on('click', function (e) {
-    if (!$(e.target).closest(`#${displayId}, #${optionsId}`).length) {
-      $options.fadeOut(150);
-      $display.removeClass('open');
-      $container.find('label').css('color', 'gray');
-    }
-  });
-}
-
 
 
 
