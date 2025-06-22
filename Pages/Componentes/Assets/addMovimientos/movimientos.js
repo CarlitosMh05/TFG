@@ -32,19 +32,23 @@ $(document).ready(function ()
         const tipo = resp.tipo_default;
 
         console.log(ingreso, gasto, etiquetasPred, tipo);
+        const value = null;
 
         // Activar el tipo predeterminado
         if (tipo === 'ingreso') {
           $plus.addClass('active');
           $minus.removeClass('active');
           conceptoTipoActual = 'ingreso';
+          value = ingreso;
         } else {
           $minus.addClass('active');
           $plus.removeClass('active');
           conceptoTipoActual = 'gasto';
+          value = gasto;
         }
         
-        const value = ingreso;
+
+
 
         // 1) Actualizar texto y cerrar menú
         $('#conceptoDisplay').text(value).removeClass('open');
