@@ -1032,6 +1032,14 @@ function updateDropdownPred() {
   }
 }
 
+// Abrir/cerrar el menú de etiquetas
+$predDisplay.on('click', function () {
+  $predOptions.fadeToggle(150);
+  $predDisplay.toggleClass('open');
+
+  const label = $predContainer.find('label');
+  label.css('color', $predDisplay.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
+});
 
 // Seleccionar una etiqueta
 $predOptions.off('click', 'li[data-id]')
