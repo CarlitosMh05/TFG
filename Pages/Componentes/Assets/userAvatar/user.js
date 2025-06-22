@@ -1005,26 +1005,26 @@ function cargarOpcionesPredeterminadas() {
 
   // Actualizar el dropdown
   function updatePredDropdown() {
-  predEtiquetaOptions.empty();
+    predEtiquetaOptions.empty();
 
-  // Search bar
-  predEtiquetaOptions.append(`
-    <li class="search-item">
-      <div class="input-container search-container">
-        <input type="text" class="search-input" placeholder=" ">
-        <label style="left: 33px; color: black !important;">Buscar etiqueta…</label>
-        <i data-lucide="search" class="search-icon"></i>
-      </div>
-    </li>
-  `);
-  lucide.createIcons();
+    // Search bar
+    predEtiquetaOptions.append(`
+      <li class="search-item">
+        <div class="input-container search-container">
+          <input type="text" class="search-input" placeholder=" ">
+          <label style="left: 33px; color: black !important;">Buscar etiqueta…</label>
+          <i data-lucide="search" class="search-icon"></i>
+        </div>
+      </li>
+    `);
+    lucide.createIcons();
 
-  const disponibles = (etiquetasTotales || []).filter(et => !etiquetasPredSeleccionadas.includes(et.nombre));
+    const disponibles = (etiquetasTotales || []).filter(et => !etiquetasPredSeleccionadas.includes(et.nombre));
 
-  disponibles.forEach(et => {
-    predEtiquetaOptions.append(`<li data-value="${et.nombre}">${et.nombre}</li>`);
-  });
-}
+    disponibles.forEach(et => {
+      predEtiquetaOptions.append(`<li data-value="${et.nombre}">${et.nombre}</li>`);
+    });
+  }
 
   // Actualizar altura
   function updatePredCompactHeight() {
