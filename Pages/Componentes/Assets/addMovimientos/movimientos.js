@@ -32,6 +32,8 @@ $(document).ready(function ()
         const etiquetasPred = resp.etiquetas || [];
         const tipo = resp.tipo_default;
 
+        
+
         // Activar el tipo predeterminado
         if (tipo === 'ingreso') {
           $plus.addClass('active');
