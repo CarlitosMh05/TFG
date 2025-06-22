@@ -1012,6 +1012,24 @@ function cargarOpcionesPredeterminadas() {
       $('#tipoMovimientoDisplay').text(capitalizado).data('tipo', resp.tipo_default);
     }
 
+    // -------- BÚSQUEDAS EN DROPDOWNS --------
+$(document).off('input.busquedasPred').on('input.busquedasPred', '.search-input', function () {
+  const $input = $(this);
+  const q = $input.val().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  const $container = $input.closest('ul');
+
+  $container.find('li[data-id], li[data-value]').each(function () {
+    const txt = $(this).text().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    $(this).toggle(txt.includes(q));
+  });
+});
+
+// -------- PREVENIR CLICK EN SEARCH ITEM --------
+$(document).off('click.preventSearchClick').on('click.preventSearchClick', 'li.search-item, li.search-item *', function (e) {
+  e.stopPropagation(); // Evita cerrar el dropdown
+  e.preventDefault();  // Evita seleccionar como si fuera una opción
+});
     
   });
 
