@@ -1179,7 +1179,6 @@ $('#guardarPredeterminadosBtn').on('click', function() {
   }, 'json');
 });
 
-$('[data-section="predeterminados"]').on('section:show', cargarPredeterminados);
 
 
 
