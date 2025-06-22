@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-require_once '../../conexion.php';
+require_once '../../../../db.php';
 $userId = $_SESSION['user_id'];
 
 // DEBUG: Mostrar ID del usuario
