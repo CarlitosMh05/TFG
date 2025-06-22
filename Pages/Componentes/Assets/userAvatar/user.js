@@ -1038,7 +1038,7 @@ function cargarOpcionesPredeterminadas() {
   }
 
   // Mostrar opciones
-  predEtiquetaDisplay.on('click', function () {
+  predEtiquetaDisplay.on('click', function (e) {
     e.stopPropagation();
     const isOpen = $(this).hasClass('open');
     predEtiquetaOptions.fadeToggle(150);
