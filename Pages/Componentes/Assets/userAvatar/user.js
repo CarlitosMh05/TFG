@@ -1053,10 +1053,7 @@ function cargarOpcionesPredeterminadas() {
     }
   });
 
-  // Evitar que el dropdown se cierre al hacer clic dentro de él
-  $('#predEtiquetaOptions').on('click', function (e) {
-    e.stopPropagation(); // Evita que el evento llegue al documento
-  });
+
 
   // Cerrar el dropdown al hacer clic fuera de él
   $(document).on('mousedown', function (e) {
