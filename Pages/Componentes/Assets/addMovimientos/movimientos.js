@@ -44,7 +44,7 @@ $(document).ready(function ()
           conceptoTipoActual = 'gasto';
         }
         
-        const value = $(this).data('value');
+        const value = ingreso;
 
         // 1) Actualizar texto y cerrar menú
         $('#conceptoDisplay').text(value).removeClass('open');
