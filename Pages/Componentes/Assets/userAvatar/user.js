@@ -1312,7 +1312,7 @@ $('#guardarPredeterminadosBtn').on('click', function() {
     concepto_ingreso_id: $('#predConceptoIngresoDisplay').data('id') || null,
     concepto_gasto_id: $('#predConceptoGastoDisplay').data('id') || null,
     tipo_default: $('#tipoMovimientoDefault').val(),
-    etiquetas: etiquetasPred.map(e => e.id)
+    etiquetas: etiquetas
   };
   console.log(data);
   $.post('../Componentes/Assets/userAvatar/savePredeterminados.php', data, function(resp) {
