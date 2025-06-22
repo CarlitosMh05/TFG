@@ -21,6 +21,8 @@
             <li data-section="conceptos">Conceptos</li>
             <li data-section="etiquetas">Etiquetas</li>
             <li data-section="usuario">Usuario</li>
+        <li data-section="predeterminados">Predeterminados</li>
+
         </ul>
         </aside>
         <section class="perfil-modal-section" id="perfilModalSection">
@@ -70,7 +72,6 @@
             </div>
         </div>
 
-        <li data-section="predeterminados">Predeterminados</li>
 
         <div class="section-content" data-section="predeterminados">
             <h3>Predeterminados</h3>
