@@ -1038,19 +1038,37 @@ function cargarOpcionesPredeterminadas() {
   }
 
   // Mostrar opciones
-  predEtiquetaDisplay.on('click', function (e) {
-    e.stopPropagation();
-    const isOpen = $(this).hasClass('open');
-    predEtiquetaOptions.fadeToggle(150);
-    predEtiquetaDisplay.toggleClass('open');
+ // Mostrar opciones del dropdown de etiquetas
+$('#predEtiquetaDisplay').on('click', function (e) {
+  e.stopPropagation(); // Evita que el evento llegue al documento
+  const isOpen = $(this).hasClass('open');
+  $('#predEtiquetaOptions').fadeToggle(150);
+  $(this).toggleClass('open');
 
-    const label = $(this).closest('.input-container').find('label');
-    if (isOpen) {
-      label.css('color', 'gray');
-    } else {
-      label.css('color', 'var(--azulPrimario)');
-    }
-  });
+  const label = $(this).closest('.input-container').find('label');
+  if (isOpen) {
+    label.css('color', 'gray');
+  } else {
+    label.css('color', 'var(--azulPrimario)');
+  }
+});
+
+// Evitar que el dropdown se cierre al hacer clic dentro de él
+$('#predEtiquetaOptions').on('click', function (e) {
+  e.stopPropagation(); // Evita que el evento llegue al documento
+});
+
+// Cerrar el dropdown al hacer clic fuera de él
+$(document).on('mousedown', function (e) {
+  const $target = $(e.target);
+  const clickedInsidePredEtiqueta = $target.closest('#predEtiquetaDisplay').length > 0 || $target.closest('#predEtiquetaOptions').length > 0;
+
+  if (!clickedInsidePredEtiqueta) {
+    $('#predEtiquetaOptions').fadeOut(150);
+    $('#predEtiquetaDisplay').removeClass('open');
+    $('#predEtiquetaDisplay').closest('.input-container').find('label').css('color', 'gray');
+  }
+});
 
   // Seleccionar etiqueta
   predEtiquetaOptions.off('click', 'li')
