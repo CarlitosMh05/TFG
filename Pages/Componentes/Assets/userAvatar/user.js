@@ -1005,11 +1005,15 @@ function cargarOpcionesPredeterminadas() {
 
 
     // Gasto
-    if (resp.concepto_gasto_id && conceptosGasto.length > 0) {
-      const item = conceptosGasto.find(c => c.id == resp.concepto_gasto_id);
-      if (item) {
-        $('#predConceptoGastoDisplay').text(item.nombre).data('id', item.id);
-      }
+    const gastoPredeterminado = conceptosGasto.find(c => c.id == resp.concepto_gasto_id);
+    if (resp.concepto_gasto_id && gastoPredeterminado) {
+      $('#predConceptoGastoDisplay')
+        .text(gastoPredeterminado.nombre)
+        .data('id', gastoPredeterminado.id);
+    } else {
+      $('#predConceptoGastoDisplay')
+        .text('Sin concepto predeterminado')
+        .data('id', null);
     }
 
     // Tipo movimiento por defecto
