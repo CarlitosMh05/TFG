@@ -60,6 +60,8 @@ $(document).ready(function ()
         etiquetasSeleccionadas = etiquetasPred; // Asignamos directamente el array de nombres
         renderChips();
         updateDropdown();
+
+        loadOptions();
         
       }
     });
