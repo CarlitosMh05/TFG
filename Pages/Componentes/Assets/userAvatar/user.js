@@ -1185,7 +1185,7 @@ $('#tipoMovimientoOptions').off('click', 'li[data-value]')
 
 
 
-
+$(document).on('click', function (e) {
   if (
     !$(e.target).closest(
       '.concepto-dropdown, .etiqueta-dropdown, .frecuencia-dropdown, .currency-dropdown, ' +
@@ -1199,7 +1199,7 @@ $('#tipoMovimientoOptions').off('click', 'li[data-value]')
       $('#predConceptoIngresoOptions').fadeOut(150);
       $('#predConceptoIngresoDisplay').removeClass('open');
 
-      $('#pred$(document).on('click', function (e) {ConceptoGastoOptions').fadeOut(150);
+      $('#predConceptoGastoOptions').fadeOut(150);
       $('#predConceptoGastoDisplay').removeClass('open');
 
       $('#predEtiquetaOptions').fadeOut(150);
