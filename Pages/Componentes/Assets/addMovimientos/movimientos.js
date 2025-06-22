@@ -134,7 +134,7 @@ $(document).ready(function ()
       $plus.addClass('active');
       $minus.removeClass('active');
       conceptoTipoActual = 'ingreso'; // NUEVO
-       $('#selectedConcepto').val('');
+      $('#selectedConcepto').val('');
       $('#conceptoDisplay').text('Seleccionar concepto');
       updateSign();
       loadOptions(); // recargar conceptos
