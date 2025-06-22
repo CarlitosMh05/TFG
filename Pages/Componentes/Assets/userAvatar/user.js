@@ -1035,6 +1035,33 @@ $('#tipoMovimientoOptions').off('click', 'li[data-value]')
     $disp.data('tipo', $(this).data('value'));
 });
 
+$('#tipoMovimientoDisplay').on('click', function (e) {
+  const $disp = $(this);
+  const $cont = $disp.closest('.input-container');
+  const $options = $('#tipoMovimientoOptions');
+
+  $options.fadeToggle(150);
+  $disp.toggleClass('open');
+
+  $cont.find('label').css('color',
+    $disp.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
+});
+
+$('#tipoMovimientoOptions').off('click', 'li[data-value]')
+  .on('click', 'li[data-value]', function (e) {
+    const value = $(this).text();
+    const $disp = $('#tipoMovimientoDisplay');
+    const $cont = $disp.closest('.input-container');
+
+    $disp.text(value).removeClass('open');
+    $('#tipoMovimientoOptions').fadeOut(150);
+
+    $cont.find('label').css('color', 'gray');
+    $disp.data('tipo', $(this).data('value'));
+});
+
+
+
 if (!$(e.target).closest('.concepto-dropdown, .etiqueta-dropdown, .frecuencia-dropdown, .currency-dropdown, #conceptoIngresoDisplay, #conceptoIngresoOptions, #conceptoGastoDisplay, #conceptoGastoOptions, #tipoMovimientoDisplay, #tipoMovimientoOptions').length) {
   setTimeout(() => {
     $('#conceptoIngresoOptions').fadeOut(150);
