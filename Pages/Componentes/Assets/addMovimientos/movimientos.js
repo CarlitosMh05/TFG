@@ -45,9 +45,7 @@ $(document).ready(function ()
         }
         
         // 1) Actualizar texto y cerrar menú
-        $disp
-          .text(value)
-          .removeClass('open');
+        $disp.text(value).removeClass('open');
         $('#conceptoOptions').fadeOut(150);
 
         // 2) Guardar en el hidden
