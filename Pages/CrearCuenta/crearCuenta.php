@@ -51,6 +51,25 @@ if (!$conn->query($sql)) {
     exit;
 }
 
+
+// 4) Predeterminados
+$sql = "
+CREATE TABLE IF NOT EXISTS predeterminados (
+    user_id INT PRIMARY KEY,
+    concepto_ingreso_id INT DEFAULT NULL,
+    concepto_gasto_id INT DEFAULT NULL,
+    tipo_default ENUM('ingreso','gasto') DEFAULT 'gasto',
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (concepto_ingreso_id) REFERENCES conceptos(id) ON DELETE SET NULL,
+    FOREIGN KEY (concepto_gasto_id) REFERENCES conceptos(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+";
+if (!$conn->query($sql)) {
+    echo json_encode(['error' => 'Error al crear la tabla predeterminados']);
+    exit;
+}
+
+
 // Recogemos POST
 $email      = $conn->real_escape_string($_POST['email']);
 $contraseña = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
