@@ -1060,7 +1060,7 @@ function cargarOpcionesPredeterminadas() {
 
 
   // Cerrar el dropdown al hacer clic fuera de él
-  $(document).on('mousedown', function (e) {
+  $(document).on('mousedown.predEtiqueta', function (e) {
     const $target = $(e.target);
     const clickedInsidePredEtiqueta = $target.closest('#predEtiquetaDisplay').length > 0 || $target.closest('#predEtiquetaOptions').length > 0;
 
