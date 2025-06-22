@@ -70,6 +70,21 @@ if (!$conn->query($sql)) {
 }
 
 
+// 5) Etiquetas predeterminadas
+$sql = "
+CREATE TABLE IF NOT EXISTS etiqueta_predeterminada (
+    user_id INT NOT NULL,
+    etiqueta_id INT NOT NULL,
+    PRIMARY KEY (user_id, etiqueta_id),
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (etiqueta_id) REFERENCES etiquetas(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+";
+if (!$conn->query($sql)) {
+    echo json_encode(['error' => 'Error al crear la tabla etiqueta_predeterminada']);
+    exit;
+}
+
 // Recogemos POST
 $email      = $conn->real_escape_string($_POST['email']);
 $contraseña = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
