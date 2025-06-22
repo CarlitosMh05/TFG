@@ -975,99 +975,92 @@ function cargarOpcionesPredeterminadas() {
   });
 
   
-let etiquetasOriginalesPred = [];
-let etiquetasSeleccionadasPred = [];
+  let etiquetasOriginalesPred = [];
+  let etiquetasSeleccionadasPred = [];
 
-const $predDisplay = $('#predEtiquetaDisplay');
-const $predOptions = $('#predEtiquetaOptions');
-const $predChips = $('#predChipsContainer');
-const $predContainer = $predDisplay.closest('.input-container');
+  const $predDisplay = $('#predEtiquetaDisplay');
+  const $predOptions = $('#predEtiquetaOptions');
+  const $predChips = $('#predChipsContainer');
+  const $predContainer = $predDisplay.closest('.input-container');
 
-// Renderizar etiquetas seleccionadas como chips
-function renderChipsPred() {
-  $predChips.empty();
+  // Renderizar etiquetas seleccionadas como chips
+  function renderChipsPred() {
+    $predChips.empty();
 
-  etiquetasSeleccionadasPred.forEach(et => {
-    const chip = $(`
-      <div class="chip" data-id="${et.id}">
-        ${et.nombre}
-        <button class="remove-chip" title="Eliminar etiqueta">×</button>
-      </div>
-    `);
-    $predChips.append(chip);
-  });
-}
-
-// Rellenar el dropdown con etiquetas disponibles
-function updateDropdownPred() {
-  $predOptions.empty();
-
-  const disponibles = etiquetasOriginalesPred.filter(
-    et => !etiquetasSeleccionadasPred.some(sel => sel.id === et.id)
-  );
-
-  disponibles.forEach(et => {
-    $predOptions.append(`<li data-id="${et.id}">${et.nombre}</li>`);
-  });
-
-  // Añadir opción "Sin etiqueta"
-  if (!etiquetasSeleccionadasPred.some(et => et.id === null)) {
-    $predOptions.prepend(`<li data-id="">Sin etiqueta</li>`);
+    etiquetasSeleccionadasPred.forEach(et => {
+      const chip = $(`
+        <div class="chip" data-id="${et.id}">
+          ${et.nombre}
+          <button class="remove-chip" title="Eliminar etiqueta">×</button>
+        </div>
+      `);
+      $predChips.append(chip);
+    });
   }
-}
 
-// Abrir/cerrar el menú de etiquetas
-$predDisplay.on('click', function () {
-  $predOptions.fadeToggle(150);
-  $predDisplay.toggleClass('open');
+  // Rellenar el dropdown con etiquetas disponibles
+  function updateDropdownPred() {
+    $predOptions.empty();
 
-  const label = $predContainer.find('label');
-  label.css('color', $predDisplay.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
-});
+    const disponibles = etiquetasOriginalesPred.filter(
+      et => !etiquetasSeleccionadasPred.some(sel => sel.id === et.id)
+    );
 
-// Seleccionar una etiqueta
-$predOptions.off('click', 'li[data-id]')
-  .on('click', 'li[data-id]', function () {
-    const id = $(this).data('id');
-    const nombre = $(this).text();
+    disponibles.forEach(et => {
+      $predOptions.append(`<li data-id="${et.id}">${et.nombre}</li>`);
+    });
 
-    if (etiquetasSeleccionadasPred.length >= 5) {
-      if ($predContainer.find('.error-limit').length === 0) {
-        const $msg = $('<div class="error-limit" style="color: red; margin: 5px 0;" >Máximo 5 etiquetas</div>');
-        $predContainer.append($msg);
-        setTimeout(() => $msg.fadeOut(300, () => $msg.remove()), 2000);
-      }
-      return;
+    // Añadir opción "Sin etiqueta"
+    if (!etiquetasSeleccionadasPred.some(et => et.id === null)) {
+      $predOptions.prepend(`<li data-id="">Sin etiqueta</li>`);
     }
+  }
 
-    if (!etiquetasSeleccionadasPred.some(et => et.id == id)) {
-      etiquetasSeleccionadasPred.push({ id, nombre });
-      renderChipsPred();
-      updateDropdownPred();
+  
 
+  // Seleccionar una etiqueta
+  $predOptions.off('click', 'li[data-id]')
+    .on('click', 'li[data-id]', function () {
+      const id = $(this).data('id');
+      const nombre = $(this).text();
+
+      if (etiquetasSeleccionadasPred.length >= 5) {
+        if ($predContainer.find('.error-limit').length === 0) {
+          const $msg = $('<div class="error-limit" style="color: red; margin: 5px 0;" >Máximo 5 etiquetas</div>');
+          $predContainer.append($msg);
+          setTimeout(() => $msg.fadeOut(300, () => $msg.remove()), 2000);
+        }
+        return;
+      }
+
+      if (!etiquetasSeleccionadasPred.some(et => et.id == id)) {
+        etiquetasSeleccionadasPred.push({ id, nombre });
+        renderChipsPred();
+        updateDropdownPred();
+
+        $predOptions.fadeOut(150);
+        $predDisplay.removeClass('open');
+        $predContainer.find('label').css('color', 'gray');
+      }
+    });
+
+  // Eliminar chip
+  $predChips.on('click', '.remove-chip', function (e) {
+    e.stopPropagation(); // evitar conflicto con toggle del display
+    const id = $(this).closest('.chip').data('id');
+    etiquetasSeleccionadasPred = etiquetasSeleccionadasPred.filter(et => et.id != id);
+    renderChipsPred();
+    updateDropdownPred();
+  });
+
+  // Cerrar menú si haces clic fuera
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('#predEtiquetaDisplay, #predEtiquetaOptions').length) {
       $predOptions.fadeOut(150);
       $predDisplay.removeClass('open');
       $predContainer.find('label').css('color', 'gray');
     }
   });
-
-// Eliminar chip
-$predChips.on('click', '.remove-chip', function (e) {
-  e.stopPropagation(); // evitar conflicto con toggle del display
-  const id = $(this).closest('.chip').data('id');
-  etiquetasSeleccionadasPred = etiquetasSeleccionadasPred.filter(et => et.id != id);
-  renderChipsPred();
-  updateDropdownPred();
-});
-
-// Cerrar menú si haces clic fuera
-$(document).on('click', function (e) {
-  if (!$(e.target).closest('#predEtiquetaDisplay, #predEtiquetaOptions').length) {
-    $predOptions.fadeOut(150);
-    $predDisplay.removeClass('open');
-    $predContainer.find('label').css('color', 'gray');
-  }
-});
 }
 
 // Ejecutar al entrar en la sección
