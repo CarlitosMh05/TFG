@@ -962,7 +962,7 @@ function renderPredChips() {
 $('#predConceptoIngresoDisplay').on('click', function (e) {
   const $disp = $(this);
   const $cont = $disp.closest('.input-container');
-  const $options = $('#conceptoIngresoOptions');
+  const $options = $('#predConceptoIngresoOptions');
 
   $options.fadeToggle(150);
   $disp.toggleClass('open');
@@ -975,7 +975,7 @@ $('#predConceptoIngresoDisplay').on('click', function (e) {
 $('#predConceptoIngresoOptions').off('click', 'li[data-id]')
   .on('click', 'li[data-id]', function (e) {
     const value = $(this).text();
-    const $disp = $('#conceptoIngresoDisplay');
+    const $disp = $('#predConceptoIngresoDisplay');
     const $cont = $disp.closest('.input-container');
 
     $disp.text(value).removeClass('open');
@@ -988,7 +988,7 @@ $('#predConceptoIngresoOptions').off('click', 'li[data-id]')
 $('#predConceptoGastoDisplay').on('click', function (e) {
   const $disp = $(this);
   const $cont = $disp.closest('.input-container');
-  const $options = $('#conceptoGastoOptions');
+  const $options = $('#predConceptoGastoDisplay');
 
   $options.fadeToggle(150);
   $disp.toggleClass('open');
@@ -1000,7 +1000,7 @@ $('#predConceptoGastoDisplay').on('click', function (e) {
 $('#predConceptoGastoOptions').off('click', 'li[data-id]')
   .on('click', 'li[data-id]', function (e) {
     const value = $(this).text();
-    const $disp = $('#conceptoGastoDisplay');
+    const $disp = $('#predConceptoGastoDisplay');
     const $cont = $disp.closest('.input-container');
 
     $disp.text(value).removeClass('open');
