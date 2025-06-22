@@ -1019,7 +1019,7 @@ function cargarOpcionesPredeterminadas() {
     `);
     lucide.createIcons();
 
-    const disponibles = (etiquetasOriginales || []).filter(et => !etiquetasPredSeleccionadas.includes(et.nombre));
+    const disponibles = (etiquetasTotales || []).filter(et => !etiquetasPredSeleccionadas.includes(et.nombre));
 
     disponibles.forEach(et => {
       predEtiquetaOptions.append(`<li data-value="${et.nombre}">${et.nombre}</li>`);
