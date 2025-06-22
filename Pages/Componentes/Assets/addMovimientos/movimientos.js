@@ -20,6 +20,9 @@ $(document).ready(function ()
   const overlay = document.getElementById("overlay");
   const modal = document.getElementById("modal");
 
+  let conceptoIngresoPredeterminadoId = null;
+  let conceptoGastoPredeterminadoId = null;
+
   /*Cargar las opciones y aparecer el modal al hacer click */
   addBtn.addEventListener("click", () => {
 
