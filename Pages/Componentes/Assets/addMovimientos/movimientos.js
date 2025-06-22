@@ -66,12 +66,12 @@ $(document).ready(function ()
         renderChips();
         updateDropdown();
 
-        loadOptions();
+        
         
       }
     });
 
-
+    loadOptions();
     overlay.style.display = "block";
     modal.style.display = "block";
     document.body.classList.add("modal-open");
