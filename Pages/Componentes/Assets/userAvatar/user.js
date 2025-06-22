@@ -1183,12 +1183,7 @@ $('#tipoMovimientoOptions').off('click', 'li[data-value]')
     $disp.data('tipo', $(this).data('value'));
 });
 
-$('#predEtiquetaDisplay').on('click', function (e) {
-  e.stopPropagation(); // evita que el evento llegue al document
-});
-$('#predEtiquetaOptions').on('click', function (e) {
-  e.stopPropagation(); // también evita que el click dentro del menú lo cierre
-});
+
 
 $(document).on('mousedown', function (e) {
   const $target = $(e.target);
