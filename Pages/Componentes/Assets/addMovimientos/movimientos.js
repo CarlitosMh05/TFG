@@ -20,82 +20,57 @@ $(document).ready(function ()
   const overlay = document.getElementById("overlay");
   const modal = document.getElementById("modal");
 
-    let conceptoTipoActual = 'gasto'; 
-
-  //
-  // Funciónes relacionadas con los signos
-  //
-
-  const $cantidad = $('#cantidad');
-  const $plus     = $('#plusBtn');
-  const $minus    = $('#minusBtn');
-
   /*Cargar las opciones y aparecer el modal al hacer click */
   addBtn.addEventListener("click", () => {
-    // Obtener predeterminados
-    $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php')
-      .done(resp => {
-        if (resp.success) {
-          const ingreso = resp.concepto_ingreso_id;
-          const gasto = resp.concepto_gasto_id;
-          const etiquetasPred = resp.etiquetas || [];
-          const tipo = resp.tipo_default;
 
-          if (tipo === 'ingreso') {
-            $plus.addClass('active');
-            $minus.removeClass('active');
-            conceptoTipoActual = 'ingreso';
-          } else {
-            $minus.addClass('active');
-            $plus.removeClass('active');
-            conceptoTipoActual = 'gasto';
+    // 1. Obtener predeterminados del usuario
+    $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', resp => {
+      if (resp.success) {
+        
+        const ingreso = resp.concepto_ingreso_id;
+        const gasto = resp.concepto_gasto_id;
+        const etiquetasPred = resp.etiquetas || [];
+        const tipo = resp.tipo_default;
+
+        
+
+        // Activar el tipo predeterminado
+        if (tipo === 'ingreso') {
+          $plus.addClass('active');
+          $minus.removeClass('active');
+          conceptoTipoActual = 'ingreso';
+        } else {
+          $minus.addClass('active');
+          $plus.removeClass('active');
+          conceptoTipoActual = 'gasto';
+        }
+
+        // Cargar conceptos y etiquetas
+        loadOptions(() => {
+          // Buscar y aplicar concepto predeterminado según tipo
+          const conceptos = $('#conceptoOptions li[data-value]');
+          const predConceptoNombre = conceptos.toArray().find(li => {
+            const id = parseInt($(li).data('id'));
+            return id === (tipo === 'ingreso' ? ingreso : gasto);
+          });
+          if (predConceptoNombre) {
+            $('#conceptoDisplay').text($(predConceptoNombre).text());
+            $('#selectedConcepto').val($(predConceptoNombre).text());
           }
 
-          // Cargar conceptos y aplicar predeterminados al terminar
-          loadOptions(() => {
-            const conceptos = $('#conceptoOptions li[data-value]');
-            const predConcepto = conceptos.toArray().find(li => {
-              const id = parseInt($(li).data('id'));
-              return id === (tipo === 'ingreso' ? ingreso : gasto);
-            });
-            if (predConcepto) {
-              $('#conceptoDisplay').text($(predConcepto).text());
-              $('#selectedConcepto').val($(predConcepto).text());
-            }
+          // Cargar etiquetas predeterminadas
+          etiquetasSeleccionadas = etiquetasPred.map(et => et.nombre);
+          renderChips();
+          updateDropdown();
+        });
+      }
+    });
 
-            etiquetasSeleccionadas = etiquetasPred.map(et => et.nombre);
-            renderChips();
-            updateDropdown();
 
-            // Abrir modal
-            overlay.style.display = "block";
-            modal.style.display = "block";
-            document.body.classList.add("modal-open");
-          });
-        } else {
-          // fallback: abrir sin predeterminados
-          openModalSinPredeterminados();
-        }
-      })
-      .fail(() => {
-        // Si hay error de red o sesión
-        openModalSinPredeterminados();
-      });
-
-    // Modal sin predeterminados
-    function openModalSinPredeterminados() {
-      conceptoTipoActual = 'gasto';
-      $minus.addClass('active');
-      $plus.removeClass('active');
-
-      loadOptions(() => {
-        overlay.style.display = "block";
-        modal.style.display = "block";
-        document.body.classList.add("modal-open");
-      });
-    }
+    overlay.style.display = "block";
+    modal.style.display = "block";
+    document.body.classList.add("modal-open");
   });
-
 
   // Solo cerrar si se hace clic fuera del modal
   overlay.addEventListener("click", (e) => {
@@ -106,7 +81,15 @@ $(document).ready(function ()
     }
   });
 
+  let conceptoTipoActual = 'gasto'; 
 
+  //
+  // Funciónes relacionadas con los signos
+  //
+
+  const $cantidad = $('#cantidad');
+  const $plus     = $('#plusBtn');
+  const $minus    = $('#minusBtn');
   function updateSign() {
     let val = $cantidad.val();
     if (val === '') return;   // nada que hacer si está vacío
