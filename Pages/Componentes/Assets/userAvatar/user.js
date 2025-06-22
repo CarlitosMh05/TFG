@@ -959,7 +959,7 @@ function renderPredChips() {
 }
 
 // Click en el display de concepto ingreso
-$('#conceptoIngresoDisplay').on('click', function (e) {
+$('#predConceptoIngresoDisplay').on('click', function (e) {
   const $disp = $(this);
   const $cont = $disp.closest('.input-container');
   const $options = $('#conceptoIngresoOptions');
