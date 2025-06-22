@@ -24,69 +24,68 @@ $(document).ready(function ()
   addBtn.addEventListener("click", () => {
 
     // 1. Obtener predeterminados del usuario
-    // 1. Obtener predeterminados del usuario
-$.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', resp => {
-  if (resp.success) {
-    const ingreso = resp.concepto_ingreso_id;
-    const gasto = resp.concepto_gasto_id;
-    const etiquetasPred = resp.etiquetas ? resp.etiquetas.map(et => et.nombre) : [];
-    const tipo = resp.tipo_default;
+    $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', resp => {
+      if (resp.success) {
+        const ingreso = resp.concepto_ingreso_id;
+        const gasto = resp.concepto_gasto_id;
+        const etiquetasPred = resp.etiquetas ? resp.etiquetas.map(et => et.nombre) : [];
+        const tipo = resp.tipo_default;
 
-    console.log(ingreso, gasto, etiquetasPred, tipo);
-    let idConceptoPredet;
-    if (tipo === 'ingreso') {
-      $plus.addClass('active');
-      $minus.removeClass('active');
-      conceptoTipoActual = 'ingreso';
-      idConceptoPredet = ingreso;
-    } else {
-      $minus.addClass('active');
-      $plus.removeClass('active');
-      conceptoTipoActual = 'gasto';
-      idConceptoPredet = gasto;
-    }
+        console.log(ingreso, gasto, etiquetasPred, tipo);
+        let idConceptoPredet;
+        if (tipo === 'ingreso') {
+          $plus.addClass('active');
+          $minus.removeClass('active');
+          conceptoTipoActual = 'ingreso';
+          idConceptoPredet = ingreso;
+        } else {
+          $minus.addClass('active');
+          $plus.removeClass('active');
+          conceptoTipoActual = 'gasto';
+          idConceptoPredet = gasto;
+        }
 
-    // Ahora cargamos opciones y luego buscamos el nombre
-    $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=' + conceptoTipoActual, data => {
-      const conceptos = data.conceptos || [];
-      const concepto = conceptos.find(c => c.id == idConceptoPredet);
-      const nombre = concepto ? concepto.nombre : 'Seleccionar concepto';
+        // Ahora cargamos opciones y luego buscamos el nombre
+        $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=' + conceptoTipoActual, data => {
+          const conceptos = data.conceptos || [];
+          const concepto = conceptos.find(c => c.id == idConceptoPredet);
+          const nombre = concepto ? concepto.nombre : 'Seleccionar concepto';
 
-      // Mostrar nombre y guardar nombre como valor
-      $('#conceptoDisplay').text(nombre).removeClass('open');
-      $('#selectedConcepto').val(nombre);
+          // Mostrar nombre y guardar nombre como valor
+          $('#conceptoDisplay').text(nombre).removeClass('open');
+          $('#selectedConcepto').val(nombre);
 
-      // Guardar etiquetas
-      etiquetasOriginales = data.etiquetas || [];
-      etiquetasSeleccionadas = etiquetasPred;
-      renderChips();
-      updateDropdown();
+          // Guardar etiquetas
+          etiquetasOriginales = data.etiquetas || [];
+          etiquetasSeleccionadas = etiquetasPred;
+          renderChips();
+          updateDropdown();
 
-      // Mostrar modal
-      overlay.style.display = "block";
-      modal.style.display = "block";
-      document.body.classList.add("modal-open");
+          // Mostrar modal
+          overlay.style.display = "block";
+          modal.style.display = "block";
+          document.body.classList.add("modal-open");
 
-      // Resto de opciones (para inline-add y búsqueda)
-      const $cOpts = $('#conceptoOptions');
-      $cOpts.empty();
-      $cOpts.append(`
-        <li class="search-item">
-          <div class="input-container search-container">
-            <input type="text" class="search-input" placeholder=" ">
-            <label style="left: 33px;">Buscar concepto…</label>
-            <i data-lucide="search" class="search-icon"></i>
-          </div>
-        </li>
-      `);
-      conceptos.forEach(c => $cOpts.append(`<li data-value="${c.nombre}">${c.nombre}</li>`));
-      $cOpts.append(`<li class="add-new" data-type="concepto">+ Añadir concepto</li>`);
-      lucide.createIcons();
-      bindInlineAdd();
-      bindSearchInput();
+          // Resto de opciones (para inline-add y búsqueda)
+          const $cOpts = $('#conceptoOptions');
+          $cOpts.empty();
+          $cOpts.append(`
+            <li class="search-item">
+              <div class="input-container search-container">
+                <input type="text" class="search-input" placeholder=" ">
+                <label style="left: 33px;">Buscar concepto…</label>
+                <i data-lucide="search" class="search-icon"></i>
+              </div>
+            </li>
+          `);
+          conceptos.forEach(c => $cOpts.append(`<li data-value="${c.nombre}">${c.nombre}</li>`));
+          $cOpts.append(`<li class="add-new" data-type="concepto">+ Añadir concepto</li>`);
+          lucide.createIcons();
+          bindInlineAdd();
+          bindSearchInput();
+        });
+      }
     });
-  }
-});
 
     loadOptions();
     overlay.style.display = "block";
