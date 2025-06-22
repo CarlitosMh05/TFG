@@ -958,6 +958,41 @@ function renderPredChips() {
   });
 }
 
+function initDropdownPredeterminados(displayId, optionsId, hiddenInputId = null) {
+  const $display = $(`#${displayId}`);
+  const $options = $(`#${optionsId}`);
+  const $container = $display.closest('.input-container');
+
+  $display.on('click', function () {
+    $options.fadeToggle(150);
+    $display.toggleClass('open');
+    $container.find('label').css('color', $display.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
+  });
+
+  $options.on('click', 'li[data-id], li[data-value]', function () {
+    const val = $(this).text();
+    const id = $(this).data('id') || $(this).data('value');
+
+    $display.text(val).removeClass('open');
+    $options.fadeOut(150);
+    if (hiddenInputId) {
+      $(`#${hiddenInputId}`).val(id);
+    }
+
+    $container.find('label').css('color', 'gray');
+  });
+
+  // Click fuera cierra dropdown
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest(`#${displayId}, #${optionsId}`).length) {
+      $options.fadeOut(150);
+      $display.removeClass('open');
+      $container.find('label').css('color', 'gray');
+    }
+  });
+}
+
+
 // Interacciones
 $(document).on('click', '#predConceptoIngresoOptions li', function() {
   const id = $(this).data('id');
