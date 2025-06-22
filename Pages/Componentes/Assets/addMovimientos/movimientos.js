@@ -54,7 +54,7 @@ $(document).ready(function ()
         $('#selectedConcepto').val(value);
 
         // 3) Limpiar cualquier estado de error
-        $('#conceptoDisplay').closest('.input-container');.removeClass('error').find('.badConcept').hide();
+        $('#conceptoDisplay').closest('.input-container').removeClass('error').find('.badConcept').hide();
         
         
         // Cargar etiquetas predeterminadas
