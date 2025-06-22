@@ -1303,11 +1303,13 @@ $(document).on('click', '#predConceptoGastoOptions li', function() {
   $('#predConceptoGastoOptions').fadeOut(150);
 });
 
-const etiquetas = etiquetasTotales
+
+
+$('#guardarPredeterminadosBtn').on('click', function() {
+  const etiquetas = etiquetasTotales
   .filter(et => etiquetasPredSeleccionadas.includes(et.nombre))
   .map(et => et.id);
 
-$('#guardarPredeterminadosBtn').on('click', function() {
   const data = {
     concepto_ingreso_id: $('#predConceptoIngresoDisplay').data('id') || null,
     concepto_gasto_id: $('#predConceptoGastoDisplay').data('id') || null,
