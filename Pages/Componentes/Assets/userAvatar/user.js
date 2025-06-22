@@ -1086,8 +1086,6 @@ function cargarOpcionesPredeterminadas() {
     updatePredDropdown();
   });
 
-  // Cerrar menú si haces clic fuera
- 
 
   // Inicializar
   renderPredChips();
