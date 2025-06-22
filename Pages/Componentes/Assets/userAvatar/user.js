@@ -905,6 +905,8 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
   cargarDropdownEtiquetas();
 });
 
+
+
 //Funciones de pestaña de Predeterminados
 
 function cargarPredeterminados() {
