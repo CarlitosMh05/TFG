@@ -1259,7 +1259,9 @@ $(document).on('click', '#predConceptoGastoOptions li', function() {
   $('#predConceptoGastoOptions').fadeOut(150);
 });
 
-
+const etiquetas = etiquetasTotales
+  .filter(et => etiquetasPredSeleccionadas.includes(et.nombre))
+  .map(et => et.id);
 
 $('#guardarPredeterminadosBtn').on('click', function() {
   const data = {
