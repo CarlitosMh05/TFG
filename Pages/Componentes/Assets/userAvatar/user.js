@@ -945,9 +945,7 @@ function cargarPredeterminados() {
     }
   });
 
-  initDropdownPredeterminados('conceptoIngresoDisplay', 'conceptoIngresoOptions');
-  initDropdownPredeterminados('conceptoGastoDisplay', 'conceptoGastoOptions');
-  initDropdownPredeterminados('tipoMovimientoDisplay', 'tipoMovimientoOptions', 'tipoMovimientoInput'); // si usas input hidden
+  
 }
 
 let etiquetasPred = [];
