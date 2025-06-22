@@ -989,6 +989,7 @@ $('#guardarPredeterminadosBtn').on('click', function() {
     tipo_default: $('#tipoMovimientoDefault').val(),
     etiquetas: etiquetasPred.map(e => e.id)
   };
+  console.log(data);
   $.post('../Componentes/Assets/userAvatar/savePredeterminados.php', data, function(resp) {
     if (resp.success) {
       showSuccessMessage('Preferencias guardadas');
