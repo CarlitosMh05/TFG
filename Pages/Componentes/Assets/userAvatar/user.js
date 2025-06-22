@@ -909,6 +909,7 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 
 //Funciones de pestaña de Predeterminados
 let etiquetasTotales = [];
+let etiquetasPredSeleccionadas = [];
 function cargarOpcionesPredeterminadas() {
   $('#predEtiquetaDisplay').off('click');
   $(document).off('mousedown.predEtiqueta');
@@ -1037,7 +1038,7 @@ function cargarOpcionesPredeterminadas() {
   const predChipsContainer = $('#predChipsContainer');
   const predEtiquetaOptions = $('#predEtiquetaOptions');
   const predEtiquetaDisplay = $('#predEtiquetaDisplay');
-  let etiquetasPredSeleccionadas = [];
+  
 
   // Renderizar chips
   function renderPredChips() {
