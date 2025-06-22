@@ -31,6 +31,8 @@ $(document).ready(function ()
         const etiquetasPred = resp.etiquetas ? resp.etiquetas.map(et => et.nombre) : []; // Cambio aquí
         const tipo = resp.tipo_default;
 
+        console.log(ingreso, gasto, etiquetasPred, tipo);
+
         // Activar el tipo predeterminado
         if (tipo === 'ingreso') {
           $plus.addClass('active');
