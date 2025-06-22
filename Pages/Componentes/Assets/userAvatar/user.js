@@ -980,8 +980,7 @@ function cargarOpcionesPredeterminadas() {
   const predEtiquetaOptions = $('#predEtiquetaOptions');
   const predEtiquetaDisplay = $('#predEtiquetaDisplay');
   let etiquetasPredSeleccionadas = [];
-  let etiquetasOriginales = [];
-  
+
   // Renderizar chips
   function renderPredChips() {
     predChipsContainer.empty();
