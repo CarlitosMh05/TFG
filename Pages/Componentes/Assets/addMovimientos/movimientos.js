@@ -44,15 +44,19 @@ $(document).ready(function ()
           conceptoTipoActual = 'gasto';
         }
         
+        const value = $(this).data('value');
+        const $disp = $('#conceptoDisplay');
+        const $cont =  $('#conceptoDisplay').closest('.input-container');
+
         // 1) Actualizar texto y cerrar menú
-        $disp.text(value).removeClass('open');
+        $('#conceptoDisplay').text(value).removeClass('open');
         $('#conceptoOptions').fadeOut(150);
 
         // 2) Guardar en el hidden
         $('#selectedConcepto').val(value);
 
         // 3) Limpiar cualquier estado de error
-        $cont.removeClass('error').find('.badConcept').hide();
+        $('#conceptoDisplay').closest('.input-container');.removeClass('error').find('.badConcept').hide();
         
         
         // Cargar etiquetas predeterminadas
