@@ -20,6 +20,16 @@ $(document).ready(function ()
   const overlay = document.getElementById("overlay");
   const modal = document.getElementById("modal");
 
+    let conceptoTipoActual = 'gasto'; 
+
+  //
+  // Funciónes relacionadas con los signos
+  //
+
+  const $cantidad = $('#cantidad');
+  const $plus     = $('#plusBtn');
+  const $minus    = $('#minusBtn');
+
   /*Cargar las opciones y aparecer el modal al hacer click */
   addBtn.addEventListener("click", () => {
     // Obtener predeterminados
@@ -96,15 +106,7 @@ $(document).ready(function ()
     }
   });
 
-  let conceptoTipoActual = 'gasto'; 
 
-  //
-  // Funciónes relacionadas con los signos
-  //
-
-  const $cantidad = $('#cantidad');
-  const $plus     = $('#plusBtn');
-  const $minus    = $('#minusBtn');
   function updateSign() {
     let val = $cantidad.val();
     if (val === '') return;   // nada que hacer si está vacío
