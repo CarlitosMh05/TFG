@@ -1001,13 +1001,13 @@ function cargarOpcionesPredeterminadas() {
   });
 
   // Búsqueda en etiquetas
-$('#predEtiquetaOptions').off('input', '.search-input').on('input', '.search-input', function () {
-  const q = this.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  $('#predEtiquetaOptions li[data-value]').each(function () {
-    const txt = $(this).text().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    $(this).toggle(txt.includes(q));
+  $('#predEtiquetaOptions').off('input', '.search-input').on('input', '.search-input', function () {
+    const q = this.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    $('#predEtiquetaOptions li[data-value]').each(function () {
+      const txt = $(this).text().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      $(this).toggle(txt.includes(q));
+    });
   });
-});
 
   // Paso 4: Obtener predeterminados ya guardados
   $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function (resp) {
