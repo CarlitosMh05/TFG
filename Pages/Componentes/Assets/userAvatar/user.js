@@ -922,6 +922,15 @@ function cargarOpcionesPredeterminadas() {
   $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=ingreso', function (data) {
     conceptosIngreso = data.conceptos || [];
     const $ul = $('#predConceptoIngresoOptions').empty();
+    $ul.append(`
+      <li class="search-item">
+        <div class="input-container search-container">
+          <input type="text" class="search-input ingreso-search" placeholder=" ">
+          <label style="left: 33px;">Buscar concepto…</label>
+          <i data-lucide="search" class="search-icon"></i>
+        </div>
+      </li>
+    `);
     conceptosIngreso.forEach(c => {
       $ul.append(`<li data-id="${c.id}">${c.nombre}</li>`);
     });
