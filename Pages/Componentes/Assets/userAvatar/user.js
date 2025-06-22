@@ -939,7 +939,7 @@ function cargarOpcionesPredeterminadas() {
   // Paso 3: Fetch etiquetas
   $.getJSON('../Componentes/Assets/fetchOptions.php', function (data) {
     etiquetasTotales = data.etiquetas || [];
-
+    console.log(etiquetasTotales);
     const $ul = $('#predEtiquetaOptions').empty();
     $ul.append(`
       <li class="search-item">
