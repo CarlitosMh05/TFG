@@ -42,33 +42,33 @@
         <div data-section="conceptos" class="section-content">
             <h3 style="margin-bottom: 18px;">Conceptos</h3>
             <div class="conceptos-cols">
-            <!-- Columna Ingresos -->
-            <div class="conceptos-col">
-                <div class="conceptos-title">De ingreso</div>
-                <ul id="listaConceptosIngreso" class="conceptos-list"></ul>
-                <div class="concepto-add-row">
-                    <div class="input-container" id="containerMiniModalInputConceptoIngreso" >
-                        <input id="nuevoConceptoIngresoInput" type="text" placeholder=" " autocomplete="off"/>
-                        <label for="nuevoConceptoIngresoInput" id="labelInputConceptoIngresos">Nuevo concepto de ingreso...</label>
-                        <p class="bad-text" id="badConceptoIngreso"></p>
-                        <button id="añadirConceptoIngresoBtn" class="concepto-add-btn">Añadir</button>
+                <!-- Columna Ingresos -->
+                <div class="conceptos-col">
+                    <div class="conceptos-title">De ingreso</div>
+                    <ul id="listaConceptosIngreso" class="conceptos-list"></ul>
+                    <div class="concepto-add-row">
+                        <div class="input-container" id="containerMiniModalInputConceptoIngreso" >
+                            <input id="nuevoConceptoIngresoInput" type="text" placeholder=" " autocomplete="off"/>
+                            <label for="nuevoConceptoIngresoInput" id="labelInputConceptoIngresos">Nuevo concepto de ingreso...</label>
+                            <p class="bad-text" id="badConceptoIngreso"></p>
+                            <button id="añadirConceptoIngresoBtn" class="concepto-add-btn">Añadir</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Columna Gastos -->
-            <div class="conceptos-col">
-                <div class="conceptos-title">De gasto</div>
-                <ul id="listaConceptosGasto" class="conceptos-list"></ul>
-                <div class="concepto-add-row">
-                    <div class="input-container" id="containerMiniModalInputConceptoGasto" >
-                        <input id="nuevoConceptoGastoInput" type="text" placeholder=" " autocomplete="off"/>
-                        <label for="nuevoConceptoGastoInput" id="labelInputConceptoGasto">Nuevo concepto de gasto...</label>
-                        <p class="bad-text" id="badConceptoGasto"></p>
-                        <button id="añadirConceptoGastoBtn" class="concepto-add-btn">Añadir</button>
+                <!-- Columna Gastos -->
+                <div class="conceptos-col">
+                    <div class="conceptos-title">De gasto</div>
+                    <ul id="listaConceptosGasto" class="conceptos-list"></ul>
+                    <div class="concepto-add-row">
+                        <div class="input-container" id="containerMiniModalInputConceptoGasto" >
+                            <input id="nuevoConceptoGastoInput" type="text" placeholder=" " autocomplete="off"/>
+                            <label for="nuevoConceptoGastoInput" id="labelInputConceptoGasto">Nuevo concepto de gasto...</label>
+                            <p class="bad-text" id="badConceptoGasto"></p>
+                            <button id="añadirConceptoGastoBtn" class="concepto-add-btn">Añadir</button>
+                        </div>
+                        
                     </div>
-                    
                 </div>
-            </div>
             </div>
         </div>
 
@@ -100,9 +100,8 @@
                 <ul id="predEtiquetaOptions" class="etiqueta-options"></ul>
                 </div>
                 <div id="predChipsContainer" class="chips-container"></div>
-            </div>
+            
 
-            <div class="conceptos-col">
                 <div class="conceptos-title">Ingresos / Gasto</div>
                 <div class="input-container">
                     <div id="tipoMovimientoDisplay" class="concepto-display">Gasto</div>
