@@ -1000,6 +1000,8 @@ function cargarOpcionesPredeterminadas() {
     
   });
 
+  
+
   // Paso 4: Obtener predeterminados ya guardados
   $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function (resp) {
     if (!resp.success) return;
