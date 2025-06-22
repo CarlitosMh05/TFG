@@ -910,6 +910,11 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 //Funciones de pestaña de Predeterminados
 
 function cargarOpcionesPredeterminadas() {
+  // Evitar que se dupliquen los handlers al volver a entrar en la sección
+  $('#predEtiquetaDisplay').off('click');
+  $(document).off('mousedown.predEtiqueta');
+  $('#predEtiquetaOptions').off('click', 'li');
+  $('#predChipsContainer').off('click', '.chip');
   let conceptosIngreso = [];
   let conceptosGasto = [];
   let etiquetasTotales = [];
@@ -1056,7 +1061,7 @@ function cargarOpcionesPredeterminadas() {
 
 
   // Cerrar el dropdown al hacer clic fuera de él
-  $(document).on('mousedown', function (e) {
+  $(document).on('mousedown.predEtiqueta', function (e) {
     const $target = $(e.target);
     const clickedInsidePredEtiqueta = $target.closest('#predEtiquetaDisplay').length > 0 || $target.closest('#predEtiquetaOptions').length > 0;
 
