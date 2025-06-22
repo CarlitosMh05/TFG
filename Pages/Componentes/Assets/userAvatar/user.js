@@ -1138,30 +1138,6 @@ $('#predConceptoGastoOptions').off('click', 'li[data-id]')
     $disp.data('id', $(this).data('id'));
 });
 
-$('#predEtiquetaDisplay').on('click', function (e) {
-  const $disp = $(this);
-  const $cont = $disp.closest('.input-container');
-  const $options = $('#predEtiquetaOptions');
-
-  $options.fadeToggle(150);
-  $disp.toggleClass('open');
-
-  $cont.find('label').css('color',
-    $disp.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
-});
-
-$('#predEtiquetaOptions').off('click', 'li[data-value]')
-  .on('click', 'li[data-value]', function (e) {
-    const value = $(this).text();
-    const $disp = $('#predEtiquetaDisplay');
-    const $cont = $disp.closest('.input-container');
-
-    $disp.text(value).removeClass('open');
-    $('#predEtiquetaOptions').fadeOut(150);
-
-    $cont.find('label').css('color', 'gray');
-    $disp.data('tipo', $(this).data('value'));
-});
 
 $('#tipoMovimientoDisplay').on('click', function (e) {
   const $disp = $(this);
