@@ -1186,7 +1186,30 @@ $('#tipoMovimientoOptions').off('click', 'li[data-value]')
 
 
 
+  if (
+    !$(e.target).closest(
+      '.concepto-dropdown, .etiqueta-dropdown, .frecuencia-dropdown, .currency-dropdown, ' +
+      '#predConceptoIngresoDisplay, #predConceptoIngresoOptions, ' +
+      '#predConceptoGastoDisplay, #predConceptoGastoOptions, ' +
+      '#predEtiquetaDisplay, #predEtiquetaOptions, ' +
+      '#tipoMovimientoDisplay, #tipoMovimientoOptions'
+    ).length
+  ) {
+    setTimeout(() => {
+      $('#predConceptoIngresoOptions').fadeOut(150);
+      $('#predConceptoIngresoDisplay').removeClass('open');
 
+      $('#pred$(document).on('click', function (e) {ConceptoGastoOptions').fadeOut(150);
+      $('#predConceptoGastoDisplay').removeClass('open');
+
+      $('#predEtiquetaOptions').fadeOut(150);
+      $('#predEtiquetaDisplay').removeClass('open');
+
+      $('#tipoMovimientoOptions').fadeOut(150);
+      $('#tipoMovimientoDisplay').removeClass('open');
+    }, 10);
+  }
+});
 
 
 
