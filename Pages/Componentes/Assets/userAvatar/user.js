@@ -956,8 +956,7 @@ function cargarOpcionesPredeterminadas() {
       $ul.append(`<li data-value="${et.id}">${et.nombre}</li>`);
     });
 
-    // Añadir "Sin etiqueta" como opción
-    $ul.prepend(`<li data-value="">Sin etiqueta</li>`);
+    
   });
 
   // Paso 4: Obtener predeterminados ya guardados
