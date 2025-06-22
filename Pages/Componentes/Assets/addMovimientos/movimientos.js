@@ -67,8 +67,8 @@ $(document).ready(function ()
           updateDropdown();
 
           overlay.style.display = "block";
-    modal.style.display = "block";
-    document.body.classList.add("modal-open");
+          modal.style.display = "block";
+          document.body.classList.add("modal-open");
         });
       }
     });
