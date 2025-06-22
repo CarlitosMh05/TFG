@@ -988,7 +988,7 @@ $('#predConceptoIngresoOptions').off('click', 'li[data-id]')
 $('#predConceptoGastoDisplay').on('click', function (e) {
   const $disp = $(this);
   const $cont = $disp.closest('.input-container');
-  const $options = $('#predConceptoGastoDisplay');
+  const $options = $('#predConceptoGastoOptions');
 
   $options.fadeToggle(150);
   $disp.toggleClass('open');
