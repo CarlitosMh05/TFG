@@ -158,7 +158,7 @@ $(document).ready(function ()
       conceptoTipoActual = 'gasto'; // NUEVO
       if (conceptoIngresoPredeterminadoId) {
         $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=ingreso', data => {
-          const concepto = (data.conceptos || []).find(c => c.id == conceptoIngresoPredeterminadoId);
+          const concepto = (data.conceptos || []).find(c => c.id == conceptoGastoPredeterminadoId);
           const nombre = concepto ? concepto.nombre : 'Seleccionar concepto';
           $('#conceptoDisplay').text(nombre);
           $('#selectedConcepto').val(nombre);
