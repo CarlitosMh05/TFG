@@ -985,7 +985,7 @@ $('#predConceptoIngresoOptions').off('click', 'li[data-id]')
     $disp.data('id', $(this).data('id'));
 });
 
-$('#conceptoGastoDisplay').on('click', function (e) {
+$('#predConceptoGastoDisplay').on('click', function (e) {
   const $disp = $(this);
   const $cont = $disp.closest('.input-container');
   const $options = $('#conceptoGastoOptions');
