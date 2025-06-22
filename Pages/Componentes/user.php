@@ -106,14 +106,10 @@
                 <div class="conceptos-title">Ingresos / Gasto</div>
                 <div class="input-container">
                     <div id="tipoMovimientoDisplay" class="concepto-display">Gasto</div>
-                        <ul id="tipoMovimientoOptions" class="concepto-options">
-                            <li data-value="gasto">Gasto</li>
-                            <li data-value="ingreso">Ingreso</li>
-                        </ul>
-                    </div>
-                    <p style="font-size: 13px; color: gray; margin-top: 6px;">
-                        Si eliges la opción de Ingreso, se activará por defecto la selección de Ingreso al añadir un movimiento.
-                    </p>
+                    <ul id="tipoMovimientoOptions" class="concepto-options">
+                        <li data-value="gasto">Gasto</li>
+                        <li data-value="ingreso">Ingreso</li>
+                    </ul>
                 </div>
             </div>
 
