@@ -21,7 +21,7 @@
             <li data-section="conceptos">Conceptos</li>
             <li data-section="etiquetas">Etiquetas</li>
             <li data-section="usuario">Usuario</li>
-        <li data-section="predeterminados">Predeterminados</li>
+            <li data-section="predeterminados">Predeterminados</li>
 
         </ul>
         </aside>
