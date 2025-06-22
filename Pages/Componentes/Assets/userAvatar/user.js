@@ -1190,31 +1190,35 @@ $('#predEtiquetaOptions').on('click', function (e) {
   e.stopPropagation(); // también evita que el click dentro del menú lo cierre
 });
 
-$(document).on('click', function (e) {
-  if (
-    !$(e.target).closest(
-      '.concepto-dropdown, .etiqueta-dropdown, .frecuencia-dropdown, .currency-dropdown, ' +
-      '#predConceptoIngresoDisplay, #predConceptoIngresoOptions, ' +
-      '#predConceptoGastoDisplay, #predConceptoGastoOptions, ' +
-      '#predEtiquetaDisplay, #predEtiquetaOptions, ' +
-      '#tipoMovimientoDisplay, #tipoMovimientoOptions'
-    ).length
-  ) {
-    setTimeout(() => {
-      $('#predConceptoIngresoOptions').fadeOut(150);
-      $('#predConceptoIngresoDisplay').removeClass('open');
+$(document).on('mousedown', function (e) {
+  const $target = $(e.target);
 
-      $('#predConceptoGastoOptions').fadeOut(150);
-      $('#predConceptoGastoDisplay').removeClass('open');
+  const clickedInsidePredEtiqueta = $target.closest('#predEtiquetaDisplay').length > 0 || $target.closest('#predEtiquetaOptions').length > 0;
+  const clickedInsidePredIngreso = $target.closest('#predConceptoIngresoDisplay').length > 0 || $target.closest('#predConceptoIngresoOptions').length > 0;
+  const clickedInsidePredGasto = $target.closest('#predConceptoGastoDisplay').length > 0 || $target.closest('#predConceptoGastoOptions').length > 0;
+  const clickedInsideTipoMov = $target.closest('#tipoMovimientoDisplay').length > 0 || $target.closest('#tipoMovimientoOptions').length > 0;
 
-      $('#predEtiquetaOptions').fadeOut(150);
-      $('#predEtiquetaDisplay').removeClass('open');
+  if (!clickedInsidePredEtiqueta) {
+    $('#predEtiquetaOptions').fadeOut(150);
+    $('#predEtiquetaDisplay').removeClass('open');
+  }
 
-      $('#tipoMovimientoOptions').fadeOut(150);
-      $('#tipoMovimientoDisplay').removeClass('open');
-    }, 10);
+  if (!clickedInsidePredIngreso) {
+    $('#predConceptoIngresoOptions').fadeOut(150);
+    $('#predConceptoIngresoDisplay').removeClass('open');
+  }
+
+  if (!clickedInsidePredGasto) {
+    $('#predConceptoGastoOptions').fadeOut(150);
+    $('#predConceptoGastoDisplay').removeClass('open');
+  }
+
+  if (!clickedInsideTipoMov) {
+    $('#tipoMovimientoOptions').fadeOut(150);
+    $('#tipoMovimientoDisplay').removeClass('open');
   }
 });
+
 
 
 
