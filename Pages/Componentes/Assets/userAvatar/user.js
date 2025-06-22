@@ -936,19 +936,6 @@ function cargarOpcionesPredeterminadas() {
     });
   });
 
-  // Paso 3: Fetch etiquetas
-  $.getJSON('../Componentes/Assets/fetchOptions.php', function (data) {
-    etiquetasTotales = data.etiquetas || [];
-
-    const $ul = $('#predEtiquetaOptions').empty();
-    etiquetasTotales.forEach(et => {
-      $ul.append(`<li data-value="${et.id}">${et.nombre}</li>`);
-    });
-
-    // Añadir "Sin etiqueta" como opción
-    $ul.prepend(`<li data-value="">Sin etiqueta</li>`);
-  });
-
   // Paso 4: Obtener predeterminados ya guardados
   $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function (resp) {
     if (!resp.success) return;
