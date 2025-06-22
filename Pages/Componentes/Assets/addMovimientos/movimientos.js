@@ -710,7 +710,7 @@ $(document).ready(function ()
                 }
                 else
                 {
-                $error.text(resp.error||'Error al crear').show();
+                  $error.text(resp.error||'Error al crear').show();
 
                 }
               }
