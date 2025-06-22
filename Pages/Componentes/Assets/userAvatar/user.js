@@ -910,6 +910,10 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 //Funciones de pestaña de Predeterminados
 
 function cargarOpcionesPredeterminadas() {
+  $('#predEtiquetaDisplay').off('click');
+  $(document).off('mousedown.predEtiqueta');
+  $('#predEtiquetaOptions').off('click', 'li');
+  $('#predChipsContainer').off('click', '.chip');
   let conceptosIngreso = [];
   let conceptosGasto = [];
   let etiquetasTotales = [];
