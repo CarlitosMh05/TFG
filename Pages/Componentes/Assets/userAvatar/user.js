@@ -983,7 +983,32 @@ $('#conceptoIngresoOptions').off('click', 'li[data-id]')
 
     $cont.find('label').css('color', 'gray');
     $disp.data('id', $(this).data('id'));
-  });
+});
+
+$('#conceptoGastoDisplay').on('click', function (e) {
+  const $disp = $(this);
+  const $cont = $disp.closest('.input-container');
+  const $options = $('#conceptoGastoOptions');
+
+  $options.fadeToggle(150);
+  $disp.toggleClass('open');
+
+  $cont.find('label').css('color',
+    $disp.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
+});
+
+$('#conceptoGastoOptions').off('click', 'li[data-id]')
+  .on('click', 'li[data-id]', function (e) {
+    const value = $(this).text();
+    const $disp = $('#conceptoGastoDisplay');
+    const $cont = $disp.closest('.input-container');
+
+    $disp.text(value).removeClass('open');
+    $('#conceptoGastoOptions').fadeOut(150);
+
+    $cont.find('label').css('color', 'gray');
+    $disp.data('id', $(this).data('id'));
+});
 
 
 
