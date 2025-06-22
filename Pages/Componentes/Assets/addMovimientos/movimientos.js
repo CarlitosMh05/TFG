@@ -32,7 +32,10 @@ $(document).ready(function ()
         const etiquetasPred = resp.etiquetas || [];
         const tipo = resp.tipo_default;
 
-        
+        console.log(ingreso);
+        console.log(gasto);
+        console.log(etiquetasPred);
+        console.log(tipo);
 
         // Activar el tipo predeterminado
         if (tipo === 'ingreso') {
