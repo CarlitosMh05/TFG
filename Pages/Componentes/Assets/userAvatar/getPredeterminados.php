@@ -28,7 +28,21 @@ $result2 = $stmt2->get_result();
 
 $etiquetas = [];
 while ($row = $result2->fetch_assoc()) {
-    $etiquetas[] = (int)$row['etiqueta_id'];
+    $etid = (int)$row['etiqueta_id'];
+    
+    // Obtener el nombre de la etiqueta
+    $etqStmt = $conn->prepare("SELECT nombre FROM etiquetas WHERE id = ?");
+    $etqStmt->bind_param("i", $etid);
+    $etqStmt->execute();
+    $etqResult = $etqStmt->get_result();
+    $etqRow = $etqResult->fetch_assoc();
+
+    if ($etqRow) {
+        $etiquetas[] = [
+            'id' => $etid,
+            'nombre' => $etqRow['nombre']
+        ];
+    }
 }
 
 // DEBUG: Imprimir resultados
