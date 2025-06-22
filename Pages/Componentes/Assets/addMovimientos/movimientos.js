@@ -34,6 +34,9 @@ $(document).ready(function ()
         const etiquetasPred = resp.etiquetas ? resp.etiquetas.map(et => et.nombre) : [];
         const tipo = resp.tipo_default;
 
+        conceptoIngresoPredeterminadoId = ingreso;
+        conceptoGastoPredeterminadoId = gasto;
+
         console.log(ingreso, gasto, etiquetasPred, tipo);
         let idConceptoPredet;
         if (tipo === 'ingreso') {
