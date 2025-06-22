@@ -992,13 +992,17 @@ function cargarOpcionesPredeterminadas() {
   $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', function (resp) {
     if (!resp.success) return;
 
-    // Ingreso
-    if (resp.concepto_ingreso_id && conceptosIngreso.length > 0) {
-      const item = conceptosIngreso.find(c => c.id == resp.concepto_ingreso_id);
-      if (item) {
-        $('#predConceptoIngresoDisplay').text(item.nombre).data('id', item.id);
-      }
+    const ingresoPredeterminado = conceptosIngreso.find(c => c.id == resp.concepto_ingreso_id);
+    if (resp.concepto_ingreso_id && ingresoPredeterminado) {
+      $('#predConceptoIngresoDisplay')
+        .text(ingresoPredeterminado.nombre)
+        .data('id', ingresoPredeterminado.id);
+    } else {
+      $('#predConceptoIngresoDisplay')
+        .text('Sin concepto predeterminado')
+        .data('id', null);
     }
+
 
     // Gasto
     if (resp.concepto_gasto_id && conceptosGasto.length > 0) {
