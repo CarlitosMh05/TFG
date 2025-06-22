@@ -997,7 +997,7 @@ $('#predConceptoGastoDisplay').on('click', function (e) {
     $disp.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
 });
 
-$('#conceptoGastoOptions').off('click', 'li[data-id]')
+$('#predConceptoGastoOptions').off('click', 'li[data-id]')
   .on('click', 'li[data-id]', function (e) {
     const value = $(this).text();
     const $disp = $('#conceptoGastoDisplay');
