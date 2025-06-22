@@ -956,6 +956,7 @@ function cargarOpcionesPredeterminadas() {
     `);
     lucide.createIcons();
     
+    $ul.append(`<li data-id="">Sin concepto predeterminado</li>`); // Opción especial
     conceptosGasto.forEach(c => {
       $ul.append(`<li data-id="${c.id}">${c.nombre}</li>`);
     });
