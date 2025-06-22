@@ -43,25 +43,24 @@ $(document).ready(function ()
           $plus.removeClass('active');
           conceptoTipoActual = 'gasto';
         }
-
-        // Cargar conceptos y etiquetas
-        loadOptions(() => {
-          // Buscar y aplicar concepto predeterminado según tipo
-          const conceptos = $('#conceptoOptions li[data-value]');
-          const predConceptoNombre = conceptos.toArray().find(li => {
-            const id = parseInt($(li).data('id'));
-            return id === (tipo === 'ingreso' ? ingreso : gasto);
-          });
-          if (predConceptoNombre) {
-            $('#conceptoDisplay').text($(predConceptoNombre).text());
-            $('#selectedConcepto').val($(predConceptoNombre).text());
-          }
-
-          // Cargar etiquetas predeterminadas
-          etiquetasSeleccionadas = etiquetasPred; // Asignamos directamente el array de nombres
-          renderChips();
-          updateDropdown();
+        
+        
+        // Buscar y aplicar concepto predeterminado según tipo
+        const conceptos = $('#conceptoOptions li[data-value]');
+        const predConceptoNombre = conceptos.toArray().find(li => {
+          const id = parseInt($(li).data('id'));
+          return id === (tipo === 'ingreso' ? ingreso : gasto);
         });
+        if (predConceptoNombre) {
+          $('#conceptoDisplay').text($(predConceptoNombre).text());
+          $('#selectedConcepto').val($(predConceptoNombre).text());
+        }
+
+        // Cargar etiquetas predeterminadas
+        etiquetasSeleccionadas = etiquetasPred; // Asignamos directamente el array de nombres
+        renderChips();
+        updateDropdown();
+        
       }
     });
 
