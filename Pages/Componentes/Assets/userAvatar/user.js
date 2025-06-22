@@ -971,26 +971,10 @@ function cargarOpcionesPredeterminadas() {
       $('#tipoMovimientoDisplay').text(capitalizado).data('tipo', resp.tipo_default);
     }
 
-    // Etiquetas predeterminadas
-    const chipsContainer = $('#predChipsContainer').empty();
-    (resp.etiquetas || []).forEach(id => {
-      const etiqueta = etiquetasTotales.find(e => e.id == id);
-      if (etiqueta) {
-        chipsContainer.append(`
-          <div class="chip" data-id="${etiqueta.id}">
-            ${etiqueta.nombre}
-            <button class="remove-chip" title="Eliminar etiqueta">×</button>
-          </div>
-        `);
-      }
-    });
+    
   });
-}
 
-// Ejecutar al entrar en la sección
-$('[data-section="predeterminados"]').on('section:show', cargarOpcionesPredeterminadas);
-
-
+  
 let etiquetasOriginalesPred = [];
 let etiquetasSeleccionadasPred = [];
 
@@ -1084,6 +1068,13 @@ $(document).on('click', function (e) {
     $predContainer.find('label').css('color', 'gray');
   }
 });
+}
+
+// Ejecutar al entrar en la sección
+$('[data-section="predeterminados"]').on('section:show', cargarOpcionesPredeterminadas);
+
+
+
 
 
 
