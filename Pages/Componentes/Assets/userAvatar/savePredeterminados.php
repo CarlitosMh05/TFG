@@ -22,7 +22,11 @@ $sql = "INSERT INTO predeterminados (user_id, concepto_ingreso_id, concepto_gast
         VALUES (?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE concepto_ingreso_id = VALUES(concepto_ingreso_id), concepto_gasto_id = VALUES(concepto_gasto_id), tipo_default = VALUES(tipo_default)";
 $stmt = $conn->prepare($sql);
+
+
 $stmt->bind_param('iiis', $user_id, $concepto_ingreso_id, $concepto_gasto_id, $tipo_default);
+
+
 if (!$stmt->execute()) {
     echo json_encode(['success' => false, 'error' => 'Error al guardar preferencias']);
     exit;
