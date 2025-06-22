@@ -24,7 +24,35 @@ $sql = "INSERT INTO predeterminados (user_id, concepto_ingreso_id, concepto_gast
 $stmt = $conn->prepare($sql);
 
 
-$stmt->bind_param('iiis', $user_id, $concepto_ingreso_id, $concepto_gasto_id, $tipo_default);
+// Convertir vacíos a null
+$concepto_ingreso_id = $concepto_ingreso_id !== "" ? intval($concepto_ingreso_id) : null;
+$concepto_gasto_id = $concepto_gasto_id !== "" ? intval($concepto_gasto_id) : null;
+
+// Preparar SQL con NULL usando VALUES(?) si hace falta
+$stmt = $conn->prepare("INSERT INTO predeterminados (user_id, concepto_ingreso_id, concepto_gasto_id, tipo_default)
+        VALUES (?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE 
+            concepto_ingreso_id = VALUES(concepto_ingreso_id),
+            concepto_gasto_id = VALUES(concepto_gasto_id),
+            tipo_default = VALUES(tipo_default)");
+
+// bind_param necesita saber qué tipo de dato es
+// Si alguno es null, debemos usar call_user_func_array para pasarlo como referencia con tipo "s" y NULL
+$types = 'i' . ($concepto_ingreso_id === null ? 's' : 'i') . ($concepto_gasto_id === null ? 's' : 'i') . 's';
+$params = [
+    &$user_id,
+    &$concepto_ingreso_id,
+    &$concepto_gasto_id,
+    &$tipo_default
+];
+
+// Si algún valor es null, lo convertimos a PHP NULL literal
+foreach ($params as &$p) {
+    if ($p === '') $p = null;
+}
+
+// Ejecutar con bind dinámico
+call_user_func_array([$stmt, 'bind_param'], array_merge([$types], $params));
 
 
 if (!$stmt->execute()) {
