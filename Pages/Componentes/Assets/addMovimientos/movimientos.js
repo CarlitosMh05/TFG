@@ -708,7 +708,11 @@ $(document).ready(function ()
                   $error.text(resp.alredyExists||'Esta etiqueta ya existe').show();
 
                 }
+                else
+                {
                 $error.text(resp.error||'Error al crear').show();
+
+                }
               }
             }, 'json')
             .fail(()=>{
