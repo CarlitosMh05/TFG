@@ -1022,6 +1022,11 @@ function cargarOpcionesPredeterminadas() {
       $('#tipoMovimientoDisplay').text(capitalizado).data('tipo', resp.tipo_default);
     }
 
+    // Etiquetas predeterminadas
+etiquetasPredSeleccionadas = (resp.etiquetas || []).map(et => et.nombre);
+renderPredChips();
+updatePredDropdown();
+
     // -------- BÚSQUEDAS EN DROPDOWNS --------
     $(document).off('input.busquedasPred').on('input.busquedasPred', '.search-input', function () {
       const $input = $(this);
