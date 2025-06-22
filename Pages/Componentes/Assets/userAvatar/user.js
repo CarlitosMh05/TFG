@@ -959,6 +959,24 @@ function cargarOpcionesPredeterminadas() {
     });
   });
 
+  // Búsqueda en conceptos ingreso
+$('#predConceptoIngresoOptions').off('input', '.ingreso-search').on('input', '.ingreso-search', function () {
+  const q = this.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  $('#predConceptoIngresoOptions li[data-id]').each(function () {
+    const txt = $(this).text().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    $(this).toggle(txt.includes(q));
+  });
+});
+
+// Búsqueda en conceptos gasto
+$('#predConceptoGastoOptions').off('input', '.gasto-search').on('input', '.gasto-search', function () {
+  const q = this.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  $('#predConceptoGastoOptions li[data-id]').each(function () {
+    const txt = $(this).text().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    $(this).toggle(txt.includes(q));
+  });
+});
+
   // Paso 3: Fetch etiquetas
   $.getJSON('../Componentes/Assets/fetchOptions.php', function (data) {
     etiquetasTotales = data.etiquetas || [];
