@@ -994,6 +994,8 @@ function cargarOpcionesPredeterminadas() {
     }
   }
 
+  renderPredChips();
+
   // Actualizar el dropdown
   function updatePredDropdown() {
     predEtiquetaOptions.empty();
