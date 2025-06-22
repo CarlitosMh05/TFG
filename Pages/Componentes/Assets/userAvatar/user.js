@@ -1321,12 +1321,15 @@ $('#guardarPredeterminadosBtn').on('click', function() {
   .filter(et => etiquetasPredSeleccionadas.includes(et.nombre))
   .map(et => et.id);
 
-  const data = {
-    concepto_ingreso_id: $('#predConceptoIngresoDisplay').data('id') || null,
-    concepto_gasto_id: $('#predConceptoGastoDisplay').data('id') || null,
-    tipo_default: $('#tipoMovimientoDefault').val(),
-    etiquetas: etiquetas
-  };
+  const ingresoId = $('#predConceptoIngresoDisplay').data('id');
+const gastoId = $('#predConceptoGastoDisplay').data('id');
+
+const data = {
+  concepto_ingreso_id: ingresoId === "" ? null : ingresoId,
+  concepto_gasto_id: gastoId === "" ? null : gastoId,
+  tipo_default: $('#tipoMovimientoDefault').val(),
+  etiquetas: etiquetas
+};
   console.log(data);
   $.post('../Componentes/Assets/userAvatar/savePredeterminados.php', data, function(resp) {
     if (resp.success) {
