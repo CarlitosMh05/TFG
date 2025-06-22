@@ -931,6 +931,7 @@ function cargarOpcionesPredeterminadas() {
         </div>
       </li>
     `);
+    lucide.createIcons();
     conceptosIngreso.forEach(c => {
       $ul.append(`<li data-id="${c.id}">${c.nombre}</li>`);
     });
