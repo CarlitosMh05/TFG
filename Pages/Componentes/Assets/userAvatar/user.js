@@ -975,99 +975,131 @@ function cargarOpcionesPredeterminadas() {
   });
 
   
-  let etiquetasOriginalesPred = [];
-  let etiquetasSeleccionadasPred = [];
+  // VARIABLES Y REFERENCIAS PARA LA PARTE DE PREDICCIONES
+  const predChipsContainer = $('#predChipsContainer');
+  const predEtiquetaOptions = $('#predEtiquetaOptions');
+  const predEtiquetaDisplay = $('#predEtiquetaDisplay');
+  let etiquetasPredSeleccionadas = [];
 
-  const $predDisplay = $('#predEtiquetaDisplay');
-  const $predOptions = $('#predEtiquetaOptions');
-  const $predChips = $('#predChipsContainer');
-  const $predContainer = $predDisplay.closest('.input-container');
+  // Renderizar chips
+  function renderPredChips() {
+    predChipsContainer.empty();
 
-  // Renderizar etiquetas seleccionadas como chips
-  function renderChipsPred() {
-    $predChips.empty();
-
-    etiquetasSeleccionadasPred.forEach(et => {
+    etiquetasPredSeleccionadas.forEach(etiqueta => {
       const chip = $(`
-        <div class="chip" data-id="${et.id}">
-          ${et.nombre}
+        <div class="chip" data-value="${etiqueta}">
+          ${etiqueta}
           <button class="remove-chip" title="Eliminar etiqueta">×</button>
         </div>
       `);
-      $predChips.append(chip);
-    });
-  }
-
-  // Rellenar el dropdown con etiquetas disponibles
-  function updateDropdownPred() {
-    $predOptions.empty();
-
-    const disponibles = etiquetasOriginalesPred.filter(
-      et => !etiquetasSeleccionadasPred.some(sel => sel.id === et.id)
-    );
-
-    disponibles.forEach(et => {
-      $predOptions.append(`<li data-id="${et.id}">${et.nombre}</li>`);
+      predChipsContainer.append(chip);
     });
 
-    // Añadir opción "Sin etiqueta"
-    if (!etiquetasSeleccionadasPred.some(et => et.id === null)) {
-      $predOptions.prepend(`<li data-id="">Sin etiqueta</li>`);
+    updatePredCompactHeight();
+
+    if (etiquetasPredSeleccionadas.length < 5) {
+      predEtiquetaOptions.find('li.add-new').show();
+      predEtiquetaOptions.find('.search-input').prop('disabled', false);
     }
   }
 
-  // Abrir/cerrar el menú de etiquetas
-  $predDisplay.on('click', function () {
-    $predOptions.fadeToggle(150);
-    $predDisplay.toggleClass('open');
+  // Actualizar el dropdown
+  function updatePredDropdown() {
+    predEtiquetaOptions.empty();
 
-    const label = $predContainer.find('label');
-    label.css('color', $predDisplay.hasClass('open') ? 'var(--azulPrimario)' : 'gray');
+    // Search bar
+    predEtiquetaOptions.append(`
+      <li class="search-item">
+        <div class="input-container search-container">
+          <input type="text" class="search-input" placeholder=" ">
+          <label style="left: 33px; color: black !important;">Buscar etiqueta…</label>
+          <i data-lucide="search" class="search-icon"></i>
+        </div>
+      </li>
+    `);
+    lucide.createIcons();
+
+    const disponibles = (etiquetasOriginales || []).filter(et => !etiquetasPredSeleccionadas.includes(et.nombre));
+
+    disponibles.forEach(et => {
+      predEtiquetaOptions.append(`<li data-value="${et.nombre}">${et.nombre}</li>`);
+    });
+
+    predEtiquetaOptions.append(`<li class="add-new" data-type="etiqueta">+ Añadir etiqueta</li>`);
+  }
+
+  // Actualizar altura
+  function updatePredCompactHeight() {
+    const isSingleLine = predChipsContainer.height() <= 30;
+    const container = predEtiquetaDisplay.closest('.input-container');
+    if (isSingleLine && etiquetasPredSeleccionadas.length > 0) {
+      container.addClass('compact');
+    } else {
+      container.removeClass('compact');
+    }
+  }
+
+  // Mostrar opciones
+  predEtiquetaDisplay.on('click', function () {
+    const isOpen = $(this).hasClass('open');
+    predEtiquetaOptions.fadeToggle(150);
+    predEtiquetaDisplay.toggleClass('open');
+
+    const label = $(this).closest('.input-container').find('label');
+    if (isOpen) {
+      label.css('color', 'gray');
+    } else {
+      label.css('color', 'var(--azulPrimario)');
+    }
   });
 
-  // Seleccionar una etiqueta
-  $predOptions.off('click', 'li[data-id]')
-    .on('click', 'li[data-id]', function () {
-      const id = $(this).data('id');
-      const nombre = $(this).text();
+  // Seleccionar etiqueta
+  predEtiquetaOptions.off('click', 'li')
+    .on('click', 'li[data-value]', function () {
+      const value = $(this).attr('data-value');
 
-      if (etiquetasSeleccionadasPred.length >= 5) {
-        if ($predContainer.find('.error-limit').length === 0) {
+      if (etiquetasPredSeleccionadas.length >= 5) {
+        const container = predEtiquetaDisplay.closest('.input-container');
+        if (container.find('.error-limit').length === 0) {
           const $msg = $('<div class="error-limit" style="color: red; margin: 5px 0;" >Máximo 5 etiquetas</div>');
-          $predContainer.append($msg);
+          container.append($msg);
           setTimeout(() => $msg.fadeOut(300, () => $msg.remove()), 2000);
         }
         return;
       }
 
-      if (!etiquetasSeleccionadasPred.some(et => et.id == id)) {
-        etiquetasSeleccionadasPred.push({ id, nombre });
-        renderChipsPred();
-        updateDropdownPred();
-
-        $predOptions.fadeOut(150);
-        $predDisplay.removeClass('open');
-        $predContainer.find('label').css('color', 'gray');
+      if (!etiquetasPredSeleccionadas.includes(value)) {
+        etiquetasPredSeleccionadas.push(value);
+        renderPredChips();
+        updatePredDropdown();
+        predEtiquetaOptions.fadeOut(150);
+        predEtiquetaDisplay.removeClass('open');
       }
+
+      predEtiquetaDisplay.closest('.input-container').find('label').css('color', 'gray');
     });
 
   // Eliminar chip
-  $predChips.on('click', '.remove-chip', function (e) {
-    e.stopPropagation(); // evitar conflicto con toggle del display
-    const id = $(this).closest('.chip').data('id');
-    etiquetasSeleccionadasPred = etiquetasSeleccionadasPred.filter(et => et.id != id);
-    renderChipsPred();
-    updateDropdownPred();
+  predChipsContainer.on('click', '.chip', function () {
+    const value = $(this).attr('data-value');
+    etiquetasPredSeleccionadas = etiquetasPredSeleccionadas.filter(et => et !== value);
+    renderPredChips();
+    updatePredDropdown();
   });
 
   // Cerrar menú si haces clic fuera
   $(document).on('click', function (e) {
-    if (!$(e.target).closest('#predEtiquetaDisplay, #predEtiquetaOptions').length) {
-      $predOptions.fadeOut(150);
-      $predDisplay.removeClass('open');
-      $predContainer.find('label').css('color', 'gray');
+    if (!$(e.target).closest('.etiqueta-dropdown').length) {
+      predEtiquetaOptions.fadeOut(150);
+      predEtiquetaDisplay.removeClass('open');
+      predEtiquetaDisplay.closest('.input-container').find('label').css('color', 'gray');
     }
   });
+
+  // Inicializar
+  renderPredChips();
+  updatePredDropdown();
+
 }
 
 // Ejecutar al entrar en la sección
