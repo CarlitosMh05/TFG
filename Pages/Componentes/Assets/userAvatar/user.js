@@ -953,7 +953,7 @@ function cargarOpcionesPredeterminadas() {
     lucide.createIcons();
 
     etiquetasTotales.forEach(et => {
-      $ul.append(`<li data-value="${et.id}">bakaaaaaa</li>`);
+      $ul.append(`<li data-value="${et.id}">${et.nombre}</li>`);
     });
 
     
