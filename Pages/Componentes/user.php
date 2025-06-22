@@ -85,48 +85,48 @@
         <li data-section="predeterminados">Predeterminados</li>
 
         <div class="section-content" data-section="predeterminados">
-        <h3>Predeterminados</h3>
+            <h3>Predeterminados</h3>
 
-        <div class="conceptos-cols">
+            <div class="conceptos-cols">
+                <div class="conceptos-col">
+                <div class="conceptos-title">Concepto Ingreso</div>
+                <div class="input-container concepto-dropdown">
+                    <div id="predConceptoIngresoDisplay" class="concepto-display">Seleccionar concepto</div>
+                    <ul id="predConceptoIngresoOptions" class="concepto-options"></ul>
+                </div>
+                </div>
+                <div class="conceptos-col">
+                <div class="conceptos-title">Concepto Gasto</div>
+                <div class="input-container concepto-dropdown">
+                    <div id="predConceptoGastoDisplay" class="concepto-display">Seleccionar concepto</div>
+                    <ul id="predConceptoGastoOptions" class="concepto-options"></ul>
+                </div>
+                </div>
+            </div>
+
             <div class="conceptos-col">
-            <div class="conceptos-title">Concepto Ingreso</div>
-            <div class="input-container concepto-dropdown">
-                <div id="predConceptoIngresoDisplay" class="concepto-display">Seleccionar concepto</div>
-                <ul id="predConceptoIngresoOptions" class="concepto-options"></ul>
+                <div class="conceptos-title">Etiquetas</div>
+                <div class="input-container etiqueta-dropdown">
+                <div id="predEtiquetaDisplay" class="etiqueta-display">Seleccionar etiquetas</div>
+                <ul id="predEtiquetaOptions" class="etiqueta-options"></ul>
+                </div>
+                <div id="predChipsContainer" class="chips-container"></div>
             </div>
-            </div>
+
             <div class="conceptos-col">
-            <div class="conceptos-title">Concepto Gasto</div>
-            <div class="input-container concepto-dropdown">
-                <div id="predConceptoGastoDisplay" class="concepto-display">Seleccionar concepto</div>
-                <ul id="predConceptoGastoOptions" class="concepto-options"></ul>
+                <div class="conceptos-title">Ingresos / Gasto</div>
+                <div class="input-container">
+                <select id="tipoMovimientoDefault">
+                    <option value="ingreso">Ingreso</option>
+                    <option value="gasto">Gasto</option>
+                </select>
+                <p style="font-size: 13px; color: gray; margin-top: 6px;">
+                    Si eliges la opción de Ingreso, se activará por defecto la selección de Ingreso al añadir un movimiento.
+                </p>
+                </div>
             </div>
-            </div>
-        </div>
 
-        <div class="conceptos-col">
-            <div class="conceptos-title">Etiquetas</div>
-            <div class="input-container etiqueta-dropdown">
-            <div id="predEtiquetaDisplay" class="etiqueta-display">Seleccionar etiquetas</div>
-            <ul id="predEtiquetaOptions" class="etiqueta-options"></ul>
-            </div>
-            <div id="predChipsContainer" class="chips-container"></div>
-        </div>
-
-        <div class="conceptos-col">
-            <div class="conceptos-title">Ingresos / Gasto</div>
-            <div class="input-container">
-            <select id="tipoMovimientoDefault">
-                <option value="ingreso">Ingreso</option>
-                <option value="gasto">Gasto</option>
-            </select>
-            <p style="font-size: 13px; color: gray; margin-top: 6px;">
-                Si eliges la opción de Ingreso, se activará por defecto la selección de Ingreso al añadir un movimiento.
-            </p>
-            </div>
-        </div>
-
-        <button id="guardarPredeterminadosBtn" class="concepto-add-btn" style="margin-top: 20px;">Guardar preferencias</button>
+            <button id="guardarPredeterminadosBtn" class="concepto-add-btn" style="margin-top: 20px;">Guardar preferencias</button>
         </div>
 
         <div data-section="usuario" class="section-content">
