@@ -908,7 +908,7 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 
 
 //Funciones de pestaña de Predeterminados
-
+let etiquetasTotales = [];
 function cargarOpcionesPredeterminadas() {
   $('#predEtiquetaDisplay').off('click');
   $(document).off('mousedown.predEtiqueta');
@@ -916,7 +916,7 @@ function cargarOpcionesPredeterminadas() {
   $('#predChipsContainer').off('click', '.chip');
   let conceptosIngreso = [];
   let conceptosGasto = [];
-  let etiquetasTotales = [];
+  
 
   // Paso 1: Fetch conceptos ingreso
   $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=ingreso', function (data) {
