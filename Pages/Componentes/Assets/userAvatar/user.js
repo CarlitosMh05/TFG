@@ -1084,7 +1084,7 @@ function cargarOpcionesPredeterminadas() {
   // Seleccionar etiqueta
   predEtiquetaOptions.off('click', 'li')
     .on('click', 'li[data-value]', function () {
-      const value = $(this).attr('data-value');
+      const value = $(this).html;
 
       if (etiquetasPredSeleccionadas.length >= 5) {
         const container = predEtiquetaDisplay.closest('.input-container');
