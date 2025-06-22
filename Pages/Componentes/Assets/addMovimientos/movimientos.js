@@ -65,14 +65,16 @@ $(document).ready(function ()
           etiquetasSeleccionadas = etiquetasPred.map(et => et.nombre);
           renderChips();
           updateDropdown();
+
+          overlay.style.display = "block";
+    modal.style.display = "block";
+    document.body.classList.add("modal-open");
         });
       }
     });
 
 
-    overlay.style.display = "block";
-    modal.style.display = "block";
-    document.body.classList.add("modal-open");
+    
   });
 
   // Solo cerrar si se hace clic fuera del modal
