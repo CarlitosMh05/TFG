@@ -953,7 +953,7 @@ function cargarOpcionesPredeterminadas() {
     lucide.createIcons();
 
     etiquetasTotales.forEach(et => {
-      $ul.append(`<li data-value="${et.id}">${et.nombre}</li>`);
+      $ul.append(`<li data-value="${et.nombre}" data-id="${et.id}">${et.nombre}</li>`);
     });
 
     
@@ -1084,7 +1084,7 @@ function cargarOpcionesPredeterminadas() {
   // Seleccionar etiqueta
   predEtiquetaOptions.off('click', 'li')
     .on('click', 'li[data-value]', function () {
-      const value = $(this).html;
+      const value = $(this).attr('data-value');
 
       if (etiquetasPredSeleccionadas.length >= 5) {
         const container = predEtiquetaDisplay.closest('.input-container');
