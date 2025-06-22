@@ -504,7 +504,7 @@ $(document).ready(function ()
     `);
       lucide.createIcons();
 
-    const disponibles = (etiquetasOriginales || []).filter(et => !etiquetasSeleccionadas.includes(et));
+    const disponibles = (etiquetasOriginales || []).filter(et => !etiquetasSeleccionadas.includes(et.nombre));
 
     disponibles.forEach(et => {
       etiquetaOptions.append(`<li data-value="${et.nombre}">${et.nombre}</li>`);
