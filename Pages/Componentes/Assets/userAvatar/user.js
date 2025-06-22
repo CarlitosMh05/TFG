@@ -1023,9 +1023,9 @@ function cargarOpcionesPredeterminadas() {
     }
 
     // Etiquetas predeterminadas
-etiquetasPredSeleccionadas = (resp.etiquetas || []).map(et => et.nombre);
-renderPredChips();
-updatePredDropdown();
+    etiquetasPredSeleccionadas = (resp.etiquetas || []).map(et => et.nombre);
+    renderPredChips();
+    updatePredDropdown();
 
     // -------- BÚSQUEDAS EN DROPDOWNS --------
     $(document).off('input.busquedasPred').on('input.busquedasPred', '.search-input', function () {
