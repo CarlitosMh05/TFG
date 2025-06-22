@@ -111,9 +111,9 @@
                             <li data-value="ingreso">Ingreso</li>
                         </ul>
                     </div>
-                <p style="font-size: 13px; color: gray; margin-top: 6px;">
-                    Si eliges la opción de Ingreso, se activará por defecto la selección de Ingreso al añadir un movimiento.
-                </p>
+                    <p style="font-size: 13px; color: gray; margin-top: 6px;">
+                        Si eliges la opción de Ingreso, se activará por defecto la selección de Ingreso al añadir un movimiento.
+                    </p>
                 </div>
             </div>
 
