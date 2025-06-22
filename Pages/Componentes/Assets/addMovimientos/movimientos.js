@@ -22,10 +22,11 @@ $(document).ready(function ()
 
   /*Cargar las opciones y aparecer el modal al hacer click */
   addBtn.addEventListener("click", () => {
-    
+
     // 1. Obtener predeterminados del usuario
     $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', resp => {
       if (resp.success) {
+        
         const ingreso = resp.concepto_ingreso_id;
         const gasto = resp.concepto_gasto_id;
         const etiquetasPred = resp.etiquetas || [];
