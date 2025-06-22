@@ -912,6 +912,7 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 function cargarPredeterminados() {
     // Cargar conceptos y etiquetas
   $.getJSON('../Componentes/Assets/fetchOptions.php', function(data) {
+    console.log(data)
     // Ingreso
     let ingreso = data.conceptos.filter(c => c.es_ingreso);
     let gasto = data.conceptos.filter(c => !c.es_ingreso);
