@@ -239,11 +239,10 @@ window.reiniciarYcargar = function(scrollToY = null) {
   totalMovsMostrados = 0;
   window.cargarMovimientos();
 
-   if (scrollToY !== null) 
-  {
-    
-    window.scrollTo(0, scrollToY);
-    
+   if (scrollToY !== null) {
+    setTimeout(() => {
+      window.scrollTo(0, scrollToY);
+    }, 10); // Ajusta el delay si es necesario
   }
 };
 
