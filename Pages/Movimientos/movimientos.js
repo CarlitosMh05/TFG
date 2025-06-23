@@ -239,9 +239,10 @@ window.reiniciarYcargar = function(scrollToY = null) {
   totalMovsMostrados = 0;
   window.cargarMovimientos();
 
-   if (scrollToY !== null) {
+   if (scrollToY !== null) 
+  {
     
-      window.scrollTo(0, scrollToY);
+    window.scrollTo(0, scrollToY);
     
   }
 };
