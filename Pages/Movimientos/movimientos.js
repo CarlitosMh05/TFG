@@ -241,7 +241,7 @@ window.reiniciarYcargar = function(scrollToY = null) {
 
    if (scrollToY !== null) {
     setTimeout(() => {
-      window.scrollTo(0, scrollToY);
+      window.scrollTo(scrollToY);
     }, 300); // Ajusta el delay si es necesario
   }
 };
