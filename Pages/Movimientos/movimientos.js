@@ -242,7 +242,7 @@ window.reiniciarYcargar = function(scrollToY = null) {
    if (scrollToY !== null) {
     setTimeout(() => {
       window.scrollTo(0, scrollToY);
-    }, 10); // Ajusta el delay si es necesario
+    }, 300); // Ajusta el delay si es necesario
   }
 };
 
