@@ -238,6 +238,12 @@ window.reiniciarYcargar = function() {
   fechasOrdenadas = [];
   totalMovsMostrados = 0;
   window.cargarMovimientos();
+
+   if (scrollToY !== null) {
+    setTimeout(() => {
+      window.scrollTo(0, scrollToY);
+    }, 300); // Ajusta el delay si es necesario
+  }
 };
 
 $(function () {
@@ -879,6 +885,8 @@ $(function () {
           if (response.success) {
             showSuccessMessage('Movimiento actualizado correctamente');
             // Recargar solo esa fila o toda la tabla, como prefieras:
+            const scrollY = window.scrollY;
+
             window.reiniciarYcargar();
             movimientoEditandoId = null;
           } 
