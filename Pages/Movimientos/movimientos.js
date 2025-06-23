@@ -887,7 +887,7 @@ $(function () {
             // Recargar solo esa fila o toda la tabla, como prefieras:
             const scrollY = window.scrollY;
 
-            window.reiniciarYcargar();
+            window.reiniciarYcargar(scrollY);
             movimientoEditandoId = null;
           } 
           else if (response.noMovFind) {
