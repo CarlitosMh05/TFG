@@ -240,9 +240,7 @@ window.reiniciarYcargar = function(scrollToY = null) {
   window.cargarMovimientos();
 
    if (scrollToY !== null) {
-    setTimeout(() => {
       window.scrollTo(scrollToY);
-    }, 300); // Ajusta el delay si es necesario
   }
 };
 
