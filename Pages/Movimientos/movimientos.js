@@ -228,7 +228,7 @@ if (movimientoEditandoId !== null) {
 }
 
 
-window.reiniciarYcargar = function() {
+window.reiniciarYcargar = function(scrollToY = null) {
 
   $('#movimientosList').empty();  
   offset = 0;
