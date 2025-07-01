@@ -1,7 +1,7 @@
 /*Modal usuario*/
 
 .user-avatar {
-  position: absolute;
+  position: fixed;
   right: 25px;
   top: 25px;
   cursor: pointer;
