@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
       hamburgerBtn.style.position = "fixed";
     } else {
       document.body.style.overflow = '';
-      hamburgerBtn.style.position = "absolute";
+      hamburgerBtn.style.position = "fixed";
     }
   });
 
