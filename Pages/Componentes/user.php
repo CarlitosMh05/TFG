@@ -1,4 +1,4 @@
-<div class="user-avatar" id="userAvatarBtn" title="Perfil">
+<div class="user-avatar show-on-scroll" id="userAvatarBtn" title="Perfil">
     <!-- Icono de usuario SVG -->
     <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
         <circle cx="19" cy="19" r="19" fill="#e4e8f1"/>
