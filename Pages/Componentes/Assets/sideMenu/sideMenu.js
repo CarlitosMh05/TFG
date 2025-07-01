@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
       sidebar.classList.remove('open');
       sideOverlay.classList.remove('active');
       document.body.style.overflow = '';
-      hamburgerBtn.style.position = "absolute";
+      hamburgerBtn.style.position = "fixed";
     });
   });
 
