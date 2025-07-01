@@ -47,8 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   let lastScrollTop = 0;
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const userAvatar = document.querySelector('.user-avatar');
+  const userAvatar = document.querySelector('.user-avatar');
 
 window.addEventListener('scroll', () => {
   const currentScroll = window.scrollY;
