@@ -492,7 +492,7 @@ window.updateCharts = function updateCharts() {
             for (let i = 0; i < 7; i++) {
               const d = new Date(startDate);
               d.setDate(startDate.getDate() + i);
-              const key = d.toISOString().split('T')[0];
+              const key = d.toLocaleDateString('sv-SE');
               labels.push(d.toLocaleDateString('es-ES', { weekday: 'short' }));
               values.push(trendMap[key] ?? null);
             }
@@ -500,7 +500,7 @@ window.updateCharts = function updateCharts() {
           case 'mensual':
             for (let d = 1; d <= endDate.getDate(); d++) {
               const realDate = new Date(startDate.getFullYear(), startDate.getMonth(), d);
-              const key = realDate.toISOString().split('T')[0];
+              const key = realDate.toLocaleDateString('sv-SE');
               labels.push(d.toString());
               values.push(trendMap[key] ?? null);
             }
