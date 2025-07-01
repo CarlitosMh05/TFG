@@ -903,6 +903,26 @@ $('[data-section="usuario"]').on('section:show', cargarDatosUsuario);
 
   // Llama a cargarDropdownEtiquetas() al iniciar
   cargarDropdownEtiquetas();
+
+  let lastScrollTop = 0;
+  const userAvatar = document.querySelector('.user-avatar');
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > lastScrollTop) {
+      // Scroll down → ocultar
+      userAvatar?.classList.remove('show-on-scroll');
+      userAvatar?.classList.add('hide-on-scroll');
+    } else {
+      // Scroll up → mostrar
+      userAvatar?.classList.add('show-on-scroll');
+      userAvatar?.classList.remove('hide-on-scroll');
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
 });
 
 
