@@ -116,6 +116,22 @@
   color: var(--azulPrimario, #3B77D1);
 }
 
+/* Animaciones de entrada y salida */
+.hide-on-scroll {
+  opacity: 0;
+  transform: translateY(-80%);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.show-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+
 /* RESPONSIVE: Si quieres ocultar en móvil, opcional */
 @media (max-width: 600px) {
   .sidebar { width: 88vw; padding-top: 50px; border-radius: 0 20px 20px 0; }
