@@ -1,5 +1,5 @@
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
-<button class="hamburger-btn" id="hamburgerBtn" aria-label="Menú">
+<button class="hamburger-btn show-on-scroll" id="hamburgerBtn" aria-label="Menú">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
