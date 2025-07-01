@@ -105,7 +105,40 @@ if ($etiquetas !== '') {
     }
 }
 
-// 7. Devolver respuesta OK
-echo json_encode(['success' => true]);
+// 7. Obtener el movimiento actualizado
+$stmt = $conn->prepare("
+  SELECT m.id, m.cantidad, m.moneda, c.nombre AS concepto, m.observaciones, m.imagen
+  FROM movimientos m
+  INNER JOIN conceptos c ON m.concepto_id = c.id
+  WHERE m.id = ? AND m.user_id = ?
+");
+$stmt->bind_param('ii', $id, $uid);
+$stmt->execute();
+$result = $stmt->get_result();
+$movimiento = $result->fetch_assoc();
+
+// 8. Obtener las etiquetas asociadas
+$stmt = $conn->prepare("
+  SELECT e.nombre 
+  FROM movimiento_etiqueta me
+  INNER JOIN etiquetas e ON me.etiqueta_id = e.id
+  WHERE me.movimiento_id = ?
+");
+$stmt->bind_param('i', $id);
+$stmt->execute();
+$res = $stmt->get_result();
+$etiquetas = [];
+while ($row = $res->fetch_assoc()) {
+    $etiquetas[] = ['nombre' => $row['nombre']];
+}
+
+// Añadir etiquetas al movimiento
+$movimiento['etiquetas'] = $etiquetas;
+
+// 9. Enviar todo como respuesta
+echo json_encode([
+    'success' => true,
+    'movimiento' => $movimiento
+]);
 exit;
 ?>
