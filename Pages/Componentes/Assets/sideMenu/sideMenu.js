@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   let lastScrollTop = 0;
-  const userAvatar = document.querySelector('.user-avatar');
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.scrollY;
@@ -57,15 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
       hamburgerBtn?.classList.remove('show-on-scroll');
       hamburgerBtn?.classList.add('hide-on-scroll');
 
-      userAvatar?.classList.remove('show-on-scroll');
-      userAvatar?.classList.add('hide-on-scroll');
+      
     } else {
       // Scroll up → mostrar
       hamburgerBtn?.classList.add('show-on-scroll');
       hamburgerBtn?.classList.remove('hide-on-scroll');
 
-      userAvatar?.classList.add('show-on-scroll');
-      userAvatar?.classList.remove('hide-on-scroll');
+      
     }
 
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
