@@ -379,8 +379,8 @@ window.updateCharts = function updateCharts() {
   if (prevBtn) prevBtn.disabled = false;
   if (nextBtn) nextBtn.disabled = false;
   
-  const startStr = startDate.toISOString().split('T')[0];
-  const endStr   = endDate.toISOString().split('T')[0];
+  const startStr = startDate.toLocaleDateString('sv-SE');
+  const endStr   = endDate.toLocaleDateString('sv-SE');
   document.getElementById('currentMonthText').textContent = currentTitle;
 
   $.getJSON(
