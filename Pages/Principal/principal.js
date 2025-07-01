@@ -471,7 +471,7 @@ window.updateCharts = function updateCharts() {
         let d = new Date(customStartDate);
         let count = 0;
         while (d <= customEndDate && count < numMaximoDias) {
-          const key = d.toISOString().split('T')[0];
+          const key = d.toLocaleDateString('sv-SE');
           labels.push(d.toLocaleDateString('es-ES', { day: 'numeric', month: 'numeric' }));
           values.push(trendMap[key] ?? null);
           d.setDate(d.getDate() + 1);
