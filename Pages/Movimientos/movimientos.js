@@ -880,24 +880,39 @@ $(function () {
         contentType: false,
         dataType: 'json',
         success(response) {
-          if (response.success) {
+          if (response.success && response.movimiento) {
             showSuccessMessage('Movimiento actualizado correctamente');
-            // Recargar solo esa fila o toda la tabla, como prefieras:
-            const scrollY = window.scrollY;
+            const updatedMov = response.movimiento;
 
-            window.reiniciarYcargar(scrollY);
+            // 1. Reemplazar datos en allMovimientosPorDia
+            for (const fecha of Object.keys(allMovimientosPorDia)) {
+              const idx = allMovimientosPorDia[fecha].findIndex(m => m.id == updatedMov.id);
+              if (idx !== -1) {
+                allMovimientosPorDia[fecha][idx] = updatedMov;
+
+                // 2. Actualizar la fila visualmente
+                const $row = $(`.movimiento-row[data-id="${updatedMov.id}"]`);
+                $row.replaceWith(generarFilaMovimiento(updatedMov));
+
+                // 3. Actualizar resumen diario
+                let totalDia = allMovimientosPorDia[fecha].reduce((acc, m) => acc + parseFloat(m.cantidad), 0);
+                const resumenColor = totalDia > 0 ? 'positivo' : (totalDia < 0 ? 'negativo' : 'cero');
+                const resumenTxt = (totalDia > 0 ? '+' : (totalDia < 0 ? '-' : '')) +
+                  Math.abs(totalDia).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+                $(`.movimientos-dia[data-fecha="${fecha}"] .mov-dia-cantidad`)
+                  .removeClass('positivo negativo cero')
+                  .addClass(resumenColor)
+                  .text(resumenTxt);
+
+                break;
+              }
+            }
+
             movimientoEditandoId = null;
-          } 
-          else if (response.noMovFind) {
-            showFailMessage(response.noMovFind);
-          } else if (response.noValidConcept) {
-            showFailMessage(response.noValidConcept);
-          } else if (response.badImageTipe) {
-            showFailMessage(response.badImageTipe);
-          } else if (response.errorUploadingImage) {
-            showFailMessage(response.errorUploadingImage);
-          } else if (response.noActualization) {
-            showFailMessage(response.noActualization);
+            $('.editar-mov-btn').show(); // restaurar botones
+            lucide.createIcons(); // actualizar iconos
+          } else {
+            showFailMessage(response.error || 'Error al actualizar');
           }
         },
         error(xhr, status, error) {
