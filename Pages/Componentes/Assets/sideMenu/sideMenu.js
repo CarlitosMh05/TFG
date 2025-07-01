@@ -44,4 +44,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ICONS (Lucide)
   if (window.lucide) lucide.createIcons();
+
+
+  let lastScrollTop = 0;
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const userAvatar = document.querySelector('.user-avatar');
+
+window.addEventListener('scroll', () => {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll > lastScrollTop) {
+    // Scroll down → ocultar
+    hamburgerBtn?.classList.remove('show-on-scroll');
+    hamburgerBtn?.classList.add('hide-on-scroll');
+
+    userAvatar?.classList.remove('show-on-scroll');
+    userAvatar?.classList.add('hide-on-scroll');
+  } else {
+    // Scroll up → mostrar
+    hamburgerBtn?.classList.add('show-on-scroll');
+    hamburgerBtn?.classList.remove('hide-on-scroll');
+
+    userAvatar?.classList.add('show-on-scroll');
+    userAvatar?.classList.remove('hide-on-scroll');
+  }
+
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+
 });
