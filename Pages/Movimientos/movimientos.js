@@ -917,6 +917,9 @@ $(function () {
 
                 break;
               }
+
+              $spinner.hide();
+              $row.find('.tick-editar-btn i').show();
             }
 
             movimientoEditandoId = null;
@@ -927,6 +930,8 @@ $(function () {
           }
         },
         error(xhr, status, error) {
+          $spinner.hide();
+          $row.find('.tick-editar-btn i').show();
           alert('Error AJAX: ' + error);
         }
       });
