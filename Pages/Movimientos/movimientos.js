@@ -1396,10 +1396,14 @@ $(function () {
       dataType: 'json',
       success: function (resp) {
         if (resp.success) {
+          $btn.find('.importar-texto').show();
+          $btn.find('.spinner-importar').hide();
+          $btn.prop('disabled', false);
           $('#modalImportar, #modalImportarOverlay').fadeOut(140);
           showSuccessMessage('¡Movimientos importados correctamente!');
           window.reiniciarYcargar && window.reiniciarYcargar();
            cargarFiltrosDropdownsCustom();
+           
         } else {
           showFailMessage(resp.error || 'Error al importar.');
         }
