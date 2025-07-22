@@ -851,6 +851,9 @@ $(function () {
 
   function confirmarEdicionFila($row, mov) {
     mostrarMiniModal('¿Seguro que quieres aplicar los cambios?', function(confirmado) {
+      const $spinner = $row.find('.spinner-confirmar');
+      $spinner.show();
+      $row.find('.tick-editar-btn i').hide();
       if (!confirmado) return;
       $row.removeClass('editando-responsive'); 
       // Recolectar los datos de los inputs
