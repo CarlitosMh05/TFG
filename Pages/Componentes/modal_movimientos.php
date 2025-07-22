@@ -145,7 +145,7 @@
     <!-- Subir imagen -->
     <div class="modal-file-upload">
       <input type="file" id="imagenCompra" name="imagenCompra" accept="image/*" hidden>
-      
+      <div id="imageLoadingSpinner" class="spinner" style="display: none;"></div>
       <!-- Label inicial -->
       <label for="imagenCompra" class="upload-label">Foto compra, ticket, factura... (Opcional)</label>
       
