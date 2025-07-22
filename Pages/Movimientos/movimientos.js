@@ -795,6 +795,9 @@ $(function () {
     $row.find('.input-imagen-editar').off('change').on('change', function(e) {
       const file = e.target.files[0];
       if (file && file.type.startsWith('image/')) {
+        const $spinner = $row.find('.spinner-editar');
+        $spinner.show();
+
         const reader = new FileReader();
         reader.onload = function(event) {
           $row.find('.upload-label').hide();
@@ -804,6 +807,7 @@ $(function () {
               <span class="remove-image" title="Eliminar imagen" style="position:absolute;top:2px;right:2px;">×</span>
             </div>
           `);
+          $spinner.hide();
           inicializarImagenEdicion($row, mov);
         };
         reader.readAsDataURL(file);
