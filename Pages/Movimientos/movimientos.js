@@ -27,6 +27,7 @@ window.cargarMovimientos = function() {
   if (cargando || noMasDatos) return;
   cargando = true;
   $('#movimientosList').append(loadingSpinner);
+  $('#noMovimientosMsg').hide(); 
 
   // Solo cargamos una vez TODOS los movimientos (sin paginación backend)
   if (Object.keys(allMovimientosPorDia).length === 0) {
