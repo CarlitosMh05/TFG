@@ -13,7 +13,7 @@ let loadingSpinner = $(`
     <div style="font-size: 1.8rem; color: #3B77D1; font-weight: 600; margin-bottom: 25px;">
       Cargando movimientos...
     </div>
-    <div class="spinner spinner-grande"></div>
+    <div class="spinner spinner-grande" style=" width: 48px; height: 48px;"></div>
   </div>
 `);
 let idsCargados = new Set();
