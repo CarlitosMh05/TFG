@@ -8,7 +8,14 @@ let filtros = {
   fecha_fin: ""
 };
 let offset = 0;
-let loadingSpinner = $('<div style="text-align:center;padding:30px;"><span>Cargando...</span></div>');
+let loadingSpinner = $(`
+  <div id="movimientosLoading" style="text-align:center; padding: 60px 20px;">
+    <div style="font-size: 1.8rem; color: #3B77D1; font-weight: 600; margin-bottom: 25px;">
+      Cargando movimientos...
+    </div>
+    <div class="spinner spinner-grande"></div>
+  </div>
+`);
 let idsCargados = new Set();
 let allMovimientosPorDia = {}; // { fecha: [todos los movimientos de ese día, en orden] }
 let mostradosPorDia = {};      // { fecha: cuántos se han mostrado ya }
