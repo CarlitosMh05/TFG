@@ -1304,8 +1304,6 @@ $(function () {
     // Solo cerrar si se hace click fuera de la imagen o en el botón
     if (e.target.id === 'modalImagenMovCerrar' || e.target.id === 'modalImagenMovimiento') {
       $('#modalImagenMovimiento').fadeOut(120);
-      $('#modalImagenMovImg').attr('src', '');
-      $('#modalImagenMovDescargar').attr('href', '#');
     }
   });
 
