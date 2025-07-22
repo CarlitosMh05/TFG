@@ -1500,7 +1500,7 @@ h1 {
 .spinner-grande {
   width: 48px;
   height: 48px;
-  border: 3px solid black !important;
+  border: 30px solid black !important;
   border-top: 30px solid transparent !important;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
