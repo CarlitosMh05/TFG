@@ -791,6 +791,7 @@ $(function () {
               $spinner.hide();
               inicializarImagenEdicion($row, mov); // Volver a enganchar el evento
             } else {
+              $spinner.hide();
               alert('No se pudo borrar la imagen.');
             }
           }, 'json');
