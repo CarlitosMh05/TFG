@@ -1488,7 +1488,7 @@ h1 {
   width: 24px;
   height: 24px;
   border: black;
-  border-top: black;
+  border-top: black solid 2px;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin: 0 auto;
