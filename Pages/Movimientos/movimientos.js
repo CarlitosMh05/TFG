@@ -1376,6 +1376,10 @@ $(function () {
   // Enviar importación AJAX
   $('#formImportarDatos').submit(function (e) {
     e.preventDefault();
+    const $btn = $('#btnImportarArchivo');
+    $btn.find('.importar-texto').hide();
+    $btn.find('.spinner-importar').show();
+    $btn.prop('disabled', true);
     if (!archivoImportar) {
       showFailMessage('Selecciona un archivo primero.');
       return;
