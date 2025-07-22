@@ -187,7 +187,10 @@ $uid = $_SESSION['user_id'];
         <div id="nombreArchivoImportar" style="margin-top: 8px; color:#222; font-size:0.98rem;"></div>
         <div style="text-align: right; margin-top: 28px;">
           <button type="button" class="admin-datos-cancel-btn" id="cancelImportarBtn">Cancelar</button>
-          <button type="submit" class="admin-datos-confirm-btn">Importar</button>
+          <button type="submit" class="admin-datos-confirm-btn" id="btnImportarArchivo" style="position: relative;">
+            <span class="importar-texto">Importar</span>
+            <div class="spinner spinner-importar" style="display:none; position:absolute; top:50%; right:16px; transform:translateY(-50%);"></div>
+          </button>
         </div>
       </form>
     </div>
