@@ -1381,6 +1381,9 @@ $(function () {
     $btn.find('.spinner-importar').show();
     $btn.prop('disabled', true);
     if (!archivoImportar) {
+      $btn.find('.importar-texto').show();
+        $btn.find('.spinner-importar').hide();
+        $btn.prop('disabled', false);
       showFailMessage('Selecciona un archivo primero.');
       return;
     }
