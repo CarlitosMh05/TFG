@@ -345,6 +345,7 @@ $(function () {
         `<div class="uploaded-preview" style="position:relative;">
           <img src="${mov.imagen}" alt="Imagen movimiento" class="img-editar">
           <span class="remove-image" title="Eliminar imagen" style="position:absolute;top:2px;right:2px;">×</span>
+          <div class="spinner spinner-borrar-imagen" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;"></div>
         </div>`
         :
         `<label class="upload-label" style="cursor:pointer;">
