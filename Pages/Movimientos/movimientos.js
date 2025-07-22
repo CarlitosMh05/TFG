@@ -1405,6 +1405,9 @@ $(function () {
            cargarFiltrosDropdownsCustom();
            
         } else {
+          $btn.find('.importar-texto').show();
+          $btn.find('.spinner-importar').hide();
+          $btn.prop('disabled', false);
           showFailMessage(resp.error || 'Error al importar.');
         }
         resetImportarModal();
