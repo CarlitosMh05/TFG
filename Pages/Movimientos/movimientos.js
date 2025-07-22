@@ -1237,10 +1237,15 @@ $(function () {
     $btn.prop('disabled', true);
     $.post('../Principal/deleteMovimiento.php', { id: movimientoAEliminar }, function (resp) {
       if (resp.success) {
+        $btn.find('i').show();
+        $btn.find('.spinner-eliminar').hide();
+        $btn.prop('disabled', false);
         showSuccessMessage('Movimiento eliminado');
         $('#miniModalDeleteOverlay, #miniModalDelete').fadeOut(120);
         window.reiniciarYcargar();
       } else {
+        $btn.find('.spinner-eliminar').hide();
+        $btn.prop('disabled', false);
         $('#miniModalDeleteError').text(resp.error || 'No se pudo eliminar').show();
       }
     }, 'json');
