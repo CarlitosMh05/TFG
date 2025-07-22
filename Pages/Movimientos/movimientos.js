@@ -965,15 +965,47 @@ $(function () {
 
   function eliminarMovimiento(movId) {
     $.ajax({
-      url: 'deleteMovimiento.php', // Este archivo PHP lo creamos abajo
+      url: 'deleteMovimiento.php',
       type: 'POST',
       data: { id: movId },
       dataType: 'json',
       success: function(resp) {
         if (resp.success) {
           showSuccessMessage('Movimiento eliminado correctamente');
-          // Recarga la lista:
-          window.reiniciarYcargar ? window.reiniciarYcargar() : location.reload();
+
+          // 1. Eliminar la fila del DOM
+          const $row = $(`.movimiento-row[data-id="${movId}"]`);
+          const $diaContainer = $row.closest('.movimientos-dia');
+          $row.remove();
+
+          // 2. Actualizar datos en allMovimientosPorDia
+          const fecha = $diaContainer.data('fecha');
+          if (allMovimientosPorDia[fecha]) {
+            allMovimientosPorDia[fecha] = allMovimientosPorDia[fecha].filter(m => m.id != movId);
+          }
+
+          // 3. Si no quedan movimientos ese día, eliminar el contenedor entero
+          if ($diaContainer.find('.movimiento-row').length === 0) {
+            $diaContainer.remove();
+            delete allMovimientosPorDia[fecha];
+          } else {
+            // 4. Actualizar el resumen diario
+            const totalDia = allMovimientosPorDia[fecha].reduce((acc, m) => acc + parseFloat(m.cantidad), 0);
+            const resumenColor = totalDia > 0 ? 'positivo' : (totalDia < 0 ? 'negativo' : 'cero');
+            const resumenTxt = (totalDia > 0 ? '+' : (totalDia < 0 ? '-' : '')) +
+              Math.abs(totalDia).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+
+            $diaContainer.find('.mov-dia-cantidad')
+              .removeClass('positivo negativo cero')
+              .addClass(resumenColor)
+              .text(resumenTxt);
+          }
+
+          // 5. Si ya no hay días en pantalla
+          if ($('#movimientosList .movimientos-dia').length === 0) {
+            $('#movimientosList').hide();
+            $('#noMovimientosMsg').show();
+          }
         } else {
           alert(resp.error || 'No se pudo eliminar');
         }
@@ -983,6 +1015,7 @@ $(function () {
       }
     });
   }
+
 
 
 
