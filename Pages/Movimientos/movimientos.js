@@ -10,7 +10,7 @@ let filtros = {
 let offset = 0;
 let loadingSpinner = $(`
   <div id="movimientosLoading" style="text-align:center; padding: 60px 20px;">
-    <div style="font-size: 1.8rem; color: #3B77D1; font-weight: 600; margin-bottom: 25px;">
+    <div style="font-size: 1.8rem; color: black; font-weight: 600; margin-bottom: 25px;">
       Cargando movimientos...
     </div>
     <div class="spinner spinner-grande" style=" width: 48px; height: 48px;"></div>
