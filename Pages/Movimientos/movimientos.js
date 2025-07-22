@@ -352,6 +352,7 @@ $(function () {
           Subir imagen
         </label>
         `}
+        <div class="spinner spinner-editar" style="display:none;margin-top:5px;"></div>
       </div>
       <div class="mov-col" style="flex:0 0 92px;display:flex;gap:4px;justify-content:center;align-items:center;">
         <button class="tick-editar-btn" title="Guardar cambios"><i data-lucide="check"></i></button>
