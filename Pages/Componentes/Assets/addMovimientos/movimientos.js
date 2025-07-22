@@ -430,8 +430,33 @@ $(document).ready(function ()
 
   // Subida de imagen inicial
   $('#imagenCompra').on('change', function (e) {
-    const file = e.target.files[0];
-    mostrarImagen(file);
+   const file = e.target.files[0];
+
+    if (file && file.type.startsWith('image/')) {
+      $('#imageLoadingSpinner').show();  // ⬅️ Mostrar spinner
+
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        $('#previewImg').attr('src', event.target.result);
+        $('#fileName').text(file.name).attr('title', file.name);
+        $('#fileNameTooltip').text(file.name);
+        $('#uploadedPreview').show();
+        $('.upload-label').hide();
+        $('#imageLoadingSpinner').hide();  // ⬅️ Ocultar spinner
+
+        // Tooltip truncamiento
+        setTimeout(() => {
+          const fileNameEl = document.getElementById('fileName');
+          const wrapper = document.querySelector('.file-name-wrapper');
+          wrapper.classList.remove('show-tooltip');
+          if (fileNameEl.scrollWidth > fileNameEl.clientWidth) {
+            wrapper.classList.add('show-tooltip');
+          }
+        }, 100);
+      };
+
+      reader.readAsDataURL(file);
+    }
   });
 
   // Permitir volver a subir otra imagen haciendo clic en miniatura o nombre
