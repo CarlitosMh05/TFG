@@ -1231,6 +1231,10 @@ $(function () {
   });
   $('#confirmDeleteMovimientoBtn').click(function () {
     if (!movimientoAEliminar) return;
+    const $btn = $(`.eliminar-mov-btn[data-id="${movimientoAEliminar}"]`);
+    $btn.find('i').hide();
+    $btn.find('.spinner-eliminar').show();
+    $btn.prop('disabled', true);
     $.post('../Principal/deleteMovimiento.php', { id: movimientoAEliminar }, function (resp) {
       if (resp.success) {
         showSuccessMessage('Movimiento eliminado');
