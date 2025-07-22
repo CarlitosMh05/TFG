@@ -775,6 +775,8 @@ $(function () {
       // Mostrar minimodal de confirmación
       mostrarMiniModal('¿Quieres que se elimine la imagen?', function(confirmado) {
         if (confirmado) {
+          const $spinner = $row.find('.spinner-borrar-imagen');
+          $spinner.show();
           // AJAX a backend para borrar imagen (requiere endpoint propio)
           $.post('deleteImagenMovimiento.php', { id: mov.id }, function(resp) {
             if (resp.success) {
