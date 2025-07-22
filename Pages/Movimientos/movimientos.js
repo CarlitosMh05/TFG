@@ -1481,7 +1481,10 @@ $(function () {
         <div class="mov-col mov-col-img">${imgHtml}</div>
         <div style="display: flex; justify-content: flex-end;">
           <button class="mov-action-btn editar-mov-btn" data-id="${mov.id}" title="Editar movimiento"><i data-lucide="pencil"></i></button>
-          <button class="mov-action-btn eliminar-mov-btn" data-id="${mov.id}" title="Eliminar movimiento"><i data-lucide="trash-2"></i></button>
+          <button class="mov-action-btn eliminar-mov-btn" data-id="${mov.id}" title="Eliminar movimiento" style="position: relative;">
+            <i data-lucide="trash-2"></i>
+            <div class="spinner spinner-eliminar" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 18px; height: 18px; border: 2.5px solid white !important; border-top: 2.5px solid transparent !important;"></div>
+          </button>
         </div>
       </div>`;
   }
