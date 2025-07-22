@@ -1413,6 +1413,9 @@ $(function () {
         resetImportarModal();
       },
       error: function () {
+        $btn.find('.importar-texto').show();
+        $btn.find('.spinner-importar').hide();
+        $btn.prop('disabled', false);
         showFailMessage('Error en la subida del archivo.');
         resetImportarModal();
       }
