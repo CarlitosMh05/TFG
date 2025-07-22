@@ -189,7 +189,7 @@ $uid = $_SESSION['user_id'];
           <button type="button" class="admin-datos-cancel-btn" id="cancelImportarBtn">Cancelar</button>
           <button type="submit" class="admin-datos-confirm-btn" id="btnImportarArchivo" style="position: relative;">
             <span class="importar-texto">Importar</span>
-            <div class="spinner spinner-importar"></div>
+            <div class="spinner spinner-importar" style="display:none;"></div>
           </button>
         </div>
       </form>
