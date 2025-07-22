@@ -788,6 +788,7 @@ $(function () {
                   Subir imagen
                 </label>
               `);
+              $spinner.hide();
               inicializarImagenEdicion($row, mov); // Volver a enganchar el evento
             } else {
               alert('No se pudo borrar la imagen.');
