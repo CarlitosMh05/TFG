@@ -355,7 +355,10 @@ $(function () {
         <div class="spinner spinner-editar" style="display:none;margin-top:5px;"></div>
       </div>
       <div class="mov-col" style="flex:0 0 92px;display:flex;gap:4px;justify-content:center;align-items:center;">
-        <button class="tick-editar-btn" title="Guardar cambios"><i data-lucide="check"></i></button>
+        <button class="tick-editar-btn" title="Guardar cambios">
+          <i data-lucide="check"></i>
+          <div class="spinner spinner-confirmar" style="display:none;margin-left:6px;"></div>
+        </button>
         <button class="cancel-editar-btn" title="Cancelar edición"><i data-lucide="x"></i></button>
       </div>
     `;
