@@ -17,6 +17,25 @@
         <form>
             <h2>Iniciar sesion</h2>
 
+            <div id="g_id_onload"
+                data-client_id="496963660713-qvce6cj1kn74gnj4o7ec04hhutpka9bi.apps.googleusercontent.com"
+                data-context="signin"
+                data-ux_mode="popup"
+                data-callback="handleCredentialResponse"
+                data-auto_prompt="false">
+            </div>
+
+            <div class="g_id_signin"
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="signin_with"
+                data-size="large"
+                data-logo_alignment="left">
+            </div>
+
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+
             <div class="input-container" style="margin-bottom: 30px;">
                 <input type="email" id="email" placeholder=" " required>
                 <label for="email">Correo</label>
@@ -38,24 +57,7 @@
                 <input type="button" value="Siguiente" id="next">
             </section>
 
-            <div id="g_id_onload"
-                data-client_id="496963660713-qvce6cj1kn74gnj4o7ec04hhutpka9bi.apps.googleusercontent.com"
-                data-context="signin"
-                data-ux_mode="popup"
-                data-callback="handleCredentialResponse"
-                data-auto_prompt="false">
-            </div>
-
-            <div class="g_id_signin"
-                data-type="standard"
-                data-shape="rectangular"
-                data-theme="outline"
-                data-text="signin_with"
-                data-size="large"
-                data-logo_alignment="left">
-            </div>
-
-            <script src="https://accounts.google.com/gsi/client" async defer></script>
+            
 
         </form>
     </body>
