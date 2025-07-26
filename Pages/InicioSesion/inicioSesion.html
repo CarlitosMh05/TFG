@@ -60,25 +60,25 @@
     </body>
 
     <script>
-function handleCredentialResponse(response) {
-    $.ajax({
-        url: 'google-callback.php',
-        type: 'POST',
-        data: { credential: response.credential },
-        success: function (res) {
-            const data = JSON.parse(res);
-            if (data.success) {
-                window.location.href = "Principal/principal.php";
-            } else {
-                alert("Error al iniciar sesión con Google.");
-            }
-        },
-        error: function () {
-            alert("Error en el servidor.");
+        function handleCredentialResponse(response) {
+            $.ajax({
+                url: 'google-callback.php',
+                type: 'POST',
+                data: { credential: response.credential },
+                success: function (res) {
+                    const data = JSON.parse(res);
+                    if (data.success) {
+                        window.location.href = "Principal/principal.php";
+                    } else {
+                        alert("Error al iniciar sesión con Google.");
+                    }
+                },
+                error: function () {
+                    alert("Error en el servidor.");
+                }
+            });
         }
-    });
-}
-</script>
+    </script>
 
     <script src="inicioSesion.js"></script>
 </html>
