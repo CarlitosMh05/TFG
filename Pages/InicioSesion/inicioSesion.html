@@ -27,8 +27,15 @@
                     data-auto_prompt="true">
                 </div>
 
-                <div id="googleSignInButton" class="g_id_signin"></div>
-
+                <div class="g_id_signin"
+                    data-type="standard"
+                    data-shape="rectangular"
+                    data-theme="outline"
+                    data-text="continue_with"
+                    data-size="large"
+                    data-logo_alignment="center"
+                    data-width="1000">
+                </div>
             </div>
 
             <div class="divider-with-text">
@@ -84,28 +91,6 @@
                 }
             });
         }
-
-         window.onload = function () {
-            const buttonContainer = document.getElementById("googleSignInButton");
-
-            function renderGoogleButton() {
-            const screenWidth = window.innerWidth;
-
-            buttonContainer.innerHTML = ""; // Borra botón anterior
-
-            google.accounts.id.renderButton(buttonContainer, {
-                theme: "outline",
-                size: "large",
-                shape: "rectangular",
-                text: "signup_with",
-                logo_alignment: "center",
-                type: screenWidth < 480 ? "icon" : "standard"
-            });
-            }
-
-            renderGoogleButton();
-            window.addEventListener("resize", renderGoogleButton);
-        };
     </script>
 
     <script src="inicioSesion.js"></script>
