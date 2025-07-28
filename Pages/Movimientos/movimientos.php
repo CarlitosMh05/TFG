@@ -22,7 +22,7 @@ $uid = $_SESSION['user_id'];
 
 
   <link rel="stylesheet" href="../Componentes/Assets/sideMenu/sideMenu.css">
-  <?php include $_SERVER['DOCUMENT_ROOT'].'/Pages/componentes/sideMenu.php'; ?>
+  <?php include $_SERVER['DOCUMENT_ROOT'].'/Pages/Componentes/sideMenu.php'; ?>
   <script src="../Componentes/Assets/sideMenu/sideMenu.js"></script>
 
   <?php
@@ -36,7 +36,7 @@ $uid = $_SESSION['user_id'];
   <script src="../Componentes/Assets/addMovimientos/movimientos.js"></script>
 
   <link rel="stylesheet" href="../Componentes/Assets/userAvatar/user.css">
-  <?php include $_SERVER['DOCUMENT_ROOT'].'/Pages/componentes/user.php'; ?>
+  <?php include $_SERVER['DOCUMENT_ROOT'].'/Pages/Componentes/user.php'; ?>
   <script src="../Componentes/Assets/userAvatar/user.js"></script>
 
 </head>
