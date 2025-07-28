@@ -86,26 +86,26 @@
         }
 
          window.onload = function () {
-    const buttonContainer = document.getElementById("googleSignInButton");
+            const buttonContainer = document.getElementById("googleSignInButton");
 
-    function renderGoogleButton() {
-      const screenWidth = window.innerWidth;
+            function renderGoogleButton() {
+            const screenWidth = window.innerWidth;
 
-      buttonContainer.innerHTML = ""; // Borra botón anterior
+            buttonContainer.innerHTML = ""; // Borra botón anterior
 
-      google.accounts.id.renderButton(buttonContainer, {
-        theme: "outline",
-        size: "large",
-        shape: "rectangular",
-        text: "signup_with",
-        logo_alignment: "center",
-        type: screenWidth < 480 ? "icon" : "standard"
-      });
-    }
+            google.accounts.id.renderButton(buttonContainer, {
+                theme: "outline",
+                size: "large",
+                shape: "rectangular",
+                text: "signup_with",
+                logo_alignment: "center",
+                type: screenWidth < 480 ? "icon" : "standard"
+            });
+            }
 
-    renderGoogleButton();
-    window.addEventListener("resize", renderGoogleButton);
-  };
+            renderGoogleButton();
+            window.addEventListener("resize", renderGoogleButton);
+        };
     </script>
 
     <script src="inicioSesion.js"></script>
