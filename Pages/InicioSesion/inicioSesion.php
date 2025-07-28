@@ -40,7 +40,7 @@ if ($result->num_rows > 0)
 
     $data = $result->fetch_assoc();
 
-     if (empty($data['contrasena'])) {
+    if (empty($data['contrasena'])) {
         echo json_encode(['googleOnly' => 'Este correo está vinculado a una cuenta de Google. Inicia sesión con Google.']);
         exit;
     }
