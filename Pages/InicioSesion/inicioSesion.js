@@ -70,9 +70,9 @@ $(document).ready(function () {
                 }
                 else if(data.googleOnly)
                 {
-                    $('.badPwd').html(data.googleOnly).css("display", "block");
-                    $('#password').closest('.input-container').addClass('error');
-                    $('#password').css("border", "1px solid red");
+                    $('.badEmail').html(data.googleOnly).css("display", "block");
+                    $('#email').closest('.input-container').addClass('error');
+                    $('#email').css("border", "1px solid red");
                 }
                 else
                 {
