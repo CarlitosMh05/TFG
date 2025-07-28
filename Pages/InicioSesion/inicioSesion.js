@@ -68,6 +68,12 @@ $(document).ready(function () {
                     $('#password').closest('.input-container').addClass('error');
                     $('#password').css("border", "1px solid red");
                 }
+                else if(data.googleOnly)
+                {
+                    $('.badPwd').html(data.googleOnly).css("display", "block");
+                    $('#password').closest('.input-container').addClass('error');
+                    $('#password').css("border", "1px solid red");
+                }
                 else
                 {
                     window.location.href = "../Principal/principal.php";
