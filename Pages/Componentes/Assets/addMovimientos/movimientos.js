@@ -668,6 +668,16 @@ $(document).ready(function ()
             <div class="input-container new-item-container">
               <input type="text" class="new-item-input" placeholder=" ">
               <label>+Añadir ${place}</label>
+
+              <!-- Botón confirmar (tick) -->
+              <button type="button" class="new-item-btn confirm-btn" title="Confirmar" disabled>
+                <i data-lucide="check"></i>
+              </button>
+
+              <!-- Botón cancelar (X) -->
+              <button type="button" class="new-item-btn cancel-btn" title="Cancelar">
+                <i data-lucide="x"></i>
+              </button>
             </div>
             <span class="spinner" style="display:none;">⏳</span>
             <div class="error-text" style="color: red !important;"></div>
