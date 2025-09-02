@@ -1356,7 +1356,6 @@ $('#guardarPredeterminadosBtn').on('click', function() {
     tipo_default: $('#tipoMovimientoDisplay').data('tipo') || 'gasto',
     etiquetas: etiquetas
   };
-  console.log(data);
   $.post('../Componentes/Assets/userAvatar/savePredeterminados.php', data, function(resp) {
     if (resp.success) {
       showSuccessMessage('Preferencias guardadas');
