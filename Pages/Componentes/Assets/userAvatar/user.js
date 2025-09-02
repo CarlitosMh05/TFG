@@ -1466,6 +1466,8 @@ function toEditMode(rowEl) {
   inputEl.focus();
   // Coloca el cursor al final
   inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
+
+  rowEl.dataset.originalValue = currVal;
 }
 
 function toViewMode(rowEl, newValueFormatted, newRaw) {
@@ -1548,9 +1550,14 @@ function cargarDinero() {
 
       // Cancelar
       if (e.target.closest('.cancel-btn') && row.dataset.mode === 'edit') {
-        const valEl = row.querySelector('.money-value'); // no existe en edit; recuperamos de data inicial:
-        // Recargar todo para simplificar cancelación:
-        cargarDinero();
+        const originalValue = valueEl?.dataset?.value ?? 0;
+        const currency = getUserCurrencyFallback();
+
+        toViewMode(
+          row,
+          fmtCurrency(Number(originalValue), currency),
+          Number(originalValue)
+        );
         return;
       }
 
