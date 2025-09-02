@@ -621,6 +621,30 @@ input:checked + .slider:before {
   grid-column: 1 / -1; /* ocupar ancho completo */
 }
 
+/* Mini-modal de confirmación (si no quieres reutilizar el tuyo existente) */
+.confirm-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 9999;
+  display: none;
+}
+.confirm-modal {
+  position: fixed; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff; border-radius: 12px;
+  width: min(420px, 90vw);
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+}
+.confirm-modal h4 { margin: 0 0 10px; font-size: 16px; }
+.confirm-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.mini-modal-cancel, .mini-modal-confirm {
+  padding: 8px 14px; border-radius: 8px; border: 0; cursor: pointer;
+}
+.mini-modal-cancel { background: #eef1f7; }
+.mini-modal-confirm { background: var(--azulPrimario); color: #fff; }
+.mini-modal-confirm:hover { background: var(--hoverAzulPrimario); }
+
 
 @media (max-width: 650px) 
 {
