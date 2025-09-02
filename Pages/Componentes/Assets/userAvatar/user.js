@@ -1564,7 +1564,7 @@ function cargarDinero() {
       // Guardar
       if (e.target.closest('.save-btn') && row.dataset.mode === 'edit') {
         const input = row.querySelector('.money-input');
-        const raw = Number(input.value);
+        const raw = Number(String(input.value).replace(',', '.')); // 👈 normaliza coma
         if (Number.isNaN(raw) || raw < 0) {
           showFailMessage('Introduce una cantidad válida (>= 0)');
           return;
