@@ -48,25 +48,8 @@ if ($action === 'get') {
 }
 
 if ($action === 'update') {
-  // recoger valores desde ambos nombres posibles
-  $campo = $_POST['campo'] ?? $_POST['field'] ?? null;
-  $valor = $_POST['valor'] ?? $_POST['value'] ?? null;
 
-  // validación de campos permitidos (solo cuenta o efectivo)
-  if (!in_array($campo, ['cuenta', 'efectivo'], true)) {
-      echo json_encode(['error' => 'Campo no permitido']);
-      exit;
-  }
-
-  // normalizar número y validar
-  $valor = str_replace(',', '.', (string)$valor);
-  if (!is_numeric($valor) || $valor < 0) {
-      echo json_encode(['error' => 'Valor no válido']);
-      exit;
-  }
-
-
-  $field = $_POST['field'] ?? '';
+  $field = $_POST['campo'] ?? '';
   $valor = isset($_POST['value']) ? floatval($_POST['value']) : null;
   echo "Updating field: $field to value: $valor\n";
   if ($value === null || $value < 0) {
