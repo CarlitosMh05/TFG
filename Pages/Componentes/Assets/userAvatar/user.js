@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Cargar cuando se entra en la sección
   $('[data-section="conceptos"]').on('section:show', cargarConceptosPerfil);
-
+  $('[data-section="dinero"]').on('section:show', cargarDinero);
   const darkSwitch = document.getElementById('darkModeSwitch');
   // Al iniciar, leemos la preferencia
   if (localStorage.getItem('darkMode') === 'on') {
@@ -1594,7 +1594,7 @@ function cargarDinero() {
     showFailMessage('No se pudo cargar el dinero del usuario');
   });
 }
-$('[data-section="predeterminados"]').on('section:show', cargarDinero);
+$('[data-section="dinero"]').on('section:show', cargarDinero);
 
 /* Hook: cuando abras el modal o al cambiar de pestaña a "Dinero" */
 /* Si ya tienes un manejador de pestañas, añade: */
