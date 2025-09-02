@@ -652,6 +652,10 @@ input:checked + .slider:before {
 }
 .icon-btn:hover { background: rgba(0,0,0,.05); }
 
+.save-btn{
+  color: var(--azulPrimario); 
+}
+
 .icon {
   width: 18px; height: 18px; display: block;
 }
