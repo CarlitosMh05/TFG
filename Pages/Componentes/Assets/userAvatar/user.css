@@ -569,7 +569,7 @@ input:checked + .slider:before {
 .dinero-total {
   grid-column: 1 / -1;
   text-align: center;
-  background: #e9f1ff; /* un tono más suave para destacar */
+  background: #e9f1ff9e; /* un tono más suave para destacar */
   padding: 20px;
   border-radius: 10px; 
   justify-content: space-between; 
