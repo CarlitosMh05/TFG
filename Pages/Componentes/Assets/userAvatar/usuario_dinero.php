@@ -60,6 +60,7 @@ if ($action === 'update') {
   if ($field !== 'cuenta' && $field !== 'efectivo') {
     echo json_encode(['error' => 'Campo no permitido']); exit;
   }
+  echo("Updating field: $field to value: $valor\n");
   $sql = "UPDATE usuarios SET {$field} = ? WHERE id = ?";
   $stmt = $mysqli->prepare($sql);
   $stmt->bind_param('di', $value, $userId);
