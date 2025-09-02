@@ -17,7 +17,7 @@
     <div class="perfil-modal-content">
         <aside class="perfil-modal-menu">
         <ul>
-            <li data-section="personalizacion" class="active">Personalización</li>
+            <li data-section="dinero" class="active">Dinero</li>
             <li data-section="conceptos">Conceptos</li>
             <li data-section="etiquetas">Etiquetas</li>
             <li data-section="usuario">Usuario</li>
@@ -27,16 +27,11 @@
         </aside>
         <section class="perfil-modal-section" id="perfilModalSection">
         <!-- Aquí se muestra el contenido dinámico -->
-        <div data-section="personalizacion" class="section-content active">
-            <h3 style="margin-bottom: 30px;">Personalización</h3>
-            <div class="darkmode-row">
-            <span class="darkmode-label">Modo oscuro</span>
-            <label class="switch">
-                <input type="checkbox" id="darkModeSwitch">
-                <span class="slider round"></span>
-            </label>
+        <div data-section="dinero" class="section-content">
+            <h3 style="margin-bottom: 18px;">Dinero</h3>
+            <div id="dineroContent" class="dinero-content" aria-live="polite">
+                <!-- Aquí pintará JS la UI (cuenta/efectivo/total o solo total) -->
             </div>
-            <p class="darkmode-desc">Activa el modo oscuro para reducir el cansancio visual.</p>
         </div>
 
         <div data-section="conceptos" class="section-content">
