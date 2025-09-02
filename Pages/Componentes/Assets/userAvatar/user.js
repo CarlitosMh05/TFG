@@ -1418,6 +1418,14 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
     cont.classList.remove('dinero-single');
     cont.innerHTML = `
       <div class="dinero-grid">
+
+        <div class="dinero-row" data-field="total" data-mode="view" style="grid-column: 1 / -1;">
+          <h4>Dinero total</h4>
+          <div class="money-edit">
+            <span class="money-value" data-value="${Number(total)}">${fmtCurrency(total, currency)}</span>
+          </div>
+        </div>
+
         <div class="dinero-row" data-field="cuenta" data-mode="view">
           <h4>Cuenta</h4>
           <div class="money-edit">
@@ -1430,12 +1438,7 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
 
        
 
-        <div class="dinero-row" data-field="total" data-mode="view" style="grid-column: 1 / -1;">
-          <h4>Dinero total</h4>
-          <div class="money-edit">
-            <span class="money-value" data-value="${Number(total)}">${fmtCurrency(total, currency)}</span>
-          </div>
-        </div>
+        
 
          <div class="dinero-row" data-field="efectivo" data-mode="view">
           <h4>Efectivo</h4>
@@ -1446,6 +1449,7 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
             </button>
           </div>
         </div>
+        
       </div>
     `;
   }
