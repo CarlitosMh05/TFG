@@ -1550,16 +1550,16 @@ function cargarDinero() {
 
       // Cancelar
       if (e.target.closest('.cancel-btn') && row.dataset.mode === 'edit') {
-        const originalValue = valueEl?.dataset?.value ?? 0;
-        const currency = getUserCurrencyFallback();
+      const originalRaw = Number(row.dataset.originalValue ?? 0);
+      const currency = getUserCurrencyFallback();
 
-        toViewMode(
-          row,
-          fmtCurrency(Number(originalValue), currency),
-          Number(originalValue)
-        );
-        return;
-      }
+      toViewMode(
+        row,
+        fmtCurrency(originalRaw, currency),
+        originalRaw
+      );
+      return;
+    }
 
       // Guardar
       if (e.target.closest('.save-btn') && row.dataset.mode === 'edit') {
