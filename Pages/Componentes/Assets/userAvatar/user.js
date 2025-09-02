@@ -1596,7 +1596,7 @@ function cargarDinero() {
 /* Hook: cuando abras el modal o al cambiar de pestaña a "Dinero" */
 /* Si ya tienes un manejador de pestañas, añade: */
 document.addEventListener('click', (e) => {
-  const li = e.target.closest('.perfil-modal-menu li[data-target="dinero"]');
+  const li = e.target.closest('.perfil-modal-menu li[data-section="dinero"]');
   if (li) cargarDinero();
 });
 
