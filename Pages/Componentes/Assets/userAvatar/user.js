@@ -1476,9 +1476,10 @@ function toEditMode(rowEl) {
   inputEl.addEventListener('input', () => {
     inputEl.value = inputEl.value.replace(/[^0-9.,]/g, ''); 
   });
-
-  inputEl.focus();
   
+  inputEl.focus();
+  // Coloca el cursor al final
+  inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
 }
 
 function toViewMode(rowEl, newValueFormatted, newRaw) {
