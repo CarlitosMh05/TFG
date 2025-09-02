@@ -638,7 +638,8 @@ input:checked + .slider:before {
 }
 
 .money-input:focus {
-  border-color: var(--azulPrimario);   /* azul de tu tema */
+  border-color: var(--azulPrimario); 
+  border-width: 2px;  /* azul de tu tema */
 }
 
 .icon-btn {
