@@ -14,9 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     overlay.style.display = 'block';
     document.body.style.overflow = 'hidden';
     cargarConceptosPerfil();
-    const dineroActivo = document.querySelector('.section-content.active[data-section="dinero"]');
-    alert(dineroActivo);
-    if (dineroActivo) cargarDinero();
+    cargarDinero();
   }
   function closeModal() {
     modal.style.display = 'none';
