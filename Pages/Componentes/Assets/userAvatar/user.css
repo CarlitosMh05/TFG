@@ -551,6 +551,13 @@ input:checked + .slider:before {
 }
 
 
+.perfil-divider {
+  border: 0;
+  border-top: 1.5px solid #f0f4fc;
+  margin: 22px 0;
+}
+
+
 @media (max-width: 650px) 
 {
   .perfil-modal-content
