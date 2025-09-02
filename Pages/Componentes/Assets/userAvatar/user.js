@@ -1585,7 +1585,7 @@ function cargarDinero() {
           // Si hay total visible y hemos actualizado cuenta/efectivo, recalcular total
           if (resp2.efectivo !== null && (field === 'cuenta' || field === 'efectivo')) {
             const total = Number(resp2.cuenta ?? 0) + Number(resp2.efectivo ?? 0);
-            const totalRow = document.querySelector('.dinero-row[data-field="total"] .money-value');
+            const totalRow = document.querySelector('[data-field="total"] .money-value-total');
             if (totalRow) {
               totalRow.dataset.value = String(total);
               totalRow.textContent = fmtCurrency(total, resp2.moneda || currency);
