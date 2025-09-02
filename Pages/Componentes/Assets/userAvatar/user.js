@@ -1597,19 +1597,6 @@ function cargarDinero() {
 
 
 
-/* También puedes cargarlo al abrir el modal por primera vez */
-(function preloadDineroAlAbrir() {
-  const btn = document.getElementById('userAvatarBtn');
-  const modal = document.getElementById('perfilModal');
-  if (!btn || !modal) return;
-  let loadedOnce = false;
-  btn.addEventListener('click', () => {
-    if (!loadedOnce) {
-      cargarDinero();
-      loadedOnce = true;
-    }
-  });
-})();
 
 
 
