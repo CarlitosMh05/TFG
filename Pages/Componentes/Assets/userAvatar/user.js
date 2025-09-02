@@ -1529,11 +1529,10 @@ function getDinero() {
 }
 
 function updateDinero({ field, value }) {
-  // Adaptamos nombres a lo que espera PHP
   return $.ajax({
     url: DINERO_ENDPOINT,
     method: 'POST',
-    data: { action: 'update', campo: field, valor: value },
+    data: { action: 'update', campo: field, field, valor: value, value },
     dataType: 'json'
   });
 }
