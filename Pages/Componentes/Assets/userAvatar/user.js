@@ -1528,12 +1528,12 @@ function getDinero() {
   return $.getJSON(DINERO_ENDPOINT, { action: 'get' });
 }
 
-function updateDinero(payload) {
-  // payload = { field: 'cuenta'|'efectivo'|'total', value: number }
+function updateDinero({ field, value }) {
+  // Adaptamos nombres a lo que espera PHP
   return $.ajax({
     url: DINERO_ENDPOINT,
     method: 'POST',
-    data: { action: 'update', ...payload },
+    data: { action: 'update', campo: field, valor: value },
     dataType: 'json'
   });
 }
