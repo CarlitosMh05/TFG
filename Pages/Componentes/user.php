@@ -159,11 +159,11 @@
             <hr class="perfil-divider" />
 
             <div class="darkmode-row">
-            <span class="darkmode-label">Modo oscuro</span>
-            <label class="switch">
-                <input type="checkbox" id="darkModeSwitch">
-                <span class="slider round"></span>
-            </label>
+                <span class="darkmode-label">Modo oscuro</span>
+                <label class="switch">
+                    <input type="checkbox" id="darkModeSwitch">
+                    <span class="slider round"></span>
+                </label>
             </div>
             <p class="darkmode-desc">Activa el modo oscuro para reducir el cansancio visual.</p>
 
