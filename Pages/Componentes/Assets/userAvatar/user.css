@@ -647,7 +647,7 @@ input:checked + .slider:before {
   background: transparent;
   cursor: pointer;
   padding: 6px;
-  border-radius: 8px;
+  border-radius: 20px;
   transition: background .2s ease;
 }
 .icon-btn:hover { background: rgba(0,0,0,.05); }
