@@ -156,6 +156,17 @@
             <button class="user-edit-btn" data-type="contrasena">Cambiar Contraseña</button>
             </div>
 
+            <hr class="perfil-divider" />
+
+            <div class="darkmode-row">
+            <span class="darkmode-label">Modo oscuro</span>
+            <label class="switch">
+                <input type="checkbox" id="darkModeSwitch">
+                <span class="slider round"></span>
+            </label>
+            </div>
+            <p class="darkmode-desc">Activa el modo oscuro para reducir el cansancio visual.</p>
+
             <div class="deleteCloseSesion">
             <button class="cerrar-sesion-btn" id="cerrarSesionBtn">Cerrar sesión</button>
             <button id="eliminarUsuarioBtn" class="eliminar-usuario-btn">Eliminar usuario</button>
