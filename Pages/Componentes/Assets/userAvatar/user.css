@@ -557,6 +557,70 @@ input:checked + .slider:before {
   margin: 22px 0;
 }
 
+/* Sección Dinero */
+.dinero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.dinero-row { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  background: #f6f7fa; 
+  border-radius: 10px; 
+  padding: 12px 14px;
+}
+
+.dinero-row h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2a2f3a;
+}
+
+.money-value {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .2px;
+}
+
+.money-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.money-input {
+  width: 120px;
+  padding: 6px 10px;
+  border: 1px solid #dfe3ec;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  text-align: right;
+}
+
+.icon-btn {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background .2s ease;
+}
+.icon-btn:hover { background: rgba(0,0,0,.05); }
+
+.icon {
+  width: 18px; height: 18px; display: block;
+}
+
+/* Fila Total (una sola columna) */
+.dinero-single .dinero-row {
+  grid-column: 1 / -1; /* ocupar ancho completo */
+}
+
 
 @media (max-width: 650px) 
 {
