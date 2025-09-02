@@ -946,6 +946,55 @@ pointer-events: none;
   margin: 0 auto;
 }
 
+
+/* Inline add: espacio para botones a la derecha */
+.new-item-container .new-item-input {
+  padding-right: 72px !important; /* espacio para X + check */
+}
+
+/* Botones del inline add */
+.new-item-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Orden: el check a la derecha del todo, la X a su izquierda */
+.new-item-btn.confirm-btn { right: 8px; }
+.new-item-btn.cancel-btn { right: 44px; }
+
+.new-item-btn[disabled] {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.new-item-btn:hover {
+  background: rgba(59, 119, 209, 0.12); /* usa tu azul primario suave */
+}
+
+/* Tamaño/estilo de los iconos Lucide */
+.new-item-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.new-item-btn.confirm-btn svg { stroke: var(--azulPrimario); }
+.new-item-btn.cancel-btn svg  { stroke: #888; }
+
+.new-item-btn:hover.confirm-btn svg { stroke: var(--hoverAzulPrimario); }
+
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
