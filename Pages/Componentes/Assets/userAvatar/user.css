@@ -563,13 +563,13 @@ input:checked + .slider:before {
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
-/*#dfe7ff
+/*#
 
 /* Caja total ocupa todo el ancho */
 .dinero-total {
   grid-column: 1 / -1;
   text-align: center;
-  background: #e9f1ff; /* un tono más suave para destacar */
+  background: #dfe7ff; /* un tono más suave para destacar */
   padding: 20px;
   border-radius: 10px; 
   justify-content: space-between; 
