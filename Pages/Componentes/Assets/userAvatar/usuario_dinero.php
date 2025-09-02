@@ -23,7 +23,7 @@ if ($mysqli->connect_error) {
 $action = $_REQUEST['action'] ?? 'get';
 
 function getUserMoney($mysqli, $userId) {
-  $stmt = $mysqli->prepare("SELECT cuenta, efectivo, moneda FROM usuarios WHERE id = ? LIMIT 1");
+  $stmt = $mysqli->prepare("SELECT cuenta, efectivo FROM usuarios WHERE id = ? LIMIT 1");
   $stmt->bind_param('i', $userId);
   $stmt->execute();
   $res = $stmt->get_result();
