@@ -1548,9 +1548,14 @@ function cargarDinero() {
 
       // Cancelar
       if (e.target.closest('.cancel-btn') && row.dataset.mode === 'edit') {
-        const valEl = row.querySelector('.money-value'); // no existe en edit; recuperamos de data inicial:
-        // Recargar todo para simplificar cancelación:
-        cargarDinero();
+        const originalValue = valueEl?.dataset?.value ?? 0;
+        const currency = getUserCurrencyFallback();
+
+        toViewMode(
+          row,
+          fmtCurrency(Number(originalValue), currency),
+          Number(originalValue)
+        );
         return;
       }
 
