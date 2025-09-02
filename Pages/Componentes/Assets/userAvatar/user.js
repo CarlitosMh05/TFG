@@ -1532,7 +1532,7 @@ function updateDinero({ field, value }) {
   return $.ajax({
     url: DINERO_ENDPOINT,
     method: 'POST',
-    data: { action: 'update', campo: field, field, valor: value, value },
+    data: { action: 'update', campo: field, valor: value },
     dataType: 'json'
   });
 }
