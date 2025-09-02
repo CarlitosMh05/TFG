@@ -571,6 +571,7 @@ input:checked + .slider:before {
   text-align: center;
   background: #e9f1ff; /* un tono más suave para destacar */
   padding: 20px;
+  border-radius: 10px; 
 }
 
 .dinero-total h4 {
