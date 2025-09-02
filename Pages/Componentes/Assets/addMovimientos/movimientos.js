@@ -762,82 +762,33 @@ $(document).ready(function ()
           });
         };
   
-        // 1) Pulsar Enter => AJAX
+        // 1) Pulsar Enter => enviar (igual que antes)
         $input.on('keydown', e => {
-          if (e.key==='Enter') {
+          if (e.key === 'Enter') {
             e.preventDefault();
-            const nombre = $input.val().trim();
-            if (!nombre) {
-              $error.text('El nombre no puede estar vacío.').show();
-              $error[0].scrollIntoView({
-                behavior: 'smooth',
-                block:    'nearest'
-              });
-              return;
-            }
-            // petición
-            $input.prop('disabled', true);
-            $error.hide();
-            $spin.show();
-  
-            $.post(url, { 
-                nombre, 
-                tipo: conceptoTipoActual === 'ingreso' ? 1 : 0 
-              }, resp => 
-            {
-              $spin.hide();
-              if (resp.success) {
-                if (tipo === 'concepto') {
-                  // 1) Creamos el nuevo <li>
-                  const $newLi = $(`<li data-value="${resp.nombre}">${resp.nombre}</li>`);
-                  // 2) Lo insertamos justo antes del "add-new" actual
-                  $li.before($newLi);
-                  // 3) Reiniciamos el <li> de inline-add para volver a "+ Añadir concepto"
-                  $li
-                    .removeClass('adding')
-                    .addClass('add-new')
-                    .html(`+ Añadir concepto`);
-                  // ¡El dropdown queda abierto y ya tienes el nuevo concepto listo para seleccionar!
-                }
-                else
-                {
-                  // 1) Añadimos el nuevo al listado justo encima
-                  etiquetasOriginales.push(resp);
-                  // 2) limpiamos input para siguiente
-                  $input.prop('disabled', false).val('').focus();
-
-                  updateDropdown();
-                }
-              } 
-              else 
-              {
-                $input.prop('disabled', false);
-                if(resp.alredyExists)
-                {
-                  $error.text(resp.alredyExists||'Esta etiqueta ya existe').show();
-
-                }
-                else
-                {
-                  $error.text(resp.error||'Error al crear').show();
-
-                }
-              }
-            }, 'json')
-            .fail(()=>{
-              
-              $spin.hide();
-              $input.prop('disabled', false);
-              $error.text('Error de red').show();
-              $error[0].scrollIntoView({
-                behavior: 'smooth',
-                block:    'nearest'
-              });
-            });
-          }
-          // 2) Pulsar Esc => cancelar
-          else if (e.key==='Escape') {
+            submitInline();
+          } else if (e.key === 'Escape') {
             cancelInline($li, place);
+          }
+        });
+
+        // 2) Click en el tick => enviar
+        $btnOk.on('click', e => {
+          e.stopPropagation();
+          if (!$btnOk.prop('disabled')) submitInline();
+        });
+
+        // 3) Click en la X => cancelar (misma función que Esc / tap fuera)
+        $btnX.on('click', e => {
+          e.stopPropagation();
+          cancelInline($li, place);
+        });
+
+        // 4) Click fuera => cancelar (ya lo tienes; lo dejamos igual)
+        $(document).on('mousedown.inlineAdd', ev => {
+          if (!$li.is(ev.target) && $li.has(ev.target).length === 0) {
+            cancelInline($li, place);
+            $(document).off('mousedown.inlineAdd');
           }
         });
   
