@@ -1367,6 +1367,254 @@ $('#guardarPredeterminadosBtn').on('click', function() {
 });
 
 
+/* ========= DINERO ========= */
+
+const DINERO_ENDPOINT = '/ajax/usuario_dinero.php'; // ajusta la ruta si lo guardas en otro sitio
+
+function getUserCurrencyFallback() {
+  // 1) Intentar leer del backend (preferente, abajo en getDinero()).
+  // 2) Intentar de un data-attr en el modal.
+  const el = document.getElementById('perfilModal');
+  if (el && el.dataset && el.dataset.moneda) return el.dataset.moneda;
+  // 3) Último recurso:
+  return 'EUR';
+}
+
+function fmtCurrency(value, currency) {
+  try {
+    return new Intl.NumberFormat('es-ES', { style: 'currency', currency }).format(value ?? 0);
+  } catch (e) {
+    // Si el código de moneda no es válido, usar EUR
+    return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(value ?? 0);
+  }
+}
+
+function renderDineroUI({ cuenta, efectivo, moneda }) {
+  const cont = document.getElementById('dineroContent');
+  if (!cont) return;
+
+  // Limpiar
+  cont.innerHTML = '';
+
+  const currency = moneda || getUserCurrencyFallback();
+
+  if (efectivo === null || efectivo === undefined) {
+    // Solo una columna: Dinero total (se guarda en cuenta, dejando efectivo = null)
+    cont.classList.add('dinero-single');
+    cont.innerHTML = `
+      <div class="dinero-row" data-field="total" data-mode="view">
+        <h4>Dinero total</h4>
+        <div class="money-edit">
+          <span class="money-value" data-value="${Number(cuenta ?? 0)}">${fmtCurrency(cuenta ?? 0, currency)}</span>
+          <button class="icon-btn edit-btn" title="Editar">
+            <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor"/></svg>
+          </button>
+        </div>
+      </div>
+    `;
+  } else {
+    // Dos columnas + total
+    const total = Number(cuenta ?? 0) + Number(efectivo ?? 0);
+    cont.classList.remove('dinero-single');
+    cont.innerHTML = `
+      <div class="dinero-grid">
+        <div class="dinero-row" data-field="cuenta" data-mode="view">
+          <h4>Cuenta</h4>
+          <div class="money-edit">
+            <span class="money-value" data-value="${Number(cuenta ?? 0)}">${fmtCurrency(cuenta ?? 0, currency)}</span>
+            <button class="icon-btn edit-btn" title="Editar">
+              <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="dinero-row" data-field="efectivo" data-mode="view">
+          <h4>Efectivo</h4>
+          <div class="money-edit">
+            <span class="money-value" data-value="${Number(efectivo ?? 0)}">${fmtCurrency(efectivo ?? 0, currency)}</span>
+            <button class="icon-btn edit-btn" title="Editar">
+              <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="dinero-row" data-field="total" data-mode="view" style="grid-column: 1 / -1;">
+          <h4>Dinero total</h4>
+          <div class="money-edit">
+            <span class="money-value" data-value="${Number(total)}">${fmtCurrency(total, currency)}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+/* Inline edit: cambia a <input type=number> y muestra ✓/✗ */
+function toEditMode(rowEl) {
+  const valueEl = rowEl.querySelector('.money-value');
+  const currVal = Number(valueEl?.dataset?.value ?? 0);
+  rowEl.dataset.mode = 'edit';
+
+  const editor = `
+    <input class="money-input" type="number" step="0.01" min="0" value="${currVal}">
+    <button class="icon-btn save-btn" title="Guardar">
+      <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M9 16.17l-3.88-3.88-1.41 1.41L9 19 21.29 6.71l-1.41-1.41z" fill="currentColor"/></svg>
+    </button>
+    <button class="icon-btn cancel-btn" title="Cancelar">
+      <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"/></svg>
+    </button>
+  `;
+  rowEl.querySelector('.money-edit').innerHTML = editor;
+  rowEl.querySelector('.money-input').focus();
+}
+
+function toViewMode(rowEl, newValueFormatted, newRaw) {
+  rowEl.dataset.mode = 'view';
+  rowEl.querySelector('.money-edit').innerHTML = `
+    <span class="money-value" data-value="${newRaw}">${newValueFormatted}</span>
+    <button class="icon-btn edit-btn" title="Editar">
+      <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" fill="currentColor"/></svg>
+    </button>
+  `;
+}
+
+/* Mini-modal de confirmación (promesa). Si ya tienes uno, puedes reutilizarlo */
+function confirmCambios(msg = '¿Estás seguro de aplicar los cambios?') {
+  return new Promise(resolve => {
+    let overlay = document.querySelector('.confirm-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'confirm-overlay';
+      overlay.innerHTML = `
+        <div class="confirm-modal">
+          <h4>Confirmar cambios</h4>
+          <p>${msg}</p>
+          <div class="confirm-actions">
+            <button class="mini-modal-cancel">Cancelar</button>
+            <button class="mini-modal-confirm">Aceptar</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    } else {
+      overlay.querySelector('p').textContent = msg;
+    }
+    overlay.style.display = 'block';
+
+    const onClose = (ok) => {
+      overlay.style.display = 'none';
+      resolve(ok);
+    };
+
+    overlay.querySelector('.mini-modal-cancel').onclick = () => onClose(false);
+    overlay.querySelector('.mini-modal-confirm').onclick = () => onClose(true);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) onClose(false); }, { once: true });
+  });
+}
+
+/* Peticiones */
+function getDinero() {
+  return $.getJSON(DINERO_ENDPOINT, { action: 'get' });
+}
+
+function updateDinero(payload) {
+  // payload = { field: 'cuenta'|'efectivo'|'total', value: number }
+  return $.ajax({
+    url: DINERO_ENDPOINT,
+    method: 'POST',
+    data: { action: 'update', ...payload },
+    dataType: 'json'
+  });
+}
+
+/* Pintar y eventos */
+function cargarDinero() {
+  getDinero().then(resp => {
+    const { cuenta, efectivo, moneda } = resp || {};
+    renderDineroUI({ cuenta, efectivo, moneda });
+
+    const currency = moneda || getUserCurrencyFallback();
+    const cont = document.getElementById('dineroContent');
+
+    cont.onclick = async (e) => {
+      const row = e.target.closest('.dinero-row');
+      if (!row) return;
+
+      // Editar
+      if (e.target.closest('.edit-btn') && row.dataset.mode === 'view') {
+        toEditMode(row);
+        return;
+      }
+
+      // Cancelar
+      if (e.target.closest('.cancel-btn') && row.dataset.mode === 'edit') {
+        const valEl = row.querySelector('.money-value'); // no existe en edit; recuperamos de data inicial:
+        // Recargar todo para simplificar cancelación:
+        cargarDinero();
+        return;
+      }
+
+      // Guardar
+      if (e.target.closest('.save-btn') && row.dataset.mode === 'edit') {
+        const input = row.querySelector('.money-input');
+        const raw = Number(input.value);
+        if (Number.isNaN(raw) || raw < 0) {
+          showFailMessage('Introduce una cantidad válida (>= 0)');
+          return;
+        }
+
+        const field = row.dataset.field; // 'cuenta' | 'efectivo' | 'total'
+        const ok = await confirmCambios('Estos cambios son definitivos. ¿Quieres aplicarlos?');
+        if (!ok) return;
+
+        updateDinero({ field, value: raw }).then(resp2 => {
+          if (!resp2 || resp2.error) {
+            showFailMessage(resp2?.error || 'Error al guardar');
+            return;
+          }
+          // Re-render con valores actualizados desde backend (evita desincronía)
+          renderDineroUI(resp2);
+
+          // Si hay total visible y hemos actualizado cuenta/efectivo, recalcular total
+          if (resp2.efectivo !== null && (field === 'cuenta' || field === 'efectivo')) {
+            const total = Number(resp2.cuenta ?? 0) + Number(resp2.efectivo ?? 0);
+            const totalRow = document.querySelector('.dinero-row[data-field="total"] .money-value');
+            if (totalRow) {
+              totalRow.dataset.value = String(total);
+              totalRow.textContent = fmtCurrency(total, resp2.moneda || currency);
+            }
+          }
+          showSuccessMessage('Guardado correctamente');
+        }).catch(() => showFailMessage('Error de red'));
+      }
+    };
+  }).catch(() => {
+    showFailMessage('No se pudo cargar el dinero del usuario');
+  });
+}
+
+/* Hook: cuando abras el modal o al cambiar de pestaña a "Dinero" */
+/* Si ya tienes un manejador de pestañas, añade: */
+document.addEventListener('click', (e) => {
+  const li = e.target.closest('.perfil-modal-menu li[data-target="dinero"]');
+  if (li) cargarDinero();
+});
+
+/* También puedes cargarlo al abrir el modal por primera vez */
+(function preloadDineroAlAbrir() {
+  const btn = document.getElementById('userAvatarBtn');
+  const modal = document.getElementById('perfilModal');
+  if (!btn || !modal) return;
+  let loadedOnce = false;
+  btn.addEventListener('click', () => {
+    if (!loadedOnce) {
+      cargarDinero();
+      loadedOnce = true;
+    }
+  });
+})();
+
+
 
 
 
