@@ -50,7 +50,7 @@ if ($action === 'get') {
 if ($action === 'update') {
 
   $field = $_POST['campo'] ?? '';
-  $valor = isset($_POST['value']) ? floatval($_POST['value']) : null;
+  $valor = isset($_POST['valor']) ? floatval($_POST['valor']) : null;
   echo "Updating field: $field to value: $valor\n";
   if ($value === null || $value < 0) {
     echo json_encode(['error' => 'Cantidad inválida']);
