@@ -637,6 +637,11 @@ input:checked + .slider:before {
   outline: none;  
 }
 
+.money-input:focus {
+  border-color: var(--azulPrimario);   /* azul de tu tema */
+  box-shadow: 0 0 0 2px rgba(59, 119, 209, 0.25); /* efecto glow opcional */
+}
+
 .icon-btn {
   border: 0;
   background: transparent;
