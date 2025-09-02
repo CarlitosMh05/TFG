@@ -1462,7 +1462,7 @@ function toEditMode(rowEl) {
   rowEl.dataset.mode = 'edit';
 
   const editor = `
-    <input class="money-input" type="text" inputmode="decimal" pattern="[0-9]*[.,]?[0-9]*" value="${currVal}">
+    <input class="money-input" type="text" inputmode="decimal" value="${currVal}">
     <button class="icon-btn save-btn" title="Guardar">
       <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M9 16.17l-3.88-3.88-1.41 1.41L9 19 21.29 6.71l-1.41-1.41z" fill="currentColor"/></svg>
     </button>
@@ -1471,10 +1471,14 @@ function toEditMode(rowEl) {
     </button>
   `;
   rowEl.querySelector('.money-edit').innerHTML = editor;
-    const inputEl = rowEl.querySelector('.money-input');
+  const inputEl = rowEl.querySelector('.money-input');
+
+  inputEl.addEventListener('input', () => {
+    inputEl.value = inputEl.value.replace(/[^0-9.,]/g, ''); 
+  });
+
   inputEl.focus();
-  // Coloca el cursor al final
-  inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
+  
 }
 
 function toViewMode(rowEl, newValueFormatted, newRaw) {
