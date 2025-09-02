@@ -1595,6 +1595,7 @@ function cargarDinero() {
   });
 }
 $('[data-section="predeterminados"]').on('section:show', cargarDinero);
+
 /* Hook: cuando abras el modal o al cambiar de pestaña a "Dinero" */
 /* Si ya tienes un manejador de pestañas, añade: */
 document.addEventListener('click', (e) => {
