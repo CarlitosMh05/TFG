@@ -1471,7 +1471,10 @@ function toEditMode(rowEl) {
     </button>
   `;
   rowEl.querySelector('.money-edit').innerHTML = editor;
-  rowEl.querySelector('.money-input').focus();
+    const inputEl = rowEl.querySelector('.money-input');
+  inputEl.focus();
+  // Coloca el cursor al final
+  inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
 }
 
 function toViewMode(rowEl, newValueFormatted, newRaw) {
