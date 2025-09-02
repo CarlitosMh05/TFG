@@ -4,6 +4,7 @@ session_start();
 header('Content-Type: application/json');
 
 require_once '../../../../db.php'; // AJUSTA la ruta
+
 // Asumo que tienes $_SESSION['user_id'] ya seteada:
 if (!isset($_SESSION['user_id'])) {
   http_response_code(401);
