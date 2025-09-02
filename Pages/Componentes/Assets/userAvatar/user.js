@@ -1417,7 +1417,7 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
     const total = Number(cuenta ?? 0) + Number(efectivo ?? 0);
     cont.classList.remove('dinero-single');
     cont.innerHTML = `
-      <div class="dinero-grid dinero-layout">
+      <div class="dinero-grid">
 
         <div class="dinero-row dinero-total" data-field="total" data-mode="view" style="grid-column: 1 / -1;">
           <h4>Dinero total</h4>
