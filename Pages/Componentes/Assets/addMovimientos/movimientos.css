@@ -969,8 +969,8 @@ pointer-events: none;
 }
 
 /* Orden: el check a la derecha del todo, la X a su izquierda */
-.new-item-btn.confirm-btn { right: 8px; }
-.new-item-btn.cancel-btn { right: 44px; }
+.new-item-btn.confirm-btn { right: 44px; }
+.new-item-btn.cancel-btn { right: 8px; }
 
 .new-item-btn[disabled] {
   opacity: 0.4;
