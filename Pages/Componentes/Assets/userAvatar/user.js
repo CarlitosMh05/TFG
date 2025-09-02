@@ -1462,7 +1462,7 @@ function toEditMode(rowEl) {
   rowEl.dataset.mode = 'edit';
 
   const editor = `
-    <input class="money-input" type="number" step="0.01" min="0" value="${currVal}">
+    <input class="money-input" type="text" step="0.01" min="0" value="${currVal}">
     <button class="icon-btn save-btn" title="Guardar">
       <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M9 16.17l-3.88-3.88-1.41 1.41L9 19 21.29 6.71l-1.41-1.41z" fill="currentColor"/></svg>
     </button>
