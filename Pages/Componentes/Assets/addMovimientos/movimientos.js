@@ -686,6 +686,8 @@ $(document).ready(function ()
         const $input   = $li.find('input.new-item-input');
         const $spin    = $li.find('span.spinner');
         const $error   = $li.find('div.error-text');
+        const $btnOk   = $li.find('.confirm-btn');
+const $btnX    = $li.find('.cancel-btn');
         $input.focus();
   
         // 1) Pulsar Enter => AJAX
