@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 //Peuqño cambio
-$servername = "TFG";  // Servidor MySQL
+$servername = "localhost:3306";  // Servidor MySQL
 $username = "root";         // Usuario de MySQL
 $password = "";             // Contraseña de MySQL
 $dbname = "tfg";           // Nombre de la base de datos
