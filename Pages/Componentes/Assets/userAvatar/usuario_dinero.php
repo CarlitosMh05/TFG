@@ -57,29 +57,14 @@ if ($action === 'update') {
     exit;
   }
 
-  // Primero vemos si el usuario tiene efectivo separado o no
-  $current = getUserMoney($mysqli, $userId);
-  if (!$current) { echo json_encode(['error' => 'Usuario no encontrado']); exit; }
-
-  $efectivoIsNull = is_null($current['efectivo']);
-
-  // Actualizaciones permitidas
-  if ($efectivoIsNull) {
-    // Solo una columna: se actualiza 'total' => mapeamos a 'cuenta' y dejamos 'efectivo' = NULL
-    if ($field !== 'total') {
-      echo json_encode(['error' => 'Campo no permitido']); exit;
-    }
-    $stmt = $mysqli->prepare("UPDATE usuarios SET cuenta = ?, efectivo = NULL WHERE id = ?");
-    $stmt->bind_param('di', $value, $userId);
-  } else {
-    // Dos columnas: cuenta o efectivo
-    if ($field !== 'cuenta' && $field !== 'efectivo') {
-      echo json_encode(['error' => 'Campo no permitido']); exit;
-    }
-    $sql = "UPDATE usuarios SET {$field} = ? WHERE id = ?";
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('di', $value, $userId);
+  // Dos columnas: cuenta o efectivo
+  if ($field !== 'cuenta' && $field !== 'efectivo') {
+    echo json_encode(['error' => 'Campo no permitido']); exit;
   }
+  $sql = "UPDATE usuarios SET {$field} = ? WHERE id = ?";
+  $stmt = $mysqli->prepare($sql);
+  $stmt->bind_param('di', $value, $userId);
+  
 
   if (!$stmt->execute()) {
     echo json_encode(['error' => 'No se pudo actualizar']);
