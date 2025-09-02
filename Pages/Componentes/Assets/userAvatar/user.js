@@ -1428,6 +1428,8 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
           </div>
         </div>
 
+       
+
         <div class="dinero-row" data-field="total" data-mode="view" style="grid-column: 1 / -1;">
           <h4>Dinero total</h4>
           <div class="money-edit">
@@ -1435,7 +1437,7 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
           </div>
         </div>
 
-        <div class="dinero-row" data-field="efectivo" data-mode="view">
+         <div class="dinero-row" data-field="efectivo" data-mode="view">
           <h4>Efectivo</h4>
           <div class="money-edit">
             <span class="money-value" data-value="${Number(efectivo ?? 0)}">${fmtCurrency(efectivo ?? 0, currency)}</span>
@@ -1444,7 +1446,6 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
             </button>
           </div>
         </div>
-
       </div>
     `;
   }
