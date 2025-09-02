@@ -63,7 +63,6 @@ if ($action === 'update') {
   $sql = "UPDATE usuarios SET {$field} = ? WHERE id = ?";
   $stmt = $mysqli->prepare($sql);
   $stmt->bind_param('si', $value, $userId);
-  echo($stmt);
 
   if (!$stmt->execute()) {
     echo json_encode(['error' => 'No se pudo actualizar']);
