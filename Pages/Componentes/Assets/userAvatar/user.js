@@ -1369,7 +1369,7 @@ $('#guardarPredeterminadosBtn').on('click', function() {
 
 /* ========= DINERO ========= */
 
-const DINERO_ENDPOINT = '/usuario_dinero.php'; // ajusta la ruta si lo guardas en otro sitio
+const DINERO_ENDPOINT = 'usuario_dinero.php'; // ajusta la ruta si lo guardas en otro sitio
 
 function getUserCurrencyFallback() {
   // 1) Intentar leer del backend (preferente, abajo en getDinero()).
