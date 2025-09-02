@@ -1529,6 +1529,7 @@ function getDinero() {
 }
 
 function updateDinero({ field, value }) {
+  console.log('Updating dinero:', field, value);
   return $.ajax({
     url: DINERO_ENDPOINT,
     method: 'POST',
