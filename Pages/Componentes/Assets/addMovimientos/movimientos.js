@@ -699,6 +699,68 @@ $(document).ready(function ()
         };
         $input.on('input', toggleOk);
         toggleOk();
+
+        // Extraemos el envío en una función para reutilizar (Enter o click en tick)
+        const submitInline = () => {
+          const nombre = $input.val().trim();
+          if (!nombre) {
+            $error.text('El nombre no puede estar vacío.').show();
+            $error[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return;
+          }
+
+          // deshabilitar mientras enviamos
+          $input.prop('disabled', true);
+          $btnOk.prop('disabled', true);
+          $btnX.prop('disabled', true);
+          $error.hide();
+          $spin.show();
+
+          $.post(url, { 
+              nombre, 
+              tipo: conceptoTipoActual === 'ingreso' ? 1 : 0 
+            }, resp => 
+          {
+            $spin.hide();
+            // re-habilitar para permitir más entradas (solo en etiquetas)
+            $input.prop('disabled', false);
+            $btnX.prop('disabled', false);
+
+            if (resp.success) {
+              if (tipo === 'concepto') {
+                // Mantener el comportamiento actual: insertar el li nuevo y
+                // devolver el inline a "+ Añadir concepto" (sin auto-selección)
+                const $newLi = $(`<li data-value="${resp.nombre}">${resp.nombre}</li>`);
+                $li.before($newLi);
+                $li.removeClass('adding').addClass('add-new').html(`+ Añadir concepto`);
+              } else {
+                // Mantener comportamiento actual en etiquetas: añadir a originales,
+                // limpiar input, dejar inline abierto para seguir añadiendo
+                etiquetasOriginales.push(resp);
+                $input.val('').focus();
+                toggleOk(); // deshabilitar tick otra vez
+                updateDropdown();
+              }
+            } else {
+              // Error del servidor/lógica
+              if (resp.alredyExists) {
+                $error.text(resp.alredyExists || 'Ya existe.').show();
+              } else {
+                $error.text(resp.error || 'Error al crear').show();
+              }
+              // Rehabilitar tick si hay texto
+              toggleOk();
+            }
+          }, 'json')
+          .fail(() => {
+            $spin.hide();
+            $input.prop('disabled', false);
+            $btnX.prop('disabled', false);
+            $error.text('Error de red').show();
+            toggleOk();
+            $error[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+        };
   
         // 1) Pulsar Enter => AJAX
         $input.on('keydown', e => {
