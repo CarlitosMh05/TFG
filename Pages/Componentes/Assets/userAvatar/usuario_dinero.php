@@ -28,6 +28,7 @@ function getUserMoney($mysqli, $userId) {
   $stmt->execute();
   $res = $stmt->get_result();
   $row = $res->fetch_assoc();
+  echo("Fetched user money: " . json_encode($row) . "\n");
   $stmt->close();
 
   if (!$row) return null;
