@@ -27,7 +27,7 @@
         </aside>
         <section class="perfil-modal-section" id="perfilModalSection">
         <!-- Aquí se muestra el contenido dinámico -->
-        <div data-section="dinero" class="section-content">
+        <div data-section="dinero" class="section-content active">
             <h3 style="margin-bottom: 18px;">Dinero</h3>
             <div id="dineroContent" class="dinero-content" aria-live="polite">
                 <!-- Aquí pintará JS la UI (cuenta/efectivo/total o solo total) -->
