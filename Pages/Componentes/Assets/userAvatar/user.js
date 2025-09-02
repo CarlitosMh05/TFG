@@ -1422,7 +1422,7 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
         <div class=" dinero-total  " data-field="total" data-mode="view" style="grid-column: 1 / -1;">
           <h4>Dinero total</h4>
           <div class="money-edit">
-            <span class="money-value" data-value="${Number(total)}">${fmtCurrency(total, currency)}</span>
+            <span class="money-value-total" data-value="${Number(total)}">${fmtCurrency(total, currency)}</span>
           </div>
         </div>
 
