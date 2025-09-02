@@ -688,7 +688,9 @@ $(document).ready(function ()
         const $error   = $li.find('div.error-text');
         const $btnOk   = $li.find('.confirm-btn');
         const $btnX    = $li.find('.cancel-btn');
+
         $input.focus();
+        if (window.lucide && lucide.createIcons) { lucide.createIcons(); }
   
         // 1) Pulsar Enter => AJAX
         $input.on('keydown', e => {
