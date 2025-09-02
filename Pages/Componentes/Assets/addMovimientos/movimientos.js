@@ -691,6 +691,14 @@ $(document).ready(function ()
 
         $input.focus();
         if (window.lucide && lucide.createIcons) { lucide.createIcons(); }
+
+        // Habilitar/deshabilitar tick según si hay texto
+        const toggleOk = () => {
+          const hasText = $input.val().trim().length > 0;
+          $btnOk.prop('disabled', !hasText);
+        };
+        $input.on('input', toggleOk);
+        toggleOk();
   
         // 1) Pulsar Enter => AJAX
         $input.on('keydown', e => {
