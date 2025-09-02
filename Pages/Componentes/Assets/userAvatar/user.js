@@ -1535,7 +1535,6 @@ function cargarDinero() {
 
     const currency = moneda || getUserCurrencyFallback();
     const cont = document.getElementById('dineroContent');
-    alert(cont.onclick)
     cont.onclick = async (e) => {
       const row = e.target.closest('.dinero-row');
       if (!row) return;
