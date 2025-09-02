@@ -1443,6 +1443,15 @@ function renderDineroUI({ cuenta, efectivo, moneda }) {
 
 /* Inline edit: cambia a <input type=number> y muestra ✓/✗ */
 function toEditMode(rowEl) {
+  // Cerrar otras filas en edición
+  document.querySelectorAll('.dinero-row[data-mode="edit"]').forEach(el => {
+    if (el !== rowEl) {
+      const original = Number(el.dataset.originalValue ?? 0);
+      const currency = getUserCurrencyFallback();
+      toViewMode(el, fmtCurrency(original, currency), original);
+    }
+  });
+
   const valueEl = rowEl.querySelector('.money-value');
   const currVal = Number(valueEl?.dataset?.value ?? 0);
   rowEl.dataset.mode = 'edit';
