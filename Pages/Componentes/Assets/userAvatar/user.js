@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.style.display = 'block';
     overlay.style.display = 'block';
     document.body.style.overflow = 'hidden';
-    cargarConceptosPerfil();
     cargarDinero();
   }
   function closeModal() {
