@@ -1466,6 +1466,8 @@ function toEditMode(rowEl) {
   inputEl.focus();
   // Coloca el cursor al final
   inputEl.setSelectionRange(inputEl.value.length, inputEl.value.length);
+
+  rowEl.dataset.originalValue = currVal;
 }
 
 function toViewMode(rowEl, newValueFormatted, newRaw) {
