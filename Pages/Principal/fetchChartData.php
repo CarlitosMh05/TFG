@@ -118,6 +118,30 @@ $hasAnyMovements = ($row['total'] ?? 0) > 0;
 $stmt->close();
 
 // 6) Datos para la tendencia (gráfico de barras)
+
+// 1. PRIMERO: Definimos $groupExpr basándonos en la frecuencia
+$trendGroup = $_GET['trendGroup'] ?? $frecuencia;
+switch (strtolower($trendGroup)) { // CORRECCIÓN: El switch debe usar la variable de frecuencia
+    case 'diaria':
+    case 'semanal':
+    case 'mensual':
+        // Día a día
+        $groupExpr = "DATE_FORMAT(COALESCE(fecha_elegida, created_at), '%Y-%m-%d')";
+        break;
+
+    case 'trimestral':
+    case 'anual':
+        // Mes a mes (en el trimestre o en el año completo)
+        $groupExpr = "DATE_FORMAT(COALESCE(fecha_elegida, created_at), '%Y-%m')";
+        break;
+
+    default:
+        // Por defecto día a día
+        $groupExpr = "DATE_FORMAT(COALESCE(fecha_elegida, created_at), '%Y-%m-%d')";
+        break;
+}
+
+// 2. SEGUNDO: Ahora construimos la consulta usando $groupExpr
 $trend = ['labels'=>[], 'data'=>[]];
 $sqlTrend = "
     SELECT
@@ -146,6 +170,7 @@ if ($etiquetaId !== null) {
     $typesTrend .= "i";
 }
 
+// 3. TERCERO: Ejecutamos la consulta y procesamos los resultados
 $stmt = $conn->prepare($sqlTrend);
 $stmt->bind_param($typesTrend, ...$paramsTrend);
 $stmt->execute();
@@ -158,62 +183,6 @@ while ($r = $res->fetch_assoc()) {
         'ingresos' => (float)$r['total_ingresos'],
         'gastos' => (float)$r['total_gastos']
     ];
-}
-$stmt->close();
-
-switch (strtolower($trend)) {
-    case 'diaria':
-    case 'semanal':
-    case 'mensual':
-        // Día a día
-        $groupExpr = "DATE_FORMAT(COALESCE(fecha_elegida, created_at), '%Y-%m-%d')";
-        break;
-
-    case 'trimestral':
-    case 'anual':
-        // Mes a mes (en el trimestre o en el año completo)
-        $groupExpr = "DATE_FORMAT(COALESCE(fecha_elegida, created_at), '%Y-%m')";
-        break;
-
-    default:
-        // Por defecto día a día
-        $groupExpr = "DATE_FORMAT(COALESCE(fecha_elegida, created_at), '%Y-%m-%d')";
-        break;
-}
-
-$trend = ['labels'=>[], 'data'=>[]];
-$sqlTrend = "
-    SELECT
-      $groupExpr AS periodo,
-      SUM(m.cantidad) AS total
-    FROM movimientos m
-";
-if ($etiquetaId !== null) {
-    $sqlTrend .= " JOIN movimiento_etiqueta me ON m.id = me.movimiento_id ";
-}
-$sqlTrend .= " WHERE m.user_id = ?
-      AND DATE(COALESCE(m.fecha_elegida, m.created_at)) BETWEEN ? AND ?
-";
-if ($etiquetaId !== null) {
-    $sqlTrend .= " AND me.etiqueta_id = ?";
-}
-$sqlTrend .= " GROUP BY periodo
-    ORDER BY periodo";
-
-$paramsTrend = [$userId, $startStr, $endStr];
-$typesTrend = "iss";
-if ($etiquetaId !== null) {
-    $paramsTrend[] = $etiquetaId;
-    $typesTrend .= "i";
-}
-
-$stmt = $conn->prepare($sqlTrend);
-$stmt->bind_param($typesTrend, ...$paramsTrend);
-$stmt->execute();
-$res = $stmt->get_result();
-while ($r = $res->fetch_assoc()) {
-    $trend['labels'][] = $r['periodo'];
-    $trend['data'][]   = (float)$r['total'];
 }
 $stmt->close();
 
