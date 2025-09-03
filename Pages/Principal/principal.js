@@ -262,7 +262,6 @@ function createBarChart(ctx, labels, data) {
       scales: {
         x: {
           barPercentage: 0.9,
-          stacked: isXStacked,
           categoryPercentage: 1.0,
           position: 'top',
           stacked: true,
