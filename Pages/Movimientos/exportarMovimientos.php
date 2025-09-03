@@ -14,24 +14,46 @@ $uid = $_SESSION['user_id'];
 $formato = isset($_GET['formato']) ? $_GET['formato'] : 'csv';
 
 // 1. Obtener movimientos con conceptos y etiquetas
+// Uso de sentencia preparada para la consulta principal
 $sql = "SELECT m.id, m.cantidad, m.moneda, c.nombre as concepto, m.observaciones, m.fecha_elegida, m.dia_recurrente, m.frecuencia
         FROM movimientos m
         JOIN conceptos c ON c.id = m.concepto_id
-        WHERE m.user_id = $uid
+        WHERE m.user_id = ?
         ORDER BY m.fecha_elegida DESC, m.id DESC";
-$res = $conn->query($sql);
-
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('i', $uid);
+$stmt->execute();
+$res = $stmt->get_result();
 $movs = [];
+$ids = [];
 while ($row = $res->fetch_assoc()) {
-    // Etiquetas (pueden ser varias)
-    $mid = $row['id'];
-    $etiquetas = [];
-    $q2 = $conn->query("SELECT e.nombre FROM movimiento_etiqueta me JOIN etiquetas e ON e.id = me.etiqueta_id WHERE me.movimiento_id = $mid");
-    while ($etq = $q2->fetch_assoc()) {
-        $etiquetas[] = $etq['nombre'];
+    $movs[$row['id']] = $row;
+    $ids[] = $row['id'];
+}
+$stmt->close();
+
+// Optimización: Unificar la búsqueda de etiquetas
+$etiquetas_map = [];
+if (!empty($ids)) {
+    $in = implode(',', array_fill(0, count($ids), '?'));
+    $sql_etiquetas = "SELECT me.movimiento_id, e.nombre FROM movimiento_etiqueta me JOIN etiquetas e ON me.etiqueta_id = e.id WHERE me.movimiento_id IN ($in)";
+    $stmt2 = $conn->prepare($sql_etiquetas);
+    $types = str_repeat('i', count($ids));
+    $stmt2->bind_param($types, ...$ids);
+    $stmt2->execute();
+    $res2 = $stmt2->get_result();
+    while ($r = $res2->fetch_assoc()) {
+        if (!isset($etiquetas_map[$r['movimiento_id']])) {
+            $etiquetas_map[$r['movimiento_id']] = [];
+        }
+        $etiquetas_map[$r['movimiento_id']][] = $r['nombre'];
     }
-    $row['etiquetas'] = implode(', ', $etiquetas);
-    $movs[] = $row;
+    $stmt2->close();
+}
+
+// Unir los movimientos y las etiquetas
+foreach ($movs as $id => &$mov) {
+    $mov['etiquetas'] = implode(', ', $etiquetas_map[$id] ?? []);
 }
 
 // --- CSV ---
