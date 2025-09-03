@@ -118,8 +118,50 @@ $hasAnyMovements = ($row['total'] ?? 0) > 0;
 $stmt->close();
 
 // 6) Datos para la tendencia (gráfico de barras)
-$trendGroup = $_GET['trendGroup'] ?? $frecuencia;
-switch (strtolower($trendGroup)) {
+$trend = ['labels'=>[], 'data'=>[]];
+$sqlTrend = "
+    SELECT
+      $groupExpr AS periodo,
+      SUM(m.cantidad) AS total_neto,
+      SUM(CASE WHEN m.cantidad >= 0 THEN m.cantidad ELSE 0 END) AS total_ingresos,
+      SUM(CASE WHEN m.cantidad < 0 THEN ABS(m.cantidad) ELSE 0 END) AS total_gastos
+    FROM movimientos m
+";
+if ($etiquetaId !== null) {
+    $sqlTrend .= " JOIN movimiento_etiqueta me ON m.id = me.movimiento_id ";
+}
+$sqlTrend .= " WHERE m.user_id = ?
+      AND DATE(COALESCE(m.fecha_elegida, m.created_at)) BETWEEN ? AND ?
+";
+if ($etiquetaId !== null) {
+    $sqlTrend .= " AND me.etiqueta_id = ?";
+}
+$sqlTrend .= " GROUP BY periodo
+    ORDER BY periodo";
+
+$paramsTrend = [$userId, $startStr, $endStr];
+$typesTrend = "iss";
+if ($etiquetaId !== null) {
+    $paramsTrend[] = $etiquetaId;
+    $typesTrend .= "i";
+}
+
+$stmt = $conn->prepare($sqlTrend);
+$stmt->bind_param($typesTrend, ...$paramsTrend);
+$stmt->execute();
+$res = $stmt->get_result();
+while ($r = $res->fetch_assoc()) {
+    $trend['labels'][] = $r['periodo'];
+    // Enviamos un objeto con los tres valores
+    $trend['data'][]   = [
+        'neto' => (float)$r['total_neto'],
+        'ingresos' => (float)$r['total_ingresos'],
+        'gastos' => (float)$r['total_gastos']
+    ];
+}
+$stmt->close();
+
+switch (strtolower($trend)) {
     case 'diaria':
     case 'semanal':
     case 'mensual':
