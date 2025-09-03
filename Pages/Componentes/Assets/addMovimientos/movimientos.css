@@ -603,6 +603,7 @@ input[type=number]::-webkit-inner-spin-button
   font-size: 14px;
   color: #333;
   font-family: "Inter", sans-serif;
+  opacity: 1 !important;
 }
 
 .radio-container label 
