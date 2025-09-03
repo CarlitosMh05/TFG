@@ -7,10 +7,11 @@ $username = "root";         // Usuario de MySQL
 $password = "";             // Contraseña de MySQL
 $dbname = "tfg";           // Nombre de la base de datos
 
-// $servername = "u982231885_TFG";  // Servidor MySQL
-// $username = "u982231885_root";         // Usuario de MySQL
-// $password = "2#W~3]b~Z";             // Contraseña de MySQL
-// $dbname = "tfg";           // Nombre de la base de datos
+//$servername = "127.0.0.1:3306";  // Servidor MySQL
+//$username = "u982231885_root";         // Usuario de MySQL
+//$password = "2#W~3]b~Z";             // Contraseña de MySQL
+//$dbname = "u982231885_TFG";      // Nombre de la base de datos
+
 
 // Conectar al servidor MySQL (sin seleccionar base de datos)
 $conn = new mysqli($servername, $username, $password);
