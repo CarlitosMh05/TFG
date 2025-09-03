@@ -140,7 +140,7 @@ function createBarChart(ctx, labels, data, mode = 'neto') { // FIX 1: Añadimos 
       {
         label: 'Ingresos',
         data: data.map(d => d?.ingresos > 0 ? d.ingresos : null),
-        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+        backgroundColor: 'rgba(0, 255, 0, 0.7)',
         barPercentage: 0.9,
         categoryPercentage: 0.5, // Deja espacio para la otra barra
         datalabels: {
@@ -152,7 +152,7 @@ function createBarChart(ctx, labels, data, mode = 'neto') { // FIX 1: Añadimos 
       {
         label: 'Gastos',
         data: data.map(d => d?.gastos > 0 ? d.gastos : null),
-        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+        backgroundColor: 'rgba(252, 0, 0, 0.7)',
         barPercentage: 0.9,
         categoryPercentage: 0.5,
         datalabels: {
