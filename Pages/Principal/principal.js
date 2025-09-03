@@ -640,6 +640,17 @@ document.addEventListener('DOMContentLoaded', (e) => {
   lucide.createIcons();
   updateCharts();
 
+  document.getElementById('trendChartSwitch').addEventListener('change', function() {
+        trendChartMode = this.checked ? 'desglose' : 'neto';
+
+        // Si ya hay un gráfico y tenemos datos, lo redibujamos sin hacer otra llamada a la API
+        if (trendChart && lastTrendData) {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            trendChart.destroy();
+            trendChart = createBarChart(ctx, lastTrendData.labels, lastTrendData.data, trendChartMode);
+        }
+    });
+
   const container = document.querySelector('.frecuencia-show-dropdown').closest('.input-container');
 
   $('#frecuenciaShowDisplay').on('click', function (e) {
