@@ -93,7 +93,7 @@
   <div class="row radios-row">
 
     <!-- Tipo de pago -->
-    <div class="radio-container" id="tipoPagoContainer">
+    <div class="radio-container" id="tipoPagoContainer" style="opacity: 1;" >
       <label><input type="radio" name="tipoPago" value="cuenta" checked> Desde la cuenta</label>
       <label><input type="radio" name="tipoPago" value="efectivo"> Efectivo</label>
     </div>
