@@ -151,7 +151,7 @@ function createBarChart(ctx, labels, data, mode = 'neto') { // FIX 1: Añadimos 
       },
       {
         label: 'Gastos',
-        data: data.map(d => d.gastos > 0 ? d.gastos : null),
+        data: data.map(d => d?.gastos > 0 ? d.gastos : null),
         backgroundColor: 'rgba(255, 99, 132, 0.7)',
         barPercentage: 0.9,
         categoryPercentage: 0.5,
