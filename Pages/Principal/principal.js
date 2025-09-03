@@ -128,8 +128,9 @@ function createPieChart(ctx, labels, data) {
 }
 
 function createBarChart(ctx, labels, data) {
-  const positivos = data.map(v => v >= 0 ? v : null);
-  const negativos = data.map(v => v < 0 ? v : null);
+   let datasets = [];
+  let isXStacked = false;
+  let isYStacked = false;
 
   return new Chart(ctx, {
     type: 'bar',
