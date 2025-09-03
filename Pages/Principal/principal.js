@@ -542,7 +542,7 @@ window.updateCharts = function updateCharts() {
         while (d <= customEndDate && count < numMaximoDias) {
           const key = d.toLocaleDateString('sv-SE');
           labels.push(d.toLocaleDateString('es-ES', { day: 'numeric', month: 'numeric' }));
-          values.push(trendMap[key] ?? null);
+          values.push(trendMap[key] ?? { neto: null, ingresos: null, gastos: null });
           d.setDate(d.getDate() + 1);
           count++;
         }
