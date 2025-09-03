@@ -27,47 +27,48 @@ window.cargarMovimientos = function() {
   if (cargando || noMasDatos) return;
   cargando = true;
   $('#movimientosList').append(loadingSpinner);
-  $('#noMovimientosMsg').hide(); 
+  $('#noMovimientosMsg').hide();
 
-  // Solo cargamos una vez TODOS los movimientos (sin paginación backend)
-  if (Object.keys(allMovimientosPorDia).length === 0) {
-    // Montar query (sin offset ni limit)
-    let query = 'fetchMovimientos.php';
-    let params = [];
-    if (filtros.concepto_id) params.push(`concepto_id=${encodeURIComponent(filtros.concepto_id)}`);
-    if (filtros.etiqueta_id) params.push(`etiqueta_id=${encodeURIComponent(filtros.etiqueta_id)}`);
-    if (filtros.fecha_inicio) params.push(`fecha_inicio=${encodeURIComponent(filtros.fecha_inicio)}`);
-    if (filtros.fecha_fin) params.push(`fecha_fin=${encodeURIComponent(filtros.fecha_fin)}`);
-    if (params.length > 0) query += '?' + params.join('&');
+  let query = 'fetchMovimientos.php';
+  let params = [];
+  params.push(`offset=${offset}`);
+  params.push(`limit=${20}`); // Cantidad fija para la carga inicial
+  if (filtros.concepto_id) params.push(`concepto_id=${encodeURIComponent(filtros.concepto_id)}`);
+  if (filtros.etiqueta_id) params.push(`etiqueta_id=${encodeURIComponent(filtros.etiqueta_id)}`);
+  if (filtros.fecha_inicio) params.push(`fecha_inicio=${encodeURIComponent(filtros.fecha_inicio)}`);
+  if (filtros.fecha_fin) params.push(`fecha_fin=${encodeURIComponent(filtros.fecha_fin)}`);
+  if (params.length > 0) query += '?' + params.join('&');
 
-    $.getJSON(query, function(resp) {
-      loadingSpinner.detach();
-      cargando = false;
-      if (!resp.success) {
-        $('#movimientosList').append(`<div style="color:red;padding:30px;">Error: ${resp.error || "Error al cargar movimientos"}</div>`);
-        return;
-      }
-      allMovimientosPorDia = resp.data || {};
-      fechasOrdenadas = Object.keys(allMovimientosPorDia).sort((a, b) => b.localeCompare(a)); // Descendente
-      mostradosPorDia = {};
-      totalMovsMostrados = 0;
-      // Si no hay movimientos
-      if (fechasOrdenadas.length === 0) {
-        $('#movimientosList').hide();
-        $('#noMovimientosMsg').show();
-        noMasDatos = true;
-        return;
-      }
-      $('#noMovimientosMsg').hide();
-      $('#movimientosList').show();
-      // Primer scroll: mostrar los primeros 20
-      window.cargarMasMovimientos();
-    });
-  } else {
+  $.getJSON(query, function(resp) {
     loadingSpinner.detach();
     cargando = false;
-    window.cargarMasMovimientos();
-  }
+    if (!resp.success) {
+      $('#movimientosList').append(`<div style="color:red;padding:30px;">Error: ${resp.error || "Error al cargar movimientos"}</div>`);
+      noMasDatos = true;
+      return;
+    }
+
+    if (!resp.data || Object.keys(resp.data).length === 0) {
+        if (offset === 0) {
+            $('#movimientosList').hide();
+            $('#noMovimientosMsg').show();
+        }
+        noMasDatos = true;
+        return;
+    }
+
+    $('#noMovimientosMsg').hide();
+    $('#movimientosList').show();
+
+    // Renderizar los movimientos directamente de la respuesta del servidor
+    // (Lógica de renderizado eliminada para simplificar, se trasladará a una función)
+    window.renderizarMovimientos(resp.data);
+    offset += 20; // Actualizamos el offset para la siguiente llamada
+  }).fail(function(jqXHR, textStatus, errorThrown) {
+    loadingSpinner.detach();
+    cargando = false;
+    $('#movimientosList').append(`<div style="color:red;padding:30px;">Error de red: ${textStatus}</div>`);
+  });
 };
 
 window.cargarMasMovimientos = function() {
