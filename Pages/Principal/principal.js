@@ -620,7 +620,7 @@ window.updateCharts = function updateCharts() {
         trendEl.style.display = 'block';
         const ctx2 = document.getElementById('trendChart').getContext('2d');
         if (trendChart) trendChart.destroy();
-        trendChart = createBarChart(ctx2, labels, values);
+        trendChart = createBarChart(ctx2, lastTrendData.labels, lastTrendData.data, trendChartMode);
       }
     }
   );
