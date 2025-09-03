@@ -264,7 +264,7 @@ function createBarChart(ctx, labels, data) {
           barPercentage: 0.9,
           categoryPercentage: 1.0,
           position: 'top',
-          stacked: true,
+          stacked: isXStacked,
           ticks: {
             autoSkip: true,
             maxRotation: 0,
@@ -273,7 +273,7 @@ function createBarChart(ctx, labels, data) {
         },
         y: {
           beginAtZero: true,
-          stacked: true,
+          stacked: isYStacked,
           grid: {
             drawBorder: false,
             drawOnChartArea: true,
