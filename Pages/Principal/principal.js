@@ -128,7 +128,7 @@ function createPieChart(ctx, labels, data) {
 }
 
 function createBarChart(ctx, labels, data) {
-   let datasets = [];
+  let datasets = [];
   let isXStacked = false;
   let isYStacked = false;
 
