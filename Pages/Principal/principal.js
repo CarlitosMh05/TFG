@@ -166,8 +166,8 @@ function createBarChart(ctx, labels, data, mode = 'neto') { // FIX 1: Añadimos 
     // MODO NETO (como estaba antes, pero usando los nuevos datos)
     isXStacked = true;
     isYStacked = true;
-    const positivos = data.map(v => v.neto >= 0 ? v.neto : null);
-    const negativos = data.map(v => v.neto < 0 ? v.neto : null);
+    const positivos = data.map(v => v && v.neto !== null && v.neto >= 0 ? v.neto : null);
+    const negativos = data.map(v => v && v.neto !== null && v.neto < 0 ? v.neto : null);
 
     datasets = [
       {
