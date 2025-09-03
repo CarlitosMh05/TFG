@@ -1493,6 +1493,59 @@ h1 {
   animation: spin 0.8s linear infinite;
   margin: 0 auto;
 }
+
+/* Modales - Solución unificada */
+.modal-imagen-mov-overlay,
+.modal-admin-datos-overlay,
+.mini-modal-overlay,
+.perfil-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-imagen-mov-overlay.active,
+.modal-admin-datos-overlay.active,
+.mini-modal-overlay.active,
+.perfil-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-imagen-mov,
+.modal-admin-datos,
+.mini-modal,
+.perfil-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  position: relative;
+}
+
+.modal-imagen-mov-overlay.active .modal-imagen-mov,
+.modal-admin-datos-overlay.active .modal-admin-datos,
+.mini-modal-overlay.active .mini-modal,
+.perfil-modal-overlay.active .perfil-modal {
+  transform: scale(1);
+  opacity: 1;
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
