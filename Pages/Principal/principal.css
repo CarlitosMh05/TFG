@@ -569,6 +569,9 @@ html
   margin-top: 8px;
   font-size: 0.9rem;
   color: #555;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .switch {
