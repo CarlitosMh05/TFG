@@ -244,17 +244,8 @@ $net = $totalIncome - $totalExpense;
           <div class="chart-box" id="trendChartContainer" style="display: none;">
             <div class="chart-title" id="trendChartTitle">
               <h1 class="title" style="font-size: 1.5rem"></h1>
-
-              <div class="switch-container">
-                <span>Resumen Neto</span>
-                <label class="switch">
-                    <input type="checkbox" id="trendChartSwitch">
-                    <span class="slider round"></span>
-                </label>
-                <span>Ingreso/Gasto</span>
-              </div>
             </div>
-            
+
             <canvas id="trendChart"></canvas>
           </div>
         </div>
