@@ -60,6 +60,7 @@ html
     background: #F7F7F7;
     border-radius: 75px;
     margin: 30px 0;
+    position: relative;
   }
 
   .charts-wrapper
