@@ -963,7 +963,7 @@ $(document).ready(function ()
 
     // Envío con AJAX
     $.ajax({
-      url: '../Componentes/assets/addMovimientos/conexionPrincipal.php',
+      url: '../Componentes/Assets/addMovimientos/conexionPrincipal.php',
       type: 'POST',
       data: formData,
       processData: false,   // importante para FormData
