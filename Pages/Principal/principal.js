@@ -4,6 +4,9 @@ let expenseChart, incomeChart, trendChart;
 let selectedEtiquetaId = null; // null = sin filtro de etiqueta
 let etiquetasList = [];
 
+let trendChartMode = 'neto'; // Puede ser 'neto' o 'desglose'
+let lastTrendData = null; // Para guardar los datos del último fetch
+
 // Formatea números con espacio cada 3 dígitos y decimales opcionales
 function formatNumber(num, decimals = 2) {
   const fixed = num.toFixed(decimals);
