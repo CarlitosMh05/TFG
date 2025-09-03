@@ -613,6 +613,9 @@ window.updateCharts = function updateCharts() {
       } else {
         document.getElementById('stickyLimit').style.display = 'block';
         document.getElementById('trendChartsContainer').style.display = 'block';
+
+        lastTrendData = { labels, data: values }; // Guardamos los datos
+
         const trendEl = document.getElementById('trendChartContainer');
         trendEl.style.display = 'block';
         const ctx2 = document.getElementById('trendChart').getContext('2d');
