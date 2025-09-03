@@ -127,7 +127,7 @@ function createPieChart(ctx, labels, data) {
   });
 }
 
-function createBarChart(ctx, labels, data) {
+function createBarChart(ctx, labels, data, mode = 'neto') { // FIX 1: Añadimos 'mode' como parámetro con un valor por defecto
   let datasets = [];
   let isXStacked = false;
   let isYStacked = false;
@@ -201,32 +201,7 @@ function createBarChart(ctx, labels, data) {
     type: 'bar',
     data: {
       labels,
-      datasets: [
-        {
-          label: 'Días positivos',
-          data: positivos,
-          backgroundColor: 'rgba(0, 255, 0, 0.7)',
-          barPercentage: 0.9,
-          categoryPercentage: 1.0,
-          datalabels: {
-            color: 'black',
-            display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
-            formatter: v => v != null ? formatNumber(v) + ' €' : ''
-          }
-        },
-        {
-          label: 'Días negativos',
-          data: negativos,
-          backgroundColor: 'rgba(252, 0, 0, 0.7)',
-          barPercentage: 0.9,
-          categoryPercentage: 1.0,
-          datalabels: {
-            color: 'black',
-            display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
-            formatter: v => v != null ? formatNumber(v) + ' €' : ''
-          }
-        }
-      ]
+      datasets: datasets // FIX 2: Usamos la variable 'datasets' que hemos preparado en el if/else
     },
     options: {
       animation: false,
@@ -255,7 +230,17 @@ function createBarChart(ctx, labels, data) {
               }
               return 'Ir al día';
             },
-            label: () => ''
+            // Pequeña mejora para que el tooltip muestre el valor correcto en ambos modos
+            label: function(context) {
+                let label = context.dataset.label || '';
+                if (label) {
+                    label += ': ';
+                }
+                if (context.parsed.y !== null) {
+                    label += formatNumber(context.parsed.y) + ' €';
+                }
+                return label;
+            }
           }
         }
       },
