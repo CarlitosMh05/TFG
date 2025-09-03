@@ -252,6 +252,15 @@ $net = $totalIncome - $totalExpense;
 
       </div>
 
+      <div class="switch-container">
+                <span>Resumen Neto</span>
+                <label class="switch">
+                    <input type="checkbox" id="trendChartSwitch">
+                    <span class="slider round"></span>
+                </label>
+                <span>Ingreso/Gasto</span>
+              </div>
+
       <div id="noMovimientos" class="no-movimientos" style="display: none;">
         <p>Todavía no tienes ningun movimiento</p>
         <p>Añade uno ahora</p>
