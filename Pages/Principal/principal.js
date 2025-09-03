@@ -139,7 +139,7 @@ function createBarChart(ctx, labels, data, mode = 'neto') { // FIX 1: Añadimos 
     datasets = [
       {
         label: 'Ingresos',
-        data: data.map(d => d.ingresos > 0 ? d.ingresos : null),
+        data: data.map(d => d?.ingresos > 0 ? d.ingresos : null),
         backgroundColor: 'rgba(75, 192, 192, 0.7)',
         barPercentage: 0.9,
         categoryPercentage: 0.5, // Deja espacio para la otra barra
