@@ -132,6 +132,71 @@ function createBarChart(ctx, labels, data) {
   let isXStacked = false;
   let isYStacked = false;
 
+  if (mode === 'desglose') {
+    // MODO DESGLOSE: dos barras (ingresos, gastos) una al lado de la otra
+    isXStacked = false;
+    isYStacked = false;
+    datasets = [
+      {
+        label: 'Ingresos',
+        data: data.map(d => d.ingresos > 0 ? d.ingresos : null),
+        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+        barPercentage: 0.9,
+        categoryPercentage: 0.5, // Deja espacio para la otra barra
+        datalabels: {
+          color: 'black',
+          display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
+          formatter: v => v != null ? formatNumber(v) + ' €' : ''
+        }
+      },
+      {
+        label: 'Gastos',
+        data: data.map(d => d.gastos > 0 ? d.gastos : null),
+        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+        barPercentage: 0.9,
+        categoryPercentage: 0.5,
+        datalabels: {
+          color: 'black',
+          display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
+          formatter: v => v != null ? formatNumber(v) + ' €' : ''
+        }
+      }
+    ];
+  } else {
+    // MODO NETO (como estaba antes, pero usando los nuevos datos)
+    isXStacked = true;
+    isYStacked = true;
+    const positivos = data.map(v => v.neto >= 0 ? v.neto : null);
+    const negativos = data.map(v => v.neto < 0 ? v.neto : null);
+
+    datasets = [
+      {
+        label: 'Días positivos',
+        data: positivos,
+        backgroundColor: 'rgba(0, 255, 0, 0.7)',
+        barPercentage: 0.9,
+        categoryPercentage: 1.0,
+        datalabels: {
+          color: 'black',
+          display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
+          formatter: v => v != null ? formatNumber(v) + ' €' : ''
+        }
+      },
+      {
+        label: 'Días negativos',
+        data: negativos,
+        backgroundColor: 'rgba(252, 0, 0, 0.7)',
+        barPercentage: 0.9,
+        categoryPercentage: 1.0,
+        datalabels: {
+          color: 'black',
+          display: ctx => ctx.dataset.data[ctx.dataIndex] != null,
+          formatter: v => v != null ? formatNumber(v) + ' €' : ''
+        }
+      }
+    ];
+  }
+
   return new Chart(ctx, {
     type: 'bar',
     data: {
