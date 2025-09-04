@@ -189,6 +189,8 @@ $(document).ready(function ()
     // Reemplazar siempre punto por coma
     v = v.replace(/\./g, ',');
 
+    $(this).val(v);
+    
     // 0) Normaliza un posible '+' al principio (algunos teclados lo ponen)
     if (v.startsWith('+')) {
       v = v.slice(1);
