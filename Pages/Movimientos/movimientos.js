@@ -996,7 +996,6 @@ $(function () {
       formData.append('observaciones', observaciones);
       if (tipoPago) formData.append('tipo_pago', tipoPago);
       formData.append('moneda', moneda);
-      if (tipoPago) formData.append('tipo_pago', tipoPago); // <-- NUEVO
       if (etiquetasCsv) formData.append('etiquetas', etiquetasCsv);
 
       $.ajax({
