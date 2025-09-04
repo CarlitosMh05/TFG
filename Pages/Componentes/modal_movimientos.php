@@ -24,7 +24,7 @@
         </button>
       </div>
 
-      <input type="text" id="cantidad" placeholder=" " required>
+      <input type="text" id="cantidad" placeholder=" " required autocomplete="off">
       <label for="cantidad" id="labelCantidad">Cantidad</label>
       
       <!-- Dropdown monedas -->
