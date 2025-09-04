@@ -878,102 +878,102 @@ $(function () {
   }
 
   function confirmarEdicionFila($row, mov) {
-  mostrarMiniModal('¿Seguro que quieres aplicar los cambios?', function(confirmado) {
-    if (!confirmado) return;
+    mostrarMiniModal('¿Seguro que quieres aplicar los cambios?', function(confirmado) {
+      if (!confirmado) return;
 
-    const $spinner = $row.find('.spinner-confirmar');
-    $spinner.show();
-    $row.find('.tick-editar-btn i').hide();
+      const $spinner = $row.find('.spinner-confirmar');
+      $spinner.show();
+      $row.find('.tick-editar-btn i').hide();
 
-    // Recolectar valores de la edición
-    const cantidadStr = ($row.find('.input-cantidad').val() || '').trim();
-    const cantidad = cantidadStr === '' ? null : parseFloat(cantidadStr);
-    const moneda = $row.find('.selected-currency').val() || 'EUR';
-    const concepto = $row.find('.selected-concepto').val() || '';
-    const observaciones = $row.find('.input-observaciones').val() || '';
-    const tipoPago = ($row.find('.input-tipo-pago').val() || '').trim(); // <-- NUEVO
-    const etiquetasCsv = $row.find('.input-etiquetas').val() || '';
-    const formData = new FormData();
+      // Recolectar valores de la edición
+      const cantidadStr = ($row.find('.input-cantidad').val() || '').trim();
+      const cantidad = cantidadStr === '' ? null : parseFloat(cantidadStr);
+      const moneda = $row.find('.selected-currency').val() || 'EUR';
+      const concepto = $row.find('.selected-concepto').val() || '';
+      const observaciones = $row.find('.input-observaciones').val() || '';
+      const tipoPago = ($row.find('.input-tipo-pago').val() || '').trim(); // <-- NUEVO
+      const etiquetasCsv = $row.find('.input-etiquetas').val() || '';
+      const formData = new FormData();
 
-    formData.append('id', String(mov.id));
-    if (cantidad !== null && !Number.isNaN(cantidad)) formData.append('cantidad', cantidad);
-    if (concepto) formData.append('concepto_id_nombre', concepto); // si usas id real, cambia a concepto_id
-    formData.append('observaciones', observaciones);
-    formData.append('moneda', moneda);
-    if (tipoPago) formData.append('tipo_pago', tipoPago); // <-- NUEVO
-    if (etiquetasCsv) formData.append('etiquetas', etiquetasCsv);
+      formData.append('id', String(mov.id));
+      if (cantidad !== null && !Number.isNaN(cantidad)) formData.append('cantidad', cantidad);
+      if (concepto) formData.append('concepto_id_nombre', concepto); // si usas id real, cambia a concepto_id
+      formData.append('observaciones', observaciones);
+      formData.append('moneda', moneda);
+      if (tipoPago) formData.append('tipo_pago', tipoPago); // <-- NUEVO
+      if (etiquetasCsv) formData.append('etiquetas', etiquetasCsv);
 
-    $.ajax({
-      url: 'updateMovimiento.php', // ajusta ruta si la tienes en otro sitio
-      method: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      dataType: 'json'
-    }).done(function(resp) {
-      if (!resp || resp.error) {
-        alert(resp?.error || 'Error al actualizar');
-        return;
-      }
-
-      // Actualizar DOM de la fila (sin recargar todo)
-      const cantNum = (cantidad !== null && !Number.isNaN(cantidad)) ? cantidad : parseFloat(mov.cantidad);
-      const esIngreso = cantNum > 0;
-      const cantidadTxt = Math.abs(cantNum).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ' + (moneda === 'EUR' ? '€' : moneda);
-      $row.html(`
-        <div class="mov-col">
-          <div class="movimiento-cantidad ${esIngreso ? 'ingreso' : 'gasto'}">${(cantNum).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})} ${moneda==='EUR'?'€':moneda}</div>
-        </div>
-        <div class="mov-col">
-          <div class="movimiento-concepto">${concepto || mov.concepto}</div>
-        </div>
-        <div class="mov-col">
-          ${(etiquetasCsv||'').split(',').filter(Boolean).map(e => `<span class="chip-etiqueta">${e}</span>`).join('')}
-        </div>
-        <div class="mov-col">
-          ${observaciones ? `<div class="observaciones">${observaciones}</div>` : ''}
-        </div>
-        <div class="mov-col mov-col-tipo" data-value="${tipoPago || mov.tipo_pago || ''}">
-          ${tipoPago || mov.tipo_pago || ''}
-        </div>
-        <div class="mov-col mov-col-img">
-          ${$row.find('.uploaded-preview img').length ? $row.find('.uploaded-preview').prop('outerHTML') : ''}
-        </div>
-        <div style="display:flex;justify-content:flex-end;">
-          <button class="mov-action-btn editar-mov-btn" data-id="${mov.id}" title="Editar movimiento"><i data-lucide="pencil"></i></button>
-          <button class="mov-action-btn eliminar-mov-btn" data-id="${mov.id}" title="Eliminar movimiento"><i data-lucide="trash-2"></i></button>
-        </div>
-      `);
-      if (window.lucide) lucide.createIcons();
-
-      // Actualiza cache en memoria (allMovimientosPorDia) para mantener coherencia
-      for (const fecha of Object.keys(allMovimientosPorDia)) {
-        const idx = allMovimientosPorDia[fecha].findIndex(m => m.id == mov.id);
-        if (idx >= 0) {
-          const mref = allMovimientosPorDia[fecha][idx];
-          if (cantidad !== null && !Number.isNaN(cantidad)) mref.cantidad = cantidad;
-          if (concepto) mref.concepto = concepto;
-          mref.observaciones = observaciones;
-          mref.moneda = moneda;
-          if (tipoPago) mref.tipo_pago = tipoPago; // <-- NUEVO
-          mref.etiquetas = (etiquetasCsv||'').split(',').filter(Boolean).map(n => ({nombre:n}));
-          break;
+      $.ajax({
+        url: 'updateMovimiento.php', // ajusta ruta si la tienes en otro sitio
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json'
+      }).done(function(resp) {
+        if (!resp || resp.error) {
+          alert(resp?.error || 'Error al actualizar');
+          return;
         }
-      }
 
-      // Si prefieres recalcular resúmenes y todo el día:
-      // reiniciarYcargar(window.scrollY);
+        // Actualizar DOM de la fila (sin recargar todo)
+        const cantNum = (cantidad !== null && !Number.isNaN(cantidad)) ? cantidad : parseFloat(mov.cantidad);
+        const esIngreso = cantNum > 0;
+        const cantidadTxt = Math.abs(cantNum).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ' + (moneda === 'EUR' ? '€' : moneda);
+        $row.html(`
+          <div class="mov-col">
+            <div class="movimiento-cantidad ${esIngreso ? 'ingreso' : 'gasto'}">${(cantNum).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})} ${moneda==='EUR'?'€':moneda}</div>
+          </div>
+          <div class="mov-col">
+            <div class="movimiento-concepto">${concepto || mov.concepto}</div>
+          </div>
+          <div class="mov-col">
+            ${(etiquetasCsv||'').split(',').filter(Boolean).map(e => `<span class="chip-etiqueta">${e}</span>`).join('')}
+          </div>
+          <div class="mov-col">
+            ${observaciones ? `<div class="observaciones">${observaciones}</div>` : ''}
+          </div>
+          <div class="mov-col mov-col-tipo" data-value="${tipoPago || mov.tipo_pago || ''}">
+            ${tipoPago || mov.tipo_pago || ''}
+          </div>
+          <div class="mov-col mov-col-img">
+            ${$row.find('.uploaded-preview img').length ? $row.find('.uploaded-preview').prop('outerHTML') : ''}
+          </div>
+          <div style="display:flex;justify-content:flex-end;">
+            <button class="mov-action-btn editar-mov-btn" data-id="${mov.id}" title="Editar movimiento"><i data-lucide="pencil"></i></button>
+            <button class="mov-action-btn eliminar-mov-btn" data-id="${mov.id}" title="Eliminar movimiento"><i data-lucide="trash-2"></i></button>
+          </div>
+        `);
+        if (window.lucide) lucide.createIcons();
 
-    }).fail(function() {
-      alert('Error de red al actualizar');
-    }).always(function() {
-      $spinner.hide();
-      $row.find('.tick-editar-btn i').show();
-      movimientoEditandoId = null;
-      $('.editar-mov-btn').show();
+        // Actualiza cache en memoria (allMovimientosPorDia) para mantener coherencia
+        for (const fecha of Object.keys(allMovimientosPorDia)) {
+          const idx = allMovimientosPorDia[fecha].findIndex(m => m.id == mov.id);
+          if (idx >= 0) {
+            const mref = allMovimientosPorDia[fecha][idx];
+            if (cantidad !== null && !Number.isNaN(cantidad)) mref.cantidad = cantidad;
+            if (concepto) mref.concepto = concepto;
+            mref.observaciones = observaciones;
+            mref.moneda = moneda;
+            if (tipoPago) mref.tipo_pago = tipoPago; // <-- NUEVO
+            mref.etiquetas = (etiquetasCsv||'').split(',').filter(Boolean).map(n => ({nombre:n}));
+            break;
+          }
+        }
+
+        // Si prefieres recalcular resúmenes y todo el día:
+        // reiniciarYcargar(window.scrollY);
+
+      }).fail(function() {
+        alert('Error de red al actualizar');
+      }).always(function() {
+        $spinner.hide();
+        $row.find('.tick-editar-btn i').show();
+        movimientoEditandoId = null;
+        $('.editar-mov-btn').show();
+      });
     });
-  });
-}
+  }
 
   function cancelarEdicionFila($row, mov) {
     mostrarMiniModal('¿Seguro que quieres cancelar la edición?', function(confirmado) {
