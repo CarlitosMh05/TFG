@@ -23,8 +23,30 @@ $(document).ready(function ()
   let conceptoIngresoPredeterminadoId = null;
   let conceptoGastoPredeterminadoId = null;
 
+  function resetErrorsUI() {
+    // Quitar estados de error y mensajes
+    $('.input-container').removeClass('error');
+    $('.bad-text').hide();
+
+    // Quitar bordes/colores inline
+    $('#cantidad, #observaciones').css('border','');
+    $('#conceptoDisplay').css({ border:'', color:'' });
+    $('#conceptoDisplay').closest('.input-container').find('label').css('color','gray');
+
+    // Asegura dropdowns cerrados y sin estilos "open"
+    $('#conceptoOptions, #etiquetaOptions, #frecuenciaOptions, #currencyOptions').hide();
+    $('#conceptoDisplay, #etiquetaDisplay, #frecuenciaDisplay, #currencyDisplay').removeClass('open');
+  }
+
   /*Cargar las opciones y aparecer el modal al hacer click */
   addBtn.addEventListener("click", () => {
+
+      // Evita doble click rápido y reentradas
+    if (document.body.classList.contains('modal-open') || modal.style.display === "block") return;
+    addBtn.disabled = true; setTimeout(() => addBtn.disabled = false, 300);
+
+    // Limpia estado anterior (errores, bordes, labels, dropdowns…)
+    resetErrorsUI();
 
     // 1. Obtener predeterminados del usuario
     $.getJSON('../Componentes/Assets/userAvatar/getPredeterminados.php', resp => {
@@ -963,7 +985,7 @@ $(document).ready(function ()
     
     // —— Construir FormData usando las variables ——  
     const formData = new FormData();
-    
+
     formData.append('cantidad',      cantidad);
     formData.append('moneda',        moneda);
     formData.append('concepto',      concepto);
