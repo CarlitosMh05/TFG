@@ -208,9 +208,11 @@ $(document).ready(function ()
 
     // 4) Si no hay nada, no fuerces el signo; si hay algo, marca "+"
     if (v === '') {
-      // $plus.addClass('active');
-      // $minus.removeClass('active');
-    } 
+      return; // deja los botones como estaban
+    } else {
+      $plus.addClass('active');
+      $minus.removeClass('active');
+    }
 
     
   });
