@@ -1310,6 +1310,10 @@ h1 {
   pointer-events: none;
 }
 
+.tipo-display.open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
 .tipo-dropdown .tipo-display.open {
   border-color: var(--azulPrimario);
   border-width: 3px;
