@@ -358,19 +358,19 @@ $(function () {
         </div>
       </div>
 
-      +     <div class="mov-col">
-+       <!-- Tipo de pago (dropdown personalizado, igual patrón que moneda/concepto) -->
-+       <div class="input-container tipo-dropdown edicion-tipo" data-id="${mov.id}">
-+         <input type="hidden" class="selected-tipo" value="${mov.tipo_pago || ''}">
-+         <div class="tipo-display">${(mov.tipo_pago && mov.tipo_pago.trim()!=='') ? mov.tipo_pago : 'Seleccionar tipo'}</div>
-+         <ul class="tipo-options">
-+           ${(!['cuenta','efectivo'].includes(String(mov.tipo_pago||'').toLowerCase())) ? `<li data-value="${mov.tipo_pago||''}">${mov.tipo_pago||''}</li>` : ''}
-+           <li data-value="cuenta">cuenta</li>
-+           <li data-value="efectivo">efectivo</li>
-+         </ul>
-+         <p class="badTipo bad-text" style="display:none;"></p>
-+       </div>
-+     </div>
+      <div class="mov-col">
+        <!-- Tipo de pago (dropdown personalizado, igual patrón que moneda/concepto) -->
+        <div class="input-container tipo-dropdown edicion-tipo" data-id="${mov.id}">
+          <input type="hidden" class="selected-tipo" value="${mov.tipo_pago || ''}">
+          <div class="tipo-display">${(mov.tipo_pago && mov.tipo_pago.trim()!=='') ? mov.tipo_pago : 'Seleccionar tipo'}</div>
+          <ul class="tipo-options">
+            ${(!['cuenta','efectivo'].includes(String(mov.tipo_pago||'').toLowerCase())) ? `<li data-value="${mov.tipo_pago||''}">${mov.tipo_pago||''}</li>` : ''}
+            <li data-value="cuenta">cuenta</li>
+            <li data-value="efectivo">efectivo</li>
+          </ul>
+          <p class="badTipo bad-text" style="display:none;"></p>
+        </div>
+      </div>
 
       <div class="mov-col mov-col-img">
         ${mov.imagen && mov.imagen !== 'NULL' && mov.imagen !== '' ?
@@ -485,6 +485,22 @@ $(function () {
       $currencyDisplay.text($(this).data('symbol')).removeClass('open');
       $row.find('.selected-currency').val($(this).data('value'));
       $currencyOptions.fadeOut(150);
+    });
+
+    const $tipoDisplay = $row.find('.tipo-display');
+    const $tipoOptions = $row.find('.tipo-options');
+
+    $tipoDisplay.on('click', function() {
+      $tipoOptions.fadeToggle(150);
+      $(this).toggleClass('open');
+    });
+
+    $tipoOptions.on('click', 'li', function() {
+      const val = $(this).data('value');
+      $row.find('.selected-tipo').val(val);
+      $tipoDisplay.text(val).removeClass('open');
+      $tipoOptions.fadeOut(150);
+      $row.find('.badTipo').hide();
     });
 
     // Concepto dropdown (similar a modal)
