@@ -195,6 +195,9 @@ window.cargarMasMovimientos = function() {
             <div class="mov-col">
               ${obsHtml}
             </div>
+            <div class="mov-col mov-col-tipo" data-value="${(mov.tipo_pago||'').trim()}">
+              ${mov.tipo_pago ? mov.tipo_pago : ''}
+            </div>
             <div class="mov-col mov-col-img">
               ${imgHtml}
             </div>
