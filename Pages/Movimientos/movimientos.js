@@ -504,12 +504,7 @@ $(function () {
       });
 
     
-    // El botón con el icono abre/cierra el calendario
-    $row.find('.btn-open-fecha').on('click', function(e) {
-      e.preventDefault();
-      fp.isOpen ? fp.close() : fp.open();
-    });
-
+    
 
     // 1. Botón +/– y cantidad (idéntico a tu modal pero adaptado a clases)
     const $cantidad = $row.find('.input-cantidad');
