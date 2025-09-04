@@ -188,9 +188,6 @@ $(document).ready(function ()
       v = v.slice(1);
       $(this).val(v);
     }
-
-    alert(v);
-
     
     // 2) Si el usuario escribe '-' al inicio, respetamos y activamos "–"
     if (v.startsWith('-')) {
