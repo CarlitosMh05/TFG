@@ -67,7 +67,7 @@ try {
   $stmt->close();
 
   $mysqli->commit();
-  echo json_encode(['ok' => true, 'id' => $id]);
+  echo json_encode(['success' => true, 'id' => $id]);
 
 } catch (Exception $e) {
   $mysqli->rollback();
