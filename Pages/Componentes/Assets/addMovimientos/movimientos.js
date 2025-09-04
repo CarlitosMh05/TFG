@@ -173,7 +173,6 @@ $(document).ready(function ()
   });
 
   // Si el usuario edita el input manualmente, sincronizamos botones
-  // Si el usuario edita el input manualmente, sincronizamos botones
   $cantidad.on('input', function () {
     let v = $(this).val();
 
@@ -190,7 +189,7 @@ $(document).ready(function ()
     v = v.replace(/\./g, ',');
 
     $(this).val(v);
-    
+
     // 0) Normaliza un posible '+' al principio (algunos teclados lo ponen)
     if (v.startsWith('+')) {
       v = v.slice(1);
