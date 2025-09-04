@@ -1298,6 +1298,18 @@ h1 {
   text-overflow: ellipsis;
   background-color: white;
 }
+
+.tipo-display::after {
+  content: "⮟";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 12px;
+  pointer-events: none;
+}
+
 .tipo-dropdown .tipo-display.open {
   border-color: var(--azulPrimario);
   border-width: 3px;
