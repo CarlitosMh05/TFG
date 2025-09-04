@@ -927,7 +927,7 @@ $(function () {
       const moneda = $row.find('.selected-currency').val() || 'EUR';
       const concepto = $row.find('.selected-concepto').val() || '';
       const observaciones = $row.find('.input-observaciones').val() || '';
-            const tipoPago = ($row.find('.selected-tipo').val() || $row.find('.tipo-display').text() || '').trim();
+      const tipoPago = ($row.find('.selected-tipo').val() || $row.find('.tipo-display').text() || '').trim();
       const etiquetasCsv = $row.find('.input-etiquetas').val() || '';
       const formData = new FormData();
 
@@ -935,6 +935,7 @@ $(function () {
       if (cantidad !== null && !Number.isNaN(cantidad)) formData.append('cantidad', cantidad);
       if (concepto) formData.append('concepto_id_nombre', concepto); // si usas id real, cambia a concepto_id
       formData.append('observaciones', observaciones);
+      if (tipoPago) formData.append('tipo_pago', tipoPago);
       formData.append('moneda', moneda);
       if (tipoPago) formData.append('tipo_pago', tipoPago); // <-- NUEVO
       if (etiquetasCsv) formData.append('etiquetas', etiquetasCsv);
