@@ -183,6 +183,8 @@ $(document).ready(function ()
       $(this).val(v);
     }
 
+    alert(v);
+
     // 1) Estados parciales de escritura: NO tocar nada
     //    ".", "-.", "12.", "-12."
     const isPartialDecimal = (v === '.') || (v === '-.') || v.endsWith('.');
