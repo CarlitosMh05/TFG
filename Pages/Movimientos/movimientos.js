@@ -357,17 +357,21 @@ $(function () {
           <label>Observaciones</label>
         </div>
       </div>
-      <div class="mov-col">
-        <!-- Tipo de pago -->
-        <div class="input-container edicion-tipo-pago" data-id="${mov.id}">
-          <select class="input-tipo-pago">
-            ${(!['cuenta','efectivo'].includes(String(mov.tipo_pago||'').toLowerCase())) ? `<option value="${mov.tipo_pago||''}" selected>${mov.tipo_pago||''}</option>` : ''}
-            <option value="cuenta"   ${String(mov.tipo_pago||'').toLowerCase()==='cuenta'?'selected':''}>cuenta</option>
-            <option value="efectivo" ${String(mov.tipo_pago||'').toLowerCase()==='efectivo'?'selected':''}>efectivo</option>
-          </select>
-          <label>Tipo de pago</label>
-        </div>
-      </div>
+
+      +     <div class="mov-col">
++       <!-- Tipo de pago (dropdown personalizado, igual patrón que moneda/concepto) -->
++       <div class="input-container tipo-dropdown edicion-tipo" data-id="${mov.id}">
++         <input type="hidden" class="selected-tipo" value="${mov.tipo_pago || ''}">
++         <div class="tipo-display">${(mov.tipo_pago && mov.tipo_pago.trim()!=='') ? mov.tipo_pago : 'Seleccionar tipo'}</div>
++         <ul class="tipo-options">
++           ${(!['cuenta','efectivo'].includes(String(mov.tipo_pago||'').toLowerCase())) ? `<li data-value="${mov.tipo_pago||''}">${mov.tipo_pago||''}</li>` : ''}
++           <li data-value="cuenta">cuenta</li>
++           <li data-value="efectivo">efectivo</li>
++         </ul>
++         <p class="badTipo bad-text" style="display:none;"></p>
++       </div>
++     </div>
+
       <div class="mov-col mov-col-img">
         ${mov.imagen && mov.imagen !== 'NULL' && mov.imagen !== '' ?
         `<div class="uploaded-preview" style="position:relative;">
