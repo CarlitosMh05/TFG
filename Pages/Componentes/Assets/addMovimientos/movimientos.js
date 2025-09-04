@@ -172,60 +172,42 @@ $(document).ready(function ()
     }
   });
 
-  
+  // Si el usuario edita el input manualmente, sincronizamos botones
+  // Si el usuario edita el input manualmente, sincronizamos botones
   // Si el usuario edita el input manualmente, sincronizamos botones
   $cantidad.on('input', function () {
     let v = $(this).val();
 
-    // 0) Normaliza un posible '+' al principio
+    // Normaliza un posible '+' al principio (algunos teclados lo ponen)
     if (v.startsWith('+')) {
       v = v.slice(1);
       $(this).val(v);
     }
 
-    // 1) Si está vacío -> por defecto positivo
-    if (v === '') {
-      $plus.addClass('active');
-      $minus.removeClass('active');
-      return;
-    }
-
-    // 2) Si es exactamente "-" -> mantener negativo hasta que borre el guion
-    if (v === '-') {
-      $minus.addClass('active');
-      $plus.removeClass('active');
-      return;
-    }
-
-    // 3) Estados parciales con punto: ".", "-.", "12.", "-12."
+    // Estados parciales de escritura: ".", "-.", "12.", "-12."
     const isPartialDecimal = (v === '.' || v === '-.' || v.endsWith('.'));
     if (isPartialDecimal) {
-      // Si empieza por "-", seguimos en negativo; si no, no tocamos el estado
-      if (v.startsWith('-')) {
-        $minus.addClass('active');
-        $plus.removeClass('active');
-      }
-      return;
+      return; // no tocar nada
     }
 
-    // 4) Si empieza con "-" -> negativo
+    // Si empieza con "-" → forzar negativo
     if (v.startsWith('-')) {
       $minus.addClass('active');
       $plus.removeClass('active');
       return;
     }
 
-    // 5) Si el toggle está en negativo y hay contenido estable, prefijamos '-'
-    if ($minus.hasClass('active')) {
-      $(this).val('-' + v);
-      return;
+    // 👇 NUEVO: si hemos borrado el "-" → pasar a positivo
+    if (!$minus.hasClass('active') && !$plus.hasClass('active')) {
+      // si ambos estaban vacíos, inicializa a positivo
+      $plus.addClass('active');
+      $minus.removeClass('active');
+    } else {
+      // en cualquier otro caso, si ya no empieza por "-", activa positivo
+      $plus.addClass('active');
+      $minus.removeClass('active');
     }
-
-    // 6) En cualquier otro caso, positivo
-    $plus.addClass('active');
-    $minus.removeClass('active');
   });
-
 
 
 
