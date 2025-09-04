@@ -1570,7 +1570,7 @@ h1 {
 .movimiento-row.editando-responsive .edit-fecha-addon {
   position: absolute;
   left: 6px;                 /* entre el margen izq. y la columna cantidad */
-  top: 50%;
+  top: 5px;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
