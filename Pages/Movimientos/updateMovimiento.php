@@ -125,7 +125,7 @@ try {
   }
 
   $mysqli->commit();
-  echo json_encode(['succes' => true, 'id' => $id]);
+  echo json_encode(['succes' => true, 'movimiento' => $id]);
 
 } catch (Exception $e) {
   $mysqli->rollback();
