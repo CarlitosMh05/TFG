@@ -17,7 +17,7 @@ $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
 $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 20;
 
 // SQL base
-$sql = "SELECT m.id, m.cantidad, m.moneda, m.observaciones, m.created_at, m.fecha_elegida,m.imagen, c.nombre as concepto
+$sql = "SELECT m.id, m.cantidad, m.moneda, m.observaciones, m.created_at, m.fecha_elegida,m.imagen, m.tipo_pago, c.nombre as concepto
         FROM movimientos m
         JOIN conceptos c ON c.id = m.concepto_id
         WHERE m.user_id = ?";
