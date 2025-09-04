@@ -173,34 +173,42 @@ $(document).ready(function ()
   });
 
   // Si el usuario edita el input manualmente, sincronizamos botones
-  $cantidad.on('input', function() 
-  {
+  // Si el usuario edita el input manualmente, sincronizamos botones
+  $cantidad.on('input', function () {
     let v = $(this).val();
 
-    // 👉 Si solo hay un punto o acaba en punto, no tocar nada
-    if (v === '.' || v.endsWith('.')) {
-      return;
+    // 0) Normaliza un posible '+' al principio (algunos teclados lo ponen)
+    if (v.startsWith('+')) {
+      v = v.slice(1);
+      $(this).val(v);
     }
-  
-    // 1) Si el usuario teclea un '-' al principio, lo respetamos y marcamos el botón
+
+    // 1) Estados parciales de escritura: NO tocar nada
+    //    ".", "-.", "12.", "-12."
+    const isPartialDecimal = (v === '.') || (v === '-.') || v.endsWith('.');
+    if (isPartialDecimal) {
+      return; // no cambiamos ni valor ni botones
+    }
+
+    // 2) Si el usuario escribe '-' al inicio, respetamos y activamos "–"
     if (v.startsWith('-')) {
       $minus.addClass('active');
       $plus.removeClass('active');
       return;
     }
-  
-    // 2) Si el toggle está en negativo y hay contenido, añadimos el '-' delante
+
+    // 3) Si el toggle está en negativo y hay contenido estable, añadimos '-'
     if ($minus.hasClass('active') && v !== '') {
-      $(this).val('-' + v);
-      // cortocircuitamos para no volver a sincronizar abajo
+      // Evita doble '-' si ya lo tuviera (no debería, pero por seguridad)
+      if (!v.startsWith('-')) {
+        $(this).val('-' + v);
+      }
       return;
     }
-  
-    // 3) Finalmente, si tras todo está empezando por '-', marcamos minus, si no, plus
-    v = $(this).val();
-    if (v.startsWith('-')) {
-      $minus.addClass('active');
-      $plus.removeClass('active');
+
+    // 4) Si no hay nada, no fuerces el signo; si hay algo, marca "+"
+    if (v === '') {
+      return; // deja los botones como estaban
     } else {
       $plus.addClass('active');
       $minus.removeClass('active');
