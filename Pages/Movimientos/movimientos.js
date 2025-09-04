@@ -1523,48 +1523,7 @@ $(function () {
   };
 
 
-  function generarFilaMovimiento(mov) {
-    const cantidadClass = parseFloat(mov.cantidad) > 0 ? 'movimiento-cantidad ingreso' : 'movimiento-cantidad gasto';
-
-    let etiquetasHtml = '';
-    if (mov.etiquetas && mov.etiquetas.length > 0) {
-      etiquetasHtml = mov.etiquetas.map(e => `<span class="chip-etiqueta">${e.nombre}</span>`).join('');
-    }
-
-    const obsHtml = mov.observaciones?.trim()
-      ? `<div class="observaciones">${mov.observaciones}</div>` : '';
-
-    let imgHtml = '';
-    if (mov.imagen && typeof mov.imagen === 'string' && mov.imagen.trim() && mov.imagen.toLowerCase() !== 'null') {
-      imgHtml = `<img src="${mov.imagen.trim()}" class="mov-img-thumb" alt="Imagen movimiento" data-img-full="${mov.imagen.trim()}" />`;
-    }
-
-    function getMonedaSymbol(moneda) {
-      switch (moneda) {
-        case 'EUR': return '€';
-        case 'USD': return '$';
-        case 'GBP': return '£';
-        case 'JPY': return '¥';
-        default: return moneda || '€';
-      }
-    }
-
-    return `
-      <div class="movimiento-row" data-id="${mov.id}">
-        <div class="mov-col"><div class="${cantidadClass}">${parseFloat(mov.cantidad).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2})} ${getMonedaSymbol(mov.moneda)}</div></div>
-        <div class="mov-col"><div class="movimiento-concepto">${mov.concepto}</div></div>
-        <div class="mov-col">${etiquetasHtml}</div>
-        <div class="mov-col">${obsHtml}</div>
-        <div class="mov-col mov-col-img">${imgHtml}</div>
-        <div style="display: flex; justify-content: flex-end;">
-          <button class="mov-action-btn editar-mov-btn" data-id="${mov.id}" title="Editar movimiento"><i data-lucide="pencil"></i></button>
-          <button class="mov-action-btn eliminar-mov-btn" data-id="${mov.id}" title="Eliminar movimiento" style="position: relative;">
-            <i data-lucide="trash-2"></i>
-            <div class="spinner spinner-eliminar" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 18px; height: 18px; border: 2.5px solid white !important; border-top: 2.5px solid transparent !important;"></div>
-          </button>
-        </div>
-      </div>`;
-  }
+  
 
 
 });
