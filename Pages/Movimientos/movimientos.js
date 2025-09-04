@@ -481,19 +481,35 @@ $(function () {
     const fp = flatpickr($inputFecha[0], {
       dateFormat: "Y-m-d",
       locale: "es",
-      defaultDate: fechaOriginal ? [fechaOriginal] : null,
+      defaultDate: fechaOriginal || null,
+      clickOpens: false,           // el input está oculto; abrimos con el botón
+      allowInput: false,
+      appendTo: document.body,     // evita recortes por overflow del contenedor
+      positionElement: $addonFecha[0], // posiciona respecto al “anexo” (icono)
       onChange: function(dates, str) {
         if (str) {
           $selectedFecha.val(str);
-          // cerrar inmediatamente al elegir, como pediste
           fp.close();
         }
-      },
-      onReady: function() {
-        // si quieres que ya aparezca “clickada” la fecha actual en el calendario, defaultDate ya lo hace
       }
     });
 
+    // Abrimos con mousedown + stopPropagation para ganar a los “cerradores”
+    $row.find('.btn-open-fecha')
+      .off('mousedown')
+      .on('mousedown', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        setTimeout(() => { fp.open(); }, 0);
+      });
+
+    // Cierre global: ignora clicks dentro del calendario y del anexo
+    $(document).off('mousedown.fpEdit').on('mousedown.fpEdit', function(e) {
+      const $cal = $('.flatpickr-calendar');
+      if ($cal.is(e.target) || $cal.has(e.target).length) return; // click dentro calendario
+      if ($(e.target).closest('.edit-fecha-addon').length) return; // click en el anexo (icono)
+      if (fp.isOpen) fp.close();
+    });
     // El botón con el icono abre/cierra el calendario
     $row.find('.btn-open-fecha').on('click', function(e) {
       e.preventDefault();
