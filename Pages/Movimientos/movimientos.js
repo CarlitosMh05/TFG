@@ -451,7 +451,6 @@ $(function () {
     if (!$cont.has(e.target).length) {
       $options.fadeOut(150);
       $display.removeClass('open');
-      $(document).off('mousedown.edicionTipo');
     }
   });
 
