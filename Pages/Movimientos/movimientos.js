@@ -460,6 +460,42 @@ $(function () {
   }
 
   function inicializarControlesEdicion($row, mov) {
+    // === FECHA (Flatpickr) ===
+    // Tomamos la fecha actual del movimiento desde el contenedor del día:
+    const $diaContainer = $row.closest('.movimientos-dia'); 
+    const fechaOriginal = ($diaContainer.data('fecha') || '').trim(); // formato YYYY-MM-DD confirmado por ti
+    const $addonFecha   = $row.find('.edit-fecha-addon');
+    const $inputFecha   = $row.find('.input-fecha-edit');
+    const $selectedFecha= $row.find('.selected-fecha');
+
+    // Guardamos la original en data- y en el hidden
+    $addonFecha.attr('data-original-fecha', fechaOriginal);
+    $selectedFecha.val(fechaOriginal);
+
+    // Inicializamos flatpickr en modo single
+    const fp = flatpickr($inputFecha[0], {
+      dateFormat: "Y-m-d",
+      locale: "es",
+      defaultDate: fechaOriginal ? [fechaOriginal] : null,
+      onChange: function(dates, str) {
+        if (str) {
+          $selectedFecha.val(str);
+          // cerrar inmediatamente al elegir, como pediste
+          fp.close();
+        }
+      },
+      onReady: function() {
+        // si quieres que ya aparezca “clickada” la fecha actual en el calendario, defaultDate ya lo hace
+      }
+    });
+
+    // El botón con el icono abre/cierra el calendario
+    $row.find('.btn-open-fecha').on('click', function(e) {
+      e.preventDefault();
+      fp.isOpen ? fp.close() : fp.open();
+    });
+
+
     // 1. Botón +/– y cantidad (idéntico a tu modal pero adaptado a clases)
     const $cantidad = $row.find('.input-cantidad');
     const $plus     = $row.find('.plus-btn');
