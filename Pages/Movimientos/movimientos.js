@@ -1063,8 +1063,8 @@ $(function () {
         // === MOVER FILA ENTRE DÍAS (OPCIÓN B) ===
         (function() {
           const $diaContainer = $row.closest('.movimientos-dia');
-          const fechaOriginal = ($diaContainer.data('fecha') || '').trim();
-          const fechaNueva = ($row.find('.selected-fecha').val() || '').trim();
+          const fechaOriginal = fechaOriginalCached;  // ⬅️ usa la cacheada
+          const fechaNueva    = fechaNuevaCached;     // ⬅️ usa la cacheada
 
           if (!fechaNueva || fechaNueva === fechaOriginal) return;
 
