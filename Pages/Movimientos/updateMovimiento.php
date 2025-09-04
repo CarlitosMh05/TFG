@@ -93,9 +93,9 @@ try {
   $stmt = $mysqli->prepare($sql);
   $stmt->bind_param($types, ...$params);
   $stmt->execute();
-//   if ($stmt->affected_rows < 0) {
-//     throw new Exception('Error al actualizar el movimiento');
-//   }
+  if ($stmt->affected_rows < 0) {
+    throw new Exception('Error al actualizar el movimiento');
+  }
   $stmt->close();
 
   // 4) Leer el movimiento ya actualizado para aplicar +nuevo
