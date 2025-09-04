@@ -964,7 +964,6 @@ $(document).ready(function ()
     const formData = new FormData();
 
     const cantidad = $('#cantidad').val().trim().replace(',', '.');
-    formData.append('cantidad', cantidad);
 
     formData.append('cantidad',      cantidad);
     formData.append('moneda',        moneda);
