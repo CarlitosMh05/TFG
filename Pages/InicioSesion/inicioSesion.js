@@ -119,6 +119,14 @@ $(document).ready(function () {
         
     });
     
+     // Detectar Enter en email o password
+    $("#email, #password").on("keydown", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault(); // Evita que intente enviar el form normal
+            $("#next").click(); // Simula click en Siguiente
+        }
+    });
+
 });
 
 // Función para obtener parámetros de la URL
