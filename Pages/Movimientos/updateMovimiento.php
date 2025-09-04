@@ -1,144 +1,134 @@
 <?php
-require_once '../../auth.php';   // O la ruta correcta a tu sistema de sesiones
-require_once '../../db.php';     // O la ruta correcta a tu conexión PDO/MySQLi
-
+// updateMovimiento.php
+session_start();
 header('Content-Type: application/json');
 
-// 1. Comprobar sesión y recibir datos
-$uid = $_SESSION['user_id'] ?? null;
-if (!$uid) {
-    echo json_encode(['success' => false, 'error' => 'No autenticado']);
-    exit;
+require_once __DIR__ . '/../db.php'; // ajusta ruta si aplica
+
+if (!isset($_SESSION['user_id'])) {
+  http_response_code(401);
+  echo json_encode(['error' => 'No autorizado']);
+  exit;
+}
+$userId = (int)$_SESSION['user_id'];
+
+$mysqli = $conn ?? new mysqli($servername, $username, $password, $dbname);
+if ($mysqli->connect_error) {
+  http_response_code(500);
+  echo json_encode(['error' => 'DB error']);
+  exit;
 }
 
-$id = intval($_POST['id'] ?? 0);
-$cantidad = floatval($_POST['cantidad'] ?? 0);
-$moneda = trim($_POST['moneda'] ?? 'EUR');
-$concepto = trim($_POST['concepto'] ?? '');
-$observaciones = trim($_POST['observaciones'] ?? '');
-$etiquetas = trim($_POST['etiquetas'] ?? '');
+// Campos esperados desde el fetch del front
+$id            = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+$cantidadNueva = isset($_POST['cantidad']) ? (float)$_POST['cantidad'] : null;
+$conceptoId    = isset($_POST['concepto_id']) ? (int)$_POST['concepto_id'] : null;
+$observaciones = isset($_POST['observaciones']) ? $_POST['observaciones'] : null;
+$tipoPagoNuevo = isset($_POST['tipo_pago']) ? trim($_POST['tipo_pago']) : null; // p.ej. 'cuenta' o 'efectivo' (o futuras)
+$fechaElegida  = isset($_POST['fecha_elegida']) ? $_POST['fecha_elegida'] : null;
+$moneda        = isset($_POST['moneda']) ? $_POST['moneda'] : 'EUR'; // por ahora solo EUR
 
-// Validación básica
-$errores = [];
-if (!$id) $errores['id'] = "ID inválido";
-if (!$cantidad && $cantidad !== 0) $errores['cantidad'] = "Introduce una cantidad";
-if (!$concepto) $errores['concepto'] = "Selecciona un concepto";
-if (!$moneda) $errores['moneda'] = "Moneda requerida";
-if (!empty($errores)) {
-    echo json_encode(['success' => false, 'errors' => $errores]);
-    exit;
+if ($id <= 0) {
+  http_response_code(400);
+  echo json_encode(['error' => 'ID inválido']);
+  exit;
 }
 
-// 2. Comprobar que el movimiento es del usuario
-$stmt = $conn->prepare("SELECT * FROM movimientos WHERE id=? AND user_id=? LIMIT 1");
-$stmt->bind_param('ii', $id, $uid);
-$stmt->execute();
-$res = $stmt->get_result();
-if ($res->num_rows !== 1) {
-    echo json_encode(['success' => false, 'noMovFind' => 'Movimiento no encontrado']);
-    exit;
-}
-$mov = $res->fetch_assoc();
+$mysqli->begin_transaction();
 
-// 3. Buscar el ID del concepto (el usuario manda el nombre)
-$stmtC = $conn->prepare("SELECT id FROM conceptos WHERE nombre=? AND user_id=? LIMIT 1");
-$stmtC->bind_param('si', $concepto, $uid);
-$stmtC->execute();
-$resC = $stmtC->get_result();
-if ($resC->num_rows === 0) {
-    echo json_encode(['success' => false, 'noValidConcept' => 'Concepto no válido']);
-    exit;
-}
-$rowC = $resC->fetch_assoc();
-$concepto_id = $rowC['id'];
+try {
+  // 1) Leer el movimiento original (para calcular -viejo +nuevo)
+  $stmt = $mysqli->prepare("SELECT id, user_id, cantidad, tipo_pago FROM movimientos WHERE id = ? AND user_id = ? LIMIT 1");
+  $stmt->bind_param('ii', $id, $userId);
+  $stmt->execute();
+  $orig = $stmt->get_result()->fetch_assoc();
+  $stmt->close();
 
-// 4. Procesar imagen (si la hay)
-$nuevaImagen = $mov['imagen'];
-if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-    $file = $_FILES['imagen'];
-    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-    $permitidas = ['jpg', 'jpeg', 'png', 'webp'];
-    if (!in_array($ext, $permitidas)) {
-        echo json_encode(['success' => false, 'badImageTipe' => 'Tipo de imagen no permitido']);
-        exit;
+  if (!$orig) {
+    throw new Exception('Movimiento no encontrado');
+  }
+
+  $cantidadVieja = (float)$orig['cantidad'];
+  $tipoPagoViejo = $orig['tipo_pago']; // no forzamos valores por tu requerimiento
+
+  // 2) Quitar efecto del movimiento viejo en usuarios.(cuenta|efectivo)
+  if ($tipoPagoViejo !== null && $tipoPagoViejo !== '') {
+    if ($tipoPagoViejo === 'cuenta') {
+      $stmt = $mysqli->prepare("UPDATE usuarios SET cuenta = cuenta - ? WHERE id = ? LIMIT 1");
+      $stmt->bind_param('di', $cantidadVieja, $userId);
+      $stmt->execute();
+      $stmt->close();
+    } else if ($tipoPagoViejo === 'efectivo') {
+      $stmt = $mysqli->prepare("UPDATE usuarios SET efectivo = efectivo - ? WHERE id = ? LIMIT 1");
+      $stmt->bind_param('di', $cantidadVieja, $userId);
+      $stmt->execute();
+      $stmt->close();
+    } else {
+      // Futuras cuentas: si el valor no coincide con 'cuenta'/'efectivo', de momento no toca totales (acorde a tu flexibilidad)
     }
-    $nombreFinal = "mov_{$id}_" . time() . "." . $ext;
-    $ruta = "uploads/$nombreFinal";
-    if (!move_uploaded_file($file['tmp_name'], $ruta)) {
-        echo json_encode(['success' => false, 'errorUploadingImage' => 'Error al subir la imagen']);
-        exit;
+  }
+
+  // 3) Actualizar el movimiento con los datos nuevos
+  // Construimos dinámicamente el SET para actualizar solo lo que llega
+  $sets = [];
+  $params = [];
+  $types = '';
+
+  if ($cantidadNueva !== null) { $sets[] = "cantidad = ?";      $params[] = $cantidadNueva; $types .= 'd'; }
+  if ($conceptoId    !== null) { $sets[] = "concepto_id = ?";    $params[] = $conceptoId;    $types .= 'i'; }
+  if ($observaciones !== null) { $sets[] = "observaciones = ?";  $params[] = $observaciones; $types .= 's'; }
+  if ($tipoPagoNuevo !== null) { $sets[] = "tipo_pago = ?";      $params[] = $tipoPagoNuevo; $types .= 's'; }
+  if ($fechaElegida  !== null) { $sets[] = "fecha_elegida = ?";  $params[] = $fechaElegida;  $types .= 's'; }
+  if ($moneda        !== null) { $sets[] = "moneda = ?";         $params[] = $moneda;        $types .= 's'; }
+
+  if (empty($sets)) {
+    throw new Exception('Nada que actualizar');
+  }
+
+  $sql = "UPDATE movimientos SET " . implode(', ', $sets) . " WHERE id = ? AND user_id = ? LIMIT 1";
+  $types .= 'ii';
+  $params[] = $id;
+  $params[] = $userId;
+
+  $stmt = $mysqli->prepare($sql);
+  $stmt->bind_param($types, ...$params);
+  $stmt->execute();
+  if ($stmt->affected_rows < 0) {
+    throw new Exception('Error al actualizar el movimiento');
+  }
+  $stmt->close();
+
+  // 4) Leer el movimiento ya actualizado para aplicar +nuevo
+  $stmt = $mysqli->prepare("SELECT cantidad, tipo_pago FROM movimientos WHERE id = ? AND user_id = ? LIMIT 1");
+  $stmt->bind_param('ii', $id, $userId);
+  $stmt->execute();
+  $nuevo = $stmt->get_result()->fetch_assoc();
+  $stmt->close();
+
+  $cantidadNuevaAplicar = (float)$nuevo['cantidad'];
+  $tipoPagoNuevoAplicar = $nuevo['tipo_pago'];
+
+  if ($tipoPagoNuevoAplicar !== null && $tipoPagoNuevoAplicar !== '') {
+    if ($tipoPagoNuevoAplicar === 'cuenta') {
+      $stmt = $mysqli->prepare("UPDATE usuarios SET cuenta = cuenta + ? WHERE id = ? LIMIT 1");
+      $stmt->bind_param('di', $cantidadNuevaAplicar, $userId);
+      $stmt->execute();
+      $stmt->close();
+    } else if ($tipoPagoNuevoAplicar === 'efectivo') {
+      $stmt = $mysqli->prepare("UPDATE usuarios SET efectivo = efectivo + ? WHERE id = ? LIMIT 1");
+      $stmt->bind_param('di', $cantidadNuevaAplicar, $userId);
+      $stmt->execute();
+      $stmt->close();
+    } else {
+      // futuras cuentas: por ahora no tocamos totales
     }
-    // Si hay imagen anterior, eliminarla
-    if ($mov['imagen'] && file_exists("../../" . $mov['imagen'])) {
-        @unlink("../../" . $mov['imagen']);
-    }
-    $nuevaImagen = "uploads/$nombreFinal";
+  }
+
+  $mysqli->commit();
+  echo json_encode(['ok' => true, 'id' => $id]);
+
+} catch (Exception $e) {
+  $mysqli->rollback();
+  http_response_code(400);
+  echo json_encode(['error' => $e->getMessage()]);
 }
-
-// 5. Actualizar el movimiento
-$stmt = $conn->prepare("UPDATE movimientos SET cantidad=?, moneda=?, concepto_id=?, observaciones=?, imagen=? WHERE id=? AND user_id=?");
-$stmt->bind_param('dsdssii', $cantidad, $moneda, $concepto_id, $observaciones, $nuevaImagen, $id, $uid);
-$stmt->execute();
-
-if ($stmt->affected_rows < 0) {
-    echo json_encode(['success' => false, 'noActualization' => 'No se pudo actualizar']);
-    exit;
-}
-
-// 6. Actualizar etiquetas (tabla movimiento_etiqueta)
-// Primero, borrar las etiquetas anteriores
-$conn->query("DELETE FROM movimiento_etiqueta WHERE movimiento_id = $id");
-// Ahora, añadir las nuevas (si hay)
-if ($etiquetas !== '') {
-    $lista = array_filter(array_map('trim', explode(',', $etiquetas)));
-    foreach ($lista as $etiqueta) {
-        // Buscar el ID de la etiqueta para este usuario
-        $stmtE = $conn->prepare("SELECT id FROM etiquetas WHERE nombre=? AND user_id=? LIMIT 1");
-        $stmtE->bind_param('si', $etiqueta, $uid);
-        $stmtE->execute();
-        $resE = $stmtE->get_result();
-        if ($resE->num_rows === 1) {
-            $rowE = $resE->fetch_assoc();
-            $eid = $rowE['id'];
-            $conn->query("INSERT INTO movimiento_etiqueta (movimiento_id, etiqueta_id) VALUES ($id, $eid)");
-        }
-    }
-}
-
-// 7. Obtener el movimiento actualizado
-$stmt = $conn->prepare("
-  SELECT m.id, m.cantidad, m.moneda, c.nombre AS concepto, m.observaciones, m.imagen
-  FROM movimientos m
-  INNER JOIN conceptos c ON m.concepto_id = c.id
-  WHERE m.id = ? AND m.user_id = ?
-");
-$stmt->bind_param('ii', $id, $uid);
-$stmt->execute();
-$result = $stmt->get_result();
-$movimiento = $result->fetch_assoc();
-
-// 8. Obtener las etiquetas asociadas
-$stmt = $conn->prepare("
-  SELECT e.nombre 
-  FROM movimiento_etiqueta me
-  INNER JOIN etiquetas e ON me.etiqueta_id = e.id
-  WHERE me.movimiento_id = ?
-");
-$stmt->bind_param('i', $id);
-$stmt->execute();
-$res = $stmt->get_result();
-$etiquetas = [];
-while ($row = $res->fetch_assoc()) {
-    $etiquetas[] = ['nombre' => $row['nombre']];
-}
-
-// Añadir etiquetas al movimiento
-$movimiento['etiquetas'] = $etiquetas;
-
-// 9. Enviar todo como respuesta
-echo json_encode([
-    'success' => true,
-    'movimiento' => $movimiento
-]);
-exit;
-?>
