@@ -176,6 +176,11 @@ $(document).ready(function ()
   $cantidad.on('input', function() 
   {
     let v = $(this).val();
+
+    // 👉 Si solo hay un punto o acaba en punto, no tocar nada
+    if (v === '.' || v.endsWith('.')) {
+      return;
+    }
   
     // 1) Si el usuario teclea un '-' al principio, lo respetamos y marcamos el botón
     if (v.startsWith('-')) {
