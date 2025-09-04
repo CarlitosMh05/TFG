@@ -962,7 +962,7 @@ $(function () {
         }
 
         // Si prefieres recalcular resúmenes y todo el día:
-        // reiniciarYcargar(window.scrollY);
+        reiniciarYcargar(window.scrollY);
 
       }).fail(function() {
         alert('Error de red al actualizar');
