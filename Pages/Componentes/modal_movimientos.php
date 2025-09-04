@@ -8,7 +8,7 @@
     
   <!-- Overlay + Modal -->
 <div class="overlay" id="overlay"></div>
-<form class="modal" id="modal" enctype="multipart/form-data">
+<form class="modal" id="modal" enctype="multipart/form-data" autocomplete="off">
   <h3>Añadir movimiento</h3>
   
   <!-- Fila 1: Cantidad + Concepto -->
