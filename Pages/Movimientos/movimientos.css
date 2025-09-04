@@ -1293,7 +1293,6 @@ h1 {
   padding: 8px 10px;
   cursor: pointer;
   user-select: none;
-  min-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
