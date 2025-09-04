@@ -362,7 +362,7 @@ $(function () {
         <!-- Tipo de pago (dropdown personalizado, igual patrón que moneda/concepto) -->
         <div class="input-container tipo-dropdown edicion-tipo" data-id="${mov.id}">
           <input type="hidden" class="selected-tipo" value="${mov.tipo_pago || ''}">
-          <div class="tipo-display">${(mov.tipo_pago && mov.tipo_pago.trim()!=='') ? mov.tipo_pago : 'Seleccionar tipo'}</div>
+          <div class="tipo-display">${(mov.tipo_pago && mov.tipo_pago.trim()!=='') ? mov.tipo_pago : 'Tipo'}</div>
           <ul class="tipo-options">
             ${(!['cuenta','efectivo'].includes(String(mov.tipo_pago||'').toLowerCase())) ? `<li data-value="${mov.tipo_pago||''}">${mov.tipo_pago||''}</li>` : ''}
             <li data-value="cuenta">cuenta</li>
