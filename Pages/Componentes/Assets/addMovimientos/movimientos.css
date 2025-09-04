@@ -995,6 +995,16 @@ pointer-events: none;
 
 .new-item-btn:hover.confirm-btn svg { stroke: var(--hoverAzulPrimario); }
 
+/* Estilo personalizado para radios */
+.radio-container input[type="radio"] {
+  accent-color: var(--azulPrimario); /* navegadores modernos */
+}
+
+/* Para más compatibilidad (fallback visual) */
+.radio-container input[type="radio"]:checked {
+  border-color: var(--azulPrimario);
+  background-color: var(--azulPrimario);
+}
 
 @keyframes spin {
   to { transform: rotate(360deg); }
