@@ -1114,9 +1114,29 @@ $(function () {
               <div class="lista-mov-dia"></div>
             `;
             $dia = $(`<div class="movimientos-dia" data-fecha="${fecha}">${header}</div>`);
-            $('#movimientosList').append($dia);
+            
+            // === Insertar en orden DESC (YYYY-MM-DD) ===
+            let insertado = false;
+            $('#movimientosList .movimientos-dia').each(function () {
+              const f = ($(this).data('fecha') || '').trim();
+              // Si la nueva fecha es MÁS RECIENTE que f, va ANTES
+              if (fecha.localeCompare(f) > 0) {
+                $(this).before($dia);
+                insertado = true;
+                return false; // break
+              }
+            });
+            if (!insertado) {
+              $('#movimientosList').append($dia);
+            }
 
-            // sticky resumen (igual patrón que ya usas al renderizar)
+            // Mantén sincronizado el array de fechas ordenadas (desc)
+            if (!fechasOrdenadas.includes(fecha)) {
+              fechasOrdenadas.push(fecha);
+              fechasOrdenadas.sort((a, b) => b.localeCompare(a)); // más recientes arriba
+            }
+
+            // sticky resumen como ya hacías
             const $resumen = $dia.find('.mov-dia-resumen');
             const observer = new IntersectionObserver((entries) => {
               entries.forEach(entry => {
