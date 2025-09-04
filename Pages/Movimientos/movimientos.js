@@ -352,6 +352,17 @@ $(function () {
           <label>Observaciones</label>
         </div>
       </div>
+      <div class="mov-col">
+        <!-- Tipo de pago -->
+        <div class="input-container edicion-tipo-pago" data-id="${mov.id}">
+          <select class="input-tipo-pago">
+            ${(!['cuenta','efectivo'].includes(String(mov.tipo_pago||'').toLowerCase())) ? `<option value="${mov.tipo_pago||''}" selected>${mov.tipo_pago||''}</option>` : ''}
+            <option value="cuenta"   ${String(mov.tipo_pago||'').toLowerCase()==='cuenta'?'selected':''}>cuenta</option>
+            <option value="efectivo" ${String(mov.tipo_pago||'').toLowerCase()==='efectivo'?'selected':''}>efectivo</option>
+          </select>
+          <label>Tipo de pago</label>
+        </div>
+      </div>
       <div class="mov-col mov-col-img">
         ${mov.imagen && mov.imagen !== 'NULL' && mov.imagen !== '' ?
         `<div class="uploaded-preview" style="position:relative;">
