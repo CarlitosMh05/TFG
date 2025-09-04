@@ -1494,7 +1494,15 @@ h1 {
   margin: 0 auto;
 }
 
-
+.input-tipo-pago {
+  width: 100%;
+  min-width: 120px;
+  padding: 8px 10px;
+  border: 1.5px solid #bbb;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 1rem;
+}
 
 
 
