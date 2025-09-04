@@ -307,6 +307,15 @@ $(function () {
 
     // NOTA: Te hago solo el "esqueleto" y lo detallamos si te parece bien el sistema.
     return `
+      <div class="edit-fecha-addon" 
+          data-original-fecha="" 
+          title="Editar fecha">
+        <button type="button" class="btn-open-fecha" aria-label="Cambiar fecha">
+          <i data-lucide="calendar"></i>
+        </button>
+        <input type="text" class="input-fecha-edit" autocomplete="off" />
+        <input type="hidden" class="selected-fecha" value="" />
+      </div>
       <div class="mov-col">
         <div class="input-container amount-with-currency edicion-cantidad" data-id="${mov.id}">
           <div class="sign-toggle">
