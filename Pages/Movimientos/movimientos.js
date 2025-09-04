@@ -971,12 +971,7 @@ $(function () {
       $spinner.show();
       $row.find('.tick-editar-btn i').hide();
 
-      // Fecha: sólo si cambia respecto a la original del día
-      const fechaOriginal = ($row.find('.edit-fecha-addon').attr('data-original-fecha') || '').trim();
-      const fechaNueva    = ($row.find('.selected-fecha').val() || '').trim();
-      if (fechaNueva && fechaNueva !== fechaOriginal) {
-        formData.append('fecha_elegida', fechaNueva);
-      }
+      
 
       // Recolectar valores de la edición
       const cantidadStr = ($row.find('.input-cantidad').val() || '').trim();
@@ -987,6 +982,13 @@ $(function () {
       const tipoPago = ($row.find('.selected-tipo').val() || $row.find('.tipo-display').text() || '').trim();
       const etiquetasCsv = $row.find('.input-etiquetas').val() || '';
       const formData = new FormData();
+
+      // Fecha: sólo si cambia respecto a la original del día
+      const fechaOriginal = ($row.find('.edit-fecha-addon').attr('data-original-fecha') || '').trim();
+      const fechaNueva    = ($row.find('.selected-fecha').val() || '').trim();
+      if (fechaNueva && fechaNueva !== fechaOriginal) {
+        formData.append('fecha_elegida', fechaNueva);
+      }
 
       formData.append('id', String(mov.id));
       if (cantidad !== null && !Number.isNaN(cantidad)) formData.append('cantidad', cantidad);
