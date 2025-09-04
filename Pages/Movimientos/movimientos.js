@@ -1524,8 +1524,6 @@ $(function () {
 
 
   
-
-
 });
 
 lucide.createIcons();
