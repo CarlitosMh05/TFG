@@ -503,13 +503,7 @@ $(function () {
         setTimeout(() => { fp.open(); }, 0);
       });
 
-    // Cierre global: ignora clicks dentro del calendario y del anexo
-    $(document).off('mousedown.fpEdit').on('mousedown.fpEdit', function(e) {
-      const $cal = $('.flatpickr-calendar');
-      if ($cal.is(e.target) || $cal.has(e.target).length) return; // click dentro calendario
-      if ($(e.target).closest('.edit-fecha-addon').length) return; // click en el anexo (icono)
-      if (fp.isOpen) fp.close();
-    });
+    
     // El botón con el icono abre/cierra el calendario
     $row.find('.btn-open-fecha').on('click', function(e) {
       e.preventDefault();
