@@ -1015,10 +1015,7 @@ pointer-events: none;
     gap: 20px;
   }
 
-  #tipoPagoContainer
-  {
-    display: none;
-  }
+
   
   .modal-file-upload
   {
