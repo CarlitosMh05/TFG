@@ -998,6 +998,10 @@ $(function () {
       formData.append('moneda', moneda);
       if (etiquetasCsv) formData.append('etiquetas', etiquetasCsv);
 
+      if (fechaNueva && fechaNueva !== fechaOriginal) {
+        formData.append('fecha_elegida', fechaNueva);
+      }
+
       $.ajax({
         url: 'updateMovimiento.php', // ajusta ruta si la tienes en otro sitio
         method: 'POST',
