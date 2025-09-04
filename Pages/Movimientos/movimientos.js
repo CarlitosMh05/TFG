@@ -1081,6 +1081,9 @@ $(function () {
           if ($diaOriginal.find('.movimiento-row').length <= 1) {
             $diaOriginal.remove();
             delete allMovimientosPorDia[fechaOriginal];
+            // ⬇️ mantener orden interno coherente
+            const idxFecha = fechasOrdenadas.indexOf(fechaOriginal);
+            if (idxFecha >= 0) fechasOrdenadas.splice(idxFecha, 1);
           } else {
             // Actualizar resumen del día original
             const totalOld = (allMovimientosPorDia[fechaOriginal] || []).reduce((acc, m) => acc + parseFloat(m.cantidad), 0);
@@ -1114,7 +1117,7 @@ $(function () {
               <div class="lista-mov-dia"></div>
             `;
             $dia = $(`<div class="movimientos-dia" data-fecha="${fecha}">${header}</div>`);
-            
+
             // === Insertar en orden DESC (YYYY-MM-DD) ===
             let insertado = false;
             $('#movimientosList .movimientos-dia').each(function () {
