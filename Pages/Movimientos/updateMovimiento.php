@@ -3,7 +3,7 @@
 session_start();
 header('Content-Type: application/json');
 
-require_once __DIR__ . '../../db.php'; // ajusta ruta si aplica
+require_once '../../db.php'; // ajusta ruta si aplica
 
 if (!isset($_SESSION['user_id'])) {
   http_response_code(401);
