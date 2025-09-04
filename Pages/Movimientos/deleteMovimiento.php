@@ -1,49 +1,76 @@
 <?php
-require_once '../../auth.php'; // Ajusta rutas según tu estructura
-require_once '../../db.php';
-
+// deleteMovimiento.php
+session_start();
 header('Content-Type: application/json');
 
-$uid = $_SESSION['user_id'] ?? null;
-if (!$uid) {
-    echo json_encode(['success' => false, 'error' => 'No autenticado']);
-    exit;
+require_once '../../db.php'; // ajusta ruta si aplica
+
+if (!isset($_SESSION['user_id'])) {
+  http_response_code(401);
+  echo json_encode(['error' => 'No autorizado']);
+  exit;
+}
+$userId = (int)$_SESSION['user_id'];
+
+$mysqli = $conn ?? new mysqli($servername, $username, $password, $dbname);
+if ($mysqli->connect_error) {
+  http_response_code(500);
+  echo json_encode(['error' => 'DB error']);
+  exit;
 }
 
-$id = intval($_POST['id'] ?? 0);
-if (!$id) {
-    echo json_encode(['success' => false, 'error' => 'ID inválido']);
-    exit;
+$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+if ($id <= 0) {
+  http_response_code(400);
+  echo json_encode(['error' => 'ID inválido']);
+  exit;
 }
 
-// 1. Comprobar que es del usuario
-$stmt = $conn->prepare("SELECT imagen FROM movimientos WHERE id=? AND user_id=?");
-$stmt->bind_param('ii', $id, $uid);
-$stmt->execute();
-$res = $stmt->get_result();
-if ($res->num_rows !== 1) {
-    echo json_encode(['success' => false, 'error' => 'No encontrado']);
-    exit;
+$mysqli->begin_transaction();
+try {
+  // 1) Obtener el movimiento
+  $stmt = $mysqli->prepare("SELECT cantidad, tipo_pago FROM movimientos WHERE id = ? AND user_id = ? LIMIT 1");
+  $stmt->bind_param('ii', $id, $userId);
+  $stmt->execute();
+  $mov = $stmt->get_result()->fetch_assoc();
+  $stmt->close();
+
+  if (!$mov) {
+    throw new Exception('Movimiento no encontrado');
+  }
+
+  // 2) Quitar su efecto de usuarios
+  $cant = (float)$mov['cantidad'];
+  $tipo = $mov['tipo_pago'];
+
+  if ($tipo === 'cuenta') {
+    $stmt = $mysqli->prepare("UPDATE usuarios SET cuenta = cuenta - ? WHERE id = ? LIMIT 1");
+    $stmt->bind_param('di', $cant, $userId);
+    $stmt->execute();
+    $stmt->close();
+  } else if ($tipo === 'efectivo') {
+    $stmt = $mysqli->prepare("UPDATE usuarios SET efectivo = efectivo - ? WHERE id = ? LIMIT 1");
+    $stmt->bind_param('di', $cant, $userId);
+    $stmt->execute();
+    $stmt->close();
+  } else {
+    // otras cuentas futuras -> por ahora no tocamos totales
+  }
+
+  // 3) Borrar
+  $stmt = $mysqli->prepare("DELETE FROM movimientos WHERE id = ? AND user_id = ? LIMIT 1");
+  $stmt->bind_param('ii', $id, $userId);
+  $stmt->execute();
+  if ($stmt->affected_rows < 1) {
+    throw new Exception('No se pudo borrar');
+  }
+  $stmt->close();
+
+  $mysqli->commit();
+  echo json_encode(['ok' => true, 'id' => $id]);
+
+} catch (Exception $e) {
+  $mysqli->rollback();
+  http_response_code(400);
+  echo json_encode(['error' => $e->getMessage()]);
 }
-$row = $res->fetch_assoc();
-
-// 2. Borrar imagen física si la hay
-if ($row['imagen'] && file_exists("../../" . $row['imagen'])) {
-    @unlink("../../" . $row['imagen']);
-}
-
-// 3. Borrar etiquetas relacionadas
-$conn->query("DELETE FROM movimiento_etiqueta WHERE movimiento_id = $id");
-
-// 4. Borrar movimiento
-$stmt2 = $conn->prepare("DELETE FROM movimientos WHERE id=? AND user_id=?");
-$stmt2->bind_param('ii', $id, $uid);
-$stmt2->execute();
-
-if ($stmt2->affected_rows > 0) {
-    echo json_encode(['success' => true]);
-} else {
-    echo json_encode(['success' => false, 'error' => 'No se pudo borrar el movimiento']);
-}
-exit;
-?>
