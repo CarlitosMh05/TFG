@@ -174,46 +174,41 @@ $(document).ready(function ()
 
   // Si el usuario edita el input manualmente, sincronizamos botones
   // Si el usuario edita el input manualmente, sincronizamos botones
+  // Si el usuario edita el input manualmente, sincronizamos botones
   $cantidad.on('input', function () {
     let v = $(this).val();
 
-    // 0) Normaliza un posible '+' al principio (algunos teclados lo ponen)
+    // Normaliza un posible '+' al principio (algunos teclados lo ponen)
     if (v.startsWith('+')) {
       v = v.slice(1);
       $(this).val(v);
     }
 
-    // 1) Estados parciales de escritura: NO tocar nada
-    //    ".", "-.", "12.", "-12."
-    const isPartialDecimal = (v === '.') || (v === '-.') || v.endsWith('.');
+    // Estados parciales de escritura: ".", "-.", "12.", "-12."
+    const isPartialDecimal = (v === '.' || v === '-.' || v.endsWith('.'));
     if (isPartialDecimal) {
-      return; // no cambiamos ni valor ni botones
+      return; // no tocar nada
     }
 
-    // 2) Si el usuario escribe '-' al inicio, respetamos y activamos "–"
+    // Si empieza con "-" → forzar negativo
     if (v.startsWith('-')) {
       $minus.addClass('active');
       $plus.removeClass('active');
       return;
     }
 
-    // 3) Si el toggle está en negativo y hay contenido estable, añadimos '-'
-    if ($minus.hasClass('active') && v !== '') {
-      // Evita doble '-' si ya lo tuviera (no debería, pero por seguridad)
-      if (!v.startsWith('-')) {
-        $(this).val('-' + v);
-      }
-      return;
-    }
-
-    // 4) Si no hay nada, no fuerces el signo; si hay algo, marca "+"
-    if (v === '') {
-      return; // deja los botones como estaban
+    // 👇 NUEVO: si hemos borrado el "-" → pasar a positivo
+    if (!$minus.hasClass('active') && !$plus.hasClass('active')) {
+      // si ambos estaban vacíos, inicializa a positivo
+      $plus.addClass('active');
+      $minus.removeClass('active');
     } else {
+      // en cualquier otro caso, si ya no empieza por "-", activa positivo
       $plus.addClass('active');
       $minus.removeClass('active');
     }
   });
+
 
 
   //Función para que aparezca o desaparezca la caja de la fecha
