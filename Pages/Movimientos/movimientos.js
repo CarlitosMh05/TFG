@@ -1050,6 +1050,124 @@ $(function () {
           }
         }
 
+        // === MOVER FILA ENTRE DÍAS (OPCIÓN B) ===
+        (function() {
+          const $diaContainer = $row.closest('.movimientos-dia');
+          const fechaOriginal = ($diaContainer.data('fecha') || '').trim();
+          const fechaNueva = ($row.find('.selected-fecha').val() || '').trim();
+
+          if (!fechaNueva || fechaNueva === fechaOriginal) return;
+
+          // 1) Quitar del array del día original
+          if (allMovimientosPorDia[fechaOriginal]) {
+            const idxOld = allMovimientosPorDia[fechaOriginal].findIndex(m => m.id == mov.id);
+            if (idxOld >= 0) {
+              allMovimientosPorDia[fechaOriginal].splice(idxOld, 1);
+            }
+          }
+
+          // 2) Si el contenedor del día original se queda vacío, eliminarlo
+          const $diaOriginal = $diaContainer;
+          if ($diaOriginal.find('.movimiento-row').length <= 1) {
+            $diaOriginal.remove();
+            delete allMovimientosPorDia[fechaOriginal];
+          } else {
+            // Actualizar resumen del día original
+            const totalOld = (allMovimientosPorDia[fechaOriginal] || []).reduce((acc, m) => acc + parseFloat(m.cantidad), 0);
+            const colorOld = totalOld > 0 ? 'positivo' : (totalOld < 0 ? 'negativo' : 'cero');
+            const txtOld   = (totalOld>0?'+':(totalOld<0?'-':'')) + Math.abs(totalOld).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' €';
+            $diaOriginal.find('.mov-dia-cantidad').removeClass('positivo negativo cero').addClass(colorOld).text(txtOld);
+          }
+
+          // 3) Asegurar contenedor del día nuevo
+          function ensureDiaContainer(fecha) {
+            let $dia = $(`.movimientos-dia[data-fecha="${fecha}"]`);
+            if ($dia.length) return $dia;
+
+            const dateObj = new Date(fecha);
+            const fechaTexto = dateObj.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+            const header = `
+              <div class="mov-dia-header">
+                <div class="movimientos-dia-fecha">${(fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1))}</div>
+                <div class="mov-dia-resumen">
+                  <span class="mov-dia-cantidad cero">0,00 €</span>
+                </div>
+              </div>
+              <div class="mov-row-header">
+                <div class="mov-header-col">Cantidad</div>
+                <div class="mov-header-col">Concepto</div>
+                <div class="mov-header-col">Etiquetas</div>
+                <div class="mov-header-col">Observaciones</div>
+                <div class="mov-header-col">Cuenta/Efectivo</div>
+                <div class="mov-header-col">Imagen</div>
+              </div>
+              <div class="lista-mov-dia"></div>
+            `;
+            $dia = $(`<div class="movimientos-dia" data-fecha="${fecha}">${header}</div>`);
+            $('#movimientosList').append($dia);
+
+            // sticky resumen (igual patrón que ya usas al renderizar)
+            const $resumen = $dia.find('.mov-dia-resumen');
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                $resumen.toggleClass('sticky', !entry.isIntersecting);
+              });
+            }, {threshold: [0, 1]});
+            observer.observe($dia[0]);
+
+            return $dia;
+          }
+
+          const $diaNuevo = ensureDiaContainer(fechaNueva);
+
+          // 4) Insertar la fila en el día nuevo (en modo “vista”)
+          const cantNum = (cantidad !== null && !Number.isNaN(cantidad)) ? cantidad : parseFloat(mov.cantidad);
+          const esIngreso = cantNum > 0;
+          const cantidadTxt = (cantNum).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' ' + (moneda==='EUR'?'€':moneda);
+          const etiquetasHtmlFin = (etiquetasCsv||'').split(',').filter(Boolean).map(e => `<span class="chip-etiqueta">${e}</span>`).join('');
+          const tipoFin = (tipoPago || mov.tipo_pago || '').trim();
+          const tipoHtmlFin = tipoFin ? `<div class="tipo-pago">${tipoFin}</div>` : '';
+          const imgHtmlFin = $row.find('.uploaded-preview img').length ? $row.find('.uploaded-preview').prop('outerHTML') : '';
+
+          const $filaNueva = $(`
+            <div class="movimiento-row" data-id="${mov.id}">
+              <div class="mov-col">
+                <div class="movimiento-cantidad ${esIngreso ? 'ingreso' : 'gasto'}">${cantidadTxt}</div>
+              </div>
+              <div class="mov-col"><div class="movimiento-concepto">${concepto || mov.concepto}</div></div>
+              <div class="mov-col">${etiquetasHtmlFin}</div>
+              <div class="mov-col">${observaciones ? `<div class="observaciones">${observaciones}</div>` : ''}</div>
+              <div class="mov-col mov-col-tipo" data-value="${tipoFin}">${tipoHtmlFin}</div>
+              <div class="mov-col mov-col-img">${imgHtmlFin}</div>
+              <div style="display:flex;justify-content:flex-end;">
+                <button class="mov-action-btn editar-mov-btn" data-id="${mov.id}" title="Editar movimiento"><i data-lucide="pencil"></i></button>
+                <button class="mov-action-btn eliminar-mov-btn" data-id="${mov.id}" title="Eliminar movimiento"><i data-lucide="trash-2"></i></button>
+              </div>
+            </div>
+          `);
+
+          $diaNuevo.find('.lista-mov-dia').prepend($filaNueva);
+          $row.remove();
+          if (window.lucide) lucide.createIcons();
+
+          // 5) Actualizar cache en memoria en el nuevo día
+          if (!allMovimientosPorDia[fechaNueva]) allMovimientosPorDia[fechaNueva] = [];
+          const movActualizado = { ...mov };
+          if (cantidad !== null && !Number.isNaN(cantidad)) movActualizado.cantidad = cantidad;
+          if (concepto) movActualizado.concepto = concepto;
+          movActualizado.observaciones = observaciones;
+          movActualizado.moneda = moneda;
+          if (tipoPago) movActualizado.tipo_pago = tipoPago;
+          movActualizado.etiquetas = (etiquetasCsv||'').split(',').filter(Boolean).map(n => ({nombre:n}));
+          allMovimientosPorDia[fechaNueva].unshift(movActualizado);
+
+          // 6) Recalcular resumen del día nuevo
+          const totalNew = allMovimientosPorDia[fechaNueva].reduce((acc, m) => acc + parseFloat(m.cantidad), 0);
+          const colorNew = totalNew > 0 ? 'positivo' : (totalNew < 0 ? 'negativo' : 'cero');
+          const txtNew   = (totalNew>0?'+':(totalNew<0?'-':'')) + Math.abs(totalNew).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' €';
+          $diaNuevo.find('.mov-dia-cantidad').removeClass('positivo negativo cero').addClass(colorNew).text(txtNew);
+        })();
+
         // Si prefieres recalcular resúmenes y todo el día:
         //reiniciarYcargar(window.scrollY);
 
