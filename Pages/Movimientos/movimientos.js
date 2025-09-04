@@ -927,7 +927,7 @@ $(function () {
       const moneda = $row.find('.selected-currency').val() || 'EUR';
       const concepto = $row.find('.selected-concepto').val() || '';
       const observaciones = $row.find('.input-observaciones').val() || '';
-      const tipoPago = ($row.find('.input-tipo-pago').val() || '').trim(); // <-- NUEVO
+            const tipoPago = ($row.find('.selected-tipo').val() || $row.find('.tipo-display').text() || '').trim();
       const etiquetasCsv = $row.find('.input-etiquetas').val() || '';
       const formData = new FormData();
 
