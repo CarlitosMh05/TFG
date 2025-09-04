@@ -181,6 +181,11 @@ window.cargarMasMovimientos = function() {
           }
         }
 
+        let tipoHtml = '';
+        if (mov.tipo_pago && String(mov.tipo_pago).trim() !== '') {
+          tipoHtml = `<div class="tipo-pago">${mov.tipo_pago}</div>`;
+        }
+
         $lista.append(`
           <div class="movimiento-row" data-id="${mov.id}">
             <div class="mov-col">
