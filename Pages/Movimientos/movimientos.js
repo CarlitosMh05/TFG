@@ -103,6 +103,7 @@ window.cargarMasMovimientos = function() {
           <div class="mov-header-col">Concepto</div>
           <div class="mov-header-col">Etiquetas</div>
           <div class="mov-header-col">Observaciones</div>
+          <div class="mov-header-col">Cuenta/Efectivo</div>
           <div class="mov-header-col">Imagen</div>
           <div class="mov-header-col" style="flex:0 0 46px;"></div>
         </div>
