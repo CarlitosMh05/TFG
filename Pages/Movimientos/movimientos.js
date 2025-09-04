@@ -430,6 +430,17 @@ $(function () {
     });
   });
 
+  $(document).on('mousedown.edicionTipo', function(e) {
+  const $cont = $row.find('.tipo-dropdown');
+  const $display = $cont.find('.tipo-display');
+  const $options = $cont.find('.tipo-options');
+  if (!$cont.has(e.target).length) {
+    $options.fadeOut(150);
+    $display.removeClass('open');
+    $(document).off('mousedown.edicionTipo');
+  }
+});
+
 
   function getMonedaSymbol(moneda) {
     return moneda === 'EUR' ? '€'
