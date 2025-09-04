@@ -984,13 +984,11 @@ $(function () {
       // Fecha: sólo si cambia respecto a la original del día
       const fechaOriginal = ($row.find('.edit-fecha-addon').attr('data-original-fecha') || '').trim();
       const fechaNueva    = ($row.find('.selected-fecha').val() || '').trim();
-      
+
       const formData = new FormData();
 
       
-      if (fechaNueva && fechaNueva !== fechaOriginal) {
-        formData.append('fecha_elegida', fechaNueva);
-      }
+      
 
       formData.append('id', String(mov.id));
       if (cantidad !== null && !Number.isNaN(cantidad)) formData.append('cantidad', cantidad);
