@@ -177,11 +177,17 @@ $(document).ready(function ()
   $cantidad.on('input', function () {
     let v = $(this).val();
 
-     // 👉 Reemplazar punto por coma automáticamente
-    if (v.includes('.')) {
-      v = v.replace('.', ',');
-      $(this).val(v);
+    // Eliminar cualquier carácter que no sea dígito, coma o punto
+    v = v.replace(/[^0-9.,-]/g, '');
+
+    // Evitar más de un punto o coma
+    const parts = v.split(/[.,]/);
+    if (parts.length > 2) {
+      v = parts[0] + ',' + parts.slice(1).join('').replace(/[.,]/g, '');
     }
+
+    // Reemplazar siempre punto por coma
+    v = v.replace(/\./g, ',');
 
     // 0) Normaliza un posible '+' al principio (algunos teclados lo ponen)
     if (v.startsWith('+')) {
