@@ -963,8 +963,7 @@ $(document).ready(function ()
     
     // —— Construir FormData usando las variables ——  
     const formData = new FormData();
-
-
+    
     formData.append('cantidad',      cantidad);
     formData.append('moneda',        moneda);
     formData.append('concepto',      concepto);
