@@ -191,13 +191,7 @@ $(document).ready(function ()
 
     alert(v);
 
-    // 1) Estados parciales de escritura: NO tocar nada
-    //    ".", "-.", "12.", "-12."
-    const isPartialDecimal = (v === '.') || (v === '-.') || v.endsWith('.');
-    if (isPartialDecimal) {
-      return; // no cambiamos ni valor ni botones
-    }
-
+    
     // 2) Si el usuario escribe '-' al inicio, respetamos y activamos "–"
     if (v.startsWith('-')) {
       $minus.addClass('active');
