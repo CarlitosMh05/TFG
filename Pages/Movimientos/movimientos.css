@@ -1308,6 +1308,7 @@ h1 {
   color: #666;
   font-size: 12px;
   pointer-events: none;
+  animation: 1s ;
 }
 
 .tipo-display.open::after {
