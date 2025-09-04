@@ -926,6 +926,7 @@ $(function () {
       const cantidad = cantidadStr === '' ? null : parseFloat(cantidadStr);
       const moneda = $row.find('.selected-currency').val() || 'EUR';
       const concepto = $row.find('.selected-concepto').val() || '';
+      const tipoPago = ($row.find('.selected-tipo').val() || $row.find('.tipo-display').text() || '').trim();
       const observaciones = $row.find('.input-observaciones').val() || '';
       const tipoPago = ($row.find('.input-tipo-pago').val() || '').trim(); // <-- NUEVO
       const etiquetasCsv = $row.find('.input-etiquetas').val() || '';
