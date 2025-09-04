@@ -1297,6 +1297,7 @@ h1 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background-color: white;
 }
 .tipo-dropdown .tipo-display.open {
   border-color: var(--azulPrimario);
