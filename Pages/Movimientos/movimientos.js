@@ -878,93 +878,102 @@ $(function () {
   }
 
   function confirmarEdicionFila($row, mov) {
-    mostrarMiniModal('¿Seguro que quieres aplicar los cambios?', function(confirmado) {
-      const $spinner = $row.find('.spinner-confirmar');
-      $spinner.show();
-      $row.find('.tick-editar-btn i').hide();
-      if (!confirmado) return;
-      $row.removeClass('editando-responsive'); 
-      // Recolectar los datos de los inputs
-      const cantidad = $row.find('.input-cantidad').val();
-      const signo = $row.find('.minus-btn').hasClass('active') ? -1 : 1;
-      const moneda = $row.find('.selected-currency').val();
-      const concepto = $row.find('.selected-concepto').val() || $row.find('.concepto-display').text();
-      const etiquetas = $row.find('.input-etiquetas').val();
-      const observaciones = $row.find('.input-observaciones').val();
-      // Imagen
-      const fileInput = $row.find('.input-imagen-editar')[0];
-      const imagen = fileInput && fileInput.files.length > 0 ? fileInput.files[0] : null;
+  mostrarMiniModal('¿Seguro que quieres aplicar los cambios?', function(confirmado) {
+    if (!confirmado) return;
 
-      // Validación (ejemplo)
-      let error = false;
-      if (!cantidad) { $row.find('.badCuantity').text('Introduce una cantidad').show(); error = true; }
-      if (!concepto) { $row.find('.badConcept').text('Selecciona un concepto').show(); error = true; }
-      if (error) return;
+    const $spinner = $row.find('.spinner-confirmar');
+    $spinner.show();
+    $row.find('.tick-editar-btn i').hide();
 
-      // Construir FormData para enviar por AJAX
-      const formData = new FormData();
-      formData.append('id', mov.id);
-      formData.append('cantidad', signo * Math.abs(cantidad));
-      formData.append('moneda', moneda);
-      formData.append('concepto', concepto);
-      formData.append('observaciones', observaciones);
-      formData.append('etiquetas', etiquetas);
-      if (imagen) formData.append('imagen', imagen);
+    // Recolectar valores de la edición
+    const cantidadStr = ($row.find('.input-cantidad').val() || '').trim();
+    const cantidad = cantidadStr === '' ? null : parseFloat(cantidadStr);
+    const moneda = $row.find('.selected-currency').val() || 'EUR';
+    const concepto = $row.find('.selected-concepto').val() || '';
+    const observaciones = $row.find('.input-observaciones').val() || '';
+    const tipoPago = ($row.find('.input-tipo-pago').val() || '').trim(); // <-- NUEVO
+    const etiquetasCsv = $row.find('.input-etiquetas').val() || '';
+    const formData = new FormData();
 
-      $.ajax({
-        url: 'updateMovimiento.php', // Debes crear este endpoint PHP
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        dataType: 'json',
-        success(response) {
-          if (response.success && response.movimiento) {
-            showSuccessMessage('Movimiento actualizado correctamente');
-            const updatedMov = response.movimiento;
+    formData.append('id', String(mov.id));
+    if (cantidad !== null && !Number.isNaN(cantidad)) formData.append('cantidad', cantidad);
+    if (concepto) formData.append('concepto_id_nombre', concepto); // si usas id real, cambia a concepto_id
+    formData.append('observaciones', observaciones);
+    formData.append('moneda', moneda);
+    if (tipoPago) formData.append('tipo_pago', tipoPago); // <-- NUEVO
+    if (etiquetasCsv) formData.append('etiquetas', etiquetasCsv);
 
-            // 1. Reemplazar datos en allMovimientosPorDia
-            for (const fecha of Object.keys(allMovimientosPorDia)) {
-              const idx = allMovimientosPorDia[fecha].findIndex(m => m.id == updatedMov.id);
-              if (idx !== -1) {
-                allMovimientosPorDia[fecha][idx] = updatedMov;
+    $.ajax({
+      url: 'updateMovimiento.php', // ajusta ruta si la tienes en otro sitio
+      method: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: 'json'
+    }).done(function(resp) {
+      if (!resp || resp.error) {
+        alert(resp?.error || 'Error al actualizar');
+        return;
+      }
 
-                // 2. Actualizar la fila visualmente
-                const $row = $(`.movimiento-row[data-id="${updatedMov.id}"]`);
-                $row.replaceWith(generarFilaMovimiento(updatedMov));
+      // Actualizar DOM de la fila (sin recargar todo)
+      const cantNum = (cantidad !== null && !Number.isNaN(cantidad)) ? cantidad : parseFloat(mov.cantidad);
+      const esIngreso = cantNum > 0;
+      const cantidadTxt = Math.abs(cantNum).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ' + (moneda === 'EUR' ? '€' : moneda);
+      $row.html(`
+        <div class="mov-col">
+          <div class="movimiento-cantidad ${esIngreso ? 'ingreso' : 'gasto'}">${(cantNum).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})} ${moneda==='EUR'?'€':moneda}</div>
+        </div>
+        <div class="mov-col">
+          <div class="movimiento-concepto">${concepto || mov.concepto}</div>
+        </div>
+        <div class="mov-col">
+          ${(etiquetasCsv||'').split(',').filter(Boolean).map(e => `<span class="chip-etiqueta">${e}</span>`).join('')}
+        </div>
+        <div class="mov-col">
+          ${observaciones ? `<div class="observaciones">${observaciones}</div>` : ''}
+        </div>
+        <div class="mov-col mov-col-tipo" data-value="${tipoPago || mov.tipo_pago || ''}">
+          ${tipoPago || mov.tipo_pago || ''}
+        </div>
+        <div class="mov-col mov-col-img">
+          ${$row.find('.uploaded-preview img').length ? $row.find('.uploaded-preview').prop('outerHTML') : ''}
+        </div>
+        <div style="display:flex;justify-content:flex-end;">
+          <button class="mov-action-btn editar-mov-btn" data-id="${mov.id}" title="Editar movimiento"><i data-lucide="pencil"></i></button>
+          <button class="mov-action-btn eliminar-mov-btn" data-id="${mov.id}" title="Eliminar movimiento"><i data-lucide="trash-2"></i></button>
+        </div>
+      `);
+      if (window.lucide) lucide.createIcons();
 
-                // 3. Actualizar resumen diario
-                let totalDia = allMovimientosPorDia[fecha].reduce((acc, m) => acc + parseFloat(m.cantidad), 0);
-                const resumenColor = totalDia > 0 ? 'positivo' : (totalDia < 0 ? 'negativo' : 'cero');
-                const resumenTxt = (totalDia > 0 ? '+' : (totalDia < 0 ? '-' : '')) +
-                  Math.abs(totalDia).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
-                $(`.movimientos-dia[data-fecha="${fecha}"] .mov-dia-cantidad`)
-                  .removeClass('positivo negativo cero')
-                  .addClass(resumenColor)
-                  .text(resumenTxt);
-
-                break;
-              }
-
-              $spinner.hide();
-              $row.find('.tick-editar-btn i').show();
-            }
-
-            movimientoEditandoId = null;
-            $('.editar-mov-btn').show(); // restaurar botones
-            lucide.createIcons(); // actualizar iconos
-          } else {
-            showFailMessage(response.error || 'Error al actualizar');
-          }
-        },
-        error(xhr, status, error) {
-          $spinner.hide();
-          $row.find('.tick-editar-btn i').show();
-          alert('Error AJAX: ' + error);
+      // Actualiza cache en memoria (allMovimientosPorDia) para mantener coherencia
+      for (const fecha of Object.keys(allMovimientosPorDia)) {
+        const idx = allMovimientosPorDia[fecha].findIndex(m => m.id == mov.id);
+        if (idx >= 0) {
+          const mref = allMovimientosPorDia[fecha][idx];
+          if (cantidad !== null && !Number.isNaN(cantidad)) mref.cantidad = cantidad;
+          if (concepto) mref.concepto = concepto;
+          mref.observaciones = observaciones;
+          mref.moneda = moneda;
+          if (tipoPago) mref.tipo_pago = tipoPago; // <-- NUEVO
+          mref.etiquetas = (etiquetasCsv||'').split(',').filter(Boolean).map(n => ({nombre:n}));
+          break;
         }
-      });
+      }
+
+      // Si prefieres recalcular resúmenes y todo el día:
+      // reiniciarYcargar(window.scrollY);
+
+    }).fail(function() {
+      alert('Error de red al actualizar');
+    }).always(function() {
+      $spinner.hide();
+      $row.find('.tick-editar-btn i').show();
+      movimientoEditandoId = null;
+      $('.editar-mov-btn').show();
     });
-  }
+  });
+}
 
   function cancelarEdicionFila($row, mov) {
     mostrarMiniModal('¿Seguro que quieres cancelar la edición?', function(confirmado) {
