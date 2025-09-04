@@ -127,6 +127,8 @@ $(document).ready(function ()
       overlay.style.display = "none";
       modal.style.display = "none";
       document.body.classList.remove("modal-open");
+
+      resetErrorsUI();
     }
   });
 
