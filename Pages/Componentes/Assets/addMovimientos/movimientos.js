@@ -177,6 +177,12 @@ $(document).ready(function ()
   $cantidad.on('input', function () {
     let v = $(this).val();
 
+     // 👉 Reemplazar punto por coma automáticamente
+    if (v.includes('.')) {
+      v = v.replace('.', ',');
+      $(this).val(v);
+    }
+
     // 0) Normaliza un posible '+' al principio (algunos teclados lo ponen)
     if (v.startsWith('+')) {
       v = v.slice(1);
