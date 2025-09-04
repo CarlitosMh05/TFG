@@ -210,10 +210,7 @@ $(document).ready(function ()
     if (v === '') {
       $plus.addClass('active');
       $minus.removeClass('active');
-    } else {
-      $plus.addClass('active');
-      $minus.removeClass('active');
-    }
+    } 
 
     
   });
