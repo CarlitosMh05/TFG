@@ -1103,6 +1103,7 @@ $(function () {
               <div class="mov-dia-header">
                 <div class="movimientos-dia-fecha">${(fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1))}</div>
                 <div class="mov-dia-resumen">
+                  <span>Resumen diario: </span>
                   <span class="mov-dia-cantidad cero">0,00 €</span>
                 </div>
               </div>
