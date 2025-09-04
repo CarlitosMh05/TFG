@@ -910,7 +910,6 @@ $(document).ready(function ()
     if ($btn.prop('disabled')) return;
   
     // Otros reads…
-    const cantidad       = $('#cantidad').val().trim();
     const moneda         = $('#selectedCurrency').val();
     const observaciones  = $('#observaciones').val().trim();
     const concepto       = $('#selectedConcepto').val();
@@ -963,6 +962,9 @@ $(document).ready(function ()
     
     // —— Construir FormData usando las variables ——  
     const formData = new FormData();
+
+    const cantidad = $('#cantidad').val().trim().replace(',', '.');
+    formData.append('cantidad', cantidad);
 
     formData.append('cantidad',      cantidad);
     formData.append('moneda',        moneda);
