@@ -118,13 +118,19 @@ $(document).ready(function ()
   const $plus     = $('#plusBtn');
   const $minus    = $('#minusBtn');
   function updateSign() {
-    let val = $cantidad.val();
-    if (val === '') return;   // nada que hacer si está vacío
-    let num = parseFloat(val);
+    let v = $cantidad.val();
+
+    // 1) Nada escrito o estados parciales → no tocar
+    if (v === '' || v === '-' || v === ',' || v === '-,') return;
+
+    // 2) Quitar cualquier signo inicial para no perder decimales
+    v = v.replace(/^[+-]/, '');
+
+    // 3) Aplicar el signo según el toggle, preservando la coma y los decimales
     if ($minus.hasClass('active')) {
-      $cantidad.val(-Math.abs(num));
+      $cantidad.val('-' + v);
     } else {
-      $cantidad.val(Math.abs(num));
+      $cantidad.val(v);
     }
   }
 
