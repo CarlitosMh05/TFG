@@ -440,6 +440,11 @@ $(function () {
   });
 
   $(document).on('mousedown.edicionTipo', function(e) {
+    const $row = $('.movimiento-row.editando-responsive');           // fila que está en edición
+    if ($row.length === 0) {
+      $(document).off('mousedown.edicionTipo');
+      return;
+    }
     const $cont = $row.find('.tipo-dropdown');
     const $display = $cont.find('.tipo-display');
     const $options = $cont.find('.tipo-options');
