@@ -966,6 +966,13 @@ $(function () {
       $spinner.show();
       $row.find('.tick-editar-btn i').hide();
 
+      // Fecha: sólo si cambia respecto a la original del día
+      const fechaOriginal = ($row.find('.edit-fecha-addon').attr('data-original-fecha') || '').trim();
+      const fechaNueva    = ($row.find('.selected-fecha').val() || '').trim();
+      if (fechaNueva && fechaNueva !== fechaOriginal) {
+        formData.append('fecha_elegida', fechaNueva);
+      }
+
       // Recolectar valores de la edición
       const cantidadStr = ($row.find('.input-cantidad').val() || '').trim();
       const cantidad = cantidadStr === '' ? null : parseFloat(cantidadStr);
