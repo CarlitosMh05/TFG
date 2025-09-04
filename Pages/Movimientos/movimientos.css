@@ -1566,6 +1566,45 @@ h1 {
 }
 
 
+/* Anexo flotante de fecha en modo edición */
+.movimiento-row.editando-responsive .edit-fecha-addon {
+  position: absolute;
+  left: 6px;                 /* entre el margen izq. y la columna cantidad */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 6;                /* por encima de la fila editando */
+}
+
+.edit-fecha-addon .btn-open-fecha {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid #d9e3f5;
+  background: #fff;
+  cursor: pointer;
+  transition: box-shadow .15s, border-color .15s;
+}
+.edit-fecha-addon .btn-open-fecha:hover {
+  box-shadow: 0 3px 12px rgba(59,119,209,0.15);
+  border-color: var(--azulPrimario, #3B77D1);
+}
+
+.edit-fecha-addon .input-fecha-edit {
+  width: 0.1px;      /* oculto pero focusable para flatpickr */
+  height: 0.1px;
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+
+
 
 @keyframes spin {
   to { transform: rotate(360deg); }
