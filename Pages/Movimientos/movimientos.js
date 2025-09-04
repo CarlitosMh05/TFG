@@ -982,8 +982,8 @@ $(function () {
       const tipoPago = ($row.find('.selected-tipo').val() || $row.find('.tipo-display').text() || '').trim();
       const etiquetasCsv = $row.find('.input-etiquetas').val() || '';
       // Fecha: sólo si cambia respecto a la original del día
-      const fechaOriginal = ($row.find('.edit-fecha-addon').attr('data-original-fecha') || '').trim();
-      const fechaNueva    = ($row.find('.selected-fecha').val() || '').trim();
+      const fechaOriginalCached = ($row.closest('.movimientos-dia').data('fecha') || '').trim();
+      const fechaNuevaCached    = ($row.find('.selected-fecha').val() || '').trim();
 
       const formData = new FormData();
 
@@ -998,8 +998,8 @@ $(function () {
       formData.append('moneda', moneda);
       if (etiquetasCsv) formData.append('etiquetas', etiquetasCsv);
 
-      if (fechaNueva && fechaNueva !== fechaOriginal) {
-        formData.append('fecha_elegida', fechaNueva);
+      if (fechaNuevaCached && fechaNuevaCached !== fechaOriginalCached) {
+        formData.append('fecha_elegida', fechaNuevaCached);
       }
 
       $.ajax({
