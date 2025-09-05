@@ -1327,6 +1327,121 @@ $(function () {
     }
   });
 
+
+  function crearDropdownConceptoBicolor(idDisplay, idOptions, idValue, ingresos, gastos) {
+  const $display = $('#' + idDisplay);
+  const $options = $('#' + idOptions);
+  const $value   = $('#' + idValue);
+
+  // Toggle del panel (cerrando el de etiquetas si está abierto)
+  $display.off('click').on('click', function(e) {
+    $('#filtroEtiquetaOptions').fadeOut(80);
+    $('#filtroEtiquetaDisplay').removeClass('open');
+    $options.fadeToggle(120);
+    $display.toggleClass('open');
+    e.stopPropagation();
+  });
+
+  // Render inicial de la estructura bicolor
+  function renderBicolor(qIng = '', qGas = '') {
+      // Limpio y pinto estructura en 2 columnas
+      $options.empty().append(`
+        <div class="concepto-bicolor">
+          <div class="concepto-todos" data-id="">Todos</div>
+
+          <div class="concepto-col concepto-col--ingreso">
+            <div class="concepto-col-title">Ingresos</div>
+            <div class="input-container search-container">
+              <input type="text" class="search-input ingreso" placeholder=" ">
+              <label style="left: 33px;">Buscar.</label>
+              <i data-lucide="search" class="search-icon"></i>
+            </div>
+            <ul class="concepto-col-list ingreso-list"></ul>
+          </div>
+
+          <div class="concepto-col concepto-col--gasto">
+            <div class="concepto-col-title">Gastos</div>
+            <div class="input-container search-container">
+              <input type="text" class="search-input gasto" placeholder=" ">
+              <label style="left: 33px;">Buscar.</label>
+              <i data-lucide="search" class="search-icon"></i>
+            </div>
+            <ul class="concepto-col-list gasto-list"></ul>
+          </div>
+        </div>
+      `);
+      if (window.lucide) lucide.createIcons();
+
+      // helper para pintar una lista
+      function pintarLista($ul, arr, q, tipo) {
+        $ul.empty();
+        const txt = q.trim().toLowerCase();
+        const data = txt ? arr.filter(c => c.nombre.toLowerCase().includes(txt)) : arr;
+        data.forEach(item => {
+          // data-id y data-tipo para saber si es ingreso/gasto al seleccionar
+          $ul.append(`<li data-id="${item.id}" data-tipo="${tipo}">${item.nombre}</li>`);
+        });
+      }
+
+      pintarLista($options.find('.ingreso-list'), ingresos, qIng, 'ingreso');
+      pintarLista($options.find('.gasto-list'),   gastos,   qGas, 'gasto');
+    }
+
+    renderBicolor();
+
+    // Buscadores independientes por columna
+    $options.on('input', '.search-input.ingreso', function() {
+      renderBicolor(this.value, $options.find('.search-input.gasto').val() || '');
+      $options.find('.search-input.ingreso').val(this.value).focus();
+    });
+    $options.on('input', '.search-input.gasto', function() {
+      renderBicolor($options.find('.search-input.ingreso').val() || '', this.value);
+      $options.find('.search-input.gasto').val(this.value).focus();
+    });
+
+    // Opción "Todos"
+    $options.on('click', '.concepto-todos', function() {
+      $display.text('Todos').removeClass('is-ingreso is-gasto');
+      $value.val('');
+      $options.fadeOut(120);
+      $display.removeClass('open');
+      filtros.concepto_id = "";
+      window.reiniciarYcargar();
+    });
+
+    // Selección de opción (en cualquiera de las dos listas)
+    $options.on('click', 'li[data-id]', function() {
+      const id    = $(this).data('id');
+      const nombre= $(this).text();
+      const tipo  = $(this).data('tipo'); // 'ingreso' | 'gasto'
+
+      // Texto y color del display según tipo elegido
+      $display.text(nombre)
+              .removeClass('is-ingreso is-gasto')
+              .addClass(tipo === 'ingreso' ? 'is-ingreso' : 'is-gasto');
+      $value.val(id);
+
+      $options.fadeOut(120);
+      $display.removeClass('open');
+
+      filtros.concepto_id = id || "";
+      window.reiniciarYcargar();
+    });
+
+    // Click fuera → cerrar (como ya haces en el otro)
+    $(document).off('click.dropdownConcepto').on('click.dropdownConcepto', function(e) {
+      if (!$display.is(e.target) && $display.has(e.target).length === 0 &&
+          !$options.is(e.target) && $options.has(e.target).length === 0) {
+        $options.fadeOut(120);
+        $display.removeClass('open');
+      }
+    });
+
+    // Reset cuando se limpian filtros (reutiliza tu función global existente)
+    // (Nada extra aquí: ya haces resetearDropdownFiltro() en el botón limpiar) :contentReference[oaicite:3]{index=3}
+  }
+
+
   // Reemplaza la función entera por esta versión
   function cargarFiltrosDropdownsCustom() {
     // 1) Cargar conceptos separados
