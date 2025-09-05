@@ -12,7 +12,7 @@ $uid = $_SESSION['user_id'];
   <title>Movimientos</title>
   <link rel="stylesheet" href="movimientos.css"> <!-- si tienes estilos extra -->
     <link rel="stylesheet" href="../darkmode.css"> <!--CSS de la pagina--> 
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="../../favicon.ico">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
