@@ -1667,9 +1667,8 @@ h1 {
   gap: 12px;
 }
 
-
-/* Solo el dropdown de concepto de la barra de filtros */
-#filtroConceptoOptions {
+/* “Todos” arriba ocupando dos columnas */
+.concepto-todos {
   grid-column: 1 / 3;
   text-align: center;
   padding: 8px 12px;
@@ -1681,6 +1680,11 @@ h1 {
   transition: background 0.15s, color 0.15s;
   border: 1px solid #e0e5ef;
   margin-bottom: 4px;
+}
+
+/* Solo el dropdown de concepto de la barra de filtros */
+#filtroConceptoOptions {
+  min-width: 320px;
 }
 
 .concepto-todos:hover {
