@@ -1739,6 +1739,11 @@ h1 {
   color: #661a1a;
 }
 
+/* Solo el dropdown de concepto de la barra de filtros */
+#filtroConceptoOptions {
+  min-width: 320px;
+}
+
 /* Responsive: apilar en móvil */
 @media (max-width: 600px) {
   .concepto-options { min-width: 260px; }
