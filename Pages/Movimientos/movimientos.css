@@ -1615,7 +1615,6 @@ h1 {
   color: #234085;
   font-size: 1.07rem;
   position: relative;
-  min-width: 170px;
   transition: border-color 0.18s, background 0.18s, color 0.18s;
 }
 .concepto-display::after {
