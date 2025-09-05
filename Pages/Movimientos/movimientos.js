@@ -1568,7 +1568,7 @@ $(function () {
 
     // Reset al limpiar filtros
     window.resetearDropdownFiltro = function() {
-      $('#filtroConceptoDisplay').text('Todos');
+      $('#filtroConceptoDisplay').text('Todos').removeClass('is-ingreso is-gasto'); ;
       $('#filtroConceptoValue').val('');
       $('#filtroEtiquetaDisplay').text('Todas');
       $('#filtroEtiquetaValue').val('');
