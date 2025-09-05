@@ -1327,19 +1327,29 @@ $(function () {
     }
   });
 
+  // Reemplaza la función entera por esta versión
   function cargarFiltrosDropdownsCustom() {
-    $.getJSON('../Componentes/Assets/fetchOptions.php', function (data) {
-      // Conceptos
-      const conceptos = data.conceptos || [];
-      crearDropdownFiltro(
+    // 1) Cargar conceptos separados
+    const pIngresos = $.getJSON('./Componentes/Assets/fetchOptions.php?tipo=ingreso');
+    const pGastos   = $.getJSON('./Componentes/Assets/fetchOptions.php?tipo=gasto');
+    const pEtqs     = $.getJSON('./Componentes/Assets/fetchOptions.php');
+
+    $.when(pIngresos, pGastos, pEtqs).done(function(respIng, respGas, respAll) {
+      // jQuery.when devuelve [data, status, jqXHR]
+      const conceptosIngreso = (respIng[0] && respIng[0].conceptos) ? respIng[0].conceptos : [];
+      const conceptosGasto   = (respGas[0] && respGas[0].conceptos) ? respGas[0].conceptos : [];
+
+      // Concepto → dropdown bicolor en 2 columnas
+      crearDropdownConceptoBicolor(
         'filtroConceptoDisplay',
         'filtroConceptoOptions',
         'filtroConceptoValue',
-        conceptos,
-        'Todos'
+        conceptosIngreso,
+        conceptosGasto
       );
 
-      // Etiquetas
+      // Etiquetas → igual que ahora
+      const data = respAll[0] || {};
       const etiquetas = data.etiquetas || [];
       crearDropdownFiltro(
         'filtroEtiquetaDisplay',
@@ -1350,6 +1360,7 @@ $(function () {
       );
     });
   }
+
   cargarFiltrosDropdownsCustom();
 
   function crearDropdownFiltro(idDisplay, idOptions, idValue, dataList, placeholder) {
