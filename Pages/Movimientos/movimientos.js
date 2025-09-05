@@ -1445,9 +1445,9 @@ $(function () {
   // Reemplaza la función entera por esta versión
   function cargarFiltrosDropdownsCustom() {
     // 1) Cargar conceptos separados
-    const pIngresos = $.getJSON('./Componentes/Assets/fetchOptions.php?tipo=ingreso');
-    const pGastos   = $.getJSON('./Componentes/Assets/fetchOptions.php?tipo=gasto');
-    const pEtqs     = $.getJSON('./Componentes/Assets/fetchOptions.php');
+    const pIngresos = $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=ingreso');
+    const pGastos   = $.getJSON('../Componentes/Assets/fetchOptions.php?tipo=gasto');
+    const pEtqs     = $.getJSON('../Componentes/Assets/fetchOptions.php');
 
     $.when(pIngresos, pGastos, pEtqs).done(function(respIng, respGas, respAll) {
       // jQuery.when devuelve [data, status, jqXHR]
