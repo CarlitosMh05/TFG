@@ -1616,6 +1616,7 @@ h1 {
   font-size: 1.07rem;
   position: relative;
   transition: border-color 0.18s, background 0.18s, color 0.18s;
+  
 }
 .concepto-display::after {
   content: "⮟";
@@ -1650,7 +1651,7 @@ h1 {
   top: 110%;
   left: 0;
   width: 100%;
-  z-index: 25;
+  z-index: 9999;
   display: none;
   background: #fff;
   border: 1.2px solid #bbb;
