@@ -1778,12 +1778,12 @@ h1 {
 
 .currency-dropdown-edicion
 {
-  right: -20px
+  right: -20px !important;
 }
 
 .currency-dropdown-edicion .currency-display
 {
-  background: transparent;
+  background: transparent !important;
 }
 
 @media (max-width: 1310px) {
