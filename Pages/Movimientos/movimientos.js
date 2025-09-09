@@ -351,7 +351,7 @@ $(function () {
           </div>
           <input type="number" class="input-cantidad" value="${mov.cantidad}">
           <label style="left: 30px;">Cantidad</label>
-          <div class="currency-dropdown">
+          <div class="currency-dropdown currency-dropdown-edicion">
             <input type="hidden" class="selected-currency" value="${mov.moneda}">
             <div class="currency-display">${getMonedaSymbol(mov.moneda)}</div>
             <ul class="currency-options">
