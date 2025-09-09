@@ -1783,7 +1783,7 @@ h1 {
     gap: 20px;
     place-items: center;
     justify-items: stretch;
-    
+
     animation: splitFadeIn 0.36s;
     background: #f4f9ff;
     border-radius: 15px;
@@ -1792,7 +1792,7 @@ h1 {
     z-index: 5;
   }
   
-  ;
+  
 
   /* Primera fila: cantidad, concepto, etiqueta */
   .movimiento-row.editando-responsive > .mov-col:nth-child(2) { grid-row: 1; grid-column: 1; }
