@@ -1793,8 +1793,6 @@ h1 {
     z-index: 5;
   }
   
-  
-
   /* Primera fila: cantidad, concepto, etiqueta */
   .movimiento-row.editando-responsive > .mov-col:nth-child(2) { grid-row: 1; grid-column: 1; }
   .movimiento-row.editando-responsive > .mov-col:nth-child(3) { grid-row: 1; grid-column: 2; }
@@ -1810,10 +1808,12 @@ h1 {
    /* --- FILAS DE MOVIMIENTOS --- */
   .movimiento-row {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: 0px 0px;
-    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr;
+    gap: 20px;
+    place-items: center;
+    justify-items: stretch;
+    
     background: #f4f9ff;
     margin-bottom: 18px;
   }
