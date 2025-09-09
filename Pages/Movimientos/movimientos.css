@@ -1799,7 +1799,7 @@ h1 {
 /* El chip de moneda ocupa lo justo pero no se superpone */
 .input-container.amount-with-currency.edicion-cantidad .currency-dropdown {
   flex: 0 0 auto;
-  position: static; /* quita absolute si no quieres que flote encima */
+  
 }
 
 @media (max-width: 1310px) {
