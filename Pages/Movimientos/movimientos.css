@@ -176,6 +176,19 @@
   padding: 0px 0 10px 0;
 }
 
+.mov-row-header,
+.movimiento-row {
+  display: grid;
+  grid-template-columns:
+    120px      /* Cantidad */
+    1.1fr      /* Concepto */
+    1fr        /* Etiquetas */
+    2fr        /* Observaciones */
+    140px      /* Cuenta/Efectivo */
+    120px      /* Imagen */
+    120px;     /* Editar / Borrar */
+}
+
 .mov-header-col {
   flex: 1 1 0;
   text-align: center;
