@@ -177,7 +177,7 @@
 .movimiento-row {
   display: grid;
   grid-template-columns:
-    120px      /* Cantidad */
+    1fr      /* Cantidad */
     1.1fr      /* Concepto */
     1fr        /* Etiquetas */
     2fr        /* Observaciones */
