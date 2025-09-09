@@ -1778,14 +1778,14 @@ h1 {
 @media (max-width: 1310px) {
   .movimiento-row.editando-responsive {
     display: grid !important;
-    flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr;
     animation: splitFadeIn 0.36s;
     background: #f4f9ff;
     border-radius: 15px;
     box-shadow: 0 6px 26px rgba(59,119,209,0.11);
     position: relative;
     z-index: 5;
-    justify-content: center;
   }
   .movimiento-row.editando-responsive > .mov-col {
     flex: 1 1 100%;
