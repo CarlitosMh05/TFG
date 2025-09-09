@@ -1815,7 +1815,6 @@ h1 {
     justify-items: stretch;
 
     background: #f4f9ff;
-    margin-bottom: 18px;
   }
   /* Primera fila: cantidad, concepto, etiqueta */
   .movimiento-row > .mov-col:nth-child(1) { grid-row: 1; grid-column: 1; }
