@@ -1798,17 +1798,6 @@ h1 {
     margin-bottom: 8px;
     transition: all .18s;
   }
-  /* PRIMERA FILA: solo los 3 primeros */
-  .movimiento-row.editando-responsive > .mov-col:nth-child(1) {
-    grid-column: 1;
-    grid-row: 1; 
-  }
-  /* SEGUNDA FILA: los siguientes */
-  .movimiento-row.editando-responsive > .mov-col:nth-child(n+5) {
-    grid-column: 1;
-    grid-row: 2; 
-    
-  }
 
   /* Primera fila: cantidad, concepto, etiqueta */
   .movimiento-row.editando-responsive > .mov-col:nth-child(1) { grid-row: 1; grid-column: 1; }
