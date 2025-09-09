@@ -1122,6 +1122,7 @@ $(function () {
                 <div class="mov-header-col">Observaciones</div>
                 <div class="mov-header-col">Cuenta/Efectivo</div>
                 <div class="mov-header-col">Imagen</div>
+                <div class="mov-header-col acciones">Acciones</div> <!-- nueva columna --
               </div>
               <div class="lista-mov-dia"></div>
             `;
