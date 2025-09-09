@@ -1894,6 +1894,22 @@ h1 {
   
 }
 
+@media (max-width: 900px) {
+
+   /* --- FILAS DE MOVIMIENTOS --- */
+  .movimiento-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows:1fr 1fr;
+    gap: 20px;
+    place-items: center;
+    justify-items: stretch;
+
+    background: #f4f9ff;
+  }
+
+}
+
 @keyframes splitFadeIn {
   from { opacity: 0; transform: translateY(12px);}
   to { opacity: 1; transform: translateY(0);}
