@@ -1776,6 +1776,13 @@ h1 {
   to { transform: rotate(360deg); }
 }
 
+.input-container.amount-with-currency.edicion-cantidad {
+   display: flex;
+  align-items: center;
+  gap: 8px;        /* separa los hijos con espacio fijo */
+  flex-wrap: nowrap; /* evita que se vayan a la segunda línea */
+}
+
 @media (max-width: 1310px) {
   
 
