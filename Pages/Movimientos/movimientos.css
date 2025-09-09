@@ -1799,10 +1799,9 @@ h1 {
     transition: all .18s;
   }
   /* PRIMERA FILA: solo los 3 primeros */
-  .movimiento-row.editando-responsive > .mov-col:nth-child(-n+4) {
-    flex: 1 1 0;
-    max-width: 33.3%;
-    margin-bottom: 0;
+  .movimiento-row.editando-responsive > .mov-col:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1; 
   }
   /* SEGUNDA FILA: los siguientes */
   .movimiento-row.editando-responsive > .mov-col:nth-child(n+5) {
