@@ -1924,7 +1924,7 @@ h1 {
   .mov-row-header > .mov-header-col:nth-child(4) { grid-row: 2; grid-column: 2; }
   .mov-row-header > .mov-header-col:nth-child(5) { grid-row: 3; grid-column: 1; }
   .mov-row-header > .mov-header-col:nth-child(6) { grid-row: 3; grid-column: 2; }
-  .mov-row-header > .mov-header-col:nth-child(7) { grid-row: 1 / span 2; grid-column: 4; }
+  .mov-row-header > .mov-header-col:nth-child(7) { grid-row: 1 / span 2; grid-column: 3; }
 
 }
 
