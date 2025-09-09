@@ -1860,7 +1860,7 @@ h1 {
   .mov-row-header > .mov-header-col:nth-child(3) { grid-row: 1; grid-column: 3; }
   .mov-row-header > .mov-header-col:nth-child(4) { grid-row: 2; grid-column: 1; }
   .mov-row-header > .mov-header-col:nth-child(5) { grid-row: 2; grid-column: 2; }
-  .mov-row-header > .mov-header-col:nth-child(6) { grid-row: 2; grid-column: 3; }
+  .mov-row-header > .mov-header-col:nth-child(6) { grid-row: 1 / span 2; grid-column: 3; }
 
 
   
