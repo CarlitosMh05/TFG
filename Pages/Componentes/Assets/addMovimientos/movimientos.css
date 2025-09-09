@@ -183,11 +183,7 @@ body.modal-open *:not(.modal):not(.modal *):not(#overlay):not(.flatpickr-calenda
 }
 
 .amount-with-currency input {
-  padding-left: 30px;
-  padding-right: 64px;   /* espacio para el chip + margen derecho */
-  box-sizing: border-box;
-  min-width: 0; 
-
+  padding-left: 10px;
 }
 
 /* =================== */
@@ -268,8 +264,6 @@ body.modal-open *:not(.modal):not(.modal *):not(#overlay):not(.flatpickr-calenda
 
 .currency-display 
 {
-  min-width: 40px;       /* €, $, £, ¥ caben sin bailar */
-  text-align: center;
   font-size: 16px;
   background: white;
   padding-right: 13px; /* espacio para flechita */
