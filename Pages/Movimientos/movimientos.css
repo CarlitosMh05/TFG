@@ -168,8 +168,6 @@
 }
 
 .mov-row-header {
-  display: flex;
-  align-items: flex-end;
   background: none;
   border-bottom: 1px solid gray;
   margin-top: 20px;
