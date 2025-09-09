@@ -1775,7 +1775,7 @@ h1 {
   to { transform: rotate(360deg); }
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1310px) {
   .movimiento-row.editando-responsive {
     display: flex !important;
     flex-wrap: wrap;
