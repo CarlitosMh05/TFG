@@ -199,7 +199,8 @@ body.modal-open *:not(.modal):not(.modal *):not(#overlay):not(.flatpickr-calenda
 
 .currency-dropdown 
 {
-  position: relative;
+  position: absolute;
+  top: 50%;
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
