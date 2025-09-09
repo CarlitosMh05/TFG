@@ -1826,20 +1826,7 @@ h1 {
   .movimiento-row > .mov-col:nth-child(5) { grid-row: 2; grid-column: 2; }
   .movimiento-row > .mov-col:nth-child(6) { grid-row: 2; grid-column: 3; }
   .movimiento-row > .mov-col:nth-child(7) { grid-row: 3; grid-column: 3; }
-  /* Si hay menos de 6 columnas (por ejemplo, sin imagen), sigue alineando bien */
-  .movimiento-row > .mov-col {
-    min-width: 0;
-    max-width: 100%;
-    border-right: none !important;
-    margin-bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  /* La columna de acciones (última) a la derecha */
-  .movimiento-row > .mov-col:last-child {
-    justify-content: flex-end;
-  }
+  
 
   /* --- CABECERA DE COLUMNAS --- */
   .mov-row-header {
