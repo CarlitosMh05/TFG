@@ -1813,7 +1813,7 @@ h1 {
     gap: 20px;
     place-items: center;
     justify-items: stretch;
-    
+
     background: #f4f9ff;
     margin-bottom: 18px;
   }
@@ -1824,7 +1824,7 @@ h1 {
   /* Segunda fila: observaciones, imagen, acciones */
   .movimiento-row > .mov-col:nth-child(4) { grid-row: 2; grid-column: 1; }
   .movimiento-row > .mov-col:nth-child(5) { grid-row: 2; grid-column: 2; }
-  .movimiento-row > .mov-col:nth-child(6) { grid-row: 2; grid-column: 3; justify-content: flex-end; }
+  .movimiento-row > .mov-col:nth-child(6) { grid-row: 2; grid-column: 3; }
   /* Si hay menos de 6 columnas (por ejemplo, sin imagen), sigue alineando bien */
   .movimiento-row > .mov-col {
     min-width: 0;
