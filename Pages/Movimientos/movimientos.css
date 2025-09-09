@@ -254,6 +254,7 @@
 .mov-dia-cantidad
 {
   font-size: 1.3rem;
+  white-space: nowrap;
 }
 
 .mov-dia-cantidad.positivo { color: #1ca72b; }
