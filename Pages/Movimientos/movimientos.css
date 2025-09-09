@@ -1863,7 +1863,11 @@ h1 {
   .mov-row-header > .mov-header-col:nth-child(6) { grid-row: 2; grid-column: 3; }
 
 
-  
+  .mov-row-header,
+  .movimiento-row {
+    border-top: 1px solid #e0e0e0 !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+  }
 
   /* --- Bordes verticales en columnas --- */
   /* Para las cabeceras */
