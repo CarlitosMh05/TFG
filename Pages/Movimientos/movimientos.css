@@ -169,11 +169,7 @@
   word-break: break-word;    /* compatibilidad extra */
 
 }
-.mov-col > * {
-  white-space: initial;     /* quita la herencia */
-  overflow-wrap: normal;
-  word-break: normal;
-}
+
 
 .mov-row-header {
   background: none;
