@@ -147,9 +147,6 @@
 }
 
 .movimiento-row {
- display: flex;
-  align-items: stretch;
-  gap: 0;
   padding: 12px 0;
   border-bottom: 1px solid #ececec;
   position: relative;
