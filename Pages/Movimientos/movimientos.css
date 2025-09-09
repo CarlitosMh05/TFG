@@ -173,7 +173,6 @@
   background: none;
   border-bottom: 1px solid gray;
   margin-bottom: 20px;
-  margin-top: 20px;
   padding: 0px 0 10px 0;
 }
 
@@ -1834,7 +1833,6 @@ h1 {
     grid-template-rows: repeat(2, auto);
     background: none;
     border-bottom: 1px solid gray !important;
-    margin-bottom: 20px;
     margin-top: 20px;
     padding: 0px 0 10px 0;
     text-align: center;
