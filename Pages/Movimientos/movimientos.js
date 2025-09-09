@@ -1046,7 +1046,7 @@ $(function () {
           <div class="mov-col mov-col-img">
             ${$row.find('.uploaded-preview img').length ? $row.find('.uploaded-preview').prop('outerHTML') : ''}
           </div>
-          <div style="display:flex;justify-content:flex-end;" class='mov-col'>
+          <div style="display:flex;justify-content:flex-end;" class="mov-col">
             <button class="mov-action-btn editar-mov-btn" data-id="${mov.id}" title="Editar movimiento"><i data-lucide="pencil"></i></button>
             <button class="mov-action-btn eliminar-mov-btn" data-id="${mov.id}" title="Eliminar movimiento"><i data-lucide="trash-2"></i></button>
           </div>
