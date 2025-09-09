@@ -1049,6 +1049,7 @@ $(function () {
         const cantidadTxt = Math.abs(cantNum).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ' + (moneda === 'EUR' ? '€' : moneda);
 
         $row.removeClass('editando-responsive');
+        actualizarTextoAccionesHeaders(null);
 
         $row.html(`
           <div class="mov-col">
