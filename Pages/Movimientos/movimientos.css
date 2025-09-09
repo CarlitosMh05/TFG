@@ -1863,11 +1863,7 @@ h1 {
   .mov-row-header > .mov-header-col:nth-child(6) { grid-row: 2; grid-column: 3; }
 
 
-  .mov-row-header,
-  .movimiento-row {
-    border-top: 1px solid #e0e0e0 !important;
-    border-bottom: 1px solid #e0e0e0 !important;
-  }
+  
 
   /* --- Bordes verticales en columnas --- */
   /* Para las cabeceras */
@@ -1881,21 +1877,7 @@ h1 {
     border-right: none; /* Quita el borde del final de cada fila */
   }
 
-  /* Para las filas de movimientos */
-  .movimiento-row > .mov-col {
-    border-right: 1px solid #e0e0e0 !important;
-    border-bottom: none;
-    border-top: none;
-  }
-  .movimiento-row > .mov-col:nth-child(3),
-  .movimiento-row > .mov-col:nth-child(6) {
-    border-right: none;
-  }
-
-  /* Opcional: Mejor separación visual entre filas de movimientos */
-  .movimiento-row {
-    margin-bottom: 0px; /* Ya hay border-bottom */
-  }
+  
 }
 
 @keyframes splitFadeIn {
