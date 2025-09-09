@@ -1781,6 +1781,7 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows:1fr 1fr 1fr;
     gap: 20px;
+    place-items: center;
     animation: splitFadeIn 0.36s;
     background: #f4f9ff;
     border-radius: 15px;
