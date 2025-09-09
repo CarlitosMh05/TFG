@@ -164,7 +164,6 @@
   border-right: 1.5px solid #e3e8ef;
   justify-content: center;
   flex-wrap: wrap;
-  white-space: normal;   /* permite que el texto se rompa en varias líneas */
   overflow-wrap: break-word; /* si hay palabras largas, que se partan */
 
 }
