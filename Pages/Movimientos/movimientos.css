@@ -1805,11 +1805,8 @@ h1 {
   }
   /* SEGUNDA FILA: los siguientes */
   .movimiento-row.editando-responsive > .mov-col:nth-child(n+5) {
-    flex: 1 1 0;
-    max-width: 33.3%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    grid-column: 1;
+    grid-row: 2; 
     
   }
 
