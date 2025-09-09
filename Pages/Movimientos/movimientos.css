@@ -1790,8 +1790,7 @@ h1 {
     z-index: 5;
   }
   
-  .movimiento-row.editando-responsive .mov-col {
-    min-width: 0;
+  .movimiento-row.editando-responsive .mov-col * {
     max-width: 100%;
     border-right: none !important;
     margin-bottom: 0;
