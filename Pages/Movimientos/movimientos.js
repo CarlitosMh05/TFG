@@ -105,7 +105,7 @@ window.cargarMasMovimientos = function() {
           <div class="mov-header-col">Observaciones</div>
           <div class="mov-header-col">Cuenta/Efectivo</div>
           <div class="mov-header-col">Imagen</div>
-          <div class="mov-header-col">Editar / Borrar</div>
+          <div class="mov-header-col acciones-header">Editar / Borrar</div>
         </div>
         <div class="lista-mov-dia"></div>
       `;
@@ -270,6 +270,28 @@ $(function () {
     if (movimientoEditandoId !== null) return; // Ya hay uno en edición
     activarEdicionFila(movId);
   });
+
+
+  function actualizarTextoAccionesHeaders($rowEdicion) {
+    const TXT_DEFAULT    = 'Editar / Borrar';
+    const TXT_EDITANDO   = 'Confirmar / Denegar';
+    const TXT_SOLO_BORRAR= 'Borrar';
+
+    const $todosHeaders = $('.mov-row-header .acciones-header');
+
+    if (!$rowEdicion || !$rowEdicion.length) {
+      // Restaurar todos
+      $todosHeaders.text(TXT_DEFAULT);
+      return;
+    }
+
+    // Poner todos a "Borrar"
+    $todosHeaders.text(TXT_SOLO_BORRAR);
+
+    // En el día del movimiento en edición -> "Confirmar / Denegar"
+    const $dia = $rowEdicion.closest('.movimientos-dia');
+    $dia.find('.mov-row-header .acciones-header').text(TXT_EDITANDO);
+  }
 
   function activarEdicionFila(movId) {
     // 1. Guardar los datos originales de la fila para poder restaurar
@@ -1122,7 +1144,7 @@ $(function () {
                 <div class="mov-header-col">Observaciones</div>
                 <div class="mov-header-col">Cuenta/Efectivo</div>
                 <div class="mov-header-col">Imagen</div>
-                <div class="mov-header-col">Acciones</div>
+                <div class="mov-header-col acciones-header">Acciones</div>
 
               </div>
               <div class="lista-mov-dia"></div>
