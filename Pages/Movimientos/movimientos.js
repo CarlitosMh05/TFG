@@ -1258,6 +1258,9 @@ $(function () {
         $row.removeClass('editando-responsive');
       $row.html($row.data('original-html'));
       movimientoEditandoId = null;
+      
+        actualizarTextoAccionesHeaders(null);
+
       $('.editar-mov-btn').show(); // Volver a mostrar los botones de editar
       if (window.lucide) lucide.createIcons();
     });
