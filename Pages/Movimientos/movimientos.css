@@ -1897,7 +1897,8 @@ h1 {
 @media (max-width: 900px) {
 
    /* --- FILAS DE MOVIMIENTOS --- */
-  .movimiento-row {
+  .movimiento-row,
+  .mov-row-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr ;
     grid-template-rows:1fr 1fr 1fr;
