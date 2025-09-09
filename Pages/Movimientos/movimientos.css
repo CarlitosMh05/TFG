@@ -1781,6 +1781,11 @@ h1 {
   right: -20px
 }
 
+.currency-dropdown-edicion .currency-display
+{
+  background: transparent;
+}
+
 @media (max-width: 1310px) {
   
 
