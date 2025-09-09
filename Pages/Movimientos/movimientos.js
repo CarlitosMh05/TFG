@@ -316,6 +316,7 @@ $(function () {
     // 3. Renderizar la fila como edición (inputs y dropdowns)
     $row.html(getEdicionRowHTML(movData));
     $row.addClass('editando-responsive');
+    actualizarTextoAccionesHeaders($row);
     // 4. Inicializar controles y eventos
     inicializarControlesEdicion($row, movData);
     // 5. Ocultar todos los botones de editar menos el de esta fila (ya se hace automáticamente con el HTML nuevo)
