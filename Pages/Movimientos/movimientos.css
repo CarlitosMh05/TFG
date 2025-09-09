@@ -1817,6 +1817,28 @@ h1 {
     white-space: nowrap;
   }
 
+   /* ------- FILAS ------- */
+  /* Fila 1 de cada movimiento */
+  .movimientos-dia .movimiento-row > .mov-col:nth-child(1) { grid-row: 1; grid-column: 1; } /* Cantidad */
+  .movimientos-dia .movimiento-row > .mov-col:nth-child(2) { grid-row: 1; grid-column: 2; } /* Concepto */
+  .movimientos-dia .movimiento-row > .mov-col:nth-child(3) { grid-row: 1; grid-column: 3; } /* Etiquetas */
+
+  /* Fila 2 de cada movimiento */
+  .movimientos-dia .movimiento-row > .mov-col:nth-child(4) { grid-row: 2; grid-column: 1; } /* Observaciones */
+  .movimientos-dia .movimiento-row > .mov-col:nth-child(5) { grid-row: 2; grid-column: 2; } /* Cuenta/Efectivo */
+  .movimientos-dia .movimiento-row > .mov-col:nth-child(6) { grid-row: 2; grid-column: 3; } /* Imagen */
+
+  /* Acciones: ocupa las 2 filas y centra botones verticalmente */
+  .movimientos-dia .movimiento-row > .mov-col-acciones {
+    grid-column: 4;
+    grid-row: 1 / span 2;          /* <-- clave */
+    display: flex;
+    flex-direction: row;
+    align-items: center;            /* centrado vertical */
+    justify-content: flex-end;      /* alineado a la derecha */
+    gap: 8px;
+  }
+
 
   .movimiento-row.editando-responsive {
     display: grid !important;
