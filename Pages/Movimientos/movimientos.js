@@ -206,7 +206,7 @@ window.cargarMasMovimientos = function() {
             <div class="mov-col mov-col-img">
               ${imgHtml}
             </div>
-            <div style="display: flex; justify-content: flex-end;">
+            <div style="display: flex; justify-content: flex-end;" class="mov-col">
               <button class="mov-action-btn editar-mov-btn" data-id="${mov.id}" title="Editar movimiento">
                 <i data-lucide="pencil"></i>
               </button>
