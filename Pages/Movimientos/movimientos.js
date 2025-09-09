@@ -1246,6 +1246,7 @@ $(function () {
         $row.find('.tick-editar-btn i').show();
         movimientoEditandoId = null;
         $('.editar-mov-btn').show();
+         actualizarTextoAccionesHeaders(null);
       });
     });
   }
