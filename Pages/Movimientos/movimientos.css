@@ -1807,8 +1807,8 @@ h1 {
    /* --- FILAS DE MOVIMIENTOS --- */
   .movimiento-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows:1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr;
     gap: 20px;
     place-items: center;
     justify-items: stretch;
@@ -1823,7 +1823,7 @@ h1 {
   .movimiento-row > .mov-col:nth-child(4) { grid-row: 2; grid-column: 1; }
   .movimiento-row > .mov-col:nth-child(5) { grid-row: 2; grid-column: 2; }
   .movimiento-row > .mov-col:nth-child(6) { grid-row: 2; grid-column: 3; }
-  .movimiento-row > .mov-col:nth-child(7) { grid-row: 3; grid-column: 3; }
+  .movimiento-row > .mov-col:nth-child(7) { grid-row: 2; grid-column: 4; }
   
 
   /* --- CABECERA DE COLUMNAS --- */
