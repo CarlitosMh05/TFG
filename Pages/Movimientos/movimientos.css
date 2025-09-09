@@ -1829,8 +1829,8 @@ h1 {
   /* --- CABECERA DE COLUMNAS --- */
   .mov-row-header {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr;
     background: none;
     border-bottom: 1px solid gray !important;
     margin-top: 20px;
