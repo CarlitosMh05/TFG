@@ -184,7 +184,7 @@ body.modal-open *:not(.modal):not(.modal *):not(#overlay):not(.flatpickr-calenda
 
 .amount-with-currency input {
   padding-left: 30px;
-  padding-right: 64px;
+  padding-right: 0px;
 }
 
 /* =================== */
