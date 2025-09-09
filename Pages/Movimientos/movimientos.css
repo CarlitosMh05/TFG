@@ -1780,6 +1780,7 @@ h1 {
     display: grid !important;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows:1fr 1fr 1fr;
+    gap: 20px;
     animation: splitFadeIn 0.36s;
     background: #f4f9ff;
     border-radius: 15px;
