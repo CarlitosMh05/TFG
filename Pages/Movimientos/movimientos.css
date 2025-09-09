@@ -1777,7 +1777,7 @@ h1 {
 
 @media (max-width: 1310px) {
   .movimiento-row.editando-responsive {
-    display: flex !important;
+    display: grid !important;
     flex-wrap: wrap;
     animation: splitFadeIn 0.36s;
     background: #f4f9ff;
