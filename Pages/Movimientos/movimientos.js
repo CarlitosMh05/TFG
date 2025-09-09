@@ -1024,6 +1024,9 @@ $(function () {
         const cantNum = (cantidad !== null && !Number.isNaN(cantidad)) ? cantidad : parseFloat(mov.cantidad);
         const esIngreso = cantNum > 0;
         const cantidadTxt = Math.abs(cantNum).toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ' + (moneda === 'EUR' ? '€' : moneda);
+
+        $row.removeClass('editando-responsive');
+
         $row.html(`
           <div class="mov-col">
             <div class="movimiento-cantidad ${esIngreso ? 'ingreso' : 'gasto'}">${(cantNum).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})} ${moneda==='EUR'?'€':moneda}</div>
