@@ -268,6 +268,8 @@ body.modal-open *:not(.modal):not(.modal *):not(#overlay):not(.flatpickr-calenda
 
 .currency-display 
 {
+  min-width: 40px;       /* €, $, £, ¥ caben sin bailar */
+  text-align: center;
   font-size: 16px;
   background: white;
   padding-right: 13px; /* espacio para flechita */
