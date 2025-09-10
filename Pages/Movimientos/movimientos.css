@@ -176,9 +176,7 @@
   border-bottom: 1px solid gray;
   margin-top: 20px;
   padding: 0px 0 10px 0;
-  white-space: normal;
   overflow-wrap: break-word;
-  word-break: break-word;
 }
 
 .mov-row-header,
