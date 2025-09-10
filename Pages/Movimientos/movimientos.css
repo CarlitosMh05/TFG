@@ -1941,6 +1941,11 @@ h1 {
   {
     display: block;
   }
+
+  #toggleFiltrosBtn {
+    
+    position: relative;
+  }
  
   .admin-datos-bar {
     position: static;          /* lo sacamos del absolute para que fluya */
