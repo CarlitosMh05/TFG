@@ -62,11 +62,12 @@ $uid = $_SESSION['user_id'];
           <span>Importar</span>
         </div>
 
-        <button id="toggleFiltrosBtn" class="filtro-btn">
-          <i data-lucide="filter"></i> Filtros
-        </button>
+        
       </div>
       
+      <button id="toggleFiltrosBtn" class="filtro-btn">
+          <i data-lucide="filter"></i> Filtros
+        </button>
       
     </div>
 
