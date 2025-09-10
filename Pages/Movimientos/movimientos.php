@@ -66,51 +66,53 @@ $uid = $_SESSION['user_id'];
       <button id="toggleFiltrosBtn" class="filtro-btn">
         <i data-lucide="filter"></i> Filtros
       </button>
-    </div>
 
-    <!-- Filtros desplegables -->
-    <div id="filtrosBlock" class="filtros-block">
-      <div class="filtros-flex">
-        <!-- Concepto -->
-        <div class="input-container" id="filtroConceptoContainer">
+      <div id="filtrosBlock" class="filtros-block">
+        <div class="filtros-flex">
+          <!-- Concepto -->
+          <div class="input-container" id="filtroConceptoContainer">
 
-          <div class="concepto-dropdown" >
-            <div class="concepto-display" id="filtroConceptoDisplay">Seleccionar concepto</div>
-            <ul class="concepto-options" id="filtroConceptoOptions">
-            </ul>
+            <div class="concepto-dropdown" >
+              <div class="concepto-display" id="filtroConceptoDisplay">Seleccionar concepto</div>
+              <ul class="concepto-options" id="filtroConceptoOptions">
+              </ul>
+            </div>
+
+            <input type="hidden" id="filtroConceptoValue" required>
+            <label for="filtroConcepto" id="concepto">Concepto</label>
           </div>
 
-          <input type="hidden" id="filtroConceptoValue" required>
-          <label for="filtroConcepto" id="concepto">Concepto</label>
-        </div>
-
-        <!-- Etiqueta -->
-        <div class="input-container etiqueta-container" id="filtroEtiquetaContainer">
-          <div class="etiqueta-dropdown">
-            <div class="etiqueta-display" id="filtroEtiquetaDisplay">Seleccionar etiquetas</div>
+          <!-- Etiqueta -->
+          <div class="input-container etiqueta-container" id="filtroEtiquetaContainer">
+            <div class="etiqueta-dropdown">
+              <div class="etiqueta-display" id="filtroEtiquetaDisplay">Seleccionar etiquetas</div>
+              
+              <ul class="etiqueta-options" id="filtroEtiquetaOptions">
+                <li class="add-new" data-type="etiqueta">+ Añadir etiqueta</li>  
+              </ul>
+            </div>
             
-            <ul class="etiqueta-options" id="filtroEtiquetaOptions">
-              <li class="add-new" data-type="etiqueta">+ Añadir etiqueta</li>  
-            </ul>
+            <input type="hidden" id="filtroEtiqueta" required>
+            <label for="filtroEtiqueta" id="labelEtiqueta">Etiquetas</label>
+            
           </div>
-          
-          <input type="hidden" id="filtroEtiqueta" required>
-          <label for="filtroEtiqueta" id="labelEtiqueta">Etiquetas</label>
-          
-        </div>
-        <!-- Fechas -->
-        <div class="input-container floating-label-group" style="min-width:170px; position:relative; width: fit-content;">
-          <input type="text" id="filtroFecha" class="filtro-input floating-label-input" autocomplete="off">
-          <label for="filtroFecha" class="floating-label">Rango</label>
-        </div>
-        <!-- Botón limpiar -->
-        <div>
-          <button id="limpiarFiltrosBtn" class="limpiar-filtros-btn">
-            Limpiar
-          </button>
+          <!-- Fechas -->
+          <div class="input-container floating-label-group" style="min-width:170px; position:relative; width: fit-content;">
+            <input type="text" id="filtroFecha" class="filtro-input floating-label-input" autocomplete="off">
+            <label for="filtroFecha" class="floating-label">Rango</label>
+          </div>
+          <!-- Botón limpiar -->
+          <div>
+            <button id="limpiarFiltrosBtn" class="limpiar-filtros-btn">
+              Limpiar
+            </button>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Filtros desplegables -->
+    
 
     <!-- Contenedor movimientos (aquí se cargan los días/movimientos) -->
     <div id="movimientosList" class="movimientos-list"></div>
