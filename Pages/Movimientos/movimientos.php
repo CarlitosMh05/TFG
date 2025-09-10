@@ -63,12 +63,14 @@ $uid = $_SESSION['user_id'];
         </div>
 
 
-        <button id="toggleFiltrosBtn" class="filtro-btn">
-          <i data-lucide="filter"></i> Filtros
-        </button>
+       
 
         
       </div>
+
+       <button id="toggleFiltrosBtn" class="filtro-btn">
+          <i data-lucide="filter"></i> Filtros
+        </button>
 
       <div id="filtrosBlock" class="filtros-block">
           <div class="filtros-flex">
