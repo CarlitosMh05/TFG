@@ -266,7 +266,9 @@
 .mov-dia-cantidad
 {
   font-size: 1.3rem;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .mov-dia-cantidad.positivo { color: #1ca72b; }
