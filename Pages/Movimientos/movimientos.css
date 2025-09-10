@@ -1963,6 +1963,10 @@ h1 {
     width: 100%;               /* ocupan todo el ancho */
     justify-content: flex-start;   /* contenido centrado */
   }
+
+  .mov-row-header {
+    font-size: 0.98rem;
+  }
   
 
 }
