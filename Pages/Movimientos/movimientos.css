@@ -1947,11 +1947,7 @@ h1 {
     margin-bottom: 12px;
   }
 
-  #toggleFiltrosBtn {
-    
-    position: relative;
-    top: 0;
-  }
+  
  
   .admin-datos-bar {
     position: static;          /* lo sacamos del absolute para que fluya */
