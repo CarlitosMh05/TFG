@@ -67,7 +67,10 @@ $uid = $_SESSION['user_id'];
           <i data-lucide="filter"></i> Filtros
         </button>
 
-        <div id="filtrosBlock" class="filtros-block">
+        
+      </div>
+
+      <div id="filtrosBlock" class="filtros-block">
           <div class="filtros-flex">
             <!-- Concepto -->
             <div class="input-container" id="filtroConceptoContainer">
@@ -109,7 +112,6 @@ $uid = $_SESSION['user_id'];
             </div>
           </div>
         </div>
-      </div>
       
       
     </div>
