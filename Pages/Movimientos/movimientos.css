@@ -1930,6 +1930,15 @@ h1 {
 
 }
 
+@media (max-width: 1310px) {
+
+  .mov-dia-resumen {
+    
+    margin-left: 20px;
+  }
+
+}
+
 @keyframes splitFadeIn {
   from { opacity: 0; transform: translateY(12px);}
   to { opacity: 1; transform: translateY(0);}
