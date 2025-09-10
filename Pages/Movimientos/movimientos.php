@@ -48,6 +48,10 @@ $uid = $_SESSION['user_id'];
     <!-- Título -->
     <div class="titulo-movimientos">
 
+      
+
+      <h1 class="titulo-principal">Movimientos</h1>
+
       <div class="admin-datos-bar">
         <div class="admin-datos-accion" id="descargarBtn">
           <i data-lucide="download" class="admin-datos-icon"></i>
@@ -58,8 +62,6 @@ $uid = $_SESSION['user_id'];
           <span>Importar</span>
         </div>
       </div>
-
-      <h1 class="titulo-principal">Movimientos</h1>
       
       <button id="toggleFiltrosBtn" class="filtro-btn">
         <i data-lucide="filter"></i> Filtros
