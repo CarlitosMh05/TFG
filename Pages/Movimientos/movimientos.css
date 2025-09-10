@@ -1937,9 +1937,21 @@ h1 {
     margin-left: 20px;
   }
 
- 
-  .titulo-movimientos{
+  .titulo-movimientos
+  {
     display: block;
+  }
+ 
+  .admin-datos-bar {
+    position: static;          /* lo sacamos del absolute para que fluya */
+    flex-direction: column;    /* en columna */
+    align-items: center;       /* centrados */
+    gap: 10px;                 /* separación entre botones */
+  }
+
+  .admin-datos-accion {
+    width: 100%;               /* ocupan todo el ancho */
+    justify-content: center;   /* contenido centrado */
   }
   
 
