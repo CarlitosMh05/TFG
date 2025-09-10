@@ -1940,6 +1940,7 @@ h1 {
   .titulo-movimientos
   {
     display: block;
+    margin-bottom: 12px;
   }
 
   #toggleFiltrosBtn {
