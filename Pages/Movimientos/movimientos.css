@@ -1945,6 +1945,7 @@ h1 {
   #toggleFiltrosBtn {
     
     position: relative;
+    top: 0;
   }
  
   .admin-datos-bar {
