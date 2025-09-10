@@ -1956,14 +1956,13 @@ h1 {
   .admin-datos-bar {
     position: static;          /* lo sacamos del absolute para que fluya */
     flex-direction: column;    /* en columna */
-    align-items: center;       /* centrados */
     gap: 10px;  
     margin-bottom: 0;               /* separación entre botones */
   }
 
   .admin-datos-accion {
     width: 100%;               /* ocupan todo el ancho */
-    justify-content: center;   /* contenido centrado */
+    justify-content: flex-start;   /* contenido centrado */
   }
   
 
