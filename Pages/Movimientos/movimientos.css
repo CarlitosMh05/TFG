@@ -1903,17 +1903,29 @@ h1 {
 @media (max-width: 900px) {
 
    /* --- FILAS DE MOVIMIENTOS --- */
-  .movimiento-row,
-  .mov-row-header {
+  .movimiento-row, .mov-row-header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    grid-template-rows:1fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* antes: 1fr 1fr 1fr */
+    grid-template-rows: 1fr 1fr 1fr;
     gap: 20px;
     place-items: center;
     justify-items: stretch;
-
+    width: 100%;                 /* asegura que el grid no intente crecer más que su padre */
+    box-sizing: border-box;      /* por si hay padding/bordes */
   }
 
+  /* 2) Clave: deja que los hijos del grid puedan encoger (evita que empujen al grid) */
+  .movimiento-row > *, 
+  .mov-row-header > * {
+    min-width: 0;     /* sin esto, los hijos mantienen min-width:auto y rompen el layout */
+  }
+
+  /* (Opcional) Si aun así algún hijo es demasiado ancho, da scroll en el padre en lugar de desbordar */
+  .lista-mov-dia {
+    width: 100%;
+    overflow: hidden; /* o overflow-x:auto; si prefieres scroll horizontal */
+    box-sizing: border-box;
+  }
   /* Primera fila: cantidad, concepto, etiqueta */
   .movimiento-row > .mov-col:nth-child(1) { grid-row: 1; grid-column: 1; }
   .movimiento-row > .mov-col:nth-child(2) { grid-row: 1; grid-column: 2; }
