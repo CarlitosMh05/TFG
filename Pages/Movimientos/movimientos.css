@@ -1937,20 +1937,19 @@ h1 {
     margin-left: 20px;
   }
 
-  /* ===== NUEVO: Responsive < 500px ===== */
-  @media (max-width: 500px) {
-    .admin-datos-bar {
-      position: static;          /* lo sacamos del absolute para que fluya */
-      flex-direction: column;    /* en columna */
-      align-items: center;       /* centrados */
-      gap: 10px;                 /* separación entre botones */
-    }
-
-    .admin-datos-accion {
-      width: 100%;               /* ocupan todo el ancho */
-      justify-content: center;   /* contenido centrado */
-    }
+ 
+  .admin-datos-bar {
+    position: static;          /* lo sacamos del absolute para que fluya */
+    flex-direction: column;    /* en columna */
+    align-items: center;       /* centrados */
+    gap: 10px;                 /* separación entre botones */
   }
+
+  .admin-datos-accion {
+    width: 100%;               /* ocupan todo el ancho */
+    justify-content: center;   /* contenido centrado */
+  }
+  
 
 }
 
