@@ -1952,7 +1952,8 @@ h1 {
     position: static;          /* lo sacamos del absolute para que fluya */
     flex-direction: column;    /* en columna */
     align-items: center;       /* centrados */
-    gap: 10px;                 /* separación entre botones */
+    gap: 10px;  
+    margin-bottom: 0;               /* separación entre botones */
   }
 
   .admin-datos-accion {
