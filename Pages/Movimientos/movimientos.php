@@ -61,11 +61,13 @@ $uid = $_SESSION['user_id'];
           <i data-lucide="upload" class="admin-datos-icon"></i>
           <span>Importar</span>
         </div>
-      </div>
-      
-      <button id="toggleFiltrosBtn" class="filtro-btn">
+
+        <button id="toggleFiltrosBtn" class="filtro-btn">
         <i data-lucide="filter"></i> Filtros
       </button>
+      </div>
+      
+      
     </div>
 
     <!-- Filtros desplegables -->
