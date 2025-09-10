@@ -1966,16 +1966,13 @@ h1 {
 
   .mov-row-header > .mov-header-col 
   {
-    font-size: 0.87rem;
+    font-size: 0.7rem;
   }
   
 
 }
 
-.mov-header-col
-{
-  font-size: 0.95rem;
-}
+
 
 @keyframes splitFadeIn {
   from { opacity: 0; transform: translateY(12px);}
