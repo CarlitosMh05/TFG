@@ -120,7 +120,27 @@
   #createUser:hover {
     background-color: #2468cf;
   }
-  
+
 input:disabled {
   background: lightgray;
+}
+
+@media (max-width: 600px) {
+  .multi-step {
+    width: 100%;
+  }
+
+  .slide {
+    padding: 20px;
+  }
+
+  .two-columns {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-buttons {
+    left: 10px;
+    right: 10px;
+  }
 }
