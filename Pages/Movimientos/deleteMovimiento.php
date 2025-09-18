@@ -1,7 +1,6 @@
 <?php
 // deleteMovimiento.php
 require_once '../../auth.php'; 
-
 require_once '../../db.php'; // ajusta ruta si aplica
 header('Content-Type: application/json');
 
