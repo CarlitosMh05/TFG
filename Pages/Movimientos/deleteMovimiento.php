@@ -1,9 +1,10 @@
 <?php
 // deleteMovimiento.php
-header('Content-Type: application/json');
 require_once '../../auth.php'; 
 
 require_once '../../db.php'; // ajusta ruta si aplica
+header('Content-Type: application/json');
+
 
 if (!isset($_SESSION['user_id'])) {
   http_response_code(401);
