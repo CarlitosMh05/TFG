@@ -1,8 +1,6 @@
 <?php
 // deleteMovimiento.php
-ini_set('session.gc_maxlifetime', 0); 
-ini_set('session.cookie_lifetime', 0); 
-session_start();
+require_once '../../auth.php'; 
 header('Content-Type: application/json');
 
 require_once '../../db.php'; // ajusta ruta si aplica
