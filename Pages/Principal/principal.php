@@ -142,6 +142,14 @@ $net = $totalIncome - $totalExpense;
     <link rel="stylesheet" href="../Componentes/Assets/userAvatar/user.css">
     <?php include $_SERVER['DOCUMENT_ROOT'].'/Pages/Componentes/user.php'; ?>
 
+
+    <vapi-widget assistant-id="cd9c3ec2-1699-4554-a12c-05824da4cf21" public-key="4bd7bcf9-15c4-4b49-81af-6f11d5bbb091"></vapi-widget>
+
+  <script
+    src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"
+    async
+    type="text/javascript"
+  ></script>
   </head>
 
   <body>
