@@ -248,6 +248,10 @@ $net = $totalIncome - $totalExpense;
             <div class="chart-title" id="trendChartTitle">
               <h1 class="title" style="font-size: 1.5rem"></h1>
             </div>
+            
+            <button id="btnExpandir" class="expand-btn" title="Ver pantalla completa">
+              ⤢ Ampliar
+            </button>
 
             <canvas id="trendChart"></canvas>
           </div>
