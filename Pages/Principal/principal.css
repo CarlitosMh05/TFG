@@ -651,9 +651,16 @@ input:checked + .slider:before {
 
  
 
+  .chart-box {
+    width: 80%; /* Ocupará más ancho en tablet/móvil */
+    margin: 20px auto; /* Centrado */
+  }
+
+  /* 2. Corregimos el Canvas */
   #expensesChart, #incomeChart {
-    width: 90% !important;
-   
+    width: 100% !important; /* Que ocupe el ancho del contenedor */
+    height: auto !important; /* IMPORTANTE: Dejar auto para que Chart.js calcule el ratio */
+    min-height: 250px; /* Opcional: asegura una altura mínima para evitar colapsos */
   }
 
 
