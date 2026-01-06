@@ -756,6 +756,79 @@ document.addEventListener('DOMContentLoaded', (e) => {
       if (firstChartBox) firstChartBox.classList.remove('radius');
     }
   });
+
+
+
+    let fullscreenChartInstance = null;
+
+    // Al hacer clic en "Ampliar"
+    $('#btnExpandir').on('click', function() {
+      if (!lastTrendData) return; // Si no hay datos, no hacemos nada
+
+      // 1. Mostrar el modal
+      $('#chartModal').fadeIn(200);
+
+      // 2. Destruir gráfico anterior si existe
+      if (fullscreenChartInstance) {
+        fullscreenChartInstance.destroy();
+      }
+
+      // 3. Configurar datos (usamos lastTrendData que ya tienes guardado)
+      // Clonamos los datasets para no modificar el original, pero cambiamos colores o bordes si quieres
+      const datasets = lastTrendData.datasets.map(ds => ({
+        ...ds,
+        // Si quieres barras más gordas en horizontal:
+        barPercentage: 0.8, 
+        categoryPercentage: 0.9 
+      }));
+
+      const ctx = document.getElementById('fullscreenCanvas').getContext('2d');
+
+      // 4. Crear el gráfico HORIZONTAL
+      fullscreenChartInstance = new Chart(ctx, {
+        type: 'bar', // Sigue siendo 'bar'
+        data: {
+          labels: lastTrendData.labels,
+          datasets: datasets
+        },
+        options: {
+          indexAxis: 'y', // <--- ESTA ES LA CLAVE: Gira el gráfico a horizontal
+          responsive: true,
+          maintainAspectRatio: false, // Importante para que llene la pantalla
+          plugins: {
+            legend: { position: 'top' },
+            title: { 
+              display: true, 
+              text: 'Visión Detallada (Horizontal)',
+              font: { size: 16 }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: { color: '#eee' } // Rejilla vertical suave
+            },
+            y: {
+              ticks: {
+                autoSkip: false, // Importante: MOSTRAR TODAS las etiquetas (todos los días)
+                font: { size: 11 } // Un poco más pequeño si son muchos días
+              },
+              grid: { display: false } // Ocultar rejilla horizontal para limpieza
+            }
+          }
+        }
+      });
+    });
+
+    // Al cerrar el modal
+    $('#closeModal').on('click', function() {
+      $('#chartModal').fadeOut(200);
+      // Opcional: destruir instancia para liberar memoria
+      if (fullscreenChartInstance) {
+        fullscreenChartInstance.destroy();
+        fullscreenChartInstance = null;
+      }
+    });
 });
 
 function avanzarFecha(offset) {
