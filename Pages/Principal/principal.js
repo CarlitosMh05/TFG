@@ -762,31 +762,95 @@ document.addEventListener('DOMContentLoaded', (e) => {
     let fullscreenChartInstance = null;
 
     // Al hacer clic en "Ampliar"
+    // Al hacer clic en "Ampliar"
     $('#btnExpandir').on('click', function() {
       if (!lastTrendData) return; // Si no hay datos, no hacemos nada
 
       // 1. Mostrar el modal
       $('#chartModal').fadeIn(200);
 
-      // 2. Destruir gráfico anterior si existe
+      // 2. Destruir gráfico anterior si existe para evitar superposiciones
       if (fullscreenChartInstance) {
         fullscreenChartInstance.destroy();
       }
 
-      // 3. Configurar datos (usamos lastTrendData que ya tienes guardado)
-      // Clonamos los datasets para no modificar el original, pero cambiamos colores o bordes si quieres
-      const datasets = lastTrendData.datasets.map(ds => ({
-        ...ds,
-        // Si quieres barras más gordas en horizontal:
-        barPercentage: 0.8, 
-        categoryPercentage: 0.9 
-      }));
+      // 3. PREPARAR DATASETS (Corrección aplicada aquí)
+      // Reconstruimos los datasets basándonos en el modo actual (Neto o Desglose)
+      // usando los datos crudos de lastTrendData.data
+      
+      let datasets = [];
+      const rawData = lastTrendData.data;
+
+      if (trendChartMode === 'desglose') {
+        // --- MODO DESGLOSE (Ingresos vs Gastos) ---
+        datasets = [
+          {
+            label: 'Ingresos',
+            data: rawData.map(d => d?.ingresos > 0 ? d.ingresos : null),
+            backgroundColor: 'rgba(0, 255, 0, 0.7)',
+            barPercentage: 0.8,
+            categoryPercentage: 0.8,
+            datalabels: {
+               color: 'black',
+               anchor: 'end',
+               align: 'end',
+               formatter: v => v != null ? formatNumber(v) + ' €' : ''
+            }
+          },
+          {
+            label: 'Gastos',
+            data: rawData.map(d => d?.gastos > 0 ? d.gastos : null),
+            backgroundColor: 'rgba(252, 0, 0, 0.7)',
+            barPercentage: 0.8,
+            categoryPercentage: 0.8,
+            datalabels: {
+               color: 'black',
+               anchor: 'end',
+               align: 'end',
+               formatter: v => v != null ? formatNumber(v) + ' €' : ''
+            }
+          }
+        ];
+      } else {
+        // --- MODO NETO (Positivos vs Negativos) ---
+        const positivos = rawData.map(v => v && v.neto !== null && v.neto >= 0 ? v.neto : null);
+        const negativos = rawData.map(v => v && v.neto !== null && v.neto < 0 ? v.neto : null);
+
+        datasets = [
+          {
+            label: 'Positivos',
+            data: positivos,
+            backgroundColor: 'rgba(0, 255, 0, 0.7)',
+            barPercentage: 0.8, 
+            categoryPercentage: 1.0, 
+            datalabels: {
+               color: 'black',
+               anchor: 'end', // Ponemos la etiqueta al final de la barra
+               align: 'end',
+               formatter: v => v != null ? formatNumber(v) + ' €' : ''
+            }
+          },
+          {
+            label: 'Negativos',
+            data: negativos,
+            backgroundColor: 'rgba(252, 0, 0, 0.7)',
+            barPercentage: 0.8, 
+            categoryPercentage: 1.0, 
+            datalabels: {
+               color: 'black',
+               anchor: 'start', // Ajuste visual para barras negativas
+               align: 'start',
+               formatter: v => v != null ? formatNumber(v) + ' €' : ''
+            }
+          }
+        ];
+      }
 
       const ctx = document.getElementById('fullscreenCanvas').getContext('2d');
 
       // 4. Crear el gráfico HORIZONTAL
       fullscreenChartInstance = new Chart(ctx, {
-        type: 'bar', // Sigue siendo 'bar'
+        type: 'bar',
         data: {
           labels: lastTrendData.labels,
           datasets: datasets
@@ -795,25 +859,44 @@ document.addEventListener('DOMContentLoaded', (e) => {
           indexAxis: 'y', // <--- ESTA ES LA CLAVE: Gira el gráfico a horizontal
           responsive: true,
           maintainAspectRatio: false, // Importante para que llene la pantalla
+          animation: false, // Para que cargue rápido
           plugins: {
             legend: { position: 'top' },
             title: { 
               display: true, 
-              text: 'Visión Detallada (Horizontal)',
+              text: trendChartMode === 'desglose' ? 'Visión Detallada (Ingresos/Gastos)' : 'Visión Detallada (Neto)',
               font: { size: 16 }
+            },
+            datalabels: {
+               display: true, // Aseguramos que se vean los números
+               font: { weight: 'bold' }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.dataset.label || '';
+                        if (label) label += ': ';
+                        if (context.parsed.x !== null) { // Nota: es .x porque está girado
+                            label += formatNumber(context.parsed.x) + ' €';
+                        }
+                        return label;
+                    }
+                }
             }
           },
           scales: {
-            x: {
+            x: { // Eje horizontal (ahora representa el dinero)
               beginAtZero: true,
-              grid: { color: '#eee' } // Rejilla vertical suave
+              grid: { color: '#eee' },
+              position: 'top' // Poner los números de dinero arriba para mejor lectura
             },
-            y: {
+            y: { // Eje vertical (ahora representa las fechas)
+              stacked: (trendChartMode === 'neto'), // Apilar solo si es modo neto
               ticks: {
-                autoSkip: false, // Importante: MOSTRAR TODAS las etiquetas (todos los días)
-                font: { size: 11 } // Un poco más pequeño si son muchos días
+                autoSkip: false, // Importante: MOSTRAR TODAS las etiquetas
+                font: { size: 11 } 
               },
-              grid: { display: false } // Ocultar rejilla horizontal para limpieza
+              grid: { display: false }
             }
           }
         }
