@@ -256,6 +256,13 @@ $net = $totalIncome - $totalExpense;
             <canvas id="trendChart"></canvas>
           </div>
 
+          <div id="chartModal" class="chart-modal" style="display: none;">
+            <span id="closeModal" class="close-modal">&times; Cerrar</span>
+            <div class="modal-content">
+              <canvas id="fullscreenCanvas"></canvas>
+            </div>
+          </div>
+
           <div class="switch-container">
             <span>Resumen Neto</span>
             <label class="switch">
