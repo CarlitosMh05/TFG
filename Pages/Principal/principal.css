@@ -710,7 +710,9 @@ input:checked + .slider:before {
 
 @media (max-width: 950px) {
 
- 
+ .expand-btn {
+    display: inline-block; /* <--- Se hace visible solo en móvil */
+  }
 
   .chart-box {
     width: 80%; /* Ocupará más ancho en tablet/móvil */
