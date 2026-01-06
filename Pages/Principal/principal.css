@@ -634,6 +634,7 @@ input:checked + .slider:before {
 
 /* Botón de ampliar pequeño y discreto */
 .expand-btn {
+  display: none;
   background: none;
   border: 1px solid #ccc;
   border-radius: 5px;
