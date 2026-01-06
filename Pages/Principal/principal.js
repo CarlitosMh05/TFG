@@ -442,8 +442,7 @@ window.updateCharts = function updateCharts() {
     `&frecuencia=${selectedFrecuencia}` +
     (selectedEtiquetaId ? `&etiqueta_id=${selectedEtiquetaId}` : ""),
     data => {
-      if (expenseChart) expenseChart.destroy();
-      if (incomeChart)  incomeChart.destroy();
+      
       const expCtx = document.getElementById('expensesChart').getContext('2d');
       const incCtx = document.getElementById('incomeChart').getContext('2d');
       expenseChart = createPieChart(expCtx, data.expense.labels, data.expense.data);
@@ -485,6 +484,21 @@ window.updateCharts = function updateCharts() {
         noMovEl.style.display = 'none';
         document.querySelectorAll('.chart-box').forEach(el => el.style.display = 'block');
         if (wrapper) wrapper.style.display = 'flex';
+
+        if (expenseChart) expenseChart.destroy();
+        if (incomeChart)  incomeChart.destroy();
+
+        requestAnimationFrame(() => {
+          const expCtx = document.getElementById('expensesChart').getContext('2d');
+          const incCtx = document.getElementById('incomeChart').getContext('2d');
+
+          expenseChart = createPieChart(expCtx, data.expense.labels, data.expense.data);
+          incomeChart  = createPieChart(incCtx, data.income.labels,  data.income.data);
+
+          // Forzar un resize después de estar visible
+          expenseChart.resize(); expenseChart.update();
+          incomeChart.resize();  incomeChart.update();
+        });
       }
 
       const net = data.income.total + data.expense.rawTotal;
