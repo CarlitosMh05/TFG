@@ -649,9 +649,7 @@ input:checked + .slider:before {
 
 @media (max-width: 950px) {
 
-  .chart-box {
-    margin: 24px auto;
-  }
+ 
 
   #expensesChart, #incomeChart {
     width: 100% !important;
