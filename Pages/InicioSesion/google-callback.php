@@ -31,8 +31,22 @@ if ($token) {
             $userId = $usuario['id'];
         }
 
+        // 3 meses (ajusta a lo que quieras)
+        $ttl = 60 * 60 * 24 * 30 * 3;
+
+        // Debe ir ANTES de session_start()
+        ini_set('session.gc_maxlifetime', (string)$ttl);
+        session_set_cookie_params([
+            'lifetime' => $ttl,
+            'path' => '/',
+            'secure' => true,     // true si estás en HTTPS (recomendado)
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
+
         // Iniciar sesión
         session_start();
+        session_regenerate_id(true); // recomendado
         $_SESSION['user_id'] = $userId;
         $response['success'] = true;
     }
