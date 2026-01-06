@@ -33,7 +33,7 @@ function createPieChart(ctx, labels, data) {
     data: { labels, datasets: [{ data }] },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       animation: false,
       plugins: {
         datalabels: {
@@ -206,7 +206,7 @@ function createBarChart(ctx, labels, data, mode = 'neto') { // FIX 1: Añadimos 
     options: {
       animation: false,
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       plugins: {
         legend: {
           display: true,
