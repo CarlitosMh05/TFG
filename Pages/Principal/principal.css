@@ -649,6 +649,17 @@ input:checked + .slider:before {
 
 @media (max-width: 950px) {
 
+  .chart-box {
+    width: 90%;       /* en móvil 30% es demasiado pequeño */
+    margin: 24px auto;
+  }
+
+  #expensesChart, #incomeChart {
+    width: 100% !important;
+    height: 260px !important;   /* fuerza altura visible */
+  }
+
+
   .main  {
     border-radius: 0 !important;
   }
