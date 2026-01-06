@@ -206,7 +206,7 @@ function createBarChart(ctx, labels, data, mode = 'neto') { // FIX 1: Añadimos 
     options: {
       animation: false,
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: true,
