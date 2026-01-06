@@ -650,7 +650,6 @@ input:checked + .slider:before {
 @media (max-width: 950px) {
 
   .chart-box {
-    width: 90%;       /* en móvil 30% es demasiado pequeño */
     margin: 24px auto;
   }
 
