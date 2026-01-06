@@ -33,7 +33,7 @@ function createPieChart(ctx, labels, data) {
     data: { labels, datasets: [{ data }] },
     options: {
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       animation: false,
       plugins: {
         datalabels: {
