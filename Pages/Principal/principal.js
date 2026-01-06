@@ -503,7 +503,7 @@ window.updateCharts = function updateCharts() {
       setTimeout(() => {
         expenseChart.resize(); expenseChart.update();
         incomeChart.resize();  incomeChart.update();
-      }, 100);
+      }, 150);
 
       let group = selectedFrecuencia;
       let numDiasRango = 0;
