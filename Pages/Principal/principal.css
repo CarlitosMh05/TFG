@@ -652,7 +652,7 @@ input:checked + .slider:before {
  
 
   #expensesChart, #incomeChart {
-    width: 100% !important;
+    width: 90% !important;
     height: 260px !important;   /* fuerza altura visible */
   }
 
